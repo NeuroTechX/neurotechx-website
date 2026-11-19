@@ -26,6 +26,32 @@ const SLIDES: Slide[] = [
     ],
   },
   {
+    eyebrow: 'Dec 7 · Frontier Tower, San Francisco',
+    title: (
+      <>
+        <span className="text-gradient">Neurotech@Berkeley</span> Symposium & Happy Hour
+      </>
+    ),
+    desc: 'UC Berkeley undergraduate teams present their neurotech projects, live demos and published articles — then stay for the mixer. 5–9 PM, free with RSVP.',
+    ctas: [
+      { label: 'RSVP on Luma', href: 'https://luma.com/neurotechberkeley-showcase', external: true, primary: true },
+      { label: 'All events', href: '/events' },
+    ],
+  },
+  {
+    eyebrow: 'Dec 9 · Frontier Tower, San Francisco',
+    title: (
+      <>
+        <span className="text-gradient">BrainsConnected</span> SF Launch Event
+      </>
+    ),
+    desc: 'The launch of BrainsConnected, a new web hub for consumer neurotech — hear from its leadership team, including Neurotech Reports founder James Cavuoto. 6–9 PM.',
+    ctas: [
+      { label: 'Register on Luma', href: 'https://luma.com/brains-connected-launch-event', external: true, primary: true },
+      { label: 'All events', href: '/events' },
+    ],
+  },
+  {
     eyebrow: 'NeurIPS 2026 workshop · Dec 12, Sydney',
     title: (
       <>
