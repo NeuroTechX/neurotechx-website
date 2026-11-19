@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         <div className="container py-12 max-w-4xl mx-auto">
             <h1 className="text-4xl font-serif font-bold mb-8">Privacy Policy</h1>
 
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-3 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-2 [&_li]:leading-relaxed">
                 <p className="text-sm text-muted-foreground">
                     Last updated: November 19, 2026 · <a href="#francais" className="underline">Version française</a>
                 </p>
