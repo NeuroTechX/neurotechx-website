@@ -29,7 +29,7 @@ export default function PrivacyPage() {
                     NeuroTechX is operated by Société BCI Montréal, a volunteer-led non-profit organization incorporated in Quebec, Canada (Quebec enterprise number 1170984166).
                     <br /><br />
                     Société BCI Montréal (NeuroTechX)<br />
-                    Mila, 6666 rue Saint-Urbain, bureau 200<br />
+                    6666 rue Saint-Urbain, bureau 200<br />
                     Montréal (Québec) H2S 3H1, Canada
                 </p>
 
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
                         NeuroTechX est exploité par la Société BCI Montréal, un organisme à but non lucratif dirigé par des bénévoles et constitué au Québec, Canada (numéro d&apos;entreprise du Québec 1170984166).
                         <br /><br />
                         Société BCI Montréal (NeuroTechX)<br />
-                        Mila, 6666, rue Saint-Urbain, bureau 200<br />
+                        6666, rue Saint-Urbain, bureau 200<br />
                         Montréal (Québec) H2S 3H1, Canada
                     </p>
 

@@ -41,7 +41,7 @@ export default function TransparencyPage() {
                             </div>
                             <div>
                                 <dt className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-1">Mailing Address</dt>
-                                <dd className="text-lg">Mila, 6666 rue Saint-Urbain, bureau 200<br />Montréal (Québec) H2S 3H1, Canada</dd>
+                                <dd className="text-lg">6666 rue Saint-Urbain, bureau 200<br />Montréal (Québec) H2S 3H1, Canada</dd>
                             </div>
                         </dl>
                     </div>
