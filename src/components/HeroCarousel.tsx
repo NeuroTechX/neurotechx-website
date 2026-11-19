@@ -26,6 +26,19 @@ const SLIDES: Slide[] = [
     ],
   },
   {
+    eyebrow: 'NeuroTechX Toronto · Nov 25',
+    title: (
+      <>
+        <span className="text-gradient">Stimulating Conversations</span>: Advances in Neuromodulation
+      </>
+    ),
+    desc: 'Short talks, two panels and demos on brain stimulation and the Toronto companies bringing it to patients — with speakers from Ampa, sync2brain, Roga and Vielight. 7 PM ET at the Peter Gilgan Centre.',
+    ctas: [
+      { label: 'Get tickets on Luma', href: 'https://luma.com/lvklsd9o', external: true, primary: true },
+      { label: 'All events', href: '/events' },
+    ],
+  },
+  {
     eyebrow: 'Dec 7 · Frontier Tower, San Francisco',
     title: (
       <>

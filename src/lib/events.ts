@@ -85,6 +85,11 @@ export const EVENTS: NtxEvent[] = [
   },
   // `end` carries the closing time for evening events, so they stay "Upcoming" until they are over.
   {
+    name: 'Stimulating Conversations: Advances in Neuromodulation', tag: 'Meetup', dateLabel: 'Nov 25, 2026 · 7 PM ET', end: '2026-11-25T23:00:00-05:00',
+    location: 'Peter Gilgan Centre for Research and Learning, Toronto', url: 'https://luma.com/lvklsd9o',
+    desc: 'NeuroTechX Toronto evening of short talks, two panels and demos on brain stimulation and the Toronto companies bringing it to patients — speakers from Ampa, sync2brain, Roga and Vielight. Tickets CA$9.',
+  },
+  {
     name: 'Neurotech@Berkeley Symposium & Happy Hour', tag: 'Meetup', dateLabel: 'Dec 7, 2026 · 5–9 PM', end: '2026-12-07T21:00:00-08:00',
     location: 'Frontier Tower, San Francisco', url: 'https://luma.com/neurotechberkeley-showcase',
     desc: 'UC Berkeley undergraduate teams present their neurotech projects, live demos and published articles, followed by a mixer. Co-hosted by NeuroTechX — free with RSVP.',
