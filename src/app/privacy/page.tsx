@@ -73,7 +73,7 @@ export default function PrivacyPage() {
 
                 <h2>Who processes it for us</h2>
                 <p>
-                    Google (forms, files and email), Mailchimp (newsletter), Slack (community workspace), Vercel (hosting of this website) and Bluehost (hosting of our previous website). These companies store information outside Quebec, mainly in the United States.
+                    Google (forms, files and email), Mailchimp (newsletter), Slack (community workspace), PayPal (donations), Vercel (hosting of this website) and Bluehost (hosting of our previous website). These companies store information outside Quebec, mainly in the United States.
                 </p>
 
                 <h2>How long we keep it</h2>
@@ -156,7 +156,7 @@ export default function PrivacyPage() {
 
                     <h2>Qui les traite pour nous</h2>
                     <p>
-                        Google (formulaires, fichiers et courriel), Mailchimp (infolettre), Slack (espace de la communauté), Vercel (hébergement de ce site) et Bluehost (hébergement de notre ancien site). Ces entreprises conservent les renseignements à l&apos;extérieur du Québec, principalement aux États-Unis.
+                        Google (formulaires, fichiers et courriel), Mailchimp (infolettre), Slack (espace de la communauté), PayPal (dons), Vercel (hébergement de ce site) et Bluehost (hébergement de notre ancien site). Ces entreprises conservent les renseignements à l&apos;extérieur du Québec, principalement aux États-Unis.
                     </p>
 
                     <h2>Durée de conservation</h2>
