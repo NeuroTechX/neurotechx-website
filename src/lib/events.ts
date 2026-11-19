@@ -79,14 +79,46 @@ export const EVENTS: NtxEvent[] = [
     desc: "The 6th edition of Europe's brain-innovation summit — startups, investors, researchers & clinicians across the brain ecosystem.",
   },
   {
+    name: 'EEG/EMG Foundation Challenge 2026', tag: 'Competition', dateLabel: 'Final submissions Nov 21, 2026', end: '2026-11-21',
+    location: 'Online · winners at NeurIPS, Sydney', url: 'https://neural-interfaces26.github.io/',
+    desc: 'Neural-interface decoding competition run with the NeurIPS Brain and Body workshop — hosted by Yneuro, Inria & UC San Diego.',
+  },
+  // `end` carries the closing time for evening events, so they stay "Upcoming" until they are over.
+  {
+    name: 'Stimulating Conversations: Advances in Neuromodulation', tag: 'Meetup', dateLabel: 'Nov 25, 2026 · 7 PM ET', end: '2026-11-25T23:00:00-05:00',
+    location: 'Peter Gilgan Centre for Research and Learning, Toronto', url: 'https://luma.com/lvklsd9o',
+    desc: 'NeuroTechX Toronto evening of short talks, two panels and demos on brain stimulation and the Toronto companies bringing it to patients — speakers from Ampa, sync2brain, Roga and Vielight. Tickets CA$9.',
+  },
+  {
+    name: 'Neurotech@Berkeley Symposium & Happy Hour', tag: 'Meetup', dateLabel: 'Dec 7, 2026 · 5–9 PM', end: '2026-12-07T21:00:00-08:00',
+    location: 'Frontier Tower, San Francisco', url: 'https://luma.com/neurotechberkeley-showcase',
+    desc: 'UC Berkeley undergraduate teams present their neurotech projects, live demos and published articles, followed by a mixer. Co-hosted by NeuroTechX — free with RSVP.',
+  },
+  {
+    name: 'BrainsConnected — SF Launch Event', tag: 'Meetup', dateLabel: 'Dec 9, 2026 · 6–9 PM', end: '2026-12-09T21:00:00-08:00',
+    location: 'Frontier Tower, San Francisco', url: 'https://luma.com/brains-connected-launch-event',
+    desc: 'Launch of BrainsConnected, a new web hub for consumer neurotech, with talks from its leadership team including Neurotech Reports founder James Cavuoto. Co-hosted by NeuroTechX.',
+  },
+  {
     name: 'NeurIPS 2026', tag: 'Conference', dateLabel: 'Dec 6–12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://neurips.cc/Conferences/2026/',
     desc: 'Flagship machine learning & computational neuroscience conference (satellites in Paris & Atlanta).',
   },
   {
+    name: 'Foundation Models for the Brain and Body — NeurIPS 2026 Workshop', tag: 'Workshop', dateLabel: 'Dec 12, 2026', end: '2026-12-12',
+    location: 'Sydney, Australia', url: 'https://brainbodyfm-workshop.github.io/',
+    desc: 'Second edition of the NeurIPS workshop on foundation models for neural & biosignal data; hosts the EEG/EMG Foundation Challenge winners.',
+  },
+  {
     name: 'MAIN 2026 — Montreal AI & Neuroscience', tag: 'Conference', dateLabel: 'Dec 2026 · dates TBA', end: '2026-12-31',
     location: 'Montreal, QC', url: 'https://www.main2025.org/',
     desc: 'Annual Montreal conference at the intersection of AI and neuroscience.',
+  },
+  // ── 2027 ──
+  {
+    name: '12th International BCI Meeting', tag: 'Conference', dateLabel: 'Jun 7–10, 2027 · abstracts due Jan 15', end: '2027-06-10',
+    location: 'Šibenik, Croatia', url: 'https://bcisociety.org/bci-meeting/',
+    desc: "The BCI Society's meeting. Abstracts for oral and poster presentations are due January 15, 2027.",
   },
 ];
 

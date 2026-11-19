@@ -126,11 +126,11 @@ export default function Header() {
             <div className={styles.ticketBanner}>
                 <div className={styles.bannerContainer}>
                     <div className={styles.bannerContent}>
-                        <span className={styles.badge}>Upcoming</span>
-                        <span className={styles.bannerTitle}>CuttingGardens 2026</span>
-                        <span className={styles.bannerDetails}>M/EEG methods multi-hub • 21–25 Sep 2026</span>
+                        <span className={styles.badge}>Abstracts due Jan 15</span>
+                        <span className={styles.bannerTitle}>12th International BCI Meeting</span>
+                        <span className={styles.bannerDetails}>Šibenik, Croatia • Jun 7–10, 2027</span>
                     </div>
-                    <a href="https://cuttingeeg.org/cuttinggardens2026/" target="_blank" rel="noopener noreferrer" className={styles.ticketLink}>
+                    <a href="https://bcisociety.org/bci-meeting/abstract-submission/" target="_blank" rel="noopener noreferrer" className={styles.ticketLink}>
                         Learn more <ArrowRight width={14} height={14} />
                     </a>
                 </div>

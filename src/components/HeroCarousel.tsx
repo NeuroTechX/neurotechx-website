@@ -26,27 +26,67 @@ const SLIDES: Slide[] = [
     ],
   },
   {
-    eyebrow: 'Featured · SfN 2026 satellite',
+    eyebrow: 'NeuroTechX Toronto · Nov 25',
     title: (
       <>
-        IEEE Brain Discovery &amp; <span className="text-gradient">Neurotechnology</span> Workshop
+        <span className="text-gradient">Stimulating Conversations</span>: Advances in Neuromodulation
       </>
     ),
-    desc: 'Nov 11–13, 2026 · Washington, DC — the flagship neurotech satellite alongside Society for Neuroscience 2026.',
+    desc: 'Short talks, two panels and demos on brain stimulation and the Toronto companies bringing it to patients — with speakers from Ampa, sync2brain, Roga and Vielight. 7 PM ET at the Peter Gilgan Centre.',
     ctas: [
-      { label: 'View details', href: 'https://brain.ieee.org/2026-ieee-brain-discovery-neurotechnology-workshop/', external: true, primary: true },
+      { label: 'Get tickets on Luma', href: 'https://luma.com/lvklsd9o', external: true, primary: true },
+      { label: 'All events', href: '/events' },
     ],
   },
   {
-    eyebrow: 'Upcoming · 21–25 Sep 2026',
+    eyebrow: 'Dec 7 · Frontier Tower, San Francisco',
     title: (
       <>
-        <span className="text-gradient">CuttingGardens</span> 2026
+        <span className="text-gradient">Neurotech@Berkeley</span> Symposium & Happy Hour
       </>
     ),
-    desc: 'A distributed M/EEG methods multi-hub conference — cutting-edge methods for M/EEG data analysis, across gardens worldwide.',
+    desc: 'UC Berkeley undergraduate teams present their neurotech projects, live demos and published articles — then stay for the mixer. 5–9 PM, free with RSVP.',
     ctas: [
-      { label: 'Learn more', href: 'https://cuttingeeg.org/cuttinggardens2026/', external: true, primary: true },
+      { label: 'RSVP on Luma', href: 'https://luma.com/neurotechberkeley-showcase', external: true, primary: true },
+      { label: 'All events', href: '/events' },
+    ],
+  },
+  {
+    eyebrow: 'Dec 9 · Frontier Tower, San Francisco',
+    title: (
+      <>
+        <span className="text-gradient">BrainsConnected</span> SF Launch Event
+      </>
+    ),
+    desc: 'The launch of BrainsConnected, a new web hub for consumer neurotech — hear from its leadership team, including Neurotech Reports founder James Cavuoto. 6–9 PM.',
+    ctas: [
+      { label: 'Register on Luma', href: 'https://luma.com/brains-connected-launch-event', external: true, primary: true },
+      { label: 'All events', href: '/events' },
+    ],
+  },
+  {
+    eyebrow: 'NeurIPS 2026 workshop · Dec 12, Sydney',
+    title: (
+      <>
+        Foundation Models for the <span className="text-gradient">Brain and Body</span>
+      </>
+    ),
+    desc: 'The second edition of the NeurIPS workshop on foundation models for neural and biosignal data — and home of the EEG/EMG Foundation Challenge (final submissions Nov 21; winners announced in Sydney).',
+    ctas: [
+      { label: 'Workshop', href: 'https://brainbodyfm-workshop.github.io/', external: true, primary: true },
+      { label: 'The challenge', href: 'https://neural-interfaces26.github.io/', external: true },
+    ],
+  },
+  {
+    eyebrow: 'Abstracts due Jan 15, 2027',
+    title: (
+      <>
+        12th International <span className="text-gradient">BCI</span> Meeting
+      </>
+    ),
+    desc: 'Jun 7–10, 2027 · Šibenik, Croatia — the BCI Society\'s meeting. The call for abstracts is open for oral and poster presentations.',
+    ctas: [
+      { label: 'Submit an abstract', href: 'https://bcisociety.org/bci-meeting/abstract-submission/', external: true, primary: true },
     ],
   },
 ];
