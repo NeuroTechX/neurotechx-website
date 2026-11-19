@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '', '/about', '/community', '/community/growth', '/community/chapter-guidelines',
     '/education', '/education/webinars', '/education/getting-started', '/education/resources',
     '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs',
-    '/transparency', '/donate', '/students', '/code-of-conduct',
+    '/transparency', '/donate', '/students', '/code-of-conduct', '/privacy',
   ];
   const now = new Date();
   return routes.map((r) => ({

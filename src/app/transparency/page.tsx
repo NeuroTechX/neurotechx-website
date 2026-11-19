@@ -35,6 +35,14 @@ export default function TransparencyPage() {
                                 <dt className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-1">Status</dt>
                                 <dd className="text-lg">Non-Profit Organization (NPO)</dd>
                             </div>
+                            <div>
+                                <dt className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-1">Quebec Enterprise Number (NEQ)</dt>
+                                <dd className="text-lg">1170984166</dd>
+                            </div>
+                            <div>
+                                <dt className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-1">Mailing Address</dt>
+                                <dd className="text-lg">Mila, 6666 rue Saint-Urbain, bureau 200<br />Montréal (Québec) H2S 3H1, Canada</dd>
+                            </div>
                         </dl>
                     </div>
                 </section>
