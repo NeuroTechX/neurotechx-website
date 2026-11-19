@@ -79,14 +79,30 @@ export const EVENTS: NtxEvent[] = [
     desc: "The 6th edition of Europe's brain-innovation summit — startups, investors, researchers & clinicians across the brain ecosystem.",
   },
   {
+    name: 'EEG/EMG Foundation Challenge 2026', tag: 'Competition', dateLabel: 'Final submissions Nov 21, 2026', end: '2026-11-21',
+    location: 'Online · winners at NeurIPS, Sydney', url: 'https://neural-interfaces26.github.io/',
+    desc: 'Neural-interface decoding competition run with the NeurIPS Brain and Body workshop — hosted by Yneuro, Inria & UC San Diego.',
+  },
+  {
     name: 'NeurIPS 2026', tag: 'Conference', dateLabel: 'Dec 6–12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://neurips.cc/Conferences/2026/',
     desc: 'Flagship machine learning & computational neuroscience conference (satellites in Paris & Atlanta).',
   },
   {
+    name: 'Foundation Models for the Brain and Body — NeurIPS 2026 Workshop', tag: 'Workshop', dateLabel: 'Dec 12, 2026', end: '2026-12-12',
+    location: 'Sydney, Australia', url: 'https://brainbodyfm-workshop.github.io/',
+    desc: 'Second edition of the NeurIPS workshop on foundation models for neural & biosignal data; hosts the EEG/EMG Foundation Challenge winners.',
+  },
+  {
     name: 'MAIN 2026 — Montreal AI & Neuroscience', tag: 'Conference', dateLabel: 'Dec 2026 · dates TBA', end: '2026-12-31',
     location: 'Montreal, QC', url: 'https://www.main2025.org/',
     desc: 'Annual Montreal conference at the intersection of AI and neuroscience.',
+  },
+  // ── 2027 ──
+  {
+    name: '12th International BCI Meeting', tag: 'Conference', dateLabel: 'Jun 7–10, 2027 · abstracts due Jan 15', end: '2027-06-10',
+    location: 'Šibenik, Croatia', url: 'https://bcisociety.org/bci-meeting/',
+    desc: "The BCI Society's meeting. Abstracts for oral and poster presentations are due January 15, 2027.",
   },
 ];
 

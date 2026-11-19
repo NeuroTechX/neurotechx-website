@@ -26,27 +26,28 @@ const SLIDES: Slide[] = [
     ],
   },
   {
-    eyebrow: 'Featured · SfN 2026 satellite',
+    eyebrow: 'NeurIPS 2026 workshop · Dec 12, Sydney',
     title: (
       <>
-        IEEE Brain Discovery &amp; <span className="text-gradient">Neurotechnology</span> Workshop
+        Foundation Models for the <span className="text-gradient">Brain and Body</span>
       </>
     ),
-    desc: 'Nov 11–13, 2026 · Washington, DC — the flagship neurotech satellite alongside Society for Neuroscience 2026.',
+    desc: 'The second edition of the NeurIPS workshop on foundation models for neural and biosignal data — and home of the EEG/EMG Foundation Challenge, whose final submissions close Nov 21.',
     ctas: [
-      { label: 'View details', href: 'https://brain.ieee.org/2026-ieee-brain-discovery-neurotechnology-workshop/', external: true, primary: true },
+      { label: 'Workshop', href: 'https://brainbodyfm-workshop.github.io/', external: true, primary: true },
+      { label: 'The challenge', href: 'https://neural-interfaces26.github.io/', external: true },
     ],
   },
   {
-    eyebrow: 'Upcoming · 21–25 Sep 2026',
+    eyebrow: 'Abstracts due Jan 15, 2027',
     title: (
       <>
-        <span className="text-gradient">CuttingGardens</span> 2026
+        12th International <span className="text-gradient">BCI</span> Meeting
       </>
     ),
-    desc: 'A distributed M/EEG methods multi-hub conference — cutting-edge methods for M/EEG data analysis, across gardens worldwide.',
+    desc: 'Jun 7–10, 2027 · Šibenik, Croatia — the BCI Society\'s meeting. The call for abstracts is open for oral and poster presentations.',
     ctas: [
-      { label: 'Learn more', href: 'https://cuttingeeg.org/cuttinggardens2026/', external: true, primary: true },
+      { label: 'Submit an abstract', href: 'https://bcisociety.org/bci-meeting/abstract-submission/', external: true, primary: true },
     ],
   },
 ];
