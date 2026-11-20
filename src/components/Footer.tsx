@@ -42,7 +42,10 @@ export default function Footer() {
             <div className={styles.container}>
                 <div className={styles.copyright}>
                     <p>
-                        © {new Date().getFullYear()} NeuroTechX. <a href="/code-of-conduct" className="hover:underline">Code of Conduct</a>.
+                        © {new Date().getFullYear()} NeuroTechX. <a href="/code-of-conduct" className="hover:underline">Code of Conduct</a> · <a href="/privacy" className="hover:underline">Privacy</a> · <a href="/transparency" className="hover:underline">Transparency</a>
+                    </p>
+                    <p className={styles.legal}>
+                        Operated by Société BCI Montréal, a Quebec non-profit organization (NEQ 1170984166) · 6666 rue Saint-Urbain, bureau 200, Montréal (Québec) H2S 3H1, Canada
                     </p>
                 </div>
                 <div className={styles.socialLinks}>

@@ -35,7 +35,7 @@ export default function DonatePage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href="https://www.paypal.com/donate/?hosted_button_id=placeholder" target="_blank" className="btn bg-[#0070BA] hover:bg-[#003087] text-white flex-1 py-4 text-lg">
+                        <a href="https://www.paypal.com/donate/?hosted_button_id=D5FANXSC6A3UU" target="_blank" rel="noopener noreferrer" className="btn bg-[#0070BA] hover:bg-[#003087] text-white flex-1 py-4 text-lg">
                             Donate via PayPal
                         </a>
                         {/* Placeholder for Stripe or other processors */}

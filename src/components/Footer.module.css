@@ -20,8 +20,13 @@
 @media (min-width: 768px) {
     .container {
         flex-direction: row;
-        height: 6rem;
+        min-height: 6rem;
+        gap: 2rem;
         padding: 0 2rem;
+    }
+
+    .copyright {
+        text-align: left;
     }
 }
 
@@ -29,6 +34,11 @@
     font-size: 0.875rem;
     line-height: 2;
     text-align: center;
+}
+
+.legal {
+    font-size: 0.75rem;
+    line-height: 1.5;
 }
 
 .socialLinks {
