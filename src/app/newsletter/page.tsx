@@ -1,5 +1,6 @@
 import { ExternalLink, Mail } from 'lucide-react';
 import Image from 'next/image';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const newsletterArchive = [
     {
@@ -76,7 +77,7 @@ export default function NewsletterArchivePage() {
                             From technical deep dives to community highlights and industry breakthroughs.
                         </p>
                     </div>
-                    <div className="bg-neuro-accent/5 p-8 rounded-2xl border border-neuro-accent/20 md:w-80">
+                    <div className="bg-neuro-accent/5 p-8 rounded-2xl border border-neuro-accent/20 md:w-96">
                         <h3 className="font-bold text-lg flex items-center gap-2 mb-3">
                             <Mail className="w-5 h-5 text-neuro-accent" />
                             Get the Digest
@@ -84,13 +85,7 @@ export default function NewsletterArchivePage() {
                         <p className="text-sm text-muted-foreground mb-6">
                             Join 15,000+ subscribers receiving the best of neurotech in their inbox.
                         </p>
-                        <a 
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" 
-                            target="_blank" 
-                            className="w-full inline-flex items-center justify-center rounded-xl text-sm font-bold bg-neuro-accent text-white hover:opacity-90 transition-all h-12 px-6 shadow-lg shadow-neuro-accent/20"
-                        >
-                            Subscribe Now
-                        </a>
+                        <NewsletterSignup />
                     </div>
                 </div>
 

@@ -113,6 +113,9 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             Launched in 2019, NTX Services provided expert advisory to the neurotech industry. Its successful operation and eventual transition in 2024 marked a pivotal moment, enabling the core NeuroTechX organization to redouble its commitment to community-driven open science.
                         </p>
+                        <a href="/ntx-services-partnership-termination" className={styles.link}>
+                            Read the joint statement <ArrowUpRight className={styles.icon} />
+                        </a>
                     </div>
 
                     <div className={styles.card}>
