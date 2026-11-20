@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/education', '/education/webinars', '/education/getting-started', '/education/resources',
     '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs',
     '/transparency', '/donate', '/students', '/code-of-conduct', '/privacy',
+    '/ntx-services-partnership-termination',
   ];
   const now = new Date();
   return routes.map((r) => ({

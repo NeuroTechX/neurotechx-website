@@ -4,6 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import NeuralBackground from '@/components/NeuralBackground';
 import HeroCarousel from '@/components/HeroCarousel';
 import EventsList from '@/components/EventsList';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import { fetchFeeds } from '@/lib/rss';
 import { fetchBlueskyPosts } from '@/lib/bluesky';
 
@@ -154,6 +155,15 @@ export default async function Home() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ── Newsletter ── */}
+      <section className="container pt-16 md:pt-20">
+        <div className="mx-auto max-w-2xl rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-8 text-center">
+          <p className="eyebrow mb-2">Newsletter</p>
+          <h2 className="mb-6 text-2xl md:text-3xl font-bold">Get the NeuroTechX newsletter</h2>
+          <NewsletterSignup />
         </div>
       </section>
 
