@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://neurotechx.org';
   const routes = [
     '', '/about', '/community', '/community/growth', '/community/chapter-guidelines',
-    '/education', '/education/webinars', '/education/getting-started', '/education/resources',
+    '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
     '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs',
     '/transparency', '/donate', '/students', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',

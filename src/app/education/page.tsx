@@ -19,10 +19,10 @@ export default function EducationPage() {
                         The definitive beginner&apos;s guide to brain-computer interfaces and neurotechnology. Written by the community, for the community.
                     </p>
                     <div className="flex gap-4">
-                        <a href="https://neurotechx.com/primer" target="_blank" className="px-6 py-3 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity">
+                        <Link href="/primer" className="px-6 py-3 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity">
                             Get the Book
-                        </a>
-                        <a href="https://neurotechx.com/primer" target="_blank" className="px-6 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted-foreground/10 transition-colors">
+                        </Link>
+                        <a href="/downloads/the-neurotech-primer.pdf" target="_blank" className="px-6 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted-foreground/10 transition-colors">
                             Read PDF
                         </a>
                     </div>
