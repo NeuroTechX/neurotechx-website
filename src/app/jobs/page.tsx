@@ -24,6 +24,11 @@ const OTHER_BOARDS = [
     about: 'A job board for the neurotech industry.',
   },
   {
+    name: 'reccy neuro',
+    href: 'https://neuro.reccy.dev/',
+    about: 'A neurotech job board with company and investor directories.',
+  },
+  {
     name: 'Bernstein Network job pool',
     href: 'https://bernstein-network.de/en/career/job-pool/',
     about: 'Academic positions in computational neuroscience.',
