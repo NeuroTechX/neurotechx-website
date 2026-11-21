@@ -1,4 +1,4 @@
-import { Heart, CreditCard, Landmark, Bitcoin, Mail } from 'lucide-react';
+import { Heart, Mail } from 'lucide-react';
 
 export default function DonatePage() {
     return (
@@ -45,7 +45,7 @@ export default function DonatePage() {
                     </p>
                 </section>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid gap-8">
                     {/* Canadian Transfers */}
                     <section className="card p-6">
                         <div className="flex items-center gap-3 mb-4">
@@ -66,61 +66,8 @@ export default function DonatePage() {
                             </div>
                         </div>
                     </section>
-
-                    {/* US Transfers */}
-                    <section className="card p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <Landmark className="w-5 h-5 text-neuro-accent" />
-                            <h3 className="text-xl font-bold">USD (ACH / Wire)</h3>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-4">
-                            Direct transfer to our US-based account via <strong>Desjardins Bank (Florida)</strong>.
-                        </p>
-                        <div className="bg-muted p-4 rounded text-sm font-mono space-y-2 mb-4">
-                            <div className="flex justify-between">
-                                <span className="text-muted-foreground">Routing (ABA):</span>
-                                <span className="select-all font-bold">[Pending]</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-muted-foreground">Account:</span>
-                                <span className="select-all font-bold">[Pending]</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-muted-foreground">Beneficiary:</span>
-                                <span>NeuroTechX</span>
-                            </div>
-                        </div>
-                        <p className="text-xs text-muted-foreground">
-                            Ideal for US-based sponsors or board members.
-                        </p>
-                    </section>
                 </div>
 
-                {/* Crypto */}
-                <section className="card p-6 border-dashed">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Bitcoin className="w-5 h-5 text-neuro-accent" />
-                        <h3 className="text-xl font-bold">Crypto (Coinbase Institutional)</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-6">
-                        We accept Ethereum (ETH) and USD Coin (USDC).
-                    </p>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <span className="text-xs font-bold uppercase tracking-wider">Ethereum (ETH)</span>
-                            <div className="p-3 bg-muted rounded font-mono text-xs break-all select-all">
-                                0x[Pending_ETH_Address]
-                            </div>
-                        </div>
-                        <div className="space-y-2">
-                            <span className="text-xs font-bold uppercase tracking-wider">USD Coin (USDC)</span>
-                            <div className="p-3 bg-muted rounded font-mono text-xs break-all select-all">
-                                0x[Pending_USDC_Address]
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </div>
     );

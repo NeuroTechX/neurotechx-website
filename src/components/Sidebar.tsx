@@ -1,4 +1,4 @@
-import { Calendar as CalendarIcon, MapPin, ExternalLink, Video, ShoppingBag } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, ExternalLink, Video } from 'lucide-react';
 import { fetchCalendarEvents } from '@/lib/calendar';
 
 export default async function Sidebar() {
@@ -162,23 +162,12 @@ export default async function Sidebar() {
                 >
                     Become a Member
                 </a>
-                {/* Support & Merch */}
+                {/* Support */}
                 <div className="card border-neuro-accent/20 mt-4">
                     <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2">
                         Support the Mission
                     </h3>
-                    <div className="space-y-4">
-                        <a href="https://neurotechx-store.creator-spring.com/" target="_blank" className="flex items-center gap-3 group">
-                            <div className="p-2 bg-muted rounded-full group-hover:bg-neuro-accent/10 transition-colors">
-                                <ShoppingBag className="w-5 h-5 group-hover:text-neuro-accent" />
-                            </div>
-                            <div>
-                                <span className="font-bold block group-hover:text-neuro-accent">Merch Store</span>
-                                <span className="text-xs text-muted-foreground">T-shirts, hoodies, and more.</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div className="mt-4 pt-4 border-t text-sm text-center">
+                    <div className="text-sm text-center">
                         <a href="/donate" className="text-neuro-accent hover:underline font-medium inline-flex items-center gap-1">
                             Donate to NeuroTechX <ExternalLink className="w-3 h-3" />
                         </a>
