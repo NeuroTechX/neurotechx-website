@@ -1,4 +1,13 @@
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Code of Conduct',
+    description:
+        'Community standards, expectations, and enforcement policy for all NeuroTechX online spaces, local chapters, and events.',
+    alternates: { canonical: '/code-of-conduct' },
+};
+
 export default function CodeOfConductPage() {
     return (
         <div className="container py-12 max-w-4xl mx-auto">

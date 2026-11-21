@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: 'The NeuroTech Primer',
     description:
         'The NeuroTech Primer: a beginner’s guide to everything neurotechnology, written by the NeuroTechX community. Download the free PDF or get the print edition.',
+    alternates: { canonical: '/primer' },
 };
 
 const PDF = '/downloads/the-neurotech-primer.pdf';

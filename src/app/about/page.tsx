@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import styles from './page.module.css';
 import InstagramImage from '@/components/InstagramImage';
+
+export const metadata: Metadata = {
+    title: 'About',
+    description:
+        'Our story, origins, board of directors, and leadership — how NeuroTechX grew from Montreal in 2015 into the largest global neurotechnology community.',
+    alternates: { canonical: '/about' },
+};
 
 export default function AboutPage() {
     return (
@@ -56,7 +64,7 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             Founded in 2013 at <em>La Paillasse</em>, CogLab pioneered the &quot;Community Lab&quot; model, exploring cognitive science through DIY hardware and open citizen science.
                         </p>
-                        <a href="https://coglab.fr/home-en/" target="_blank" className={styles.link}>
+                        <a href="https://coglab.fr/home-en/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                             Visit CogLab <ArrowUpRight className={styles.icon} />
                         </a>
                     </div>
@@ -67,7 +75,7 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             The Cognitive Technology Group at Berkeley was a seminal student organization that set the standard for what would become <em>NeuroTech@Berkeley</em>.
                         </p>
-                        <a href="http://www.explorecogtech.com/" target="_blank" className={styles.link}>
+                        <a href="http://www.explorecogtech.com/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                             Visit Project <ArrowUpRight className={styles.icon} />
                         </a>
                     </div>
@@ -78,7 +86,7 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             The &quot;Deep Learning for EEG&quot; workshop at Concordia University bridged the gap between raw signal processing and modern machine learning.
                         </p>
-                        <a href="https://github.com/NeuroTechX/bci-workshop" target="_blank" className={styles.link}>
+                        <a href="https://github.com/NeuroTechX/bci-workshop" target="_blank" rel="noopener noreferrer" className={styles.link}>
                             View Materials <ArrowUpRight className={styles.icon} />
                         </a>
                     </div>
@@ -90,7 +98,7 @@ export default function AboutPage() {
                             The democratized access to EEG data through muse-lsl and eeg-notebooks enabled large-scale studies and hyperscanning protocols worldwide.
                         </p>
                         <div className="flex flex-col gap-2">
-                            <a href="https://github.com/NeuroTechX/eeg-notebooks" target="_blank" className={styles.link}>
+                            <a href="https://github.com/NeuroTechX/eeg-notebooks" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 eeg-notebooks <ArrowUpRight className={styles.icon} />
                             </a>
                         </div>
@@ -102,7 +110,7 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             The <strong>Mother of All BCI Benchmarks (MOABB)</strong> project set a new standard for reproducibility in BCI research, providing a comprehensive framework for dataset benchmarking.
                         </p>
-                        <a href="https://github.com/NeuroTechX/moabb" target="_blank" className={styles.link}>
+                        <a href="https://github.com/NeuroTechX/moabb" target="_blank" rel="noopener noreferrer" className={styles.link}>
                             View MOABB <ArrowUpRight className={styles.icon} />
                         </a>
                     </div>
@@ -124,7 +132,7 @@ export default function AboutPage() {
                         <p className={styles.cardText}>
                             A grant-funded partnership to launch the Neurotech Micro-credential Program, setting a new standard for hands-on neurotechnology education.
                         </p>
-                        <a href="https://neurotechmicrocreds.com/" target="_blank" className={styles.link}>
+                        <a href="https://neurotechmicrocreds.com/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                             Visit Program <ArrowUpRight className={styles.icon} />
                         </a>
                     </div>

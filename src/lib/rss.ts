@@ -38,10 +38,23 @@ export const FEEDS: FeedConfig[] = [
     },
     {
         name: "Deric's Mind Blog",
-        url: 'http://mindblog.dericbownds.net/rss.xml',
+        url: 'https://mindblog.dericbownds.net/rss.xml',
         type: 'blog',
     }
 ];
+
+function safeExternalUrl(raw: unknown, httpsOnly = false): string | undefined {
+    if (typeof raw !== 'string' || !raw.trim()) return undefined;
+    try {
+        const u = new URL(raw.trim());
+        if (httpsOnly ? u.protocol === 'https:' : u.protocol === 'https:' || u.protocol === 'http:') {
+            return u.toString();
+        }
+    } catch {
+        // Ignore malformed URLs from external feeds
+    }
+    return undefined;
+}
 
 // Business / industry-oriented neurotech news + press releases (Reports page).
 // Google News RSS search feeds — aggregate articles & PRs, neurotech-targeted, always fresh.
@@ -84,12 +97,12 @@ export async function fetchFeeds(feeds: FeedConfig[] = FEEDS): Promise<NewsItem[
                 // First image (thumbnail) from content:encoded / media:content
                 const encoded: string = (item['content:encoded'] || item.content || '') as string;
                 const imgMatch = /<img[^>]+src=["']([^"']+)["']/i.exec(encoded);
-                const image = imgMatch?.[1] || item['media:content']?.$?.url || undefined;
+                const image = safeExternalUrl(imgMatch?.[1] || item['media:content']?.$?.url, true);
 
                 return {
                     id: item.guid || item.link || Math.random().toString(36).substr(2, 9),
                     title: item.title || 'Untitled',
-                    link: item.link || '#',
+                    link: safeExternalUrl(item.link) || '#',
                     pubDate,
                     contentSnippet: (item.contentSnippet || item.summary || '').substring(0, 600), // Slightly larger snippet
                     content: '', // Drop full content to reduce build size/memory usage since we don't display it

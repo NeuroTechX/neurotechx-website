@@ -4,6 +4,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy',
     description:
         'How NeuroTechX (Société BCI Montréal) collects, uses and protects personal information, and how to ask for access, correction or deletion.',
+    alternates: { canonical: '/privacy' },
 };
 
 const CONTACT = 'info@neurotechx.com';
@@ -21,7 +22,7 @@ export default function PrivacyPage() {
 
             <div className="[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-3 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-2 [&_li]:leading-relaxed">
                 <p className="text-sm text-muted-foreground">
-                    Last updated: November 19, 2026 · <a href="#francais" className="underline">Version française</a>
+                    Last updated: November 21, 2026 · <a href="#francais" className="underline">Version française</a>
                 </p>
 
                 <h2>Who we are</h2>
@@ -73,7 +74,7 @@ export default function PrivacyPage() {
 
                 <h2>Who processes it for us</h2>
                 <p>
-                    Google (forms, files and email), Mailchimp (newsletter), Slack (community workspace), PayPal (donations), Vercel (hosting of this website) and Bluehost (hosting of our previous website). These companies store information outside Quebec, mainly in the United States.
+                    Google (forms, files and email), Mailchimp (newsletter), Slack (community workspace), Airtable (ecosystem directory and entry suggestions), PayPal (donations), Vercel (hosting of this website) and Bluehost (legacy hosting of our previous website, being retired). These companies store information outside Quebec, mainly in the United States.
                 </p>
 
                 <h2>How long we keep it</h2>
@@ -105,7 +106,7 @@ export default function PrivacyPage() {
                 <h1 id="francais" lang="fr" className="text-4xl font-serif font-bold mb-8">Politique de confidentialité</h1>
 
                 <div lang="fr">
-                    <p className="text-sm text-muted-foreground">Dernière mise à jour : 19 novembre 2026</p>
+                    <p className="text-sm text-muted-foreground">Dernière mise à jour : 21 novembre 2026</p>
 
                     <h2>Qui nous sommes</h2>
                     <p>
@@ -156,7 +157,7 @@ export default function PrivacyPage() {
 
                     <h2>Qui les traite pour nous</h2>
                     <p>
-                        Google (formulaires, fichiers et courriel), Mailchimp (infolettre), Slack (espace de la communauté), PayPal (dons), Vercel (hébergement de ce site) et Bluehost (hébergement de notre ancien site). Ces entreprises conservent les renseignements à l&apos;extérieur du Québec, principalement aux États-Unis.
+                        Google (formulaires, fichiers et courriel), Mailchimp (infolettre), Slack (espace de la communauté), Airtable (répertoire de l&apos;écosystème et suggestions d&apos;entrées), PayPal (dons), Vercel (hébergement de ce site) et Bluehost (ancien hébergement de notre site précédent, en cours de fermeture). Ces entreprises conservent les renseignements à l&apos;extérieur du Québec, principalement aux États-Unis.
                     </p>
 
                     <h2>Durée de conservation</h2>

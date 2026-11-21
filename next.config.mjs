@@ -56,8 +56,46 @@ const JOB_REGION = [{ type: 'query', key: 'job_listing_region' }];
 const jobRegion = (value) => [{ type: 'query', key: 'job_listing_region', value }];
 const OLD_JOB_REGIONS = ['europe', 'north-america'];
 
+const CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+  "frame-src https://www.youtube-nocookie.com https://airtable.com",
+  "form-action 'self' https://neurotechx.us12.list-manage.com https://bciwiki.org",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  'upgrade-insecure-requests',
+].join('; ');
+
+const SECURITY_HEADERS = [
+  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+  { key: 'Content-Security-Policy', value: CONTENT_SECURITY_POLICY },
+  { key: 'X-Frame-Options', value: 'DENY' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: SECURITY_HEADERS,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: '(?<host>.*\\.vercel\\.app)' }],
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+    ];
+  },
   async redirects() {
     return [
       ...Object.entries(OLD_JOB_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),

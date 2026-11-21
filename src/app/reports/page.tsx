@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import { fetchFeeds, REPORTS_FEEDS } from '@/lib/rss';
 import PageHeader from '@/components/PageHeader';
 import { formatDistanceToNow } from 'date-fns';
+
+export const metadata: Metadata = {
+    title: 'Industry Reports & News',
+    description:
+        'Curated business, startup, funding, and device news from across the neurotechnology industry, updated hourly.',
+    alternates: { canonical: '/reports' },
+};
 
 export const revalidate = 3600; // refresh hourly
 

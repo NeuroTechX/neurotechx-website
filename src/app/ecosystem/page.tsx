@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: 'Neurotech Ecosystem',
   description:
     'A community-maintained directory of the neurotechnology ecosystem — industry companies and academic labs across the globe.',
+  alternates: { canonical: '/ecosystem' },
 };
 
 const VIEWS = [

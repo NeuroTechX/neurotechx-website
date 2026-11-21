@@ -77,17 +77,17 @@ export const CHAPTERS: Chapter[] = [
   },
 
   // ── Other chapters ──
-  { name: 'Barcelona', city: 'Barcelona', status: 'active', url: 'https://bcn.neurotechx.com', map: [506, 107.8] },
-  { name: 'Boston', city: 'Boston', status: 'active', url: 'https://bos.neurotechx.com', map: [302.6, 103.8] },
-  { name: 'Los Angeles', city: 'Los Angeles', status: 'active', url: 'https://la.neurotechx.com', map: [171.6, 140.1] },
-  { name: 'Oslo', city: 'Oslo', status: 'active', url: 'https://oslo.neurotechx.com', map: [529.9, 42.9] },
-  { name: 'Washington DC', city: 'Washington DC', status: 'active', url: 'https://dc.neurotechx.com', map: [286, 118.4] },
-  { name: 'Tel Aviv', city: 'Tel Aviv', status: 'active', url: 'https://tlv.neurotechx.com', map: [596.6, 149.3] },
-  { name: 'Vancouver', city: 'Vancouver', status: 'active', url: 'https://van.neurotechx.com', map: [158, 77.1] },
-  { name: 'Waterloo', city: 'Waterloo', status: 'active', url: 'https://kw.neurotechx.com', map: [276.3, 99.4] },
-  { name: 'Lima', city: 'Lima', status: 'inactive', url: 'https://lima.neurotechx.com', map: [286, 384.8] },
-  { name: 'Ottawa', city: 'Ottawa', status: 'active', url: 'https://ott.neurotechx.com', map: [289.7, 91.6] },
-  { name: 'Hamilton', city: 'Hamilton', status: 'active', url: 'https://ha.neurotechx.com', map: [278.1, 100.2] },
+  { name: 'Barcelona', city: 'Barcelona', status: 'active', url: JOIN, map: [506, 107.8] },
+  { name: 'Boston', city: 'Boston', status: 'active', url: 'https://x.com/neurotechbos', map: [302.6, 103.8] },
+  { name: 'Los Angeles', city: 'Los Angeles', status: 'active', url: 'https://x.com/neurotechla', map: [171.6, 140.1] },
+  { name: 'Oslo', city: 'Oslo', status: 'active', url: 'https://x.com/neurotechoslo', map: [529.9, 42.9] },
+  { name: 'Washington DC', city: 'Washington DC', status: 'active', url: 'https://x.com/neurotechdc', map: [286, 118.4] },
+  { name: 'Tel Aviv', city: 'Tel Aviv', status: 'active', url: 'https://x.com/neurotechtlv', map: [596.6, 149.3] },
+  { name: 'Vancouver', city: 'Vancouver', status: 'active', url: 'https://x.com/neurotechvan', map: [158, 77.1] },
+  { name: 'Waterloo', city: 'Waterloo', status: 'active', url: 'https://x.com/neurotechkw', map: [276.3, 99.4] },
+  { name: 'Lima', city: 'Lima', status: 'inactive', url: 'https://x.com/NeuroTechLIMA', map: [286, 384.8] },
+  { name: 'Ottawa', city: 'Ottawa', status: 'active', url: 'https://x.com/neurotechott', map: [289.7, 91.6] },
+  { name: 'Hamilton', city: 'Hamilton', status: 'active', url: 'https://x.com/NeuroTechHa', map: [278.1, 100.2] },
 
   // ── Latin America ──
   { name: 'La Paz', city: 'La Paz, Bolivia', status: 'active', url: 'https://www.instagram.com/neurotechxbolivia/', map: [310.7, 408.7] },

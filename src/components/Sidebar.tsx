@@ -27,19 +27,19 @@ export default async function Sidebar() {
                 </h3>
                 <ul className="space-y-4">
                     <li>
-                        <a href="https://neurofounders.co/map" target="_blank" className="font-bold hover:text-neuro-accent block">Startup Map</a>
+                        <a href="https://neurofounders.co/map" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Startup Map</a>
                         <p className="text-xs text-muted-foreground">Interactive database of 225+ companies.</p>
                     </li>
                     <li>
-                        <a href="https://neurotechjobs.io/nerd" target="_blank" className="font-bold hover:text-neuro-accent block">NERD Program</a>
+                        <a href="https://neurotechjobs.io/nerd" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">NERD Program</a>
                         <p className="text-xs text-muted-foreground">Milestone-based funding for R&D.</p>
                     </li>
                     <li>
-                        <a href="http://www.neurotechreports.com/" target="_blank" className="font-bold hover:text-neuro-accent block">Neurotech Reports</a>
+                        <a href="http://www.neurotechreports.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Neurotech Reports</a>
                         <p className="text-xs text-muted-foreground">Market intelligence & analysis.</p>
                     </li>
                     <li>
-                        <a href="https://neurofounders.co/glossary" target="_blank" className="font-bold hover:text-neuro-accent block">Glossary</a>
+                        <a href="https://neurofounders.co/glossary" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Glossary</a>
                         <p className="text-xs text-muted-foreground">600+ neurotech terms defined.</p>
                     </li>
                 </ul>
@@ -53,28 +53,28 @@ export default async function Sidebar() {
                 </h3>
                 <ul className="space-y-4">
                     <li>
-                        <a href="https://github.com/NeuroTechX/awesome-bci" target="_blank" className="font-bold hover:text-neuro-accent block">awesome-bci</a>
+                        <a href="https://github.com/NeuroTechX/awesome-bci" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">awesome-bci</a>
                         <p className="text-xs text-muted-foreground">The &quot;Goldmine&quot; of BCI resources. 1.4k+ stars.</p>
                     </li>
                     <li>
-                        <a href="https://github.com/NeuroTechX/moabb" target="_blank" className="font-bold hover:text-neuro-accent block">MOABB</a>
+                        <a href="https://github.com/NeuroTechX/moabb" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">MOABB</a>
                         <p className="text-xs text-muted-foreground">The Mother of All BCI Benchmarks.</p>
                     </li>
                     <li>
-                        <a href="https://github.com/braindecode/braindecode" target="_blank" className="font-bold hover:text-neuro-accent block">Braindecode</a>
+                        <a href="https://github.com/braindecode/braindecode" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Braindecode</a>
                         <p className="text-xs text-muted-foreground">Deep learning software for EEG.</p>
                     </li>
                     <li>
-                        <a href="https://brainflow.org" target="_blank" className="font-bold hover:text-neuro-accent block">BrainFlow</a>
+                        <a href="https://brainflow.org" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">BrainFlow</a>
                         <p className="text-xs text-muted-foreground">Universal biosensor library.</p>
                     </li>
                     <li>
-                        <a href="https://pieeg.com" target="_blank" className="font-bold hover:text-neuro-accent block">PiEEG</a>
+                        <a href="https://pieeg.com" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">PiEEG</a>
                         <p className="text-xs text-muted-foreground">Raspberry Pi Shield for EEG.</p>
                     </li>
                 </ul>
                 <div className="mt-4 pt-4 border-t text-sm text-center">
-                    <a href="https://github.com/NeuroTechX" target="_blank" className="text-neuro-accent hover:underline font-medium inline-flex items-center gap-1">
+                    <a href="https://github.com/NeuroTechX" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-medium inline-flex items-center gap-1">
                         View Organization <ExternalLink className="w-3 h-3" />
                     </a>
                 </div>
@@ -88,7 +88,7 @@ export default async function Sidebar() {
                 </div>
                 <div className="aspect-video bg-black relative flex items-center justify-center">
                     {/* Placeholder for iframe or thumbnail */}
-                    <a href="https://www.youtube.com/neurotechx" target="_blank" className="text-white/80 hover:text-white flex flex-col items-center gap-2">
+                    <a href="https://www.youtube.com/neurotechx" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white flex flex-col items-center gap-2">
                         <div className="w-12 h-12 rounded-full border-2 border-white/50 flex items-center justify-center">
                             <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                         </div>
@@ -140,10 +140,10 @@ export default async function Sidebar() {
                     )}
                 </div>
                 <div className="mt-4 pt-4 border-t text-sm text-center flex flex-col gap-2">
-                    <a href="https://luma.com/neurotechx" target="_blank" className="text-neuro-accent hover:underline font-medium inline-flex items-center justify-center gap-1">
+                    <a href="https://luma.com/neurotechx" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-medium inline-flex items-center justify-center gap-1">
                         View NeuroTechX Calendar <ExternalLink className="w-3 h-3" />
                     </a>
-                    <a href="https://sites.google.com/site/fabienlotte/bci-community/conferences" target="_blank" className="text-muted-foreground hover:text-neuro-accent text-xs inline-flex items-center justify-center gap-1 transition-colors">
+                    <a href="https://sites.google.com/site/fabienlotte/bci-community/conferences" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-neuro-accent text-xs inline-flex items-center justify-center gap-1 transition-colors">
                         View Global BCI Conference List <ExternalLink className="w-3 h-3" />
                     </a>
                 </div>
@@ -157,7 +157,7 @@ export default async function Sidebar() {
                 </p>
                 <a
                     href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform"
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     className="block w-full py-2 px-4 bg-foreground text-background text-center rounded font-medium hover:opacity-90 transition-opacity"
                 >
                     Become a Member
@@ -199,25 +199,25 @@ export default async function Sidebar() {
 
                     <ul className="space-y-4 border-t pt-4">
                         <li>
-                            <a href="https://bciwiki.org" target="_blank" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
+                            <a href="https://bciwiki.org" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
                                 BCIwiki <ExternalLink className="w-3 h-3 text-muted-foreground" />
                             </a>
                             <p className="text-xs text-muted-foreground">The open encyclopedia for BCI.</p>
                         </li>
                         <li>
-                            <a href="https://tfussociety.miraheze.org/wiki/Main_Page" target="_blank" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
+                            <a href="https://tfussociety.miraheze.org/wiki/Main_Page" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
                                 TFUS Society <ExternalLink className="w-3 h-3 text-muted-foreground" />
                             </a>
                             <p className="text-xs text-muted-foreground">Transcranial Focused Ultrasound resources.</p>
                         </li>
                         <li>
-                            <a href="https://brainbox-initiative.com/" target="_blank" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
+                            <a href="https://brainbox-initiative.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
                                 Brainbox Initiative <ExternalLink className="w-3 h-3 text-muted-foreground" />
                             </a>
                             <p className="text-xs text-muted-foreground">Workshops and awards for early-career neuroscientists.</p>
                         </li>
                         <li>
-                            <a href="https://bcisociety.org" target="_blank" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
+                            <a href="https://bcisociety.org" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block flex items-center gap-2">
                                 BCI Society <ExternalLink className="w-3 h-3 text-muted-foreground" />
                             </a>
                             <p className="text-xs text-muted-foreground">International society. Next meeting: 2026.</p>

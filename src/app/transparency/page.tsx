@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import { FileText, Shield, ExternalLink } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
+
+export const metadata: Metadata = {
+    title: 'Transparency & Governance',
+    description:
+        'Legal entity details (Société BCI Montréal, NEQ 1170984166), governance, financial reporting, and open science policies of NeuroTechX.',
+    alternates: { canonical: '/transparency' },
+};
 
 export default function TransparencyPage() {
     return (
@@ -97,7 +105,7 @@ export default function TransparencyPage() {
                             <li>Publish data to open repositories (e.g., OpenNeuro, DANDI).</li>
                             <li>Use open-source software and transparent analysis pipelines.</li>
                         </ul>
-                        <a href="https://www.cos.io/initiatives/top-guidelines" target="_blank" className="text-neuro-accent hover:underline inline-flex items-center gap-1">
+                        <a href="https://www.cos.io/initiatives/top-guidelines" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline inline-flex items-center gap-1">
                             Read the TOP Guidelines <ExternalLink className="w-4 h-4" />
                         </a>
                     </div>

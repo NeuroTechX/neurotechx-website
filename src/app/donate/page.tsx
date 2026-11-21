@@ -1,4 +1,12 @@
+import type { Metadata } from 'next';
 import { Heart } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Donate',
+    description:
+        'Support NeuroTechX (Société BCI Montréal), an all-volunteer non-profit advancing open neurotechnology education, tools, and chapters worldwide.',
+    alternates: { canonical: '/donate' },
+};
 
 export default function DonatePage() {
     return (
