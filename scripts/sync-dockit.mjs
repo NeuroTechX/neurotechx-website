@@ -1,7 +1,6 @@
-import simpleGit from 'simple-git';
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 import matter from 'gray-matter';
 
 const REPO_URL = 'https://github.com/NeuroTechX/NTX-dockit.git';
@@ -28,8 +27,7 @@ async function syncDockit() {
 
     // 2. Clone repository
     console.log(`Cloning ${REPO_URL}...`);
-    const git = simpleGit();
-    await git.clone(REPO_URL, TEMP_DIR);
+    execFileSync('git', ['clone', '--depth', '1', REPO_URL, TEMP_DIR], { stdio: 'inherit' });
 
     // 3. Prepare content directory
     if (!fs.existsSync(CONTENT_DIR)) {

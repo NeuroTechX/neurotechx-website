@@ -1,4 +1,4 @@
-import { Linkedin, Instagram, Youtube, Github, Facebook, ShoppingBag } from 'lucide-react';
+import { Linkedin, Instagram, Youtube, Github, Facebook } from 'lucide-react';
 import styles from './Footer.module.css';
 
 // Brand glyphs lucide doesn't ship (Bluesky, X)
@@ -34,7 +34,6 @@ export default function Footer() {
         { name: 'Instagram', url: 'https://www.instagram.com/neurotechx', icon: Instagram },
         { name: 'Facebook', url: 'https://www.facebook.com/neurotechx', icon: Facebook },
         { name: 'Hugging Face', url: 'https://huggingface.co/NeuroTechX', icon: HuggingFaceIcon },
-        { name: 'Merch Store', url: 'https://neurotechx-store.creator-spring.com/', icon: ShoppingBag },
     ];
 
     return (
