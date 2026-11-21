@@ -9,13 +9,13 @@ export default async function Sidebar() {
             {/* Featured Resource */}
             <div className="card bg-neuro-accent/10 border-neuro-accent">
                 <h3 className="text-lg font-serif font-bold mb-2 text-neuro-accent">Essential Reading</h3>
-                <a href="https://neurotechx.com/primer" target="_blank" className="font-bold text-xl hover:underline mb-1 block">
+                <a href="/primer" className="font-bold text-xl hover:underline mb-1 block">
                     The NeuroTech Primer
                 </a>
                 <p className="text-sm text-foreground/80 mb-3">
                     A beginner&apos;s guide to everything neurotechnology. Free for the community.
                 </p>
-                <a href="https://neurotechx.com/primer" target="_blank" className="text-sm font-bold uppercase tracking-wide flex items-center gap-1 hover:gap-2 transition-all">
+                <a href="/primer" className="text-sm font-bold uppercase tracking-wide flex items-center gap-1 hover:gap-2 transition-all">
                     Read Now <ExternalLink className="w-3 h-3" />
                 </a>
             </div>

@@ -19,7 +19,7 @@ const PILLARS = [
 ];
 
 const FEATURED = [
-  { icon: BookOpen, tag: 'Guide', title: 'The NeuroTech Primer', desc: 'The essential guide to Brain–Computer Interfaces — start your journey here.', href: '/education', cta: 'Read the book' },
+  { icon: BookOpen, tag: 'Guide', title: 'The NeuroTech Primer', desc: 'The essential guide to Brain–Computer Interfaces — start your journey here.', href: '/primer', cta: 'Read the book' },
   { icon: Code2, tag: 'Open source', title: 'MOABB Benchmarks', desc: 'The community standard for reproducible BCI dataset benchmarking.', href: 'https://github.com/NeuroTechX/moabb', cta: 'View repo', external: true },
   { icon: Video, tag: 'Archive', title: 'Industry Webinars', desc: 'Technical workshops from g.tec, Interaxon, Neuroelectrics, ANT Neuro, NIRx & more.', href: '/education/webinars', cta: 'Watch archive' },
   { icon: Mic, tag: 'Podcast', title: 'FUS Forward', desc: 'Advancements in focused ultrasound, with host Charles Caskey.', href: 'https://podcasts.apple.com/us/podcast/fus-forward/id1857021050', cta: 'Listen', external: true },
