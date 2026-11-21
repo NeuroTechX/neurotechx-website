@@ -47,9 +47,6 @@ const JOB_REGION = [{ type: 'query', key: 'job_listing_region' }];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   async redirects() {
     return [
       { source: '/', has: JOB_REGION, destination: '/jobs', permanent: true },
