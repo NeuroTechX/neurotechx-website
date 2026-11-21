@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 // The boards are read again at most every four hours.
 export const revalidate = 14400;
 
-// Where employers write to have their company added.
+// Where employers send job postings. Listing is free and at NeuroTechX's discretion (ED, 2026-11-20).
 const EMPLOYER_CONTACT = 'info@neurotechx.com';
 
 const OTHER_BOARDS = [
@@ -122,11 +122,11 @@ export default async function JobsPage() {
             <Mail className="h-5 w-5 text-neuro-accent" /> Hiring in neurotech?
           </h2>
           <p className="mb-6 text-muted-foreground">
-            If your company&apos;s openings should be on this page, send us the link to your careers page. Once your
-            company is added, its roles appear here and stay up to date on their own.
+            Email us your job postings or the link to your careers page. Listing is free and at NeuroTechX&apos;s
+            discretion. Once your company is added, its roles appear here and stay up to date on their own.
           </p>
           <a
-            href={`mailto:${EMPLOYER_CONTACT}?subject=${encodeURIComponent('Add our company to the NeuroTechX jobs page')}`}
+            href={`mailto:${EMPLOYER_CONTACT}?subject=${encodeURIComponent('Job posting for the NeuroTechX jobs page')}`}
             className="inline-flex items-center gap-2 rounded-full bg-neuro-accent px-7 py-3 font-bold text-[var(--background)] transition hover:brightness-110"
           >
             Email {EMPLOYER_CONTACT}
