@@ -503,7 +503,7 @@ const SIGNATURES: [string, RegExp][] = [
   ['pinpoint', /\/\/([a-z0-9-]+)\.pinpointhq\.com/i],
 ];
 
-const SKIP_TOKENS = new Set(['www', 'api', 'app', 'embed', 'js', 'support', 'help', 'cdn']);
+const SKIP_TOKENS = new Set(['www', 'api', 'app', 'embed', 'js', 'support', 'help', 'cdn', 'assets-cdn']);
 
 // Hiring systems referenced by a careers page (or by a board address itself).
 export function detectBoards(html: string): Detected[] {

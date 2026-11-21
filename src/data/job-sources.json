@@ -26,6 +26,16 @@
   {"company": "Nudge", "site": "https://www.nudge.com", "careers": "https://jobs.ashbyhq.com/nudge", "about": "Ultrasound brain interfaces", "fields": ["neuromodulation"], "region": "north-america", "ats": "ashby", "token": "nudge"},
   {"company": "Cognito Therapeutics", "site": "https://www.cognitotx.com", "careers": "https://jobs.ashbyhq.com/cognito-therapeutics", "about": "Sensory stimulation therapy for Alzheimer's disease", "fields": ["neuromodulation"], "region": "north-america", "ats": "ashby", "token": "cognito-therapeutics"},
   {"company": "Motif Neurotech", "site": "https://www.motifneuro.tech", "careers": "https://job-boards.greenhouse.io/motifneurotech", "about": "Minimally invasive brain stimulation", "fields": ["neuromodulation"], "region": "north-america", "ats": "greenhouse", "token": "motifneurotech"},
+  {"company": "CoMind", "site": "https://www.comind.io", "careers": "https://www.comind.io/careers", "about": "Non-invasive brain monitoring", "fields": ["neuroimaging"], "region": "europe", "ats": "ashby", "token": "comind"},
+  {"company": "Kandu (Neurolutions)", "site": "https://kandu.com", "careers": "https://kandu.com/join-our-team/", "about": "Brain–computer interface for stroke rehabilitation", "fields": ["bci"], "region": "north-america", "ats": "greenhouse", "token": "kandu"},
+  {"company": "Cadwell", "site": "https://www.cadwell.com", "careers": "https://www.cadwell.com/careers/", "about": "EEG, EMG and neuromonitoring systems", "fields": ["eeg"], "region": "north-america", "ats": "greenhouse", "token": "cadwell"},
+  {"company": "Brain Products", "site": "https://www.brainproducts.com", "careers": "https://www.brainproducts.com/about-us/careers/", "about": "EEG systems for research", "fields": ["eeg"], "region": "europe", "ats": "personio", "token": "brainproducts"},
+  {"company": "Artinis (NIRx, TMSi)", "site": "https://artinis.com", "careers": "https://nirx.jobs.personio.de/", "about": "fNIRS and EEG systems for research", "fields": ["neuroimaging", "eeg"], "region": "europe", "ats": "personio", "token": "nirx"},
+  {"company": "NeuroCatch", "site": "https://www.neurocatch.com", "careers": "https://www.neurocatch.com/", "about": "EEG-based assessment of brain function", "fields": ["eeg"], "region": "north-america", "ats": "adp", "token": "3a148327-9258-4419-bdb8-ae8236e63d64", "ccId": "9200179358193_2"},
+  {"company": "Mobia Medical", "site": "https://www.mobia.com", "careers": "https://www.mobia.com/careers/", "about": "Vagus nerve stimulation for stroke recovery (formerly MicroTransponder)", "fields": ["neuromodulation"], "region": "north-america", "ats": "rippling", "token": "mobiamedical"},
+  {"company": "Phagenesis", "site": "https://www.phagenesis.com", "careers": "https://www.phagenesis.com/careers/", "about": "Neurostimulation for swallowing recovery", "fields": ["neuromodulation"], "region": "europe", "ats": "greenhouse", "token": "phagenesisltd"},
+  {"company": "BlueWind Medical", "site": "https://bluewindmedical.com", "careers": "https://bluewindmedical.com/careers/", "about": "Implantable tibial nerve stimulation", "fields": ["neuromodulation"], "region": "north-america", "ats": "adp", "token": "44280642-afe4-4bbf-86ed-50fbc904a4a3", "ccId": "19000101_000001"},
+  {"company": "neurocare group", "site": "https://www.neurocaregroup.com", "careers": "https://www.neurocaregroup.com/careers", "about": "Clinics and devices for TMS and neurofeedback", "fields": ["neuromodulation"], "region": "europe", "ats": "personio", "token": "neurocare-group-ag"},
 
   {"company": "Science Corporation", "site": "https://science.xyz", "careers": "https://science.xyz/careers/open-positions/", "about": "Vision restoration and neural interfaces"},
   {"company": "Precision Neuroscience", "site": "https://www.precisionneuro.io", "careers": "https://www.precisionneuro.io/careers", "about": "Thin-film brain–computer interfaces"},
@@ -48,5 +58,9 @@
   {"company": "MindMaze", "site": "https://www.mindmaze.com", "careers": "https://www.mindmaze.com/careers/", "about": "Digital neurotherapeutics"},
   {"company": "Magstim", "site": "https://www.magstim.com", "careers": "https://www.magstim.com/careers/", "about": "Transcranial magnetic stimulation and EEG"},
   {"company": "Neurosity", "site": "https://neurosity.co", "careers": "https://neurosity.co/jobs", "about": "EEG headset for focus"},
-  {"company": "MintNeuro", "site": "https://mintneuro.com", "careers": "https://mintneuro.com/home#careers", "about": "Chips for neural implants"}
+  {"company": "MintNeuro", "site": "https://mintneuro.com", "careers": "https://mintneuro.com/home#careers", "about": "Chips for neural implants"},
+  {"company": "Nevro", "site": "https://www.nevro.com", "careers": "https://www.nevro.com/careers/", "about": "Spinal cord stimulation for chronic pain"},
+  {"company": "Nia Therapeutics", "site": "https://niatherapeutics.com", "careers": "https://niatherapeutics.com/careers", "about": "Implanted neurostimulation for memory"},
+  {"company": "Cefaly", "site": "https://www.cefaly.com", "careers": "https://cefaly-technology.breezy.hr/", "about": "Nerve stimulation for migraine"},
+  {"company": "Myndlift", "site": "https://www.myndlift.com", "careers": "https://apply.workable.com/myndlift/", "about": "Remote neurofeedback"}
 ]
