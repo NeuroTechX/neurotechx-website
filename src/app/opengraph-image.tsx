@@ -1,4 +1,6 @@
 import { ImageResponse } from 'next/og';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export const alt = 'NeuroTechX — The global neurotechnology community';
 export const size = { width: 1200, height: 630 };
@@ -6,6 +8,9 @@ export const contentType = 'image/png';
 
 // Branded social share image, applied site-wide.
 export default async function Image() {
+  // Noto Sans (SIL Open Font License), the default font of next/og before Next.js 16.
+  // The Next.js 16 default (Geist) leaves a gap inside the wordmark.
+  const notoSans = await readFile(join(process.cwd(), 'src/assets/fonts/noto-sans-v27-latin-regular.ttf'));
   return new ImageResponse(
     (
       <div
@@ -39,6 +44,6 @@ export default async function Image() {
         />
       </div>
     ),
-    { ...size }
+    { ...size, fonts: [{ name: 'Noto Sans', data: notoSans, weight: 400, style: 'normal' }] }
   );
 }
