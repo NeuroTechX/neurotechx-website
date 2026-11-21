@@ -1,216 +1,164 @@
-import LandingPageLayout from '@/components/LandingPageLayout';
-import { ExternalLink, Building2, MapPin, DollarSign, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
+import { ArrowUpRight, Building2, Compass, Mail } from 'lucide-react';
+import PageHeader from '@/components/PageHeader';
+import JobsBrowser from '@/components/JobsBrowser';
+import JobCategoryLinks from '@/components/JobCategoryLinks';
+import { loadJobs } from '@/lib/jobs';
 
-const FEATURED_JOBS = [
-    {
-        company: 'Orbit Neurotech',
-        role: 'Founding Machine Learning Engineer',
-        location: 'San Francisco, CA (On-site)',
-        compensation: '$150K – $225K + Equity',
-        description: 'Building foundation models of emotion using advanced BCI and AI. Real-time, multi-dimensional neural data.',
-        link: 'https://orbitneuro.com/'
-    },
-    {
-        company: 'Neuralink',
-        role: 'Machine Learning Engineer (BCI Applications)',
-        location: 'Fremont, CA / Austin, TX',
-        description: 'Developing high-bandwidth brain-machine interfaces to connect humans and computers.',
-        link: 'https://neuralink.com/careers/'
-    },
-    {
-        company: 'Science Corporation',
-        role: 'Software Engineer, Neural Interfaces',
-        location: 'Alameda, CA',
-        description: 'Building the future of vision restoration and clinical-stage neurotechnology.',
-        link: 'https://science.xyz/'
-    },
-    {
-        company: 'Precision Neuroscience',
-        role: 'Full Stack Software Engineer',
-        location: 'New York / Mountain View',
-        description: 'Developing a high-resolution, minimally invasive neural interface.',
-        link: 'https://precisionneuroscience.com/'
-    },
-    {
-        company: 'Paradromics',
-        role: 'Data Scientist / ML Engineer',
-        location: 'Austin, TX',
-        description: 'Creating the next generation of data-rate brain-computer interfaces.',
-        link: 'https://paradromics.com/'
-    },
-    {
-        company: 'Ampa Health',
-        role: 'Backend Engineer – APIs & Data Systems',
-        location: 'Palo Alto, CA',
-        description: 'Building scalable backend infrastructure and data systems for healthcare innovation.',
-        link: 'https://www.ampahealth.com/careers'
-    },
-    {
-        company: 'Ampa Health',
-        role: 'Frontend-focused Fullstack Software Engineer',
-        location: 'Palo Alto, CA',
-        description: 'Developing high-performance user interfaces and end-to-end features for medical technology.',
-        link: 'https://www.ampahealth.com/careers'
-    },
-    {
-        company: 'Merge',
-        role: 'ML Research Scientist - Bayesian Optimization',
-        location: 'San Francisco, CA',
-        description: 'Bridging biological and artificial intelligence to maximize human ability through BCI development.',
-        link: 'https://www.merge.io/careers'
-    },
-    {
-        company: 'Merge',
-        role: 'MLE / MLOps / Full-stack DL Engineer',
-        location: 'San Francisco, CA',
-        description: 'Building the infrastructure and pipelines for foundation models of intelligence and neural interfaces.',
-        link: 'https://www.merge.io/careers'
-    },
-    {
-        company: 'Axion',
-        role: 'ML Researcher',
-        location: 'San Francisco, CA',
-        description: 'Developing non-invasive neural interfaces that translate brain signals and eye movements into seamless interactions.',
-        link: 'https://www.axionclick.com/careers'
-    },
-    {
-        company: 'Axion',
-        role: 'Founding Software Engineer',
-        location: 'San Francisco, CA',
-        description: 'Building the software foundation for high-performance, wearable neural interface systems.',
-        link: 'https://www.axionclick.com/careers'
-    },
-    {
-        company: 'BrainsWay',
-        role: 'Field Clinical Engineer',
-        location: 'Remote / Various',
-        description: 'Supporting the deployment and clinical application of Deep TMS (Transcranial Magnetic Stimulation) systems.',
-        link: 'https://www.brainsway.com/about-brainsway/careers/'
-    },
-    {
-        company: 'BrainsWay',
-        role: 'Clinical Program Manager - TMS',
-        location: 'Remote / Various',
-        description: 'Leading clinical program initiatives for non-invasive neurostimulation treatments.',
-        link: 'https://www.brainsway.com/about-brainsway/careers/'
-    },
-    {
-        company: 'Beacon Biosignals',
-        role: 'Neuroscientist, External Scientific Programs',
-        location: 'Boston, MA / Remote',
-        description: 'Analyzing clinical trial data and translating complex neural data into insights for drug development programs.',
-        link: 'https://job-boards.greenhouse.io/beaconbiosignals/jobs/4110972009'
-    },
-    {
-        company: 'Alto Neuroscience',
-        role: 'Sr. Director Clinical Development / Program Leader',
-        location: 'Remote (US)',
-        description: 'Leading clinical development strategy and program execution for precision psychiatry initiatives.',
-        link: 'https://altoneuroscience.com/careers/'
-    },
-    {
-        company: 'Alto Neuroscience',
-        role: 'Clinical Research Associate',
-        location: 'Remote (US)',
-        description: 'Supporting the monitoring and execution of clinical trials for innovative CNS therapeutics.',
-        link: 'https://altoneuroscience.com/careers/'
-    }
+export const metadata: Metadata = {
+  title: 'Neurotech Jobs',
+  description:
+    'Open jobs and internships at neurotechnology companies: brain–computer interfaces, EEG, neuromodulation and neuroimaging. Read from each employer’s own careers page and refreshed through the day.',
+};
+
+// The boards are read again at most every four hours.
+export const revalidate = 14400;
+
+// Where employers send job postings. Listing is free and at NeuroTechX's discretion (ED, 2026-11-20).
+const EMPLOYER_CONTACT = 'info@neurotechx.com';
+
+const OTHER_BOARDS = [
+  {
+    name: 'NeuroTech Futures',
+    href: 'https://neurotechjobs.io',
+    about: 'A job board for the neurotech industry.',
+  },
+  {
+    name: 'reccy neuro',
+    href: 'https://neuro.reccy.dev/',
+    about: 'A neurotech job board with company and investor directories.',
+  },
+  {
+    name: 'Bernstein Network job pool',
+    href: 'https://bernstein-network.de/en/career/job-pool/',
+    about: 'Academic positions in computational neuroscience.',
+  },
 ];
 
-export default function JobsPage() {
-    return (
-        <LandingPageLayout
-            title="NeuroTech Jobs"
-            subtitle="Explore high-impact roles at the frontier of brain-computer interfaces and neural engineering."
-            ctaText="Post a Job"
-            ctaLink="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform"
-        >
-            <section className="mt-12">
-                <h2 className="text-3xl font-serif font-bold mb-8">Featured Openings</h2>
-                <div className="grid gap-6">
-                    {FEATURED_JOBS.map((job) => (
-                        <div key={`${job.company}-${job.role}`} className="card p-6 hover:border-neuro-accent transition-all group">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <Building2 className="w-4 h-4 text-neuro-accent" />
-                                        <span className="font-bold text-lg">{job.company}</span>
-                                    </div>
-                                    <h3 className="text-xl font-bold mb-3 group-hover:text-neuro-accent transition-colors">
-                                        {job.role}
-                                    </h3>
-                                    <p className="text-muted-foreground mb-4 max-w-2xl">
-                                        {job.description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                                        <div className="flex items-center gap-1">
-                                            <MapPin className="w-4 h-4" />
-                                            {job.location}
-                                        </div>
-                                        {job.compensation && (
-                                            <div className="flex items-center gap-1">
-                                                <DollarSign className="w-4 h-4" />
-                                                {job.compensation}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="flex shrink-0">
-                                    <a 
-                                        href={job.link} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="inline-flex items-center gap-2 px-6 py-2 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity"
-                                    >
-                                        Apply <ExternalLink className="w-4 h-4" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+const CHECKED = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZone: 'UTC',
+});
 
-            {/* NeuroTech Futures Section - Moved Down */}
-            <section className="mt-20 p-8 rounded-2xl bg-neuro-accent/5 border-2 border-neuro-accent/20">
-                <div className="max-w-3xl">
-                    <h2 className="text-3xl font-serif font-bold mb-4">NeuroTech Futures</h2>
-                    <p className="text-xl text-muted-foreground mb-8">
-                        The premier job board for careers in neurotechnology. Find roles in clinical research, software engineering, and hardware development at top neurotech companies worldwide.
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                        <a 
-                            href="https://neurotechjobs.io" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex items-center gap-2 px-8 py-3 bg-neuro-accent text-black rounded-full font-bold hover:brightness-110 transition-all"
-                        >
-                            Browse All Roles <ArrowRight className="w-5 h-5" />
-                        </a>
-                        <a 
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex items-center gap-2 px-8 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted/50 transition-all"
-                        >
-                            Post a Job
-                        </a>
-                    </div>
-                </div>
-            </section>
+export default async function JobsPage() {
+  const { jobs, employers, linked, checkedAt } = await loadJobs();
+  const hiring = employers.filter((e) => e.openRoles > 0);
 
-            <div className="mt-20">
-                <h3 className="text-2xl font-serif font-bold mb-6">Related Job Boards</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                    <a href="https://bernstein-network.de/en/career/job-pool/" target="_blank" className="card p-4 hover:border-neuro-accent transition-colors flex items-center justify-between group">
-                        <div>
-                            <span className="font-bold block group-hover:text-neuro-accent">Bernstein Network Job Pool</span>
-                            <span className="text-xs text-muted-foreground">Computational Neuroscience & Neurotechnology (Germany/Global)</span>
-                        </div>
-                        <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-neuro-accent" />
-                    </a>
-                </div>
-            </div>
-        </LandingPageLayout>
-    );
+  return (
+    <div className="container py-12">
+      <PageHeader
+        eyebrow="Careers"
+        title="Neurotech jobs"
+        subtitle={
+          <>
+            {jobs.length} open roles at {hiring.length} neurotechnology companies, read directly from each
+            employer&apos;s own careers page. Every role links to the employer&apos;s posting, where you apply.
+          </>
+        }
+      />
+
+      <section className="mb-10" aria-label="Browse by category">
+        <JobCategoryLinks jobs={jobs} />
+      </section>
+
+      <JobsBrowser jobs={jobs} />
+
+      <p className="mt-4 text-sm text-muted-foreground">
+        Last read from the employers&apos; boards on {CHECKED.format(new Date(checkedAt))} UTC. NeuroTechX does not
+        take applications for these roles.
+      </p>
+
+      <section className="mt-20">
+        <h2 className="mb-2 flex items-center gap-2 text-2xl font-serif font-bold">
+          <Building2 className="h-6 w-6 text-neuro-accent" /> Companies on this page
+        </h2>
+        <p className="mb-6 text-muted-foreground">
+          Their openings are read for the list above. Each name links to the company&apos;s own careers page.
+        </p>
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {employers.map((e) => (
+            <li key={e.company}>
+              <a
+                href={e.careers}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full items-start justify-between gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-4 transition-colors hover:border-[var(--border-strong)]"
+              >
+                <span>
+                  <span className="block font-bold group-hover:text-neuro-accent">{e.company}</span>
+                  {e.about && <span className="mt-1 block text-sm text-muted-foreground">{e.about}</span>}
+                </span>
+                <span className="shrink-0 whitespace-nowrap text-sm text-muted-foreground">
+                  {e.openRoles === 0 ? 'None open' : e.openRoles === 1 ? '1 role' : `${e.openRoles} roles`}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {linked.length > 0 && (
+        <section className="mt-16">
+          <h2 className="mb-2 text-2xl font-serif font-bold">More neurotech employers</h2>
+          <p className="mb-6 text-muted-foreground">
+            We can&apos;t read these companies&apos; openings automatically, so here are their own pages.
+          </p>
+          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {linked.map((e) => (
+              <li key={e.company}>
+                <a href={e.careers} target="_blank" rel="noopener noreferrer" className="group inline-flex items-baseline gap-1">
+                  <span className="font-semibold group-hover:text-neuro-accent">{e.company}</span>
+                  <ArrowUpRight className="h-3.5 w-3.5 self-center text-muted-foreground group-hover:text-neuro-accent" />
+                </a>
+                {e.about && <p className="text-sm text-muted-foreground">{e.about}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div className="mt-16 grid gap-8 md:grid-cols-2">
+        <section className="rounded-2xl border border-neuro-accent/20 bg-neuro-accent/5 p-8">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
+            <Mail className="h-5 w-5 text-neuro-accent" /> Hiring in neurotech?
+          </h2>
+          <p className="mb-6 text-muted-foreground">
+            Email us your job postings or the link to your careers page. Listing is free and at NeuroTechX&apos;s
+            discretion. Once your company is added, its roles appear here and stay up to date on their own.
+          </p>
+          <a
+            href={`mailto:${EMPLOYER_CONTACT}?subject=${encodeURIComponent('Job posting for the NeuroTechX jobs page')}`}
+            className="inline-flex items-center gap-2 rounded-full bg-neuro-accent px-7 py-3 font-bold text-[var(--background)] transition hover:brightness-110"
+          >
+            Email {EMPLOYER_CONTACT}
+          </a>
+        </section>
+
+        <section className="rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
+            <Compass className="h-5 w-5 text-neuro-accent" /> Other places to look
+          </h2>
+          <ul className="space-y-4">
+            {OTHER_BOARDS.map((board) => (
+              <li key={board.href}>
+                <a
+                  href={board.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold hover:text-neuro-accent"
+                >
+                  {board.name} <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+                <p className="text-sm text-muted-foreground">{board.about}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  );
 }

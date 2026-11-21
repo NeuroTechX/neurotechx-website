@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "sync:dockit": "node scripts/sync-dockit.mjs"
+    "sync:dockit": "node scripts/sync-dockit.mjs",
+    "jobs:check": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-job-boards.mjs",
+    "jobs:probe": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-job-boards.mjs --probe"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

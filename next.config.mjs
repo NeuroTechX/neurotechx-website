@@ -25,7 +25,6 @@ const OLD_SITE = {
   '/jobs': [
     '/find-a-job/:path*',
     '/post-a-job',
-    '/ntx-internship-opportunities',
     '/job-tag/:path*',
     '/job/:path*',
   ],
@@ -41,14 +40,35 @@ const OLD_SITE = {
   '/projects': ['/project-details'],
 };
 
+// Old job-board addresses that have a matching page under /jobs. These come first:
+// the general '/job-tag/:path*' rule above would otherwise send them all to /jobs.
+const OLD_JOB_PAGES = {
+  '/job-tag/bci': '/jobs/bci',
+  '/job-tag/eeg': '/jobs/eeg',
+  '/job-tag/computational-neuroscience': '/jobs/computational-neuroscience',
+  '/job-tag/fmri': '/jobs/neuroimaging',
+  '/ntx-internship-opportunities': '/jobs/internships',
+};
+
 // The old job board's region filter lived on the home page (/?job_listing_region=europe,
-// /page/2/?job_listing_region=europe). Without these two rules those land on the home page.
+// /page/2/?job_listing_region=europe). Without these rules those land on the home page.
 const JOB_REGION = [{ type: 'query', key: 'job_listing_region' }];
+const jobRegion = (value) => [{ type: 'query', key: 'job_listing_region', value }];
+const OLD_JOB_REGIONS = ['europe', 'north-america'];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
     return [
+      ...Object.entries(OLD_JOB_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),
+      ...OLD_JOB_REGIONS.flatMap((region) =>
+        ['/', '/page/:n'].map((source) => ({
+          source,
+          has: jobRegion(region),
+          destination: `/jobs/${region}`,
+          permanent: true,
+        }))
+      ),
       { source: '/', has: JOB_REGION, destination: '/jobs', permanent: true },
       { source: '/page/:n', has: JOB_REGION, destination: '/jobs', permanent: true },
       ...Object.entries(OLD_SITE).flatMap(([destination, sources]) =>

@@ -1,0 +1,58 @@
+name: Check job boards
+
+# Goes through the company list behind /jobs (src/data/job-sources.json) once a week:
+# every listed board, and every company we only link to. When something needs a person
+# (a board stopped answering, a careers link broke, a linked company's board became
+# readable) it opens the issue "Job boards need attention", or adds a comment to it.
+#
+# To look up a new company: Actions > Check job boards > Run workflow, and paste the
+# address of its careers page. The result is on the run's Summary page.
+
+on:
+  schedule:
+    - cron: '0 13 * * 1' # Mondays, 13:00 UTC
+  workflow_dispatch:
+    inputs:
+      careers_url:
+        description: "A new company's careers page to look up (leave empty to check the whole list)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check the boards
+        id: check
+        env:
+          CAREERS_URL: ${{ inputs.careers_url }}
+        run: |
+          if [ -n "$CAREERS_URL" ]; then
+            npm run --silent jobs:probe -- "$CAREERS_URL" --report report.md
+          else
+            npm run --silent jobs:check -- --report report.md
+          fi
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open or update the issue
+        if: github.event_name == 'schedule' && steps.check.outputs.needs_action == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Job boards need attention"
+          number=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body-file report.md
+          else
+            gh issue create --title "$title" --body-file report.md
+          fi
