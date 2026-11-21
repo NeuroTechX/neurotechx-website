@@ -1,4 +1,4 @@
-import { Heart, Mail } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function DonatePage() {
     return (
@@ -44,29 +44,6 @@ export default function DonatePage() {
                         Secure payment processing. You can set up a monthly recurring donation.
                     </p>
                 </section>
-
-                <div className="grid gap-8">
-                    {/* Canadian Transfers */}
-                    <section className="card p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <Mail className="w-5 h-5 text-neuro-accent" />
-                            <h3 className="text-xl font-bold">Interac e-Transfer</h3>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-4">
-                            For Canadian donors. 100% of funds go to NTX (no fees).
-                        </p>
-                        <div className="bg-muted p-4 rounded text-sm font-mono space-y-2">
-                            <div className="flex justify-between">
-                                <span className="text-muted-foreground">Email:</span>
-                                <span className="select-all font-bold">finance@neurotechx.com</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-muted-foreground">Auto-Deposit:</span>
-                                <span>Enabled</span>
-                            </div>
-                        </div>
-                    </section>
-                </div>
 
             </div>
         </div>
