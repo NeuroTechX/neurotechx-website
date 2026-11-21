@@ -1,7 +1,15 @@
+import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import { fetchFeeds } from '@/lib/rss';
 import { formatDistanceToNow } from 'date-fns';
 import { ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: 'Content Lab',
+    description:
+        'Original articles, deep dives, and editorial coverage of neurotechnology by the NeuroTechX Content Laboratory.',
+    alternates: { canonical: '/content-lab' },
+};
 
 export const revalidate = 3600; // refresh hourly
 

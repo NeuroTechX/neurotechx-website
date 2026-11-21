@@ -1,7 +1,15 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Github, Globe, Mail, PlusCircle } from 'lucide-react';
 import { studentClubs } from '@/data/clubs';
 import styles from './page.module.css';
+
+export const metadata: Metadata = {
+    title: 'Student Clubs',
+    description:
+        'University neurotechnology student clubs connected with NeuroTechX — projects, competitions, and how to list your club.',
+    alternates: { canonical: '/students' },
+};
 
 export default function StudentClubsPage() {
     return (
@@ -95,7 +103,7 @@ export default function StudentClubsPage() {
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <a
                             href="https://github.com/webntx/neurotechx-website/edit/main/src/data/clubs.ts"
-                            target="_blank"
+                            target="_blank" rel="noopener noreferrer"
                             className={styles.githubButton}
                         >
                             <Github style={{ marginRight: '0.5rem' }} size={20} />

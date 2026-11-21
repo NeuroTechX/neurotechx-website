@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ExternalLink, Mail } from 'lucide-react';
-import Image from 'next/image';
 import NewsletterSignup from '@/components/NewsletterSignup';
+
+export const metadata: Metadata = {
+    title: 'Newsletter Archive',
+    description:
+        'Subscribe to the NeuroTechX newsletter and browse our archive of digests covering neurotechnology news, tools, research, and events.',
+    alternates: { canonical: '/newsletter' },
+};
 
 const newsletterArchive = [
     {
@@ -142,12 +150,12 @@ export default function NewsletterArchivePage() {
                         If you can&apos;t find what you&apos;re looking for, feel free to reach out to our community on Slack.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
-                        <a href="/community" className="inline-flex items-center justify-center rounded-xl text-sm font-bold border border-border bg-background hover:bg-muted transition-all h-12 px-8">
+                        <Link href="/community" className="inline-flex items-center justify-center rounded-xl text-sm font-bold border border-border bg-background hover:bg-muted transition-all h-12 px-8">
                             Back to Community
-                        </a>
-                        <a href="/" className="inline-flex items-center justify-center rounded-xl text-sm font-bold bg-foreground text-background hover:opacity-90 transition-all h-12 px-8">
+                        </Link>
+                        <Link href="/" className="inline-flex items-center justify-center rounded-xl text-sm font-bold bg-foreground text-background hover:opacity-90 transition-all h-12 px-8">
                             Return Home
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

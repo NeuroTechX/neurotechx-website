@@ -1,8 +1,16 @@
+import type { Metadata } from 'next';
 import { getFeaturedProjects, getCommunityProjects, GitHubRepo } from '@/lib/github';
 import Link from 'next/link';
 import { ArrowRight, Star, GitFork, ExternalLink, Code2, BookOpen } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import styles from './page.module.css';
+
+export const metadata: Metadata = {
+    title: 'Open Source Projects',
+    description:
+        'Open-source BCI benchmarks, EEG/neuroimaging toolkits, and community repositories from NeuroTechX and contributors worldwide.',
+    alternates: { canonical: '/projects' },
+};
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -95,10 +103,10 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://www.sci.utah.edu/software.html" target="_blank">SCI Head Models</a>
+                            <a href="https://www.sci.utah.edu/software.html" target="_blank" rel="noopener noreferrer">SCI Head Models</a>
                         </h3>
                         <p className={styles.description}>
-                            High-resolution anatomical head models for electromagnetic source imaging and stimulation (Placeholder).
+                            High-resolution anatomical head models for electromagnetic source imaging and stimulation.
                         </p>
                         <div className={styles.topics}>
                             <span className={styles.topic}>head-model</span>
@@ -107,7 +115,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Resource</span>
-                            <a href="https://www.sci.utah.edu/software.html" target="_blank" className={styles.link}>
+                            <a href="https://www.sci.utah.edu/software.html" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Visit Website <ExternalLink size={14} />
                             </a>
                         </div>
@@ -122,7 +130,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://openvibe.inria.fr/" target="_blank">OpenViBE</a>
+                            <a href="https://openvibe.inria.fr/" target="_blank" rel="noopener noreferrer">OpenViBE</a>
                         </h3>
                         <p className={styles.description}>
                             Software for Brain-Computer Interfaces and Real-Time Neurosciences. A graphical platform for designing BCI scenarios.
@@ -134,7 +142,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Platform</span>
-                            <a href="https://openvibe.inria.fr/" target="_blank" className={styles.link}>
+                            <a href="https://openvibe.inria.fr/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Visit Website <ExternalLink size={14} />
                             </a>
                         </div>
@@ -149,7 +157,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" className={styles.smallRepoName} >riemannien_dimension_reduction</a>
+                            <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" rel="noopener noreferrer" className={styles.smallRepoName} >riemannien_dimension_reduction</a>
                         </h3>
                         <p className={styles.description}>
                             Riemannian dimension reduction for covariance matrices. Essential for advanced BCI signal processing.
@@ -164,7 +172,7 @@ export default async function ProjectsPage() {
                                 <span className={styles.langColor} style={{ backgroundColor: '#3572A5' }}></span>
                                 Python
                             </span>
-                            <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" className={styles.link}>
+                            <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 View Code <ExternalLink size={14} />
                             </a>
                         </div>
@@ -196,7 +204,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://www.nature.com/articles/s41586-025-09255-w#Ack1" target="_blank">
+                            <a href="https://www.nature.com/articles/s41586-025-09255-w#Ack1" target="_blank" rel="noopener noreferrer">
                                 A generic non-invasive neuromotor interface for HCI
                             </a>
                         </h3>
@@ -210,7 +218,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Paper</span>
-                            <a href="https://www.nature.com/articles/s41586-025-09255-w#Ack1" target="_blank" className={styles.link}>
+                            <a href="https://www.nature.com/articles/s41586-025-09255-w#Ack1" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Read Article <ExternalLink size={14} />
                             </a>
                         </div>
@@ -225,7 +233,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://www.braincode.ca/" target="_blank">Brain-CODE</a>
+                            <a href="https://www.braincode.ca/" target="_blank" rel="noopener noreferrer">Brain-CODE</a>
                         </h3>
                         <p className={styles.description}>
                             A large-scale neuroinformatics platform for data management and sharing. Enables collaborative brain research across Canada.
@@ -236,7 +244,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Platform</span>
-                            <a href="https://www.braincode.ca/" target="_blank" className={styles.link}>
+                            <a href="https://www.braincode.ca/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Visit Website <ExternalLink size={14} />
                             </a>
                         </div>
@@ -251,7 +259,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank">NERVE Program</a>
+                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank" rel="noopener noreferrer">NERVE Program</a>
                         </h3>
                         <p className={styles.description}>
                             Neurotech Entrepreneurship to Validate Emerging Innovations. Supporting neurotech startups and entrepreneurs.
@@ -262,7 +270,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Program</span>
-                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank" className={styles.link}>
+                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Learn More <ExternalLink size={14} />
                             </a>
                         </div>

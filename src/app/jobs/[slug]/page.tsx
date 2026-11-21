@@ -19,7 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const category = CATEGORIES.find((c) => c.slug === slug);
-  return category ? { title: category.title, description: category.intro } : {};
+  return category
+    ? {
+        title: category.title,
+        description: category.intro,
+        alternates: { canonical: `/jobs/${category.slug}` },
+      }
+    : {};
 }
 
 export default async function JobCategoryPage({ params }: Props) {

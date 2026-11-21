@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Users, Code2, Mic, Video, Heart } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
@@ -7,6 +8,10 @@ import EventsList from '@/components/EventsList';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import { fetchFeeds } from '@/lib/rss';
 import { fetchBlueskyPosts } from '@/lib/bluesky';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export const revalidate = 1800;
 

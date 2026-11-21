@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import { getPlaylistVideos, getLatestVideosFromChannels } from '@/lib/youtube';
 import { Play, Calendar, ExternalLink, Building2 } from 'lucide-react';
 import styles from './page.module.css';
+
+export const metadata: Metadata = {
+    title: 'Industry Webinars',
+    description:
+        'Technical workshops and webinar archives featuring neurotechnology hardware and software teams worldwide.',
+    alternates: { canonical: '/education/webinars' },
+};
 
 export const revalidate = 86400; // Revalidate every 24 hours
 

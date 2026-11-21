@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Neurotech Jobs',
   description:
     'Open jobs and internships at neurotechnology companies: brain–computer interfaces, EEG, neuromodulation and neuroimaging. Read from each employer’s own careers page and refreshed through the day.',
+  alternates: { canonical: '/jobs' },
 };
 
 // The boards are read again at most every four hours.

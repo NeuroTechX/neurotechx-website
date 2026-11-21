@@ -4,6 +4,7 @@ export const metadata: Metadata = {
     title: 'NTX Services Partnership Termination',
     description:
         'Joint statement by NeuroTechX and NTX Services on the end of their contractual partnership, August 12, 2024.',
+    alternates: { canonical: '/ntx-services-partnership-termination' },
 };
 
 export default function PartnershipTerminationPage() {

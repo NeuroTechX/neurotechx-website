@@ -64,11 +64,11 @@ export default function Header() {
                         <Link href="/donate" className={styles.donateLink}>
                             Donate
                         </Link>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" className={styles.joinButton}>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
                             Join Community
                         </a>
                         <nav className={styles.mobileNav} onClick={toggleNavButtonClick}>
-                            <button id={styles.toggleNavButton}>
+                            <button id={styles.toggleNavButton} aria-label="Toggle navigation menu" aria-expanded={mobileMenuOpen}>
                                 { 
                                 mobileMenuOpen ? 
                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> :
@@ -84,7 +84,7 @@ export default function Header() {
             </header>
 
             <nav id={mobileMenuOpen ? styles.mobileNavLinks : styles.hidden}>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" className={styles.joinButton}>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
                     Join Community
                 </a>
                 <Link href="/donate" className={styles.donateLink}>

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: 'Events',
     description:
         'NeuroTechX events — hacknights, workshops, talks, and chapter meetups worldwide on our Luma calendar, plus the major neurotech conferences and hackathons.',
+    alternates: { canonical: '/events' },
 };
 
 const LUMA = 'https://luma.com/neurotechx';

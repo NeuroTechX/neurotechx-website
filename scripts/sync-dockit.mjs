@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { execFileSync, execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import matter from 'gray-matter';
 
 const REPO_URL = 'https://github.com/NeuroTechX/NTX-dockit.git';
@@ -47,8 +47,9 @@ async function syncDockit() {
                 // -f rst (from ReStructuredText)
                 // -t gfm (to GitHub Flavored Markdown)
                 // --wrap=none (preserve line breaks)
-                const pandocCommand = `pandoc "${rstPath}" -f rst -t gfm --wrap=none`;
-                const markdownContent = sanitizeMdx(execSync(pandocCommand).toString());
+                const markdownContent = sanitizeMdx(
+                    execFileSync('pandoc', [rstPath, '-f', 'rst', '-t', 'gfm', '--wrap=none']).toString()
+                );
 
                 // Skip if the converted body is unchanged — avoids a daily no-op
                 // commit (and Vercel deploy) caused only by bumping updatedAt.
