@@ -26,6 +26,19 @@ const SLIDES: Slide[] = [
     ],
   },
   {
+    eyebrow: 'May 25–28, 2027 · St. Louis · Abstracts due Jan 15',
+    title: (
+      <>
+        <span className="text-gradient">FUN27</span>: Focused Ultrasound Neuromodulation Conference
+      </>
+    ),
+    desc: 'The field\'s flagship meeting on transcranial ultrasound stimulation, organised by ITRUSST and hosted by Washington University in St. Louis. Regular abstracts are due January 15, 2027; late-breaking abstracts March 15.',
+    ctas: [
+      { label: 'Conference details', href: 'https://itrusst.org/fun27', external: true, primary: true },
+      { label: 'Abstract submission', href: 'https://itrusst.org/fun27/submission', external: true },
+    ],
+  },
+  {
     eyebrow: 'NeuroTechX Toronto · Nov 25',
     title: (
       <>
