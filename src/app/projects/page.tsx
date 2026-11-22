@@ -142,7 +142,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://www.sci.utah.edu/software.html" target="_blank" rel="noopener noreferrer">SCI Head Models</a>
+                            <a href="https://www.sci.utah.edu/software/" target="_blank" rel="noopener noreferrer">SCI Head Models</a>
                         </h3>
                         <p className={styles.description}>
                             High-resolution anatomical head models for electromagnetic source imaging and stimulation.
@@ -154,7 +154,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Resource</span>
-                            <a href="https://www.sci.utah.edu/software.html" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                            <a href="https://www.sci.utah.edu/software/" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Visit Website <ExternalLink size={14} />
                             </a>
                         </div>
@@ -298,7 +298,7 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank" rel="noopener noreferrer">NERVE Program</a>
+                            <a href="https://braininstitute.ca/programs-opportunities/nerve-program" target="_blank" rel="noopener noreferrer">NERVE Program</a>
                         </h3>
                         <p className={styles.description}>
                             Neurotech Entrepreneurship to Validate Emerging Innovations. Supporting neurotech startups and entrepreneurs.
@@ -309,7 +309,7 @@ export default async function ProjectsPage() {
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>Program</span>
-                            <a href="https://braininstitute.ca/commercialization/nerve" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                            <a href="https://braininstitute.ca/programs-opportunities/nerve-program" target="_blank" rel="noopener noreferrer" className={styles.link}>
                                 Learn More <ExternalLink size={14} />
                             </a>
                         </div>
