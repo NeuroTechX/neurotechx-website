@@ -27,20 +27,20 @@ export default async function Sidebar() {
                 </h3>
                 <ul className="space-y-4">
                     <li>
-                        <a href="https://neurofounders.co/map" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Startup Map</a>
-                        <p className="text-xs text-muted-foreground">Interactive database of 225+ companies.</p>
+                        <a href="https://www.neurofounders.co/resources/start-up-map" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Startup Map</a>
+                        <p className="text-xs text-muted-foreground">Interactive map of neurotech start-ups.</p>
                     </li>
                     <li>
                         <a href="https://neurotechjobs.io/nerd" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">NERD Program</a>
                         <p className="text-xs text-muted-foreground">Milestone-based funding for R&D.</p>
                     </li>
                     <li>
-                        <a href="http://www.neurotechreports.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Neurotech Reports</a>
+                        <a href="https://www.neurotechreports.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Neurotech Reports</a>
                         <p className="text-xs text-muted-foreground">Market intelligence & analysis.</p>
                     </li>
                     <li>
-                        <a href="https://neurofounders.co/glossary" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Glossary</a>
-                        <p className="text-xs text-muted-foreground">600+ neurotech terms defined.</p>
+                        <a href="https://www.neurofounders.co/resources/investor-map" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">Investor Map</a>
+                        <p className="text-xs text-muted-foreground">Who invests in neurotech.</p>
                     </li>
                 </ul>
             </div>
