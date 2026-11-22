@@ -19,6 +19,29 @@ export default function EducationPage() {
                 subtitle="Curated learning resources and open standards for the community."
             />
 
+            <section className="mb-10 p-8 rounded-xl border border-neuro-accent bg-neuro-accent/5">
+                <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">Featured Programme · NeuroTechX Partner</span>
+                <h2 className="text-3xl font-serif font-bold mb-4">NeuroTech Microcredential Program</h2>
+                <p className="text-lg text-muted-foreground mb-4">
+                    A professional neurotechnology credential led by Queen&apos;s University with York, Western and Nipissing
+                    universities, developed with support from the Province of Ontario. Online courses of about 50 hours each
+                    cover the neuroscience and neurotech primer, neuroelectronic recording and processing, neuroimaging,
+                    neuromodulation, behavioural assessment, neuro-entrepreneurship and neuroethics, followed by a two-week
+                    hands-on capstone on a partner campus.
+                </p>
+                <p className="text-sm text-muted-foreground mb-6">
+                    For students, researchers and professionals moving into neurotech. NeuroTechX is a partner on the programme.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                    <a href="https://www.queensu.ca/microcredentials/collection/13" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
+                        See the courses <ExternalLink size={16} />
+                    </a>
+                    <a href="https://www.queensu.ca/neurotech-discovery-lab/" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted-foreground/10 transition-colors inline-flex items-center gap-2">
+                        Neurotech Discovery Lab <ExternalLink size={16} />
+                    </a>
+                </div>
+            </section>
+
             <div className="mb-16 p-8 bg-muted rounded-xl border border-foreground/10 flex flex-col md:flex-row gap-8 items-center">
                 <div className="flex-1">
                     <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">Featured Resource</span>
@@ -43,6 +66,47 @@ export default function EducationPage() {
                     />
                 </div>
             </div>
+
+            <section className="mb-16">
+                <h2 className="text-2xl font-serif font-bold mb-2 flex items-center gap-2">
+                    <GraduationCap size={24} /> Degree Programmes in Neurotechnology
+                </h2>
+                <p className="text-sm text-muted-foreground mb-6">Master&apos;s programmes and university networks dedicated to neurotechnology.</p>
+                <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                        {
+                            name: 'European Master in Neurotechnology',
+                            by: 'NeurotechEU: Bonn, Radboud, Miguel Hernández (Elche), Boğaziçi, Cluj-Napoca, Lille and Reykjavík',
+                            about: 'A two-year, 120 ECTS joint master’s taught in English, with study at a second partner university and an interdisciplinary thesis. Starting in the 2027/28 academic year.',
+                            href: 'https://www.uni-bonn.de/en/news/210-2026',
+                        },
+                        {
+                            name: 'Master’s in Neurotechnology (MUNE)',
+                            by: 'Universidad Politécnica de Madrid',
+                            about: 'A one-year master’s taught in English covering neuroscience, neurodevices, AI in neurotechnology, and neural signals and imaging, with a placement in the second semester. Aimed at biomedical engineering graduates; other backgrounds can join with bridging courses.',
+                            href: 'https://neurotec.upm.es/en/masters-of-science-in-neurotechnology/enrollment-procedure/',
+                        },
+                        {
+                            name: 'Master’s in Neuroscience and Neurotechnology',
+                            by: 'Universidad Autónoma de Madrid',
+                            about: 'A one-year, 60 ECTS master’s taught in Spanish for graduates in science, health sciences or engineering, leading to research, industry or entrepreneurship.',
+                            href: 'https://www.uam.es/uam/en/master-universitario-neurociencia-neurotecnologia',
+                        },
+                        {
+                            name: 'NeurotechEU schools, internships and doctoral network',
+                            by: 'NeurotechEU, the European University for Brain and Technology',
+                            about: 'Winter and autumn schools, innovation internships and a doctoral network across the alliance’s partner universities. Most are open to students of partner universities.',
+                            href: 'https://theneurotech.eu/',
+                        },
+                    ].map((p) => (
+                        <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="card p-6 block hover:border-neuro-accent transition-colors">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-neuro-accent block mb-2">{p.by}</span>
+                            <h3 className="font-bold text-lg mb-2 flex items-center gap-2">{p.name} <ExternalLink size={14} /></h3>
+                            <p className="text-sm text-muted-foreground">{p.about}</p>
+                        </a>
+                    ))}
+                </div>
+            </section>
 
             <div className="grid md:grid-cols-2 gap-8">
                 {/* Left Column */}
