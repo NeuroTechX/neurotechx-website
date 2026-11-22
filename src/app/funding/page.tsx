@@ -15,9 +15,10 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 const AUDIENCES: FundingAudience[] = [
+    'Start-up programmes and mentorship',
     'Students and early career',
     'Researchers and labs',
-    'Startups and open source',
+    'Seed funding and open source',
     'Outreach and community',
 ];
 
@@ -35,7 +36,7 @@ export default function FundingPage() {
             <PageHeader
                 eyebrow="Funding"
                 title="Funding opportunities"
-                subtitle="Grants, fellowships, awards and accelerators for people working in neurotechnology."
+                subtitle="Start-up programmes, grants, fellowships and awards for people working in neurotechnology."
             />
 
             <section className="mb-12 rounded-2xl border border-neuro-accent/20 bg-neuro-accent/5 p-8">
@@ -69,9 +70,9 @@ export default function FundingPage() {
                             {items.map((item) => (
                                 <article
                                     key={item.href}
-                                    className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6"
+                                    className={`flex flex-col rounded-xl border p-6 ${item.featured ? 'border-neuro-accent bg-neuro-accent/5 md:col-span-2' : 'border-[var(--border)] bg-[var(--surface-1)]'}`}
                                 >
-                                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{item.funder}</p>
+                                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{item.featured ? 'Featured · ' : ''}{item.funder}</p>
                                     <h3 className="mb-2 text-lg font-bold">{item.name}</h3>
                                     <p className="flex-1 text-sm text-muted-foreground">{item.who}</p>
                                     <dl className="mt-4 space-y-1 text-sm">
