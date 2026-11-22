@@ -14,6 +14,14 @@ const FILE_MAPPING = {
     'chapter-guidelines.rst': 'chapter-guidelines.mdx',
     'resources.rst': 'resources.mdx',
     'getting-started.rst': 'getting-started.mdx',
+    'chapter-onboarding.rst': 'chapter-onboarding.mdx',
+    'student-club-onboarding.rst': 'student-club-onboarding.mdx',
+};
+
+// Page titles that differ from the prettified filename
+const TITLES = {
+    'chapter-onboarding.rst': 'Starting a Chapter',
+    'student-club-onboarding.rst': 'Starting a Student Club',
 };
 
 async function syncDockit() {
@@ -62,7 +70,7 @@ async function syncDockit() {
                 }
 
                 // Add Frontmatter
-                const title = extractTitle(rstFile) || path.basename(mdxFile, '.mdx');
+                const title = TITLES[rstFile] || extractTitle(rstFile) || path.basename(mdxFile, '.mdx');
                 const frontmatterData = {
                     title: title,
                     sourceUrl: `${REPO_URL.replace('.git', '')}/blob/master/${rstFile}`,
@@ -99,7 +107,10 @@ function sanitizeMdx(md) {
         .replace(/<input\b([^>]*?)\/?\s*>([\s\S]*?)<\/input>/gi,
             (_m, attrs, inner) => `<input${attrs.replace(/\s+$/, '')} /> ${inner.trim()}`)
         // strip empty <form> / <ol> wrappers pandoc emits around the above
-        .replace(/<\/?form[^>]*>/gi, '');
+        .replace(/<\/?form[^>]*>/gi, '')
+        // MDX reads <name@host> and <https://...> autolinks as JSX; write them as plain links
+        .replace(/<([\w.+-]+@[\w-]+(?:\.[\w-]+)+)>/g, '[$1](mailto:$1)')
+        .replace(/<(https?:\/\/[^\s>]+)>/g, '[$1]($1)');
 }
 
 function extractTitle(filename) {

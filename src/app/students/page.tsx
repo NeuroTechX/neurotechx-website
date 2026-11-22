@@ -23,10 +23,10 @@ export default function StudentClubsPage() {
                         Explore student-led groups from universities around the world.
                     </p>
 
-                    <div className={styles.addButton}>
+                    <Link href="/students/start-a-club" className={styles.addButton}>
                         <PlusCircle size={16} />
-                        <span>Want to add your club? Scroll to the bottom!</span>
-                    </div>
+                        <span>Starting a club, or want yours listed? Read the guide</span>
+                    </Link>
                 </div>
             </section>
 
@@ -81,7 +81,9 @@ export default function StudentClubsPage() {
                 <div className={styles.container}>
                     <h2 className={styles.ctaTitle}>Don&apos;t see your club?</h2>
                     <p className={styles.subtitle}>
-                        This directory is community-maintained. The fastest way to get listed is to open a Pull Request on our GitHub repository.
+                        Read the <Link href="/students/start-a-club" style={{ color: 'var(--neuro-accent)' }}>guide to starting a student club</Link>, then
+                        write to <a href="mailto:studentclubs@neurotechx.com" style={{ color: 'var(--neuro-accent)' }}>studentclubs@neurotechx.com</a> with
+                        your club&apos;s name, university, web page and contact address. If you use GitHub, you can also open a pull request:
                     </p>
 
                     <div className={styles.codeBlock}>
