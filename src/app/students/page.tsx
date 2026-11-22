@@ -27,6 +27,10 @@ export default function StudentClubsPage() {
                         <PlusCircle size={16} />
                         <span>Starting a club, or want yours listed? Read the guide</span>
                     </Link>
+                    <p className={styles.subtitle}>
+                        Looking for travel grants, fellowships or outreach funding? See{' '}
+                        <Link href="/funding" style={{ color: 'var(--neuro-accent)' }}>funding opportunities</Link>.
+                    </p>
                 </div>
             </section>
 
