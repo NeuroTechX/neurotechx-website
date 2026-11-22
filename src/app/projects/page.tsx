@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { getFeaturedProjects, getCommunityProjects, GitHubRepo } from '@/lib/github';
 import Link from 'next/link';
-import { ArrowRight, Star, GitFork, ExternalLink, Code2, BookOpen } from 'lucide-react';
+import { ArrowRight, Star, GitFork, ExternalLink, Code2, BookOpen, Trophy } from 'lucide-react';
+import { CHALLENGES } from '@/data/challenges';
 import PageHeader from '@/components/PageHeader';
 import styles from './page.module.css';
 
@@ -85,6 +86,44 @@ export default async function ProjectsPage() {
                 title={<>Open Source <span className="text-gradient">Projects</span></>}
                 subtitle={<>Discover the tools powering the next generation of neurotechnology. Add your project by tagging your GitHub repository with <code className="rounded bg-[var(--surface-2)] px-2 py-1 text-sm font-mono">neurotechx</code>.</>}
             />
+
+            <section className="mb-16" id="challenges">
+                <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                    <Trophy className="text-neuro-accent" /> Open Challenges &amp; Leaderboards
+                </h2>
+                <p className="mb-6 text-sm text-muted-foreground">
+                    Benchmarks with sealed test data, where open methods compete on the same footing.
+                </p>
+                <div className="grid gap-6">
+                    {CHALLENGES.map((c) => (
+                        <article key={c.name} className="rounded-xl border-2 border-neuro-accent/20 bg-neuro-accent/5 p-6">
+                            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{c.organiser}</p>
+                            <h3 className="mb-2 text-xl font-bold">{c.name}</h3>
+                            <p className="mb-3 text-sm text-foreground/80">{c.about}</p>
+                            {c.prize && <p className="mb-3 text-sm"><strong>Prize: </strong>{c.prize}</p>}
+                            <p className="mb-4 text-sm text-muted-foreground">{c.timing}</p>
+                            {c.standings && (
+                                <div className="mb-4 rounded-lg border border-[var(--border)] bg-[var(--surface-1)] p-4">
+                                    <p className="mb-2 text-sm font-semibold">Leaderboard, {c.standings.asOf}</p>
+                                    <ul className="list-disc space-y-1 pl-5 text-sm text-foreground/80">
+                                        {c.standings.lines.map((l) => <li key={l}>{l}</li>)}
+                                    </ul>
+                                </div>
+                            )}
+                            <div className="flex flex-wrap gap-4 text-sm font-semibold">
+                                <a href={c.leaderboard} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
+                                    Live leaderboard <ExternalLink size={14} />
+                                </a>
+                                {c.enter && (
+                                    <a href={c.enter} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
+                                        Rules and how to enter <ExternalLink size={14} />
+                                    </a>
+                                )}
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </section>
 
             <section className="mb-16">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">

@@ -207,6 +207,15 @@ export const fundingOpportunities: FundingOpportunity[] = [
         timing: 'Rolling',
         href: 'https://wellcome.org/research-funding/schemes/wellcome-discovery-awards',
     },
+    {
+        name: 'Brainclinics Foundation Prize (TDBRAIN Challenge)',
+        funder: 'Brainclinics Foundation and Alto Neuroscience',
+        audience: 'Researchers and labs',
+        who: 'Anyone, from students to ML specialists, who can predict depression diagnosis or rTMS outcome from EEG alone on sealed replication data. Standings on our projects page.',
+        amount: 'EUR 10,000',
+        timing: 'Runs 18 months from 1 September 2026; the first entry to beat the bar and hold first place for two months wins',
+        href: 'https://brainclinics.com/research/brainclinics-prize',
+    },
 
     // Startups and open source
     {
