@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight, Building2, Compass, Mail } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, Building2, Compass, Mail, Users } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import JobsBrowser from '@/components/JobsBrowser';
 import JobCategoryLinks from '@/components/JobCategoryLinks';
@@ -122,7 +123,19 @@ export default async function JobsPage() {
         </section>
       )}
 
-      <div className="mt-16 grid gap-8 md:grid-cols-2">
+      <section className="mt-16 rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
+        <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
+          <Users className="h-5 w-5 text-neuro-accent" /> Join the NeuroTechX team
+        </h2>
+        <p className="mb-5 text-muted-foreground">
+          NeuroTechX is run by volunteers, and we have roles of our own to fill.
+        </p>
+        <Link href="/join-the-team" className="inline-flex items-center gap-1 font-semibold text-neuro-accent hover:underline">
+          See our open roles <ArrowUpRight className="h-3.5 w-3.5" />
+        </Link>
+      </section>
+
+      <div className="mt-8 grid gap-8 md:grid-cols-2">
         <section className="rounded-2xl border border-neuro-accent/20 bg-neuro-accent/5 p-8">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
             <Mail className="h-5 w-5 text-neuro-accent" /> Hiring in neurotech?

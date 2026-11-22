@@ -191,6 +191,11 @@ export default function AboutPage() {
                         </p>
                     </div>
                 </div>
+                <p style={{ marginTop: '2rem' }}>
+                    <a href="/join-the-team" className={styles.link}>
+                        Join the team: see the roles we would like to fill <ArrowUpRight size={16} />
+                    </a>
+                </p>
             </section>
         </div>
     );
