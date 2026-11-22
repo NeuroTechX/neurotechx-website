@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Neurotech Ecosystem',
@@ -23,6 +24,12 @@ const VIEWS = [
     suggest: 'https://airtable.com/shrGqkwnVZT6QCshc',
   },
 ];
+
+// The Airtable suggestion forms stopped accepting entries when the workspace dropped to the free
+// plan (Nov 2024). Set back to true once suggestions work again.
+const SUGGESTIONS_OPEN = false;
+
+const linkStyle = { color: 'var(--neuro-accent)' };
 
 export default function EcosystemPage() {
   return (
@@ -71,6 +78,7 @@ export default function EcosystemPage() {
                 <h2 id={`${v.id}-h`} style={{ fontSize: '1.6rem' }}>{v.label}</h2>
                 <p style={{ color: 'var(--muted-foreground)', fontSize: '0.95rem', marginTop: '0.25rem' }}>{v.blurb}</p>
               </div>
+              {SUGGESTIONS_OPEN && (
               <a
                 href={v.suggest}
                 target="_blank"
@@ -87,6 +95,7 @@ export default function EcosystemPage() {
               >
                 + Suggest an entry
               </a>
+              )}
             </div>
             <div
               style={{
@@ -110,10 +119,36 @@ export default function EcosystemPage() {
         ))}
       </div>
 
-      {/* Contact */}
-      <p style={{ marginTop: '3rem', color: 'var(--muted-foreground)', fontSize: '0.95rem' }}>
-        Questions or inquiries? Contact{' '}
-        <a href="mailto:info@neurotechx.com" style={{ color: 'var(--neuro-accent)' }}>info@neurotechx.com</a>.
+      {/* Related pages */}
+      <section style={{ marginTop: '3rem', maxWidth: '52rem' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem' }}>More on the neurotech industry</h2>
+        <ul style={{ color: 'var(--muted-foreground)', fontSize: '0.95rem', lineHeight: 1.8, paddingLeft: '1.2rem', listStyle: 'disc' }}>
+          <li>
+            Who is hiring: <Link href="/jobs" style={linkStyle}>neurotech jobs</Link>, read from these companies&apos; own careers pages.
+          </li>
+          <li>
+            Who writes about the industry: <Link href="/reports" style={linkStyle}>industry intelligence</Link>.
+          </li>
+          <li>
+            Neurofounders keeps an up-to-date{' '}
+            <a href="https://www.neurofounders.co/resources/start-up-map" target="_blank" rel="noopener noreferrer" style={linkStyle}>start-up map</a>{' '}
+            and{' '}
+            <a href="https://www.neurofounders.co/resources/investor-map" target="_blank" rel="noopener noreferrer" style={linkStyle}>investor map</a>.
+          </li>
+          <li>
+            Money for your work: <Link href="/funding" style={linkStyle}>funding opportunities</Link>.
+          </li>
+        </ul>
+      </section>
+
+      {/* Credit and contact */}
+      <p style={{ marginTop: '2.5rem', color: 'var(--muted-foreground)', fontSize: '0.95rem' }}>
+        The Neurotech Ecosystem database was built by NeuroTechX volunteers together with BrainMind.
+      </p>
+      <p style={{ marginTop: '0.75rem', color: 'var(--muted-foreground)', fontSize: '0.95rem' }}>
+        {SUGGESTIONS_OPEN ? 'Questions or inquiries?' : 'New suggestions are paused while we move the database. To suggest an entry or ask a question,'}{' '}
+        {SUGGESTIONS_OPEN ? 'Contact ' : 'write to '}
+        <a href="mailto:info@neurotechx.com" style={linkStyle}>info@neurotechx.com</a>.
       </p>
     </div>
   );
