@@ -26,6 +26,9 @@ export default function CommunityPage() {
                 <a href="/code-of-conduct" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
                     Read Code of Conduct
                 </a>
+                <a href="/community/start-a-chapter" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
+                    Start a Chapter
+                </a>
             </div>
 
             {/* Chapters: world map + featured + full list */}

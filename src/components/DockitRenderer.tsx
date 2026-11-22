@@ -6,6 +6,12 @@ interface DockitRendererProps {
 }
 
 export function DockitRenderer({ content }: DockitRendererProps) {
+    // The synced body opens with its own "# Title"; drop it when it repeats the page title
+    const heading = content.content.match(/^\s*# (.+)\n/);
+    const body = heading && heading[1].trim().toLowerCase() === content.frontmatter.title.toLowerCase()
+        ? content.content.slice(heading[0].length)
+        : content.content;
+
     return (
         <div className="prose prose-slate max-w-none dark:prose-invert">
             <h1>{content.frontmatter.title}</h1>
@@ -14,7 +20,7 @@ export function DockitRenderer({ content }: DockitRendererProps) {
                     Source: <a href={content.frontmatter.sourceUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">NTX-dockit</a>
                 </p>
             )}
-            <MDXRemote source={content.content} />
+            <MDXRemote source={body} />
         </div>
     );
 }
