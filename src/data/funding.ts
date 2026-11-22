@@ -42,6 +42,23 @@ export const fundingOpportunities: FundingOpportunity[] = [
         featured: true,
     },
     {
+        name: 'Cambridge NeuroWorks',
+        funder: 'Cambridge University Health Partners, powered by ARIA',
+        audience: 'Start-up programmes and mentorship',
+        who: 'UK-based researchers, clinicians and innovators with radical neurotech ideas for depression, dementia, chronic pain and other brain conditions; no neurotech background needed. Blue Sky and Frontier fellowships with funding, mentorship and lab space, plus a Blue Sky Proof-of-Concept Fund for six-month projects through a UK university.',
+        amount: 'Proof-of-concept projects up to GBP 50,000',
+        timing: 'Calls in rounds; check the site for the next one',
+        href: 'https://cambridgeneuroworks.org/',
+    },
+    {
+        name: 'Araya neurotech incubator',
+        funder: "Araya, with support from Japan's Moonshot R&D Program",
+        audience: 'Start-up programmes and mentorship',
+        who: "Researchers and would-be founders in Japan turning neurotech research into companies. Japan's first neurotech incubator, running information sessions and workshops at universities across Japan.",
+        timing: 'Ongoing',
+        href: 'https://www.araya.org/service/neurotech/',
+    },
+    {
         name: 'NERVE: Neurotech Entrepreneurship to Validate Emerging Innovations',
         funder: 'Ontario Brain Institute',
         audience: 'Start-up programmes and mentorship',
