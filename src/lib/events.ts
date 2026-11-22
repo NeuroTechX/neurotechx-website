@@ -116,6 +116,11 @@ export const EVENTS: NtxEvent[] = [
   },
   // ── 2027 ──
   {
+    name: 'FUN27 — Focused Ultrasound Neuromodulation Conference', tag: 'Conference', dateLabel: 'May 25–28, 2027 · abstracts due Jan 15', end: '2027-05-28',
+    location: 'Washington University in St. Louis', url: 'https://itrusst.org/fun27',
+    desc: 'ITRUSST\'s annual meeting on transcranial ultrasound stimulation. Regular abstracts are due January 15, 2027 (decisions February 19); late-breaking abstracts March 15.',
+  },
+  {
     name: '12th International BCI Meeting', tag: 'Conference', dateLabel: 'Jun 7–10, 2027 · abstracts due Jan 15', end: '2027-06-10',
     location: 'Šibenik, Croatia', url: 'https://bcisociety.org/bci-meeting/',
     desc: "The BCI Society's meeting. Abstracts for oral and poster presentations are due January 15, 2027.",
