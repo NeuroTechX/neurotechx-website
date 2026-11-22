@@ -210,7 +210,7 @@ export default function EducationPage() {
                     <section>
                         <h2 className="text-2xl font-serif font-bold mb-4">Gold Standard Education</h2>
                         <div className="card p-6 border-2 border-neuro-accent/20 bg-neuro-accent/5">
-                            <a href="https://academy.neuromatch.io/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
+                            <a href="https://neuromatch.io/courses/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
                                 Neuromatch Academy <ExternalLink className="w-4 h-4" />
                             </a>
                             <p className="text-sm text-foreground/80 mb-4">
@@ -420,9 +420,9 @@ export default function EducationPage() {
                             <div className="card p-6 bg-background">
                                 <h3 className="font-bold text-lg mb-2">OpenEIT (Spectra)</h3>
                                 <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    Mind&apos;s Eye Biomedical. Open-source Earnings Impedance Tomography.
+                                    Mind&apos;s Eye Biomedical. Open-source Electrical Impedance Tomography.
                                 </p>
-                                <a href="https://ktt.OPENEIT.github.io/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
+                                <a href="https://github.com/OPENEIT" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
                                     View Project <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
@@ -508,22 +508,22 @@ export default function EducationPage() {
                                     </div>
 
                                     <div className="pb-3 border-b border-border/50">
-                                        <a href="https://fens.org/meetings/fens-forum/fens-forum-2026" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
-                                            FENS Forum 2026 <ExternalLink className="w-3 h-3" />
+                                        <a href="https://www.fens.org/meetings/fens-forum" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
+                                            FENS Forum <ExternalLink className="w-3 h-3" />
                                         </a>
                                         <div className="flex justify-between text-xs mt-1">
                                             <span className="text-foreground/80">Federation of European Neuroscience Societies</span>
-                                            <span className="font-mono text-muted-foreground">July 6-10 • Barcelona, Spain</span>
+                                            <span className="font-mono text-muted-foreground">Every two years • Europe</span>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <a href="https://neuromatch.io/academy/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
-                                            Neuromatch Academy 2026 <ExternalLink className="w-3 h-3" />
+                                        <a href="https://neuromatch.io/courses/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
+                                            Neuromatch Academy 2027 <ExternalLink className="w-3 h-3" />
                                         </a>
                                         <div className="flex justify-between text-xs mt-1">
                                             <span className="text-foreground/80">Computational Neuroscience & Deep Learning</span>
-                                            <span className="font-mono text-muted-foreground">July 6-24 • Online</span>
+                                            <span className="font-mono text-muted-foreground">July 5–23 • Online</span>
                                         </div>
                                     </div>
                                 </div>
@@ -531,13 +531,13 @@ export default function EducationPage() {
                             <div className="card p-6 bg-background border-neuro-accent/30">
                                 <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
                                     <span className="inline-block w-2 h-2 rounded-full bg-neuro-accent animate-pulse"></span>
-                                    BCI & Neurotechnology Spring School 2026
+                                    BCI & Neurotechnology Spring School 2027
                                 </h3>
                                 <p className="text-sm text-foreground/80 mb-4">
-                                    <strong>April 27 – May 6, 2026</strong>. The largest online BCI education event. 140+ hours of lectures, hackathons, and certification for free. Organized by g.tec.
+                                    The largest online BCI education event, back in 2027. 140+ hours of lectures, hackathons, and certification for free. Organized by g.tec.
                                 </p>
-                                <a href="https://www.gtec.at/spring-school-2026/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Register for Free <ExternalLink className="w-3 h-3" />
+                                <a href="https://www.gtec.at/the-bci-neurotechnology-spring-school/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
+                                    Details and registration <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
                             <div className="card p-6 bg-background">
