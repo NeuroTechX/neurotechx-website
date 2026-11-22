@@ -123,7 +123,15 @@ export default async function JobsPage() {
         </section>
       )}
 
-      <section className="mt-16 rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
+      <p className="mt-16 text-muted-foreground">
+        Looking for grants, fellowships or awards instead?{' '}
+        <Link href="/funding" className="font-semibold text-neuro-accent hover:underline">
+          See funding opportunities
+        </Link>
+        .
+      </p>
+
+      <section className="mt-8 rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
         <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
           <Users className="h-5 w-5 text-neuro-accent" /> Join the NeuroTechX team
         </h2>
