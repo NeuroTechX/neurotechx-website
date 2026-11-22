@@ -5,9 +5,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://neurotechx.org';
   const routes = [
     '', '/about', '/community', '/community/growth', '/community/chapter-guidelines',
+    '/community/start-a-chapter',
     '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
     '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs',
-    '/transparency', '/donate', '/students', '/code-of-conduct', '/privacy',
+    '/transparency', '/donate', '/students', '/students/start-a-club', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',
     ...CATEGORIES.map((c) => `/jobs/${c.slug}`),
   ];
