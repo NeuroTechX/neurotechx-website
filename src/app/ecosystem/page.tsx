@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { fieldMaps } from '@/data/field-maps';
 
 export const metadata: Metadata = {
   title: 'Neurotech Ecosystem',
@@ -119,6 +121,31 @@ export default function EcosystemPage() {
         ))}
       </div>
 
+      {/* Outside maps and trackers of the field */}
+      <section style={{ marginTop: '3rem' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>Maps and trackers of the field</h2>
+        <p style={{ color: 'var(--muted-foreground)', fontSize: '0.95rem', marginBottom: '1.25rem', maxWidth: '52rem' }}>
+          Other groups chart the neurotech field too. These are kept by their makers; listing one is not an endorsement.
+        </p>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {fieldMaps.map((m) => (
+            <article key={m.name} className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{m.by}</p>
+              <h3 className="mb-2 text-lg font-bold">{m.name}</h3>
+              <p className="flex-1 text-sm text-muted-foreground">{m.about}</p>
+              <a
+                href={m.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline"
+              >
+                {m.cta} <ArrowUpRight width={15} height={15} />
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* Related pages */}
       <section style={{ marginTop: '3rem', maxWidth: '52rem' }}>
         <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem' }}>More on the neurotech industry</h2>
@@ -128,17 +155,6 @@ export default function EcosystemPage() {
           </li>
           <li>
             Who writes about the industry: <Link href="/reports" style={linkStyle}>industry intelligence</Link>.
-          </li>
-          <li>
-            Neurofounders keeps an up-to-date{' '}
-            <a href="https://www.neurofounders.co/resources/start-up-map" target="_blank" rel="noopener noreferrer" style={linkStyle}>start-up map</a>{' '}
-            and{' '}
-            <a href="https://www.neurofounders.co/resources/investor-map" target="_blank" rel="noopener noreferrer" style={linkStyle}>investor map</a>.
-          </li>
-          <li>
-            Where the field stands: PL Neuro&apos;s{' '}
-            <a href="https://www.plneuro.xyz/neuro-atlas" target="_blank" rel="noopener noreferrer" style={linkStyle}>Neuro Atlas</a>{' '}
-            charts the field&apos;s milestones, how fast capabilities are moving and where BCI funding goes, with a source for every chart.
           </li>
           <li>
             Money for your work: <Link href="/funding" style={linkStyle}>funding opportunities</Link>.
