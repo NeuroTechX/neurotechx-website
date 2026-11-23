@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight, Search } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
-import { FUNDING_CHECKED, FUNDING_FINDERS, fundingOpportunities, type FundingAudience } from '@/data/funding';
+import { FUNDING_CHECKED, FUNDING_FINDERS, INVESTOR_DIRECTORIES, fundingOpportunities, type FundingAudience } from '@/data/funding';
 
 export const metadata: Metadata = {
     title: 'Funding Opportunities',
@@ -58,6 +58,23 @@ export default function FundingPage() {
                         </li>
                     ))}
                 </ul>
+                <h3 className="mb-2 mt-6 text-lg font-bold">For start-ups: who invests in neurotech</h3>
+                <ul className="space-y-2">
+                    {INVESTOR_DIRECTORIES.map((directory) => (
+                        <li key={directory.href}>
+                            <a
+                                href={directory.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 font-semibold text-neuro-accent hover:underline"
+                            >
+                                {directory.name} <ArrowUpRight className="h-3.5 w-3.5" />
+                            </a>
+                            <p className="text-sm text-muted-foreground">{directory.about}</p>
+                        </li>
+                    ))}
+                </ul>
+                <p className="mt-3 text-xs text-muted-foreground">Directories of investors, not funding offers.</p>
             </section>
 
             {AUDIENCES.map((audience) => {

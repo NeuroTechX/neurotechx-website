@@ -30,6 +30,20 @@ export const FUNDING_FINDERS = [
     },
 ];
 
+// Directories of who invests in neurotech companies, for founders. Not funding offers.
+export const INVESTOR_DIRECTORIES = [
+    {
+        name: 'BCI Funding Index (PL Neuro)',
+        href: 'https://www.plneuro.xyz/neuro-atlas/funding',
+        about: 'Funding rounds and investors in brain–computer interface companies, part of PL Neuro’s Neuro Atlas.',
+    },
+    {
+        name: 'Neurofounders investor map',
+        href: 'https://www.neurofounders.co/resources/investor-map',
+        about: 'Investors who fund neurotech start-ups.',
+    },
+];
+
 export const fundingOpportunities: FundingOpportunity[] = [
     // Start-up programmes and mentorship
     {
