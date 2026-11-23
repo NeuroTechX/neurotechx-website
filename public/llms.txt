@@ -1,0 +1,40 @@
+# NeuroTechX
+
+> NeuroTechX is a volunteer-led non-profit and the international community for neurotechnology. It connects students, researchers, engineers and companies through local city chapters, university student clubs, events, education and open-source projects. Founded in Montréal in 2015; legally Société BCI Montréal, a Quebec non-profit (NEQ 1170984166). The official website is https://neurotechx.org (the old neurotechx.com site is retired).
+
+## Join and connect
+
+- [Community: chapters and Slack](https://neurotechx.org/community): local city chapters worldwide and how to join the NeuroTechX Slack
+- [Join the Slack](https://neurotechx.org/slack): invitation to the community workspace
+- [Student clubs](https://neurotechx.org/students): university neurotechnology clubs connected with NeuroTechX
+- [Start a student club](https://neurotechx.org/students/start-a-club): guide to starting and running a club, and how to get listed
+- [Newsletter](https://neurotechx.org/newsletter): the NeuroTechX newsletter and how to subscribe
+- [Volunteer](https://neurotechx.org/join-the-team): open volunteer roles
+
+## Opportunities
+
+- [Events](https://neurotechx.org/events): neurotech, BCI and neuroscience conferences and hackathons
+- [Jobs](https://neurotechx.org/jobs): neurotechnology job listings, updated from company job boards
+- [Funding](https://neurotechx.org/funding): grants, fellowships, awards and start-up programmes for neurotech
+
+## Learn
+
+- [Education](https://neurotechx.org/education): courses, programmes and learning resources
+- [The NeuroTech Primer](https://neurotechx.org/primer): beginner's guide to neurotechnology written by the community
+- [Content Lab](https://neurotechx.org/content-lab): original articles on neurotechnology
+- [Industry intelligence](https://neurotechx.org/reports): who to read on the neurotech industry, and industry news
+- [Ecosystem directory](https://neurotechx.org/ecosystem): neurotech companies and academic labs
+
+## Build
+
+- [Open-source projects](https://neurotechx.org/projects): BCI benchmarks, EEG and neuroimaging toolkits, community repositories
+- [GitHub](https://github.com/NeuroTechX): NeuroTechX code
+
+## About
+
+- [About NeuroTechX](https://neurotechx.org/about): history, board and leadership
+- [Transparency](https://neurotechx.org/transparency): legal entity, governance and financial reporting
+- [Code of Conduct](https://neurotechx.org/code-of-conduct)
+- [Privacy Policy](https://neurotechx.org/privacy)
+- [Donate](https://neurotechx.org/donate)
+- Contact: info@neurotechx.com

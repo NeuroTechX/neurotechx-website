@@ -29,6 +29,49 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Analytics } from '@vercel/analytics/react';
 
+// schema.org data so search engines and AI assistants can identify the organization.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'NGO',
+      '@id': 'https://neurotechx.org/#organization',
+      name: 'NeuroTechX',
+      legalName: 'Société BCI Montréal',
+      url: 'https://neurotechx.org',
+      logo: 'https://neurotechx.org/icon.png',
+      email: 'info@neurotechx.com',
+      description:
+        'Volunteer-led non-profit and international community for neurotechnology: local chapters, student clubs, events, education and open-source projects.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '6666 rue Saint-Urbain, bureau 200',
+        addressLocality: 'Montréal',
+        addressRegion: 'QC',
+        postalCode: 'H2S 3H1',
+        addressCountry: 'CA',
+      },
+      sameAs: [
+        'https://bsky.app/profile/neurotechx.bsky.social',
+        'https://x.com/neurotechx',
+        'https://github.com/NeuroTechX',
+        'https://www.youtube.com/@neurotechx',
+        'https://www.linkedin.com/company/neurotechx',
+        'https://www.instagram.com/neurotechx',
+        'https://www.facebook.com/neurotechx',
+        'https://linktr.ee/neurotechx',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://neurotechx.org/#website',
+      url: 'https://neurotechx.org',
+      name: 'NeuroTechX',
+      publisher: { '@id': 'https://neurotechx.org/#organization' },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -45,6 +88,10 @@ export default function RootLayout({
           <Footer />
         </div>
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </body>
     </html>
   )
