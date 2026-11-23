@@ -11,7 +11,7 @@ export interface TeamRole {
 }
 
 // Applications for roles without their own page come here.
-export const TEAM_CONTACT = 'info@neurotechx.com';
+export const TEAM_CONTACT = 'info@neurotechx.org';
 
 const apply = (title: string) => ({
     label: `Email ${TEAM_CONTACT}`,
@@ -25,7 +25,7 @@ export const teamRoles: TeamRole[] = [
         summary:
             'The first point of contact for university neurotech clubs: the person who answers when a club writes in and who keeps the clubs in touch with each other.',
         tasks: [
-            'Read and answer studentclubs@neurotechx.com',
+            'Read and answer studentclubs@neurotechx.org',
             'Welcome new clubs and keep the list on the Student Clubs page current',
             'Introduce club officers to each other in Slack',
         ],

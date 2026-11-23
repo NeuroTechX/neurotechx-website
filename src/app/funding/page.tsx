@@ -126,7 +126,7 @@ export default function FundingPage() {
                     Checked on the funders&apos; own pages on {formatDate(FUNDING_CHECKED)}. Amounts, eligibility and dates
                     change: always confirm on the funder&apos;s site before applying. Know of an opportunity we should list?
                     Write to{' '}
-                    <a className="text-neuro-accent underline" href="mailto:info@neurotechx.com">info@neurotechx.com</a>.
+                    <a className="text-neuro-accent underline" href="mailto:info@neurotechx.org">info@neurotechx.org</a>.
                 </p>
                 <p className="mt-4 text-sm text-muted-foreground">
                     Looking for a job instead? See the <Link className="text-neuro-accent underline" href="/jobs">jobs page</Link>.

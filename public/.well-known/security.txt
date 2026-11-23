@@ -1,4 +1,4 @@
-Contact: mailto:admins@neurotechx.com
+Contact: mailto:admins@neurotechx.org
 Expires: 2027-11-21T00:00:00.000Z
 Preferred-Languages: en, fr
 Canonical: https://neurotechx.org/.well-known/security.txt

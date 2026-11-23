@@ -169,7 +169,7 @@ export default function EcosystemPage() {
       <p style={{ marginTop: '0.75rem', color: 'var(--muted-foreground)', fontSize: '0.95rem' }}>
         {SUGGESTIONS_OPEN ? 'Questions or inquiries?' : 'New suggestions are paused while we move the database. To suggest an entry or ask a question,'}{' '}
         {SUGGESTIONS_OPEN ? 'Contact ' : 'write to '}
-        <a href="mailto:info@neurotechx.com" style={linkStyle}>info@neurotechx.com</a>.
+        <a href="mailto:info@neurotechx.org" style={linkStyle}>info@neurotechx.org</a>.
       </p>
     </div>
   );

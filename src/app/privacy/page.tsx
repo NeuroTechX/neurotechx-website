@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     alternates: { canonical: '/privacy' },
 };
 
-const CONTACT = 'info@neurotechx.com';
+const CONTACT = 'info@neurotechx.org';
 
 function Contact() {
     return (

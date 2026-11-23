@@ -164,7 +164,7 @@ export default async function ContentLabPage() {
 
                 <p className="mt-8 text-muted-foreground">
                     Got a question? Reach out to{' '}
-                    <a className="text-neuro-accent underline" href="mailto:blog@neurotechx.com">blog@neurotechx.com</a>.
+                    <a className="text-neuro-accent underline" href="mailto:blog@neurotechx.org">blog@neurotechx.org</a>.
                 </p>
             </section>
         </div>
