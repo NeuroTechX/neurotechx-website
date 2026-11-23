@@ -86,7 +86,7 @@ export default function StudentClubsPage() {
                     <h2 className={styles.ctaTitle}>Don&apos;t see your club?</h2>
                     <p className={styles.subtitle}>
                         Read the <Link href="/students/start-a-club" style={{ color: 'var(--neuro-accent)' }}>guide to starting a student club</Link>, then
-                        write to <a href="mailto:studentclubs@neurotechx.com" style={{ color: 'var(--neuro-accent)' }}>studentclubs@neurotechx.com</a> with
+                        write to <a href="mailto:studentclubs@neurotechx.org" style={{ color: 'var(--neuro-accent)' }}>studentclubs@neurotechx.org</a> with
                         your club&apos;s name, university, web page and contact address. If you use GitHub, you can also open a pull request:
                     </p>
 

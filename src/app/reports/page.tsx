@@ -127,7 +127,7 @@ export default async function ReportsPage() {
                 <p className="text-sm text-muted-foreground">
                     Listing a publication is not an endorsement, and NeuroTechX is not paid for it. Know of an
                     independent neurotech newsletter we should list? Write to{' '}
-                    <a className="text-neuro-accent underline" href="mailto:info@neurotechx.com">info@neurotechx.com</a>.
+                    <a className="text-neuro-accent underline" href="mailto:info@neurotechx.org">info@neurotechx.org</a>.
                     Looking for money for your work? See{' '}
                     <Link className="text-neuro-accent underline" href="/funding">funding opportunities</Link>.
                 </p>

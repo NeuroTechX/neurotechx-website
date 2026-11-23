@@ -79,7 +79,7 @@ export default function CodeOfConductPage() {
 
                 <h2>Enforcement</h2>
                 <p>
-                    Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at <a href="mailto:admins@neurotechx.com" className="text-neuro-accent hover:underline">admins@neurotechx.com</a>. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+                    Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at <a href="mailto:admins@neurotechx.org" className="text-neuro-accent hover:underline">admins@neurotechx.org</a>. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
                 </p>
                 <p>
                     Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project&apos;s leadership.

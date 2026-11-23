@@ -37,4 +37,4 @@
 - [Code of Conduct](https://neurotechx.org/code-of-conduct)
 - [Privacy Policy](https://neurotechx.org/privacy)
 - [Donate](https://neurotechx.org/donate)
-- Contact: info@neurotechx.com
+- Contact: info@neurotechx.org

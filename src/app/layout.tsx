@@ -40,7 +40,7 @@ const structuredData = {
       legalName: 'Société BCI Montréal',
       url: 'https://neurotechx.org',
       logo: 'https://neurotechx.org/icon.png',
-      email: 'info@neurotechx.com',
+      email: 'info@neurotechx.org',
       description:
         'Volunteer-led non-profit and international community for neurotechnology: local chapters, student clubs, events, education and open-source projects.',
       address: {

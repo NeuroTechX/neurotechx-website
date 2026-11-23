@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const revalidate = 14400;
 
 // Where employers send job postings. Listing is free and at NeuroTechX's discretion (ED, 2026-11-20).
-const EMPLOYER_CONTACT = 'info@neurotechx.com';
+const EMPLOYER_CONTACT = 'info@neurotechx.org';
 
 const OTHER_BOARDS = [
   {
