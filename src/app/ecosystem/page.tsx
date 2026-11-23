@@ -136,6 +136,11 @@ export default function EcosystemPage() {
             <a href="https://www.neurofounders.co/resources/investor-map" target="_blank" rel="noopener noreferrer" style={linkStyle}>investor map</a>.
           </li>
           <li>
+            Where the field stands: PL Neuro&apos;s{' '}
+            <a href="https://www.plneuro.xyz/neuro-atlas" target="_blank" rel="noopener noreferrer" style={linkStyle}>Neuro Atlas</a>{' '}
+            charts the field&apos;s milestones, how fast capabilities are moving and where BCI funding goes, with a source for every chart.
+          </li>
+          <li>
             Money for your work: <Link href="/funding" style={linkStyle}>funding opportunities</Link>.
           </li>
         </ul>
