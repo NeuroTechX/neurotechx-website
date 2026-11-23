@@ -24,7 +24,7 @@ export const studentClubs: StudentClub[] = [
         university: "University of California, Santa Cruz",
         location: "Santa Cruz, CA",
         logo: "/images/clubs/ucsc.png",
-        website: "https://neurotechsc.com",
+        website: "https://neurotech.ucsc.edu/",
         description: "Exploring the intersection of neuroscience and technology through hardware and software projects."
     },
     // Add your club here via PR!
@@ -41,7 +41,6 @@ export const studentClubs: StudentClub[] = [
         university: "Polytechnique Montréal",
         location: "Montréal, QC",
         logo: "/images/clubs/polycortex.png",
-        website: "http://polycortex.polymtl.ca/",
         description: "Student committee dedicated to neurotechnology and biomedical engineering."
     },
     {

@@ -94,7 +94,7 @@ export default function CommunityPage() {
                     <p className="mb-4">
                         The Turing Way is the global collaborative guide to best practices in community organizing around data science for science topics.
                     </p>
-                    <a href="https://the-turing-way.netlify.app/welcome" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">Read the Handbook →</a>
+                    <a href="https://book.the-turing-way.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">Read the Handbook →</a>
                 </div>
             </div>
 
@@ -220,7 +220,7 @@ export default function CommunityPage() {
                                 <span className="text-xs text-muted-foreground">Active Discourse forum and Discord server.</span>
                             </li>
                             <li>
-                                <a href="https://sccn.ucsd.edu/eeglab/mailinglist.php" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">EEGLAB</a>
+                                <a href="https://eeglab.org/others/EEGLAB_mailing_lists.html" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent block">EEGLAB</a>
                                 <span className="text-xs text-muted-foreground">The best place for EEGLAB-specific questions (Mailing List).</span>
                             </li>
                             <li>
