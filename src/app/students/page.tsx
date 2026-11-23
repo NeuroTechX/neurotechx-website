@@ -108,7 +108,7 @@ export default function StudentClubsPage() {
 
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <a
-                            href="https://github.com/webntx/neurotechx-website/edit/main/src/data/clubs.ts"
+                            href="https://github.com/NeuroTechX/neurotechx-website/edit/main/src/data/clubs.ts"
                             target="_blank" rel="noopener noreferrer"
                             className={styles.githubButton}
                         >
