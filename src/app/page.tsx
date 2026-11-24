@@ -66,6 +66,7 @@ export default async function Home() {
 
       {/* ── Pillars ── */}
       <section className="container py-16 md:py-20">
+        <h2 className="sr-only">What we do</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {PILLARS.map((p) => (
             <Link key={p.title} href={p.href}

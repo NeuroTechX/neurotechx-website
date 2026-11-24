@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Linkedin, Instagram, Youtube, Github, Facebook } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -41,7 +42,7 @@ export default function Footer() {
             <div className={styles.container}>
                 <div className={styles.copyright}>
                     <p>
-                        © {new Date().getFullYear()} NeuroTechX. <a href="/code-of-conduct" className="hover:underline">Code of Conduct</a> · <a href="/privacy" className="hover:underline">Privacy</a> · <a href="/transparency" className="hover:underline">Transparency</a>
+                        © {new Date().getFullYear()} NeuroTechX. <Link href="/code-of-conduct" className="hover:underline">Code of Conduct</Link> · <Link href="/privacy" className="hover:underline">Privacy</Link> · <Link href="/transparency" className="hover:underline">Transparency</Link>
                     </p>
                     <p className={styles.legal}>
                         Operated by Société BCI Montréal, a Quebec non-profit organization (NEQ 1170984166) · 6666 rue Saint-Urbain, bureau 200, Montréal (Québec) H2S 3H1, Canada

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import WorldMap from './WorldMap';
 import { FEATURED_CHAPTERS, OTHER_CHAPTERS, STUDENT_CLUBS, STATUS_LABEL, STATUS_COLOR, type ChapterStatus } from '@/lib/chapters';
@@ -134,14 +135,9 @@ export default function Chapters() {
 
       <p className="mt-8 text-sm text-muted-foreground">
         Don&apos;t see your city?{' '}
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-semibold text-neuro-accent hover:underline"
-        >
+        <Link href="/community/start-a-chapter" className="font-semibold text-neuro-accent hover:underline">
           Start a chapter
-        </a>{' '}
+        </Link>{' '}
         and put it on the map.
       </p>
     </div>

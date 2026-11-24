@@ -4,7 +4,6 @@ import './globals.css'
 
 // Inter = body + headings (readable). Aldrich = display/wordmark only (--font-display).
 const interSans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
-const interSerif = Inter({ subsets: ['latin'], variable: '--font-serif', display: 'swap' })
 const aldrich = Aldrich({ weight: '400', subsets: ['latin'], variable: '--font-display', display: 'swap' })
 
 export const metadata: Metadata = {
@@ -79,10 +78,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${interSans.variable} ${interSerif.variable} ${aldrich.variable} font-sans`}>
+      <body className={`${interSans.variable} ${aldrich.variable} font-sans`}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-neuro-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-black"
+        >
+          Skip to content
+        </a>
         <div className="relative flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">
+          <main id="main" className="flex-1">
             {children}
           </main>
           <Footer />

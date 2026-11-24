@@ -84,7 +84,7 @@ const SLIDES: Slide[] = [
         Foundation Models for the <span className="text-gradient">Brain and Body</span>
       </>
     ),
-    desc: 'The second edition of the NeurIPS workshop on foundation models for neural and biosignal data — and home of the EEG/EMG Foundation Challenge (final submissions Nov 21; winners announced in Sydney).',
+    desc: 'The second edition of the NeurIPS workshop on foundation models for neural and biosignal data — and home of the EEG/EMG Foundation Challenge, whose winners are announced in Sydney.',
     ctas: [
       { label: 'Workshop', href: 'https://brainbodyfm-workshop.github.io/', external: true, primary: true },
       { label: 'The challenge', href: 'https://neural-interfaces26.github.io/', external: true },
