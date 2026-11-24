@@ -1,4 +1,5 @@
 import sources from '@/data/job-sources.json';
+import posted from '@/data/posted-jobs.json';
 import { fetchBoard, type Job, type JobSource } from './job-boards';
 
 // How long a board's answer is reused before it is read again (seconds).
@@ -13,6 +14,50 @@ export type JobsData = {
   linked: JobSource[]; // companies we only link to
   checkedAt: string;
 };
+
+// A role an employer asked us to list because it has no careers board we can read
+// (src/data/posted-jobs.json). Shown only once the employer has agreed, and until it expires.
+export type PostedJob = {
+  id: string;
+  approved: boolean;
+  company: string;
+  site?: string;
+  title: string;
+  employment?: string;
+  location: string;
+  remote: boolean;
+  regions: string[];
+  topics: string[];
+  role: string;
+  postedAt: string;
+  expires: string;
+  summary: string;
+  requirements?: string[];
+  apply: string;
+  source?: string;
+};
+
+export function livePosted(now = Date.now()): PostedJob[] {
+  const today = new Date(now).toISOString().slice(0, 10);
+  return (posted as PostedJob[]).filter((p) => p.approved && p.expires >= today);
+}
+
+function postedJob(p: PostedJob): Job {
+  return {
+    id: `posted:${p.id}`,
+    company: p.company,
+    title: p.title,
+    location: p.location,
+    url: `/jobs/posted/${p.id}`,
+    postedAt: p.postedAt,
+    topics: p.topics,
+    role: p.role,
+    regions: p.regions,
+    remote: p.remote,
+    internship: /\bintern/i.test(p.title),
+    posted: true,
+  };
+}
 
 async function board(source: JobSource): Promise<Job[] | null> {
   for (let attempt = 1; ; attempt++) {
@@ -38,6 +83,7 @@ async function readAll(): Promise<JobsData> {
   const now = Date.now();
   const jobs = boards
     .flatMap((b) => b ?? [])
+    .concat(livePosted(now).map(postedJob))
     .map((job) => ({
       ...job,
       isNew: job.postedAt ? now - Date.parse(job.postedAt) < NEW_DAYS * 86_400_000 : false,

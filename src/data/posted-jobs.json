@@ -1,0 +1,28 @@
+[
+  {
+    "id": "atlas-mankind-data-scientist",
+    "approved": false,
+    "company": "Atlas Mankind",
+    "site": "https://atlasmankind.com",
+    "title": "Data Scientist (EEG, contract)",
+    "employment": "Contract, about 20 hours a week. No full-time applications.",
+    "location": "Remote, UK or EU",
+    "remote": true,
+    "regions": ["europe"],
+    "topics": ["eeg"],
+    "role": "software",
+    "postedAt": "2026-11-23",
+    "expires": "2027-01-22",
+    "summary": "Analyse behavioural, neural (EEG) and physiological data, and work with the experimental scientists on experiment design and on debugging data collection and pipelines.",
+    "requirements": [
+      "Based in the UK or EU",
+      "PhD in neuroscience",
+      "Several years of EEG analysis",
+      "Python, MNE and mixed-effects models",
+      "Strong statistics or computational modelling",
+      "Ideally, experience with production software systems"
+    ],
+    "apply": "Email your CV, a description or demo of one analysis project you led, your hourly or daily rate and your start date to andre@atlasmankind.com, with the subject \"Atlas - Data Scientist\".",
+    "source": ""
+  }
+]
