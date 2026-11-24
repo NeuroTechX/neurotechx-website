@@ -7,12 +7,40 @@ import { useState } from 'react';
 import styles from './Header.module.css';
 
 
-export default function Header() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const NAV_ITEMS = [
+    { name: 'About', href: '/about' },
+    { name: 'Community', href: '/community' },
+    { name: 'Education', href: '/education' },
+    { name: 'Events', href: '/events' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Ecosystem', href: '/ecosystem' },
+    { name: 'Reports', href: '/reports' },
+    { name: 'Jobs', href: '/jobs' },
+];
 
-    const toggleNavButtonClick = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
-    }
+const JOIN_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform';
+
+export default function Header() {
+    const pathname = usePathname();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const closeMenu = () => setMobileMenuOpen(false);
+    const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
+    const navLinks = (onNavigate?: () => void) =>
+        NAV_ITEMS.map((item) => {
+            const active = isActive(item.href);
+            return (
+                <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={onNavigate}
+                    aria-current={active ? 'page' : undefined}
+                    className={active ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+                >
+                    {item.name}
+                </Link>
+            );
+        });
 
     return (
         <div className={styles.headerWrapper}>
@@ -21,105 +49,47 @@ export default function Header() {
                 <div className={styles.container}>
                     <div className={styles.leftSection}>
                         <div className={styles.logo}>
-                            <Link href="/" className={styles.logoText}>
+                            <Link href="/" className={styles.logoText} onClick={closeMenu}>
                                 <span style={{ fontWeight: 900, letterSpacing: '-0.05em' }}>NeuroTech</span><span style={{ color: 'var(--neuro-accent)' }}>X</span>
                             </Link>
                         </div>
                         {/* Tabs as a proper row */}
-                        <nav className={styles.nav}>
-                            {[
-                                { name: 'About', href: '/about' },
-                                { name: 'Community', href: '/community' },
-                                { name: 'Education', href: '/education' },
-                                { name: 'Events', href: '/events' },
-                                { name: 'Projects', href: '/projects' },
-                                { name: 'Ecosystem', href: '/ecosystem' },
-                                { name: 'Reports', href: '/reports' },
-                                { name: 'Jobs', href: '/jobs' },
-                            ].map((item: { name: string; href: string; external?: boolean }) => (
-                                item.external ? (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.navLink}
-                                    >
-                                        {item.name}
-                                    </a>
-                                ) : (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className={styles.navLink}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                )
-                            ))}
-                        </nav>
+                        <nav className={styles.nav}>{navLinks()}</nav>
                     </div>
 
                     <div className={styles.rightSection}>
                         <Link href="/donate" className={styles.donateLink}>
                             Donate
                         </Link>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
+                        <a href={JOIN_FORM} target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
                             Join Community
                         </a>
-                        <nav className={styles.mobileNav} onClick={toggleNavButtonClick}>
-                            <button id={styles.toggleNavButton} aria-label="Toggle navigation menu" aria-expanded={mobileMenuOpen}>
-                                { 
-                                mobileMenuOpen ? 
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> :
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
-                                 }
-                            </button>
-                            
-                            
-                            
-                        </nav>
+                        <button
+                            id={styles.toggleNavButton}
+                            className={styles.mobileNav}
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle navigation menu"
+                            aria-expanded={mobileMenuOpen}
+                            aria-controls="mobile-nav"
+                        >
+                            {
+                            mobileMenuOpen ?
+                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> :
+                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+                             }
+                        </button>
                     </div>
                 </div>
             </header>
 
-            <nav id={mobileMenuOpen ? styles.mobileNavLinks : styles.hidden}>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform" target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
+            <nav aria-label="Mobile" data-nav="mobile" id={mobileMenuOpen ? styles.mobileNavLinks : styles.hidden}>
+                <a href={JOIN_FORM} target="_blank" rel="noopener noreferrer" className={styles.joinButton} onClick={closeMenu}>
                     Join Community
                 </a>
-                <Link href="/donate" className={styles.donateLink}>
+                <Link href="/donate" className={styles.donateLink} onClick={closeMenu}>
                     Donate
                 </Link>
-                {[
-                    { name: 'About', href: '/about' },
-                    { name: 'Community', href: '/community' },
-                    { name: 'Education', href: '/education' },
-                    { name: 'Events', href: '/events' },
-                    { name: 'Projects', href: '/projects' },
-                    { name: 'Ecosystem', href: '/ecosystem' },
-                    { name: 'Reports', href: '/reports' },
-                    { name: 'Jobs', href: '/jobs' },
-                ].map((item: { name: string; href: string; external?: boolean }) => (
-                    item.external ? (
-                        <a
-                            key={item.name}
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.navLink}
-                        >
-                            {item.name}
-                        </a>
-                    ) : (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={styles.navLink}
-                        >
-                            {item.name}
-                        </Link>
-                    )
-                ))}
+                {navLinks(closeMenu)}
             </nav>
 
             {/* Ticket Bar (Sub-header) - Restored "Wonderful" Style */}

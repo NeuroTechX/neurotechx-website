@@ -76,6 +76,11 @@
     text-decoration: none;
 }
 
+.navLinkActive {
+    color: var(--foreground);
+    border-bottom-color: var(--neuro-accent);
+}
+
 .navLink:hover {
     color: var(--foreground);
     /* background-color: var(--muted); Removed bg hover for cleaner text tab style */
@@ -171,6 +176,9 @@ nav>.joinButton {
     flex-direction: column;
     width: 100%;
     padding: 10px;
+    /* Opaque, so the open menu doesn't show page text through it */
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
 }
 
 @media (min-width: 1060px) {
