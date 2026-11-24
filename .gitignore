@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# sync-dockit.mjs working copies
+temp_dockit_sync/
+temp_handbook_sync/

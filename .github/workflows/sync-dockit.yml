@@ -1,4 +1,4 @@
-name: Sync with NTX-dockit
+name: Sync with NTX-dockit and NTX-handbook
 
 on:
   schedule:
@@ -37,7 +37,9 @@ jobs:
         with:
           branch: chore/sync-dockit
           delete-branch: true
-          commit-message: "chore: sync content from NTX-dockit"
-          title: "chore: sync content from NTX-dockit"
-          body: "Automated sync of updated documentation from `NeuroTechX/NTX-dockit`. Review changes before merging."
-          add-paths: src/content/dockit
+          commit-message: "chore: sync content from NTX-dockit and NTX-handbook"
+          title: "chore: sync content from NTX-dockit and NTX-handbook"
+          body: "Automated sync of updated documentation from `NeuroTechX/NTX-dockit` and `NeuroTechX/NTX-handbook`. Review changes before merging."
+          add-paths: |
+            src/content/dockit
+            src/content/handbook

@@ -1,0 +1,69 @@
+[
+  {
+    "heading": "Start here",
+    "pages": [
+      {
+        "slug": "welcome",
+        "title": "Welcome"
+      },
+      {
+        "slug": "joining",
+        "title": "Joining"
+      },
+      {
+        "slug": "agreement",
+        "title": "The contributor agreement"
+      }
+    ]
+  },
+  {
+    "heading": "How we work",
+    "pages": [
+      {
+        "slug": "organization",
+        "title": "How NeuroTechX is organized"
+      },
+      {
+        "slug": "tools-and-access",
+        "title": "Tools and access"
+      },
+      {
+        "slug": "working-together",
+        "title": "Working together"
+      },
+      {
+        "slug": "privacy",
+        "title": "Personal information"
+      },
+      {
+        "slug": "money",
+        "title": "Money"
+      },
+      {
+        "slug": "open-source",
+        "title": "Code, content and licences"
+      },
+      {
+        "slug": "leaving",
+        "title": "Stepping back or leaving"
+      }
+    ]
+  },
+  {
+    "heading": "For people who onboard others",
+    "pages": [
+      {
+        "slug": "onboarders",
+        "title": "Onboarding checklist"
+      },
+      {
+        "slug": "roles",
+        "title": "Roles"
+      },
+      {
+        "slug": "contacts",
+        "title": "Contacts"
+      }
+    ]
+  }
+]

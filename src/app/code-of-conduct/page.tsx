@@ -13,7 +13,7 @@ export default function CodeOfConductPage() {
         <div className="container py-12 max-w-4xl mx-auto">
             <h1 className="text-4xl font-serif font-bold mb-8">NeuroTechX Code of Conduct</h1>
 
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="prose prose-invert max-w-none prose-a:text-neuro-accent">
                 <p className="lead text-xl text-muted-foreground mb-8">
                     NeuroTechX is dedicated to providing a harassment-free experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, or religion. We do not tolerate harassment of participants in any form.
                 </p>
