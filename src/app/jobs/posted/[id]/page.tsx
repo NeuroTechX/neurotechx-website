@@ -81,13 +81,13 @@ export default async function PostedJobPage({ params }: Props) {
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1 text-neuro-accent hover:underline"
             >
-              The employer&apos;s original post <ArrowUpRight className="h-4 w-4" />
+              The employer&apos;s posting <ArrowUpRight className="h-4 w-4" />
             </a>
           )}
         </section>
 
         <p className="text-sm text-muted-foreground">
-          Posted by NeuroTechX on {DATE.format(new Date(job.postedAt))} at the employer&apos;s request; listed until{' '}
+          Posted by NeuroTechX on {DATE.format(new Date(job.postedAt))}; listed until{' '}
           {DATE.format(new Date(job.expires))}. Applications go to the employer, not to NeuroTechX.{' '}
           <Link href="/jobs" className="text-neuro-accent hover:underline">
             See all neurotech jobs

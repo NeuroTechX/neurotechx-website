@@ -16,7 +16,8 @@ export type JobsData = {
 };
 
 // A role an employer asked us to list because it has no careers board we can read
-// (src/data/posted-jobs.json). Shown only once the employer has agreed, and until it expires.
+// (src/data/posted-jobs.json). `approved` is set when the employer has agreed, or when the role is
+// on the employer's own public careers page; shown until it expires.
 export type PostedJob = {
   id: string;
   approved: boolean;
