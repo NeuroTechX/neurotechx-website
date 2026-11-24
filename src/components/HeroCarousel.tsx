@@ -2,15 +2,14 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-
-const JOIN =
-  'https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform';
+import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 type CTA = { label: string; href: string; external?: boolean; primary?: boolean };
-type Slide = { eyebrow: string; title: React.ReactNode; desc: string; ctas: CTA[] };
+// `until`: last day (YYYY-MM-DD) the slide is shown; past slides drop out on their own.
+type Slide = { eyebrow: string; title: React.ReactNode; desc: string; ctas: CTA[]; until?: string };
 
-// ── Edit these to control the rotating front-page headlines ──
+// ── Edit these to control the front-page headlines ──
+// Only the welcome slide, the latest blog post and the soonest upcoming item are shown (MAX_SLIDES).
 const SLIDES: Slide[] = [
   {
     eyebrow: 'The global neurotechnology community',
@@ -21,7 +20,7 @@ const SLIDES: Slide[] = [
     ),
     desc: 'A volunteer-led non-profit representing the largest global community of neurotechnology innovators — education, open-source tools, and 30+ local chapters.',
     ctas: [
-      { label: 'Join the Community', href: JOIN, external: true, primary: true },
+      { label: 'Join the Community', href: '/community', primary: true },
       { label: 'Explore Education', href: '/education' },
     ],
   },
@@ -37,6 +36,7 @@ const SLIDES: Slide[] = [
       { label: 'Conference details', href: 'https://itrusst.org/fun27', external: true, primary: true },
       { label: 'Abstract submission', href: 'https://itrusst.org/fun27/submission', external: true },
     ],
+    until: '2027-05-28',
   },
   {
     eyebrow: 'NeuroTechX Toronto · Nov 25',
@@ -50,6 +50,7 @@ const SLIDES: Slide[] = [
       { label: 'Get tickets on Luma', href: 'https://luma.com/lvklsd9o', external: true, primary: true },
       { label: 'All events', href: '/events' },
     ],
+    until: '2026-11-25',
   },
   {
     eyebrow: 'Dec 7 · Frontier Tower, San Francisco',
@@ -63,6 +64,7 @@ const SLIDES: Slide[] = [
       { label: 'RSVP on Luma', href: 'https://luma.com/neurotechberkeley-showcase', external: true, primary: true },
       { label: 'All events', href: '/events' },
     ],
+    until: '2026-12-07',
   },
   {
     eyebrow: 'Dec 9 · Frontier Tower, San Francisco',
@@ -76,6 +78,7 @@ const SLIDES: Slide[] = [
       { label: 'Register on Luma', href: 'https://luma.com/brains-connected-launch-event', external: true, primary: true },
       { label: 'All events', href: '/events' },
     ],
+    until: '2026-12-09',
   },
   {
     eyebrow: 'NeurIPS 2026 workshop · Dec 12, Sydney',
@@ -89,6 +92,7 @@ const SLIDES: Slide[] = [
       { label: 'Workshop', href: 'https://brainbodyfm-workshop.github.io/', external: true, primary: true },
       { label: 'The challenge', href: 'https://neural-interfaces26.github.io/', external: true },
     ],
+    until: '2026-12-12',
   },
   {
     eyebrow: 'Abstracts due Jan 15, 2027',
@@ -101,10 +105,12 @@ const SLIDES: Slide[] = [
     ctas: [
       { label: 'Submit an abstract', href: 'https://bcisociety.org/bci-meeting/abstract-submission/', external: true, primary: true },
     ],
+    until: '2027-01-15',
   },
 ];
 
 const INTERVAL = 6500;
+const MAX_SLIDES = 3;
 
 function Cta({ cta }: { cta: CTA }) {
   const cls = cta.primary
@@ -122,32 +128,47 @@ function Cta({ cta }: { cta: CTA }) {
   );
 }
 
-export default function HeroCarousel({ mediumSlides = [] }: { mediumSlides?: Slide[] }) {
-  // Curated welcome first, then the latest blog post(s), then the events.
-  const all: Slide[] = [SLIDES[0], ...mediumSlides, ...SLIDES.slice(1)];
+export default function HeroCarousel({
+  mediumSlides = [],
+  today,
+}: {
+  mediumSlides?: Slide[];
+  today: string; // YYYY-MM-DD, from the server so server and client agree
+}) {
+  // Welcome first, then the latest blog post, then the soonest upcoming item.
+  const upcoming = SLIDES.slice(1)
+    .filter((sl) => !sl.until || sl.until >= today)
+    .sort((a, b) => (a.until ?? '9999').localeCompare(b.until ?? '9999'));
+  const all: Slide[] = [SLIDES[0], ...mediumSlides.slice(0, 1), ...upcoming].slice(0, MAX_SLIDES);
   const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [stopped, setStopped] = useState(false);
   const n = all.length;
   const go = useCallback((idx: number) => setI(((idx % n) + n) % n), [n]);
 
   useEffect(() => {
-    if (paused) return;
+    if (stopped || hovered || n < 2) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const t = setInterval(() => setI((p) => (p + 1) % n), INTERVAL);
     return () => clearInterval(t);
-  }, [paused, n]);
+  }, [stopped, hovered, n]);
 
   const s = all[i];
+  const control =
+    'inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-strong)] text-muted-foreground transition hover:border-neuro-accent hover:text-foreground';
 
   return (
     <div
       className="mx-auto max-w-4xl"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Featured headlines"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={() => setHovered(false)}
     >
-      <div key={i} className="hero-slide">
+      <div key={i} className="hero-slide" aria-live={stopped ? 'polite' : 'off'}>
         <p className="eyebrow mb-5">{s.eyebrow}</p>
         <h1 className="mx-auto max-w-4xl text-4xl md:text-6xl font-bold leading-[1.06] mb-6 min-h-[2.2em]">
           {s.title}
@@ -160,21 +181,38 @@ export default function HeroCarousel({ mediumSlides = [] }: { mediumSlides?: Sli
         </div>
       </div>
 
-      {/* Dots */}
-      <div className="mt-10 flex items-center justify-center gap-2.5" role="tablist" aria-label="Featured headlines">
-        {all.map((_, idx) => (
+      {n > 1 && (
+        <div className="mt-10 flex items-center justify-center gap-3">
+          <button type="button" className={control} onClick={() => go(i - 1)} aria-label="Previous headline">
+            <ChevronLeft width={18} height={18} />
+          </button>
+          <div className="flex items-center gap-2.5" role="group" aria-label="Choose a headline">
+            {all.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                aria-current={idx === i ? 'true' : undefined}
+                aria-label={`Headline ${idx + 1} of ${n}`}
+                onClick={() => go(idx)}
+                className={`h-2 rounded-full transition-all ${
+                  idx === i ? 'w-7 bg-neuro-accent' : 'w-2 bg-[var(--border-strong)] hover:bg-muted-foreground'
+                }`}
+              />
+            ))}
+          </div>
+          <button type="button" className={control} onClick={() => go(i + 1)} aria-label="Next headline">
+            <ChevronRight width={18} height={18} />
+          </button>
           <button
-            key={idx}
-            role="tab"
-            aria-selected={idx === i}
-            aria-label={`Headline ${idx + 1}`}
-            onClick={() => go(idx)}
-            className={`h-2 rounded-full transition-all ${
-              idx === i ? 'w-7 bg-neuro-accent' : 'w-2 bg-[var(--border-strong)] hover:bg-muted-foreground'
-            }`}
-          />
-        ))}
-      </div>
+            type="button"
+            className={control}
+            onClick={() => setStopped((v) => !v)}
+            aria-label={stopped ? 'Play headlines' : 'Pause headlines'}
+          >
+            {stopped ? <Play width={16} height={16} /> : <Pause width={16} height={16} />}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

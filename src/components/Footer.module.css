@@ -6,6 +6,48 @@
     padding: 2.5rem 0;
 }
 
+.sections {
+    max-width: 1200px;
+    margin: 0 auto 2.5rem;
+    padding: 0 1rem 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+    .sections {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 0 2rem 2.5rem;
+    }
+}
+
+.sectionHeading {
+    margin-bottom: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--foreground);
+}
+
+.sectionLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.sectionLink {
+    color: var(--muted-foreground);
+    transition: color 0.2s;
+}
+
+.sectionLink:hover {
+    color: var(--neuro-accent);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
