@@ -2,7 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const CONTENT_DIR = path.join(process.cwd(), 'src/content/dockit');
+// Pages converted from the NTX-dockit and NTX-handbook repositories by scripts/sync-dockit.mjs
+const COLLECTIONS = {
+    dockit: path.join(process.cwd(), 'src/content/dockit'),
+    handbook: path.join(process.cwd(), 'src/content/handbook'),
+} as const;
+
+export type Collection = keyof typeof COLLECTIONS;
 
 export interface DockitContent {
     slug: string;
@@ -15,8 +21,8 @@ export interface DockitContent {
     content: string;
 }
 
-export function getDockitContent(slug: string): DockitContent | null {
-    const filePath = path.join(CONTENT_DIR, `${slug}.mdx`);
+export function getContent(collection: Collection, slug: string): DockitContent | null {
+    const filePath = path.join(COLLECTIONS[collection], `${slug}.mdx`);
 
     if (!fs.existsSync(filePath)) {
         return null;
@@ -32,13 +38,31 @@ export function getDockitContent(slug: string): DockitContent | null {
     };
 }
 
+export function getDockitContent(slug: string): DockitContent | null {
+    return getContent('dockit', slug);
+}
+
 export function getAllDockitSlugs(): string[] {
-    if (!fs.existsSync(CONTENT_DIR)) {
+    if (!fs.existsSync(COLLECTIONS.dockit)) {
         return [];
     }
 
-    const files = fs.readdirSync(CONTENT_DIR);
+    const files = fs.readdirSync(COLLECTIONS.dockit);
     return files
         .filter((file) => file.endsWith('.mdx'))
         .map((file) => file.replace('.mdx', ''));
+}
+
+export interface HandbookSection {
+    heading: string;
+    pages: { slug: string; title: string }[];
+}
+
+// Table of contents in the handbook's own order, written by the sync from its index.rst
+export function getHandbookSections(): HandbookSection[] {
+    const indexPath = path.join(COLLECTIONS.handbook, '_index.json');
+    if (!fs.existsSync(indexPath)) {
+        return [];
+    }
+    return JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
 }

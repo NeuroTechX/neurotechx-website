@@ -58,6 +58,10 @@ export default function JoinTheTeamPage() {
                     and tell us what you would like to do.
                 </p>
                 <p className="mt-4 text-muted-foreground">
+                    How joining works, and what we ask of volunteers, is in the{' '}
+                    <Link className="text-neuro-accent underline" href="/handbook">volunteer handbook</Link>.
+                </p>
+                <p className="mt-4 text-muted-foreground">
                     Looking for paid work in neurotechnology? See the{' '}
                     <Link className="text-neuro-accent underline" href="/jobs">jobs page</Link>.
                 </p>
