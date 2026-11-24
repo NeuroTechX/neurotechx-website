@@ -3,158 +3,125 @@ import path from 'path';
 import { execFileSync } from 'child_process';
 import matter from 'gray-matter';
 
-const REPO_URL = 'https://github.com/NeuroTechX/NTX-dockit.git';
-const TEMP_DIR = path.join(process.cwd(), 'temp_dockit_sync');
-const CONTENT_DIR = path.join(process.cwd(), 'src/content/dockit');
+// Two documentation repositories are published as pages on this site, never linked to on GitHub.
+// Each page listed in a repository's index.rst toctree is converted with pandoc to
+// src/content/<collection>/<slug>.mdx, and the table of contents is written to _index.json.
+const SOURCES = [
+    {
+        name: 'NTX-dockit',
+        repo: 'https://github.com/NeuroTechX/NTX-dockit.git',
+        outDir: 'src/content/dockit',
+        basePath: '/guide',
+        // Pages with their own long-standing address on the site
+        routes: {
+            'chapter-guidelines': '/community/chapter-guidelines',
+            'community-growth': '/community/growth',
+            'getting-started': '/education/getting-started',
+            resources: '/education/resources',
+            'chapter-onboarding': '/community/start-a-chapter',
+            'student-club-onboarding': '/students/start-a-club',
+            // The site has its own Code of Conduct page; the dockit copy is not published
+            conduct: '/code-of-conduct',
+        },
+        skip: ['conduct'],
+        titles: {
+            'chapter-onboarding': 'Starting a Chapter',
+            'student-club-onboarding': 'Starting a Student Club',
+        },
+    },
+    {
+        name: 'NTX-handbook',
+        repo: 'https://github.com/NeuroTechX/NTX-handbook.git',
+        outDir: 'src/content/handbook',
+        basePath: '/handbook',
+        routes: {},
+        skip: [],
+        titles: {},
+    },
+];
 
-// The internal volunteer manual: every page listed in its index.rst becomes /handbook/<slug>
-const HANDBOOK_REPO_URL = 'https://github.com/NeuroTechX/NTX-handbook.git';
-const HANDBOOK_TEMP_DIR = path.join(process.cwd(), 'temp_handbook_sync');
-const HANDBOOK_DIR = path.join(process.cwd(), 'src/content/handbook');
+// Old Read the Docs addresses of the dockit, rewritten to the site
+const READTHEDOCS = /https?:\/\/ntx-dockit\.readthedocs\.(?:io|org)\/en\/latest\/?([A-Za-z0-9-]*)(?:\.html)?/g;
 
-// Mapping configuration: RST file in repo -> MDX output filename (relative to CONTENT_DIR)
-const FILE_MAPPING = {
-    'about.rst': 'about.mdx',
-    'community-growth.rst': 'community-growth.mdx',
-    'chapter-guidelines.rst': 'chapter-guidelines.mdx',
-    'resources.rst': 'resources.mdx',
-    'getting-started.rst': 'getting-started.mdx',
-    'chapter-onboarding.rst': 'chapter-onboarding.mdx',
-    'student-club-onboarding.rst': 'student-club-onboarding.mdx',
-};
-
-// Page titles that differ from the prettified filename
-const TITLES = {
-    'chapter-onboarding.rst': 'Starting a Chapter',
-    'student-club-onboarding.rst': 'Starting a Student Club',
-};
-
-async function syncDockit() {
-    console.log('Starting NTX-dockit sync...');
-
-    // 1. Prepare temp directory
-    if (fs.existsSync(TEMP_DIR)) {
-        fs.rmSync(TEMP_DIR, { recursive: true, force: true });
+function syncAll() {
+    const allRoutes = {};
+    const allTitles = {};
+    const converted = SOURCES.map((source) => {
+        const result = convertSource(source);
+        Object.assign(allRoutes, result.routes);
+        for (const [slug, page] of Object.entries(result.pages)) allTitles[slug] = page.title;
+        return result;
+    });
+    for (const result of converted) {
+        writeSource(result, allRoutes, allTitles);
     }
-    fs.mkdirSync(TEMP_DIR);
-
-    // 2. Clone repository
-    console.log(`Cloning ${REPO_URL}...`);
-    execFileSync('git', ['clone', '--depth', '1', REPO_URL, TEMP_DIR], { stdio: 'inherit' });
-
-    // 3. Prepare content directory
-    if (!fs.existsSync(CONTENT_DIR)) {
-        fs.mkdirSync(CONTENT_DIR, { recursive: true });
-    }
-
-    // 4. Process files
-    for (const [rstFile, mdxFile] of Object.entries(FILE_MAPPING)) {
-        const rstPath = path.join(TEMP_DIR, rstFile);
-        const mdxPath = path.join(CONTENT_DIR, mdxFile);
-
-        if (fs.existsSync(rstPath)) {
-            console.log(`Processing ${rstFile} -> ${mdxFile}...`);
-
-            try {
-                // Convert using pandoc
-                // -f rst (from ReStructuredText)
-                // -t gfm (to GitHub Flavored Markdown)
-                // --wrap=none (preserve line breaks)
-                const markdownContent = sanitizeMdx(
-                    execFileSync('pandoc', [rstPath, '-f', 'rst', '-t', 'gfm', '--wrap=none']).toString()
-                );
-
-                // Skip if the converted body is unchanged — avoids a daily no-op
-                // commit (and Vercel deploy) caused only by bumping updatedAt.
-                if (fs.existsSync(mdxPath)) {
-                    const existing = matter(fs.readFileSync(mdxPath, 'utf8'));
-                    if (existing.content.trim() === markdownContent.trim()) {
-                        console.log(`No content change for ${mdxFile}, skipping.`);
-                        continue;
-                    }
-                }
-
-                // Add Frontmatter
-                const title = TITLES[rstFile] || extractTitle(rstFile) || path.basename(mdxFile, '.mdx');
-                const frontmatterData = {
-                    title: title,
-                    sourceUrl: `${REPO_URL.replace('.git', '')}/blob/master/${rstFile}`,
-                    updatedAt: new Date().toISOString().split('T')[0],
-                };
-
-                const fileContent = matter.stringify(markdownContent, frontmatterData);
-
-                fs.writeFileSync(mdxPath, fileContent);
-                console.log(`Saved ${mdxPath}`);
-            } catch (error) {
-                console.error(`Error processing ${rstFile}:`, error.message);
-                if (error.message.includes('pandoc: not found')) {
-                    console.error('CRITICAL: Pandoc is required but not found in PATH.');
-                    process.exit(1);
-                }
-            }
-        } else {
-            console.warn(`Warning: Source file ${rstFile} not found in repo.`);
-        }
-    }
-
-    // 5. Cleanup
-    console.log('Cleaning up...');
-    fs.rmSync(TEMP_DIR, { recursive: true, force: true });
-
-    syncHandbook();
     console.log('Sync complete.');
 }
 
-function syncHandbook() {
-    console.log(`Cloning ${HANDBOOK_REPO_URL}...`);
-    fs.rmSync(HANDBOOK_TEMP_DIR, { recursive: true, force: true });
-    execFileSync('git', ['clone', '--depth', '1', HANDBOOK_REPO_URL, HANDBOOK_TEMP_DIR], { stdio: 'inherit' });
-    fs.mkdirSync(HANDBOOK_DIR, { recursive: true });
+function convertSource(source) {
+    const tempDir = path.join(process.cwd(), `temp_sync_${source.name}`);
+    console.log(`Cloning ${source.repo}...`);
+    fs.rmSync(tempDir, { recursive: true, force: true });
+    execFileSync('git', ['clone', '--depth', '1', source.repo, tempDir], { stdio: 'inherit' });
+    const branch = execFileSync('git', ['-C', tempDir, 'rev-parse', '--abbrev-ref', 'HEAD']).toString().trim();
 
-    const sections = parseToctree(fs.readFileSync(path.join(HANDBOOK_TEMP_DIR, 'index.rst'), 'utf8'));
-    const slugs = sections.flatMap((section) => section.pages);
-
-    // Convert first, so every page title is known before cross-references are linked
+    const sections = parseToctree(fs.readFileSync(path.join(tempDir, 'index.rst'), 'utf8'));
+    const routes = {};
     const pages = {};
-    for (const slug of slugs) {
-        const rstPath = path.join(HANDBOOK_TEMP_DIR, `${slug}.rst`);
-        if (!fs.existsSync(rstPath)) {
-            console.warn(`Warning: handbook page ${slug}.rst not found.`);
-            continue;
+    for (const section of sections) {
+        for (const file of section.pages) {
+            const slug = file.toLowerCase();
+            routes[slug] = source.routes[slug] || `${source.basePath}/${slug}`;
+            if (source.skip.includes(slug)) continue;
+            const rstPath = path.join(tempDir, `${file}.rst`);
+            if (!fs.existsSync(rstPath)) {
+                console.warn(`Warning: ${source.name} page ${file}.rst not found.`);
+                continue;
+            }
+            const markdown = execFileSync('pandoc', [rstPath, '-f', 'rst', '-t', 'gfm', '--wrap=none']).toString();
+            const title = source.titles[slug] || (markdown.match(/^# (.+)$/m) || [])[1] || prettify(slug);
+            pages[slug] = { markdown, title, file };
         }
-        const markdown = execFileSync('pandoc', [rstPath, '-f', 'rst', '-t', 'gfm', '--wrap=none']).toString();
-        const title = (markdown.match(/^# (.+)$/m) || [])[1] || extractTitle(`${slug}.rst`);
-        pages[slug] = { markdown, title };
     }
+    fs.rmSync(tempDir, { recursive: true, force: true });
+    return { source, sections, routes, pages, branch };
+}
 
-    for (const [slug, { markdown, title }] of Object.entries(pages)) {
-        const body = sanitizeMdx(handbookMarkdown(markdown, pages));
-        writeIfChanged(path.join(HANDBOOK_DIR, `${slug}.mdx`), body, {
+function writeSource({ source, sections, routes, pages, branch }, allRoutes, allTitles) {
+    const outDir = path.join(process.cwd(), source.outDir);
+    fs.mkdirSync(outDir, { recursive: true });
+
+    for (const [slug, { markdown, title, file }] of Object.entries(pages)) {
+        const body = sanitizeMdx(linkReferences(markdown, allRoutes, allTitles));
+        writeIfChanged(path.join(outDir, `${slug}.mdx`), body, {
             title,
-            sourceUrl: `${HANDBOOK_REPO_URL.replace('.git', '')}/blob/main/${slug}.rst`,
+            // Kept for maintainers; not shown on the site
+            sourceUrl: `${source.repo.replace('.git', '')}/blob/${branch}/${file}.rst`,
             updatedAt: new Date().toISOString().split('T')[0],
         });
     }
 
-    // Pages removed from the handbook disappear from the site too
-    for (const file of fs.readdirSync(HANDBOOK_DIR)) {
+    // Pages removed upstream disappear from the site too
+    for (const file of fs.readdirSync(outDir)) {
         if (file.endsWith('.mdx') && !pages[file.replace('.mdx', '')]) {
-            fs.rmSync(path.join(HANDBOOK_DIR, file));
+            fs.rmSync(path.join(outDir, file));
+            console.log(`Removed ${file}`);
         }
     }
 
     const index = sections.map((section) => ({
         heading: section.heading,
-        pages: section.pages.filter((slug) => pages[slug]).map((slug) => ({ slug, title: pages[slug].title })),
+        pages: section.pages
+            .map((file) => file.toLowerCase())
+            .filter((slug) => pages[slug] || routes[slug] !== `${source.basePath}/${slug}`)
+            .map((slug) => ({ slug, title: pages[slug]?.title || prettify(slug), href: routes[slug] })),
     }));
-    const indexPath = path.join(HANDBOOK_DIR, '_index.json');
+    const indexPath = path.join(outDir, '_index.json');
     const indexJson = `${JSON.stringify(index, null, 2)}\n`;
     if (!fs.existsSync(indexPath) || fs.readFileSync(indexPath, 'utf8') !== indexJson) {
         fs.writeFileSync(indexPath, indexJson);
+        console.log(`Saved ${indexPath}`);
     }
-
-    fs.rmSync(HANDBOOK_TEMP_DIR, { recursive: true, force: true });
 }
 
 // Section headings and the pages listed in each toctree, in order
@@ -168,7 +135,7 @@ function parseToctree(rst) {
         }
         if (lines[i].startsWith('.. toctree::')) {
             const pages = [];
-            for (i++; i < lines.length && (lines[i].startsWith(' ') || !lines[i].trim()); i++) {
+            for (i++; i < lines.length && (/^\s/.test(lines[i]) || !lines[i].trim()); i++) {
                 const entry = lines[i].trim();
                 if (entry && !entry.startsWith(':')) pages.push(entry);
             }
@@ -180,11 +147,16 @@ function parseToctree(rst) {
 }
 
 // Sphinx features pandoc leaves as code or raw HTML
-function handbookMarkdown(markdown, pages) {
+function linkReferences(markdown, routes, titles) {
     return markdown
-        // :doc:`slug` arrives as `slug`; link it to the page on the site
-        .replace(/`([a-z0-9-]+)`/g, (match, slug) => (pages[slug] ? `[${pages[slug].title}](/handbook/${slug})` : match))
-        // Admonitions ("Draft") and notes become blockquotes with a bold label
+        // :doc:`Label <slug>` and :ref:`Label <slug>` arrive as `Label <slug>`
+        .replace(/`([^`<>]+?)\s*<([A-Za-z0-9-]+)>`/g, (match, label, slug) =>
+            routes[slug.toLowerCase()] ? `[${label.trim()}](${routes[slug.toLowerCase()]})` : match)
+        // :doc:`slug` and :ref:`slug` arrive as `slug`
+        .replace(/`([A-Za-z0-9-]+)`/g, (match, slug) =>
+            routes[slug.toLowerCase()] ? `[${titles[slug.toLowerCase()] || prettify(slug)}](${routes[slug.toLowerCase()]})` : match)
+        .replace(READTHEDOCS, (_m, page) => `https://neurotechx.org${page ? routes[page.toLowerCase()] || '/guide' : '/guide'}`)
+        // Admonitions ("Draft") become blockquotes with a bold label
         .replace(/<div class="admonition">\s*\n\n([^\n]+)\n\n([\s\S]*?)\n\n<\/div>/g,
             (_m, label, body) => quote(`**${label}.** ${body}`))
         .replace(/^> \[!NOTE\]\n/gm, '> **Note.** ');
@@ -192,17 +164,6 @@ function handbookMarkdown(markdown, pages) {
 
 function quote(text) {
     return text.split('\n').map((line) => (line ? `> ${line}` : '>')).join('\n');
-}
-
-function writeIfChanged(mdxPath, body, frontmatterData) {
-    if (fs.existsSync(mdxPath)) {
-        const existing = matter(fs.readFileSync(mdxPath, 'utf8'));
-        if (existing.content.trim() === body.trim()) {
-            return;
-        }
-    }
-    fs.writeFileSync(mdxPath, matter.stringify(body, frontmatterData));
-    console.log(`Saved ${mdxPath}`);
 }
 
 // Pandoc passes raw HTML from the .rst through unchanged. MDX/React rejects void
@@ -219,13 +180,20 @@ function sanitizeMdx(md) {
         .replace(/<(https?:\/\/[^\s>]+)>/g, '[$1]($1)');
 }
 
-function extractTitle(filename) {
-    // Simple heuristic: usage map or just prettify filename
-    const name = path.basename(filename, path.extname(filename));
-    return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+function writeIfChanged(mdxPath, body, frontmatterData) {
+    if (fs.existsSync(mdxPath)) {
+        const existing = matter(fs.readFileSync(mdxPath, 'utf8'));
+        if (existing.content.trim() === body.trim() && existing.data.title === frontmatterData.title) {
+            return;
+        }
+    }
+    fs.writeFileSync(mdxPath, matter.stringify(body, frontmatterData));
+    console.log(`Saved ${mdxPath}`);
 }
 
-syncDockit().catch(err => {
-    console.error('Sync failed:', err);
-    process.exit(1);
-});
+function prettify(slug) {
+    if (slug.toLowerCase() === 'faq') return 'FAQ';
+    return slug.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+}
+
+syncAll();
