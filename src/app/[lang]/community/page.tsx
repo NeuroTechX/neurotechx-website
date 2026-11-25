@@ -41,6 +41,9 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
                 <Link href="/community/start-a-chapter" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
                     {t.startChapter}
                 </Link>
+                <Link href="/guide" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
+                    {t.guide}
+                </Link>
             </div>
 
             {/* Chapters: world map + featured + full list */}
