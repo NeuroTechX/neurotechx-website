@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Linkedin, Instagram, Youtube, Github, Facebook } from 'lucide-react';
+import type { Dictionary } from '@/i18n/fr';
+import { localizePath, type Locale } from '@/i18n/routes';
 import styles from './Footer.module.css';
 
 // Brand glyphs lucide doesn't ship (Bluesky, X)
@@ -25,48 +27,54 @@ function HuggingFaceIcon({ width = 20, height = 20 }: { width?: number; height?:
     );
 }
 
-// Pages not in the top menu belong here so they stay findable.
-const FOOTER_SECTIONS = [
-    {
-        heading: 'Get involved',
-        links: [
-            { name: 'Join the community', href: '/community' },
-            { name: 'Join the team', href: '/join-the-team' },
-            { name: 'Students and clubs', href: '/students' },
-            { name: 'Newsletter', href: '/newsletter' },
-            { name: 'Donate', href: '/donate' },
-        ],
-    },
-    {
-        heading: 'Learn',
-        links: [
-            { name: 'Education', href: '/education' },
-            { name: 'The Neurotech Primer', href: '/primer' },
-            { name: 'Content Lab', href: '/content-lab' },
-            { name: 'Reports', href: '/reports' },
-        ],
-    },
-    {
-        heading: 'Resources',
-        links: [
-            { name: 'Funding', href: '/funding' },
-            { name: 'Jobs', href: '/jobs' },
-            { name: 'Ecosystem', href: '/ecosystem' },
-            { name: 'Volunteer handbook', href: '/handbook' },
-        ],
-    },
-    {
-        heading: 'Organization',
-        links: [
-            { name: 'About', href: '/about' },
-            { name: 'Events', href: '/events' },
-            { name: 'Projects', href: '/projects' },
-            { name: 'Transparency', href: '/transparency' },
-        ],
-    },
-];
+// Pages not in the top menu belong here so they stay findable. href values are English
+// route paths; localizePath gives the French address.
+function footerSections(t: Dictionary['footer']) {
+    const l = t.links;
+    return [
+        {
+            heading: t.getInvolved,
+            links: [
+                { name: l.community, href: '/community' },
+                { name: l.joinTeam, href: '/join-the-team' },
+                { name: l.students, href: '/students' },
+                { name: l.newsletter, href: '/newsletter' },
+                { name: l.donate, href: '/donate' },
+            ],
+        },
+        {
+            heading: t.learn,
+            links: [
+                { name: l.education, href: '/education' },
+                { name: l.primer, href: '/primer' },
+                { name: l.contentLab, href: '/content-lab' },
+                { name: l.reports, href: '/reports' },
+            ],
+        },
+        {
+            heading: t.resources,
+            links: [
+                { name: l.funding, href: '/funding' },
+                { name: l.jobs, href: '/jobs' },
+                { name: l.ecosystem, href: '/ecosystem' },
+                { name: l.handbook, href: '/handbook' },
+            ],
+        },
+        {
+            heading: t.organization,
+            links: [
+                { name: l.about, href: '/about' },
+                { name: l.events, href: '/events' },
+                { name: l.projects, href: '/projects' },
+                { name: l.transparency, href: '/transparency' },
+            ],
+        },
+    ];
+}
 
-export default function Footer() {
+export default function Footer({ lang, t: dict }: { lang: Locale; t: Dictionary }) {
+    const t = dict.footer;
+    const href = (path: string) => localizePath(path, lang);
     const socialLinks = [
         { name: 'Bluesky', url: 'https://bsky.app/profile/neurotechx.bsky.social', icon: BlueskyIcon },
         { name: 'X', url: 'https://x.com/neurotechx', icon: XIcon },
@@ -80,14 +88,14 @@ export default function Footer() {
 
     return (
         <footer className={styles.footer}>
-            <nav aria-label="Footer" className={styles.sections}>
-                {FOOTER_SECTIONS.map((section) => (
+            <nav aria-label={t.label} className={styles.sections}>
+                {footerSections(t).map((section) => (
                     <div key={section.heading}>
                         <h2 className={styles.sectionHeading}>{section.heading}</h2>
                         <ul className={styles.sectionLinks}>
                             {section.links.map((link) => (
                                 <li key={link.href}>
-                                    <Link href={link.href} className={styles.sectionLink}>
+                                    <Link href={href(link.href)} className={styles.sectionLink}>
                                         {link.name}
                                     </Link>
                                 </li>
@@ -99,10 +107,10 @@ export default function Footer() {
             <div className={styles.container}>
                 <div className={styles.copyright}>
                     <p>
-                        © {new Date().getFullYear()} NeuroTechX. <Link href="/code-of-conduct" className="hover:underline">Code of Conduct</Link> · <Link href="/privacy" className="hover:underline">Privacy</Link> · <Link href="/transparency" className="hover:underline">Transparency</Link>
+                        © {new Date().getFullYear()} NeuroTechX. <Link href={href('/code-of-conduct')} className="hover:underline">{t.conduct}</Link> · <Link href={href('/privacy')} className="hover:underline">{t.privacy}</Link> · <Link href={href('/transparency')} className="hover:underline">{t.transparency}</Link>
                     </p>
                     <p className={styles.legal}>
-                        Operated by Société BCI Montréal, a Quebec non-profit organization (NEQ 1170984166) · 6666 rue Saint-Urbain, bureau 200, Montréal (Québec) H2S 3H1, Canada
+                        {t.legal}
                     </p>
                 </div>
                 <div className={styles.socialLinks}>

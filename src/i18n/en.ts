@@ -1,0 +1,163 @@
+import type { Dictionary } from './fr';
+
+// English mirrors fr.ts key for key. Add a string to fr.ts first; the type below then asks for it here.
+
+const en: Dictionary = {
+  meta: {
+    title: 'NeuroTechX — The global neurotechnology community',
+    description:
+      'NeuroTechX is a volunteer-led non-profit representing the largest global community of neurotechnology innovators — education, open-source tools, hackathons, and 30+ local chapters.',
+    ogDescription: 'The global community for neurotechnology.',
+  },
+  skipToContent: 'Skip to content',
+  languageSwitch: {
+    label: 'Choose language',
+    other: 'Français',
+  },
+  nav: {
+    label: 'Main',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    donate: 'Donate',
+    join: 'Join the Community',
+    about: {
+      title: 'About',
+      mission: 'Our mission',
+      joinTeam: 'Join the team',
+      transparency: 'Transparency',
+      conduct: 'Code of conduct',
+    },
+    community: {
+      title: 'Community',
+      overview: 'The community',
+      chapters: 'Start a chapter',
+      students: 'Student clubs',
+      contentLab: 'Content Lab',
+      newsletter: 'Newsletter',
+      handbook: 'Volunteer handbook',
+    },
+    learn: {
+      title: 'Learn',
+      education: 'Education',
+      primer: 'The NeuroTech Primer',
+      webinars: 'Webinars',
+      gettingStarted: 'Getting started',
+    },
+    projects: {
+      title: 'Projects',
+      openSource: 'Open-source projects',
+      challenges: 'Challenges & leaderboards',
+    },
+    ecosystem: {
+      title: 'Ecosystem',
+      map: 'Ecosystem map',
+      funding: 'Funding',
+      reports: 'Industry intelligence',
+      jobs: 'Jobs',
+    },
+    events: 'Events',
+  },
+  banner: {
+    badge: 'Abstracts due Jan 15',
+    title: '12th International BCI Meeting',
+    details: 'Šibenik, Croatia • Jun 7–10, 2027',
+    cta: 'Learn more',
+    close: 'Hide this announcement',
+  },
+  notTranslated: 'This page is not translated yet.',
+  footer: {
+    label: 'Footer',
+    getInvolved: 'Get involved',
+    learn: 'Learn',
+    resources: 'Resources',
+    organization: 'Organization',
+    links: {
+      community: 'Join the community',
+      joinTeam: 'Join the team',
+      students: 'Students and clubs',
+      newsletter: 'Newsletter',
+      donate: 'Donate',
+      education: 'Education',
+      primer: 'The NeuroTech Primer',
+      contentLab: 'Content Lab',
+      reports: 'Industry intelligence',
+      funding: 'Funding',
+      jobs: 'Jobs',
+      ecosystem: 'Ecosystem',
+      handbook: 'Volunteer handbook',
+      about: 'About',
+      events: 'Events',
+      projects: 'Projects',
+      transparency: 'Transparency',
+    },
+    conduct: 'Code of Conduct',
+    privacy: 'Privacy',
+    transparency: 'Transparency',
+    legal:
+      'Operated by Société BCI Montréal, a Quebec non-profit organization (NEQ 1170984166) · 6666 rue Saint-Urbain, bureau 200, Montréal (Québec) H2S 3H1, Canada',
+  },
+  notFound: {
+    title: 'Page not found',
+    body: "The page you're looking for may have moved when we transitioned from neurotechx.com to neurotechx.org, or no longer exists.",
+    home: 'Back to Home',
+  },
+  hero: {
+    region: 'Featured headlines',
+    previous: 'Previous headline',
+    next: 'Next headline',
+    choose: 'Choose a headline',
+    position: 'Headline {n} of {total}',
+    play: 'Play headlines',
+    pause: 'Pause headlines',
+    blogEyebrow: 'Latest from the NeuroTechX blog',
+    blogCta: 'Read on Medium',
+  },
+  home: {
+    doorsHeading: 'Where to start',
+    doors: {
+      learn: {
+        title: 'Learn',
+        desc: 'The NeuroTech Primer, getting-started guides, and 100+ hours of webinar archives.',
+        cta: 'Start learning',
+      },
+      participate: {
+        title: 'Get involved',
+        desc: 'Local chapters in 30+ cities, student clubs, hackathons and open challenges.',
+        cta: 'Find your people',
+      },
+      work: {
+        title: 'Work in neurotech',
+        desc: 'Jobs, funding and a map of the ecosystem for building a career or a company.',
+        cta: 'See jobs',
+      },
+    },
+    eventsEyebrow: 'Events',
+    eventsHeading: "What's coming up",
+    allEvents: 'All events',
+    newsletterEyebrow: 'Newsletter',
+    newsletterHeading: 'Get the NeuroTechX newsletter',
+    ctaHeading: 'Build the future of neurotech, together.',
+    ctaBody: 'Join thousands of innovators, students, and researchers shaping the field.',
+    ctaJoin: 'Join the Community',
+    ctaSupport: 'Support the Mission',
+  },
+  events: {
+    past: 'Past',
+    upcoming: 'Upcoming',
+    tags: {
+      Competition: 'Competition',
+      Conference: 'Conference',
+      Hackathon: 'Hackathon',
+      Meetup: 'Meetup',
+      Workshop: 'Workshop',
+    },
+  },
+  newsletter: {
+    email: 'Email address',
+    subscribe: 'Subscribe',
+    unsubscribe: 'Unsubscribe at any time. See our',
+    privacy: 'privacy policy',
+  },
+};
+
+export default en;

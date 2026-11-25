@@ -1,14 +1,17 @@
+import { getDictionary, localizePath, type Locale } from '@/i18n';
+
 // Email-only signup that posts straight to the Mailchimp audience (no API key).
 // When the newsletter moves to another service, change ACTION and the field names here.
 const MC_USER = '5124b2527cf13d913a8beeea3';
 const MC_LIST = '3519c19837';
 const ACTION = `https://neurotechx.us12.list-manage.com/subscribe/post?u=${MC_USER}&id=${MC_LIST}`;
 
-export default function NewsletterSignup({ className = '' }: { className?: string }) {
+export default function NewsletterSignup({ className = '', lang = 'en' }: { className?: string; lang?: Locale }) {
+    const t = getDictionary(lang).newsletter;
     return (
         <form action={ACTION} method="post" target="_blank" className={className}>
             <div className="flex flex-col sm:flex-row gap-3">
-                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+                <label htmlFor="newsletter-email" className="sr-only">{t.email}</label>
                 <input
                     id="newsletter-email"
                     type="email"
@@ -26,11 +29,11 @@ export default function NewsletterSignup({ className = '' }: { className?: strin
                     type="submit"
                     className="inline-flex items-center justify-center rounded-lg bg-neuro-accent px-6 py-3 font-bold text-[var(--background)] transition hover:brightness-110"
                 >
-                    Subscribe
+                    {t.subscribe}
                 </button>
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-                Unsubscribe at any time. See our <a href="/privacy" className="underline">privacy policy</a>.
+                {t.unsubscribe} <a href={localizePath('/privacy', lang)} className="underline">{t.privacy}</a>.
             </p>
         </form>
     );

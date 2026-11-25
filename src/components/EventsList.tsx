@@ -1,5 +1,6 @@
 import { Calendar, MapPin } from 'lucide-react';
 import { sortedEvents } from '@/lib/events';
+import { getDictionary, type Locale } from '@/i18n';
 
 // Shared events grid (Upcoming/Past badges, sorted upcoming-first). Used on the
 // homepage and the community page so there's a single source of truth.
@@ -7,10 +8,15 @@ import { sortedEvents } from '@/lib/events';
 export default function EventsList({
   upcomingOnly = false,
   limit,
+  lang = 'en',
 }: {
   upcomingOnly?: boolean;
   limit?: number;
+  lang?: Locale;
 } = {}) {
+  const fr = lang === 'fr';
+  const t = getDictionary(lang).events;
+  const tags: Record<string, string> = t.tags;
   let events = sortedEvents();
   if (upcomingOnly) events = events.filter((e) => !e.past);
   if (limit) events = events.slice(0, limit);
@@ -33,16 +39,20 @@ export default function EventsList({
                   : { background: 'rgba(34,211,238,0.15)', color: 'var(--neuro-accent)' }
               }
             >
-              {e.past ? 'Past' : 'Upcoming'}
+              {e.past ? t.past : t.upcoming}
             </span>
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{e.tag}</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{tags[e.tag] ?? e.tag}</span>
           </div>
           <h3 className="mb-3 text-lg font-bold leading-snug group-hover:text-neuro-accent transition-colors">{e.name}</h3>
           <div className="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 text-neuro-accent" /> {e.dateLabel}</span>
-            <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-neuro-accent" /> {e.location}</span>
+            <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 text-neuro-accent" /> {(fr && e.fr?.dateLabel) || e.dateLabel}</span>
+            <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-neuro-accent" /> {(fr && e.fr?.location) || e.location}</span>
           </div>
-          <p className="text-sm text-muted-foreground">{e.desc}</p>
+          {fr && e.fr ? (
+            <p className="text-sm text-muted-foreground">{e.fr.desc}</p>
+          ) : (
+            <p className="text-sm text-muted-foreground" lang={fr ? 'en' : undefined}>{e.desc}</p>
+          )}
         </a>
       ))}
     </div>

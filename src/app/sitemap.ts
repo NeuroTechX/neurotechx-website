@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { CATEGORIES } from '@/lib/job-boards';
 import { getHandbookSections } from '@/lib/dockit';
+import { localizePath, TRANSLATED_ROUTES } from '@/i18n/routes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://neurotechx.org';
@@ -16,10 +17,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getHandbookSections().flatMap((s) => s.pages.map((p) => `/handbook/${p.slug}`)),
   ];
   const now = new Date();
-  return routes.map((r) => ({
-    url: `${base}${r}`,
-    lastModified: now,
-    changeFrequency: r === '' || r === '/reports' || r === '/content-lab' || r.startsWith('/jobs') ? 'daily' : 'weekly',
-    priority: r === '' ? 1 : 0.7,
-  }));
+  const changeFrequency = (r: string) =>
+    r === '' || r === '/reports' || r === '/content-lab' || r.startsWith('/jobs') ? 'daily' : 'weekly';
+  // French addresses are listed only for pages that have French text (see TRANSLATED_ROUTES).
+  return routes.flatMap((r) => {
+    const path = r || '/';
+    const entry = { lastModified: now, changeFrequency: changeFrequency(r), priority: r === '' ? 1 : 0.7 } as const;
+    if (!TRANSLATED_ROUTES.has(path)) return [{ url: `${base}${r}`, ...entry }];
+    const languages = { 'en-CA': `${base}${r}`, 'fr-CA': `${base}${localizePath(path, 'fr')}` };
+    return [
+      { url: languages['en-CA'], ...entry, alternates: { languages } },
+      { url: languages['fr-CA'], ...entry, alternates: { languages } },
+    ];
+  });
 }

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { CATEGORIES, inCategory, type Job } from '@/lib/job-boards';
 
 // Links to the /jobs/<slug> pages that have at least one open role.
