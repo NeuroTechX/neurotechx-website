@@ -1,0 +1,117 @@
+[
+  {
+    "heading": "Getting to know NeuroTechX",
+    "pages": [
+      {
+        "slug": "about",
+        "title": "About",
+        "href": "/guide/about"
+      },
+      {
+        "slug": "initiatives",
+        "title": "Initiatives",
+        "href": "/guide/initiatives"
+      },
+      {
+        "slug": "conduct",
+        "title": "Conduct",
+        "href": "/code-of-conduct"
+      },
+      {
+        "slug": "social-media",
+        "title": "NTX Social Media",
+        "href": "/guide/social-media"
+      }
+    ]
+  },
+  {
+    "heading": "Chapter Guidelines",
+    "pages": [
+      {
+        "slug": "chapter-guidelines",
+        "title": "Chapter Guidelines",
+        "href": "/community/chapter-guidelines"
+      },
+      {
+        "slug": "expectations",
+        "title": "Expectations of being a Chapter Admin",
+        "href": "/guide/expectations"
+      },
+      {
+        "slug": "resources",
+        "title": "Resources",
+        "href": "/education/resources"
+      },
+      {
+        "slug": "sponsorship",
+        "title": "Sponsorship / Partnership",
+        "href": "/guide/sponsorship"
+      }
+    ]
+  },
+  {
+    "heading": "Growing a Community",
+    "pages": [
+      {
+        "slug": "community-growth",
+        "title": "Growing your Community",
+        "href": "/community/growth"
+      },
+      {
+        "slug": "meetups",
+        "title": "Meetups",
+        "href": "/guide/meetups"
+      },
+      {
+        "slug": "hacknights",
+        "title": "\\#HackNights and Tutorials",
+        "href": "/guide/hacknights"
+      }
+    ]
+  },
+  {
+    "heading": "Getting Started",
+    "pages": [
+      {
+        "slug": "getting-started",
+        "title": "Getting Started",
+        "href": "/education/getting-started"
+      },
+      {
+        "slug": "chapter-onboarding",
+        "title": "Starting a Chapter",
+        "href": "/community/start-a-chapter"
+      },
+      {
+        "slug": "student-club-onboarding",
+        "title": "Starting a Student Club",
+        "href": "/students/start-a-club"
+      }
+    ]
+  },
+  {
+    "heading": "FAQ",
+    "pages": [
+      {
+        "slug": "faq",
+        "title": "Frequently Asked Questions",
+        "href": "/guide/faq"
+      }
+    ]
+  },
+  {
+    "heading": "Contacts",
+    "pages": [
+      {
+        "slug": "contact",
+        "title": "Contacts",
+        "href": "/guide/contact"
+      },
+      {
+        "slug": "team",
+        "title": "Team",
+        "href": "/guide/team"
+      }
+    ]
+  }
+]
