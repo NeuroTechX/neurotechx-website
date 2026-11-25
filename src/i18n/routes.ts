@@ -39,6 +39,7 @@ const FR_SEGMENTS: Record<string, string> = {
   privacy: 'confidentialite',
   'ntx-services-partnership-termination': 'fin-partenariat-ntx-services',
   handbook: 'guide-benevole',
+  guide: 'guide',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
   Object.entries(FR_SEGMENTS).map(([en, fr]) => [fr, en])

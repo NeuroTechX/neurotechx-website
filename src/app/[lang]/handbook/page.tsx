@@ -23,8 +23,7 @@ export default function HandbookPage() {
             <p className="mb-10 max-w-3xl text-muted-foreground">
                 Chapters and student clubs have their own guides: <Link className="text-neuro-accent underline" href="/community/start-a-chapter">starting a chapter</Link> and{' '}
                 <Link className="text-neuro-accent underline" href="/students/start-a-club">starting a club</Link>. Passages marked{' '}
-                <strong>Draft</strong> describe something not yet decided. The handbook is edited on{' '}
-                <a className="text-neuro-accent underline" href="https://github.com/NeuroTechX/NTX-handbook" target="_blank" rel="noopener noreferrer">GitHub</a>.
+                <strong>Draft</strong> describe something not yet decided.
             </p>
             <div className="grid gap-8 md:grid-cols-3">
                 {sections.map((section) => (
@@ -33,7 +32,7 @@ export default function HandbookPage() {
                         <ul className="space-y-2">
                             {section.pages.map((page) => (
                                 <li key={page.slug}>
-                                    <Link href={`/handbook/${page.slug}`} className="text-neuro-accent hover:underline">
+                                    <Link href={page.href} className="text-neuro-accent hover:underline">
                                         {page.title}
                                     </Link>
                                 </li>

@@ -4,15 +4,18 @@
     "pages": [
       {
         "slug": "welcome",
-        "title": "Welcome"
+        "title": "Welcome",
+        "href": "/handbook/welcome"
       },
       {
         "slug": "joining",
-        "title": "Joining"
+        "title": "Joining",
+        "href": "/handbook/joining"
       },
       {
         "slug": "agreement",
-        "title": "The contributor agreement"
+        "title": "The contributor agreement",
+        "href": "/handbook/agreement"
       }
     ]
   },
@@ -21,31 +24,38 @@
     "pages": [
       {
         "slug": "organization",
-        "title": "How NeuroTechX is organized"
+        "title": "How NeuroTechX is organized",
+        "href": "/handbook/organization"
       },
       {
         "slug": "tools-and-access",
-        "title": "Tools and access"
+        "title": "Tools and access",
+        "href": "/handbook/tools-and-access"
       },
       {
         "slug": "working-together",
-        "title": "Working together"
+        "title": "Working together",
+        "href": "/handbook/working-together"
       },
       {
         "slug": "privacy",
-        "title": "Personal information"
+        "title": "Personal information",
+        "href": "/handbook/privacy"
       },
       {
         "slug": "money",
-        "title": "Money"
+        "title": "Money",
+        "href": "/handbook/money"
       },
       {
         "slug": "open-source",
-        "title": "Code, content and licences"
+        "title": "Code, content and licences",
+        "href": "/handbook/open-source"
       },
       {
         "slug": "leaving",
-        "title": "Stepping back or leaving"
+        "title": "Stepping back or leaving",
+        "href": "/handbook/leaving"
       }
     ]
   },
@@ -54,15 +64,18 @@
     "pages": [
       {
         "slug": "onboarders",
-        "title": "Onboarding checklist"
+        "title": "Onboarding checklist",
+        "href": "/handbook/onboarders"
       },
       {
         "slug": "roles",
-        "title": "Roles"
+        "title": "Roles",
+        "href": "/handbook/roles"
       },
       {
         "slug": "contacts",
-        "title": "Contacts"
+        "title": "Contacts",
+        "href": "/handbook/contacts"
       }
     ]
   }
