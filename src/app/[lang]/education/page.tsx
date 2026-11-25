@@ -1,67 +1,64 @@
 import type { Metadata } from 'next';
-import { BookOpen, GraduationCap, Users, Video, ExternalLink } from 'lucide-react';
+import { Fragment } from 'react';
+import { GraduationCap, ExternalLink } from 'lucide-react';
 import Link from '@/components/LocaleLink';
 import PageHeader from '@/components/PageHeader';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/education';
 
-export const metadata: Metadata = {
-    title: 'Education & Data',
-    description:
-        'The NeuroTech Primer, open neural datasets, open-source EEG analysis toolkits, FAIR standards, and curated learning paths.',
-    alternates: { canonical: '/education' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/education'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/education', lang) };
+}
 
-export default function EducationPage() {
+const HARDWARE_COMMUNITIES = [
+    { name: 'GOSH', href: 'https://openhardware.science/' },
+    { name: 'LibreHub', href: 'https://librehub.github.io/' },
+    { name: 'Open Neuroscience', href: 'https://open-neuroscience.com/' },
+];
+
+export default async function EducationPage({ params }: PageProps<'/[lang]/education'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    const pro = t.pro;
     return (
         <div className="container py-12">
-            <PageHeader
-                eyebrow="Learn"
-                title="Education & Data"
-                subtitle="Curated learning resources and open standards for the community."
-            />
+            <PageHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} />
 
             <section className="mb-10 p-8 rounded-xl border border-neuro-accent bg-neuro-accent/5">
-                <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">Featured Programme · NeuroTechX Partner</span>
-                <h2 className="text-3xl font-serif font-bold mb-4">NeuroTech Microcredential Program</h2>
-                <p className="text-lg text-muted-foreground mb-4">
-                    A professional neurotechnology credential led by Queen&apos;s University with York, Western and Nipissing
-                    universities, developed with support from the Province of Ontario. Online courses of about 50 hours each
-                    cover the neuroscience and neurotech primer, neuroelectronic recording and processing, neuroimaging,
-                    neuromodulation, behavioural assessment, neuro-entrepreneurship and neuroethics, followed by a two-week
-                    hands-on capstone on a partner campus.
-                </p>
-                <p className="text-sm text-muted-foreground mb-6">
-                    For students, researchers and professionals moving into neurotech. NeuroTechX is a partner on the programme.
-                </p>
+                <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">{t.micro.label}</span>
+                <h2 className="text-3xl font-serif font-bold mb-4">{t.micro.title}</h2>
+                <p className="text-lg text-muted-foreground mb-4">{t.micro.body}</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.micro.audience}</p>
                 <div className="flex flex-wrap gap-4">
                     <a href="https://www.queensu.ca/microcredentials/collection/13" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity inline-flex items-center gap-2">
-                        See the courses <ExternalLink size={16} />
+                        {t.micro.coursesCta} <ExternalLink size={16} />
                     </a>
                     <a href="https://www.queensu.ca/neurotech-discovery-lab/" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted-foreground/10 transition-colors inline-flex items-center gap-2">
-                        Neurotech Discovery Lab <ExternalLink size={16} />
+                        {t.micro.labCta} <ExternalLink size={16} />
                     </a>
                 </div>
             </section>
 
             <div className="mb-16 p-8 bg-muted rounded-xl border border-foreground/10 flex flex-col md:flex-row gap-8 items-center">
                 <div className="flex-1">
-                    <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">Featured Resource</span>
-                    <h2 className="text-3xl font-serif font-bold mb-4">The NeuroTech Primer</h2>
-                    <p className="text-lg text-muted-foreground mb-6">
-                        The definitive beginner&apos;s guide to brain-computer interfaces and neurotechnology. Written by the community, for the community.
-                    </p>
+                    <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">{t.primer.label}</span>
+                    <h2 className="text-3xl font-serif font-bold mb-4">{t.primer.title}</h2>
+                    <p className="text-lg text-muted-foreground mb-6">{t.primer.body}</p>
                     <div className="flex gap-4">
                         <Link href="/primer" className="px-6 py-3 bg-foreground text-background rounded-full font-bold hover:opacity-90 transition-opacity">
-                            Get the Book
+                            {t.primer.bookCta}
                         </Link>
                         <a href="/downloads/the-neurotech-primer.pdf" target="_blank" rel="noopener noreferrer" className="px-6 py-3 border border-foreground/20 rounded-full font-bold hover:bg-muted-foreground/10 transition-colors">
-                            Read PDF
+                            {t.primer.pdfCta}
                         </a>
                     </div>
                 </div>
                 <div className="w-48 h-auto shrink-0 rotate-3 transition-transform hover:rotate-0 duration-500">
-                    <img 
-                        src="/images/neurotech-primer.png" 
-                        alt="The NeuroTech Primer Cover" 
+                    <img
+                        src="/images/neurotech-primer.png"
+                        alt={t.primer.coverAlt}
                         className="w-full h-full object-contain rounded shadow-2xl border border-foreground/5"
                     />
                 </div>
@@ -69,37 +66,12 @@ export default function EducationPage() {
 
             <section className="mb-16">
                 <h2 className="text-2xl font-serif font-bold mb-2 flex items-center gap-2">
-                    <GraduationCap size={24} /> Degree Programmes in Neurotechnology
+                    <GraduationCap size={24} /> {t.degrees.title}
                 </h2>
-                <p className="text-sm text-muted-foreground mb-6">Master&apos;s programmes and university networks dedicated to neurotechnology.</p>
+                <p className="text-sm text-muted-foreground mb-6">{t.degrees.lead}</p>
                 <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                        {
-                            name: 'European Master in Neurotechnology',
-                            by: 'NeurotechEU: Bonn, Radboud, Miguel Hernández (Elche), Boğaziçi, Cluj-Napoca, Lille and Reykjavík',
-                            about: 'A two-year, 120 ECTS joint master’s taught in English, with study at a second partner university and an interdisciplinary thesis. Starting in the 2027/28 academic year.',
-                            href: 'https://www.uni-bonn.de/en/news/210-2026',
-                        },
-                        {
-                            name: 'Master’s in Neurotechnology (MUNE)',
-                            by: 'Universidad Politécnica de Madrid',
-                            about: 'A one-year master’s taught in English covering neuroscience, neurodevices, AI in neurotechnology, and neural signals and imaging, with a placement in the second semester. Aimed at biomedical engineering graduates; other backgrounds can join with bridging courses.',
-                            href: 'https://neurotec.upm.es/en/masters-of-science-in-neurotechnology/enrollment-procedure/',
-                        },
-                        {
-                            name: 'Master’s in Neuroscience and Neurotechnology',
-                            by: 'Universidad Autónoma de Madrid',
-                            about: 'A one-year, 60 ECTS master’s taught in Spanish for graduates in science, health sciences or engineering, leading to research, industry or entrepreneurship.',
-                            href: 'https://www.uam.es/uam/en/master-universitario-neurociencia-neurotecnologia',
-                        },
-                        {
-                            name: 'NeurotechEU schools, internships and doctoral network',
-                            by: 'NeurotechEU, the European University for Brain and Technology',
-                            about: 'Winter and autumn schools, innovation internships and a doctoral network across the alliance’s partner universities. Most are open to students of partner universities.',
-                            href: 'https://theneurotech.eu/',
-                        },
-                    ].map((p) => (
-                        <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="card p-6 block hover:border-neuro-accent transition-colors">
+                    {t.degrees.items.map((p) => (
+                        <a key={p.href} href={p.href} target="_blank" rel="noopener noreferrer" className="card p-6 block hover:border-neuro-accent transition-colors">
                             <span className="text-xs font-semibold uppercase tracking-wide text-neuro-accent block mb-2">{p.by}</span>
                             <h3 className="font-bold text-lg mb-2 flex items-center gap-2">{p.name} <ExternalLink size={14} /></h3>
                             <p className="text-sm text-muted-foreground">{p.about}</p>
@@ -111,473 +83,204 @@ export default function EducationPage() {
             <div className="grid md:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div className="space-y-8">
+                    {[t.archives, t.tools, t.standards, t.devMeetings].map((group) => (
+                        <section key={group.title}>
+                            <h2 className="text-2xl font-serif font-bold mb-4 flex items-center gap-2">{group.title}</h2>
+                            <div className="card p-6 space-y-4">
+                                <p className="text-sm text-muted-foreground">{group.lead}</p>
+                                <ul className="space-y-3">
+                                    {group.items.map((item) => (
+                                        <li key={item.href}>
+                                            <a href={item.href} target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">{item.name}</a>
+                                            <span className="text-xs text-muted-foreground">{item.body}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </section>
+                    ))}
+
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
-                            Open Data Archives
-                        </h2>
-                        <div className="card p-6 space-y-4">
-                            <p className="text-sm text-muted-foreground">
-                                We strongly believe in open science. Use these verified repositories for your research.
-                            </p>
-                            <ul className="space-y-3">
-                                <li>
-                                    <a href="https://openneuro.org/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">OpenNeuro</a>
-                                    <span className="text-xs text-muted-foreground">A free and open platform for sharing MRI, MEG, EEG, iEEG, and ECoG data.</span>
-                                </li>
-                                <li>
-                                    <a href="https://nemar.org/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">NEMAR</a>
-                                    <span className="text-xs text-muted-foreground">Neuroelectromagnetic Data Archive and Tools.</span>
-                                </li>
-                                <li>
-                                    <a href="https://dandiarchive.org/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">DANDI Archive</a>
-                                    <span className="text-xs text-muted-foreground">Distributed Archives for Neurophysiology Data Integration.</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.gold.title}</h2>
+                        {t.gold.items.map((item, i) => (
+                            <div key={item.href} className={`card p-6 border-2 border-neuro-accent/20 bg-neuro-accent/5${i > 0 ? ' mt-6' : ''}`}>
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
+                                    {item.name} <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <p className="text-sm text-foreground/80 mb-4">{item.body}</p>
+                                <div className="flex gap-2">
+                                    {item.tags.map((tag) => (
+                                        <span key={tag} className="text-xs bg-background px-2 py-1 rounded border">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
-                            Open Source Analysis Tools
-                        </h2>
-                        <div className="card p-6 space-y-4">
-                            <p className="text-sm text-muted-foreground">
-                                Essential Python toolkits for neural signal processing and parameterization.
-                            </p>
-                            <ul className="space-y-3">
-                                <li>
-                                    <a href="https://fooof-tools.github.io/fooof/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">specparam (formerly FOOOF)</a>
-                                    <span className="text-xs text-muted-foreground">Fitting Oscillations & One-Over-F. Parametrizing neural power spectra.</span>
-                                </li>
-                                <li>
-                                    <a href="https://neurodsp-tools.github.io/neurodsp/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">NeuroDSP</a>
-                                    <span className="text-xs text-muted-foreground">Digital signal processing for neural time series. Filtering, spectral analysis, and simulation.</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.skills.title}</h2>
+                        {t.skills.items.map((item, i) => (
+                            <div key={item.href} className={`card p-6 border-l-4 border-neuro-accent bg-muted/30${i > 0 ? ' mt-6' : ''}`}>
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
+                                    {item.name} <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <p className="text-sm text-foreground/80 mb-4">{item.body}</p>
+                                <div className="flex gap-2">
+                                    {item.tags.map((tag) => (
+                                        <span key={tag} className="text-xs bg-background px-2 py-1 rounded border">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
-                            EEG Standards &amp; Reproducibility
-                        </h2>
-                        <div className="card p-6 space-y-4">
-                            <p className="text-sm text-muted-foreground">
-                                Open standards and tooling for FAIR, reproducible EEG — from the EEG101 &amp; INDoS COST Actions.
-                            </p>
-                            <ul className="space-y-3">
-                                <li>
-                                    <a href="https://linktr.ee/eegcf" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">EEG Community Framework</a>
-                                    <span className="text-xs text-muted-foreground">Rigor, democratization & sustainability for open EEG science.</span>
-                                </li>
-                                <li>
-                                    <a href="https://artemis.incf.org/" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">ARTEM-IS</a>
-                                    <span className="text-xs text-muted-foreground">Interactive web app for structured, standardized EEG/ERP methods reporting.</span>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/ANCPLabOldenburg/BIDS-Manager" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">BIDS Manager</a>
-                                    <span className="text-xs text-muted-foreground">GUI for raw-to-BIDS curation across MRI, MEG & EEG datasets.</span>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/ANCPLabOldenburg/MEGqc" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">MEEGqc</a>
-                                    <span className="text-xs text-muted-foreground">BIDS-aligned Python toolbox for MEG/EEG quality assessment & control.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4 flex items-center gap-2">
-                            Developer Meetings
-                        </h2>
-                        <div className="card p-6 space-y-4">
-                            <p className="text-sm text-muted-foreground">
-                                Join the contributors building the next generation of open neurotech tools.
-                            </p>
-                            <ul className="space-y-3">
-                                <li>
-                                    <a href="https://github.com/neurotechx/eeg-expy" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">EEG-ExPy</a>
-                                    <span className="text-xs text-muted-foreground">Weekly developer meeting. Python EEG experiments.</span>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/NeuroTechX/moabb" target="_blank" rel="noopener noreferrer" className="block font-bold hover:text-neuro-accent">MOABB</a>
-                                    <span className="text-xs text-muted-foreground">Weekly developer meeting. Mother of All BCI Benchmarks.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Gold Standard Education</h2>
-                        <div className="card p-6 border-2 border-neuro-accent/20 bg-neuro-accent/5">
-                            <a href="https://neuromatch.io/courses/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Neuromatch Academy <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                The gold standard for online computational neuroscience and deep learning education. Intensive, community-driven, and open.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Computational Neuroscience</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Deep Learning</span>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.interactive.title}</h2>
+                        {t.interactive.items.map((item) => (
+                            <div key={item.href} className="card p-6 border-l-4 border-neuro-accent">
+                                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
+                                    {item.name} <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <p className="text-sm text-foreground/80 mb-4">{item.body}</p>
+                                <div className="flex gap-2">
+                                    {item.tags.map((tag) => (
+                                        <span key={tag} className="text-xs bg-muted px-2 py-1 rounded">{tag}</span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="card p-6 border-2 border-neuro-accent/20 bg-neuro-accent/5 mt-6">
-                            <a href="https://github.com/neurotech-berkeley/neurotech-course" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                NeuroTech Course (Berkeley) <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                The original open-source neurotechnology curriculum. A comprehensive survey of biosignals, hardware, and labs from UC Berkeley.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">University Curriculum</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Labs & Hardware</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Foundational Skills & Workshops</h2>
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mb-6">
-                            <a href="https://brainhack.org/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Brainhack Global <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Collaborative workshops for open brain science. A unique format that combines education, hackathons, and unconferences.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Open Science</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Global Events</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30">
-                            <a href="https://software-carpentry.org/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Software Carpentry <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Teaching essential lab skills for research computing. The foundational &quot;missing semester&quot; of coding skills for scientists.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Git & Shell</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Python/R</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                The Missing Semester (MIT) <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                The Missing Semester of Your Computer Science Education. Master the command line, use a powerful text editor, use fancy features of version control systems, and much more!
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Shell</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Vim/Git</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Security</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://cuttingeeg.org/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                CuttingEEG <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Deep dive into MEEG methodology. Association promoting cutting-edge methods for EEG and MEG research through conferences and hands-on workshops.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Advanced Methodology</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Signal Processing</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://lucklab.ucdavis.edu/blog/category/EEG%2FERP" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Luck Lab (ERP Info) <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                The gold standard for Event-Related Potential (ERP) methodology. Best practices for experimental design and analysis from Prof. Steve Luck.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">ERPs</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Experimental Design</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://direct.mit.edu/books/monograph/4013/Analyzing-Neural-Time-Series-DataTheory-and" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Analyzing Neural Time Series Data <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                The essential guide to spectral analysis and time-frequency dynamics. Mike X Cohen&apos;s definitive textbook on analyzing neural data.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Time-Frequency</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Spectral Analysis</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://pursue.richmond.edu/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                PURSUE <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Preparing Undergraduates for Research in STEM Using Electrophysiology. Open teaching materials, datasets, and labs for semester-long courses.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Undergraduate Research</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Open Courseware</span>
-                            </div>
-                        </div>
-
-                        <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30 mt-6">
-                            <a href="https://www.s-ccs.de/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Stuttgart Computational Cognitive Science (S-CCS) <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Understanding human behavior and brain activity under realistic conditions. Advancing MEEG, Eye-Tracking, and VR methods with open tools like Unfold.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-background px-2 py-1 rounded border">Computational Modeling</span>
-                                <span className="text-xs bg-background px-2 py-1 rounded border">VR & Eye-Tracking</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Interactive Learning</h2>
-                        <div className="card p-6 border-l-4 border-neuro-accent">
-                            <a href="https://eegedu.com/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                EEGEdu <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                An interactive brain playground in your browser. Learn EEG basics with Muse devices without installing software.
-                            </p>
-                            <div className="flex gap-2">
-                                <span className="text-xs bg-muted px-2 py-1 rounded">Muse</span>
-                                <span className="text-xs bg-muted px-2 py-1 rounded">Browser-Based</span>
-                            </div>
-                        </div>
+                        ))}
                     </section>
                 </div>
 
                 {/* Right Column */}
                 <div className="space-y-8">
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Hardware & Student Kits</h2>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.hardware.title}</h2>
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">OpenBCI</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    The open-source gold standard for BCI research and education.
-                                </p>
-                                <a href="https://shop.openbci.com/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Visit Store <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Backyard Brains</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    &quot;Neuroscience for Everyone.&quot; Affordable SpikerBoxes for classrooms.
-                                </p>
-                                <a href="https://backyardbrains.com/products/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    View Kits <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">PiEEG</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    Raspberry Pi shields for reading EEG, EMG, ECG, and more.
-                                </p>
-                                <a href="https://pieeg.com/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Learn More <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Muse (InteraXon)</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    Consumer-grade EEG headbands widely used for accessible research.
-                                </p>
-                                <a href="https://choosemuse.com/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Shop Muse <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
+                            {t.hardware.items.map((item) => (
+                                <div key={item.href} className="card p-6 bg-background">
+                                    <h3 className="font-bold text-lg mb-2">{item.name}</h3>
+                                    <p className="text-sm text-foreground/80 mb-4 h-10">{item.body}</p>
+                                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
+                                        {item.cta} <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            ))}
                         </div>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Open Hardware & DIY</h2>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.openHardware.title}</h2>
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">FreeEEG32 / 128</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    Manufacture your own high-channel EEG kits. (GitHub)
-                                </p>
-                                <a href="https://github.com/neuroidss/FreeEEG32-beta" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    View Source <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">OpenEIT (Spectra)</h3>
-                                <p className="text-sm text-foreground/80 mb-4 h-10">
-                                    Mind&apos;s Eye Biomedical. Open-source Electrical Impedance Tomography.
-                                </p>
-                                <a href="https://github.com/OPENEIT" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    View Project <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
+                            {t.openHardware.items.map((item) => (
+                                <div key={item.href} className="card p-6 bg-background">
+                                    <h3 className="font-bold text-lg mb-2">{item.name}</h3>
+                                    <p className="text-sm text-foreground/80 mb-4 h-10">{item.body}</p>
+                                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
+                                        {item.cta} <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            ))}
                             <div className="card p-6 bg-background md:col-span-2">
-                                <h3 className="font-bold text-lg mb-2">Open Science Hardware Communities</h3>
+                                <h3 className="font-bold text-lg mb-2">{t.openHardware.communitiesTitle}</h3>
                                 <div className="flex flex-wrap gap-4 text-sm">
-                                    <a href="https://openhardware.science/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-neuro-accent">
-                                        <ExternalLink className="w-3 h-3" /> GOSH
-                                    </a>
-                                    <span className="text-muted-foreground">|</span>
-                                    <a href="https://librehub.github.io/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-neuro-accent">
-                                        <ExternalLink className="w-3 h-3" /> LibreHub
-                                    </a>
-                                    <span className="text-muted-foreground">|</span>
-                                    <a href="https://open-neuroscience.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-neuro-accent">
-                                        <ExternalLink className="w-3 h-3" /> Open Neuroscience
-                                    </a>
+                                    {HARDWARE_COMMUNITIES.map((community, i) => (
+                                        <Fragment key={community.href}>
+                                            {i > 0 && <span className="text-muted-foreground">|</span>}
+                                            <a href={community.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-neuro-accent">
+                                                <ExternalLink className="w-3 h-3" /> {community.name}
+                                            </a>
+                                        </Fragment>
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Frontier Tech & Community Science</h2>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.frontier.title}</h2>
                         <div className="grid md:grid-cols-1 gap-6">
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">MedARC (Sophont)</h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    Open multimodal medical AI. A community science research collective building foundational models for medicine.
-                                </p>
-                                <a href="https://medarc.ai/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Join Collective <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Biopunk Lab</h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    A community lab for citizen science and DIY biology.
-                                </p>
-                                <a href="https://biopunklab.com/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Visit Lab <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">OpenFlexure</h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    A 3D-printable microscope for open science.
-                                </p>
-                                <a href="https://openflexure.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Print It <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
-                            <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Mind in Vitro</h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    NSF Expedition: Computing with living neurons.
-                                </p>
-                                <a href="https://mindinvitro.illinois.edu/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Explore Research <ExternalLink className="w-3 h-3" />
-                                </a>
-                            </div>
+                            {t.frontier.items.map((item) => (
+                                <div key={item.href} className="card p-6 bg-background">
+                                    <h3 className="font-bold text-lg mb-2">{item.name}</h3>
+                                    <p className="text-sm text-foreground/80 mb-4">{item.body}</p>
+                                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
+                                        {item.cta} <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            ))}
                         </div>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Professional Development</h2>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{pro.title}</h2>
                         <div className="grid md:grid-cols-1 gap-6">
                             {/* Summer 2026 Events */}
                             <div className="card p-6 bg-background border-2 border-neuro-accent/20">
                                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                                     <span className="inline-block w-2 h-2 rounded-full bg-neuro-accent animate-pulse"></span>
-                                    Major Summer 2026 Events
+                                    {pro.eventsTitle}
                                 </h3>
                                 <div className="space-y-4">
-                                    <div className="pb-3 border-b border-border/50">
-                                        <a href="https://humanbrainmapping.org" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
-                                            OHBM 2026 & Brainhack <ExternalLink className="w-3 h-3" />
-                                        </a>
-                                        <div className="flex justify-between text-xs mt-1">
-                                            <span className="text-foreground/80">Organization for Human Brain Mapping</span>
-                                            <span className="font-mono text-muted-foreground">June 14-18 • Bordeaux, France</span>
+                                    {pro.events.map((event, i) => (
+                                        <div key={event.name} className={i < pro.events.length - 1 ? 'pb-3 border-b border-border/50' : undefined}>
+                                            <a href={event.href} target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
+                                                {event.name} <ExternalLink className="w-3 h-3" />
+                                            </a>
+                                            <div className="flex justify-between text-xs mt-1">
+                                                <span className="text-foreground/80">{event.org}</span>
+                                                <span className="font-mono text-muted-foreground">{event.when}</span>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div className="pb-3 border-b border-border/50">
-                                        <a href="https://www.fens.org/meetings/fens-forum" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
-                                            FENS Forum <ExternalLink className="w-3 h-3" />
-                                        </a>
-                                        <div className="flex justify-between text-xs mt-1">
-                                            <span className="text-foreground/80">Federation of European Neuroscience Societies</span>
-                                            <span className="font-mono text-muted-foreground">Every two years • Europe</span>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <a href="https://neuromatch.io/courses/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-neuro-accent flex items-center gap-1">
-                                            Neuromatch Academy 2027 <ExternalLink className="w-3 h-3" />
-                                        </a>
-                                        <div className="flex justify-between text-xs mt-1">
-                                            <span className="text-foreground/80">Computational Neuroscience & Deep Learning</span>
-                                            <span className="font-mono text-muted-foreground">July 5–23 • Online</span>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className="card p-6 bg-background border-neuro-accent/30">
                                 <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
                                     <span className="inline-block w-2 h-2 rounded-full bg-neuro-accent animate-pulse"></span>
-                                    BCI & Neurotechnology Spring School 2027
+                                    {pro.springTitle}
                                 </h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    The largest online BCI education event, back in 2027. 140+ hours of lectures, hackathons, and certification for free. Organized by g.tec.
-                                </p>
+                                <p className="text-sm text-foreground/80 mb-4">{pro.springBody}</p>
                                 <a href="https://www.gtec.at/the-bci-neurotechnology-spring-school/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    Details and registration <ExternalLink className="w-3 h-3" />
+                                    {pro.springCta} <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
                             <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Queen&apos;s University</h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    Neurotech Micro-credential Program. A grant-funded partnership with NeuroTechX to deliver hands-on skills in imaging, recording, and ethics.
-                                </p>
+                                <h3 className="font-bold text-lg mb-2">{pro.queensTitle}</h3>
+                                <p className="text-sm text-foreground/80 mb-4">{pro.queensBody}</p>
                                 <a href="https://neurotechmicrocreds.com/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    View Program <ExternalLink className="w-3 h-3" />
+                                    {pro.queensCta} <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
                             <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-4">Modern Data Science Stack</h3>
+                                <h3 className="font-bold text-lg mb-4">{pro.stackTitle}</h3>
 
                                 <div className="mb-6 pb-4 border-b border-border/50">
-                                    <span className="text-xs font-bold uppercase text-muted-foreground mb-3 block tracking-wider">The Python Neuro-ML Ecosystem</span>
+                                    <span className="text-xs font-bold uppercase text-muted-foreground mb-3 block tracking-wider">{pro.ecosystem}</span>
                                     <div className="space-y-3">
                                         <div>
                                             <a href="https://scikit-learn.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                                 scikit-learn <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                             </a>
-                                            <p className="text-xs text-muted-foreground">The foundation of machine learning in Python.</p>
+                                            <p className="text-xs text-muted-foreground">{pro.sklearnBody}</p>
                                         </div>
                                         <div className="pl-3 border-l-2 border-border ml-1">
                                             <a href="https://nilearn.github.io/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                                 Nilearn <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                             </a>
-                                            <p className="text-xs text-muted-foreground">Statistical learning for neuroimaging (built on scikit-learn).</p>
+                                            <p className="text-xs text-muted-foreground">{pro.nilearnBody}</p>
                                         </div>
                                         <div className="pl-3 border-l-2 border-border ml-1">
                                             <a href="https://github.com/NeuroTechX/moabb" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                                 MOABB <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                             </a>
                                             <p className="text-xs text-muted-foreground">
-                                                The Mother of All BCI Benchmarks.
+                                                {pro.moabbBody}
                                                 <br />
-                                                <span className="opacity-75">PI: <a href="https://sylvchev.github.io" target="_blank" rel="noopener noreferrer" className="hover:text-neuro-accent underline">Sylvain Chevallier</a></span>
+                                                <span className="opacity-75">{pro.moabbPi} <a href="https://sylvchev.github.io" target="_blank" rel="noopener noreferrer" className="hover:text-neuro-accent underline">Sylvain Chevallier</a></span>
                                             </p>
                                             <a href="https://iopscience.iop.org/article/10.1088/1741-2552/addf80" target="_blank" rel="noopener noreferrer" className="text-[10px] text-muted-foreground hover:text-neuro-accent hover:underline block mt-1 flex items-center gap-1">
-                                                📄 Read: Learning from small datasets (BCI Meeting 2023 Workshop) <ExternalLink className="w-2 h-2 inline" />
+                                                📄 {pro.moabbPaper} <ExternalLink className="w-2 h-2 inline" />
                                             </a>
                                         </div>
                                     </div>
@@ -588,20 +291,20 @@ export default function EducationPage() {
                                         <a href="https://probabl.ai" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                             probabl.ai <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                         </a>
-                                        <p className="text-xs text-muted-foreground">Professional scikit-learn certification & maintenance.</p>
+                                        <p className="text-xs text-muted-foreground">{pro.probablBody}</p>
                                     </div>
 
                                     <div>
                                         <a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                             Hugging Face <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                         </a>
-                                        <p className="text-xs text-muted-foreground mb-2">The AI community building the future. Models, datasets, and spaces.</p>
+                                        <p className="text-xs text-muted-foreground mb-2">{pro.hfBody}</p>
                                         <div className="pl-3 border-l-2 border-border ml-1">
-                                            <span className="text-xs font-bold text-muted-foreground block mb-1">Notable Models:</span>
+                                            <span className="text-xs font-bold text-muted-foreground block mb-1">{pro.hfModels}</span>
                                             <a href="https://huggingface.co/datasets/pscotti/mindeyev2" target="_blank" rel="noopener noreferrer" className="text-xs font-bold hover:text-neuro-accent flex items-center gap-1">
                                                 MedARC MindEye 2 <ExternalLink className="w-2 h-2" />
                                             </a>
-                                            <p className="text-[10px] text-muted-foreground">State-of-the-art fMRI-to-image reconstruction (1hr training).</p>
+                                            <p className="text-[10px] text-muted-foreground">{pro.mindeyeBody}</p>
                                         </div>
                                     </div>
 
@@ -609,14 +312,14 @@ export default function EducationPage() {
                                         <a href="https://www.pymc.io/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                             PyMC <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                         </a>
-                                        <p className="text-xs text-muted-foreground">Probabilistic programming for Bayesian modeling.</p>
+                                        <p className="text-xs text-muted-foreground">{pro.pymcBody}</p>
                                     </div>
 
                                     <div>
                                         <a href="https://www.codabench.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1 group">
                                             Codabench <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
                                         </a>
-                                        <p className="text-xs text-muted-foreground">Reproducible benchmarks and challenges. The next-generation platform for open science competitions.</p>
+                                        <p className="text-xs text-muted-foreground">{pro.codabenchBody}</p>
                                     </div>
                                 </div>
                             </div>
@@ -624,28 +327,24 @@ export default function EducationPage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-serif font-bold mb-4">Google Summer of Code (GSoC)</h2>
+                        <h2 className="text-2xl font-serif font-bold mb-4">{t.gsoc.title}</h2>
                         <div className="grid md:grid-cols-1 gap-6">
                             <div className="card p-6 bg-background border-neuro-accent/20">
                                 <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
                                     <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                    Current Call (2026)
+                                    {t.gsoc.currentTitle}
                                 </h3>
-                                <p className="text-sm text-foreground/80 mb-4">
-                                    INCF is calling for project ideas and mentors for GSoC 2026. Join the global open-source development initiative.
-                                </p>
+                                <p className="text-sm text-foreground/80 mb-4">{t.gsoc.currentBody}</p>
                                 <a href="https://www.incf.org/blog/call-project-ideas-and-mentors-gsoc-2026" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold inline-flex items-center gap-1">
-                                    View Call for Proposals <ExternalLink className="w-3 h-3" />
+                                    {t.gsoc.currentCta} <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
                             <div className="card p-6 bg-background">
-                                <h3 className="font-bold text-lg mb-2">Past Highlights</h3>
+                                <h3 className="font-bold text-lg mb-2">{t.gsoc.pastTitle}</h3>
                                 <p className="text-sm text-foreground/80 mb-4">
-                                    NeuroTechX members have a strong history of contribution, including the notable project by <strong>John Griffith & Morgan Hough</strong>.
+                                    {t.gsoc.pastBefore} <strong>John Griffith & Morgan Hough</strong>{t.gsoc.pastAfter}
                                 </p>
-                                <span className="text-muted-foreground text-sm italic">
-                                    Archives available via INCF
-                                </span>
+                                <span className="text-muted-foreground text-sm italic">{t.gsoc.archives}</span>
                             </div>
                         </div>
                     </section>
@@ -654,68 +353,48 @@ export default function EducationPage() {
 
             {/* Community & Media Partners */}
             <div className="mt-16 mb-16">
-                <h2 className="text-2xl font-serif font-bold mb-6">Partners & Research Hubs</h2>
+                <h2 className="text-2xl font-serif font-bold mb-6">{t.partners.title}</h2>
                 <div className="grid md:grid-cols-3 gap-8">
-                    <div className="card p-6 border-l-4 border-neuro-accent flex flex-col justify-between">
-                        <div>
-                            <a href="https://braininstitute.ca/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                Ontario Brain Institute <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Accelerating neuroscience discovery and innovation. Home to the <strong>Brain-CODE</strong> open data platform and neurotech entrepreneurship programs.
-                            </p>
+                    {t.partners.items.map((partner) => (
+                        <div key={partner.href} className="card p-6 border-l-4 border-neuro-accent flex flex-col justify-between">
+                            <div>
+                                <a href={partner.href} target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
+                                    {partner.name} <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <p className="text-sm text-foreground/80 mb-4">
+                                    {partner.before}
+                                    {partner.strong && (
+                                        <>
+                                            {' '}<strong>{partner.strong}</strong> {partner.after}
+                                        </>
+                                    )}
+                                </p>
+                            </div>
+                            <div className="flex gap-2">
+                                {partner.tags.map((tag) => (
+                                    <span key={tag} className="text-xs bg-muted px-2 py-1 rounded">{tag}</span>
+                                ))}
+                            </div>
                         </div>
-                        <div className="flex gap-2">
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Research Hub</span>
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Open Data</span>
-                        </div>
-                    </div>
-                    <div className="card p-6 border-l-4 border-neuro-accent flex flex-col justify-between">
-                        <div>
-                            <a href="https://www.bciguys.com/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                The BCI Guys <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                Entertaining and educational videos on Brain-Computer Interfaces. The world&apos;s leading BCI media platform.
-                            </p>
-                        </div>
-                        <div className="flex gap-2">
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Media</span>
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Education</span>
-                        </div>
-                    </div>
-                    <div className="card p-6 border-l-4 border-neuro-accent flex flex-col justify-between">
-                        <div>
-                            <a href="https://www.neurosociety.center/" target="_blank" rel="noopener noreferrer" className="text-xl font-bold hover:text-neuro-accent mb-2 block flex items-center gap-2">
-                                The NeuroSociety <ExternalLink className="w-4 h-4" />
-                            </a>
-                            <p className="text-sm text-foreground/80 mb-4">
-                                A global non-profit community at the intersection of neuroscience, technology, and society.
-                            </p>
-                        </div>
-                        <div className="flex gap-2">
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Community</span>
-                            <span className="text-xs bg-muted px-2 py-1 rounded">Non-Profit</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
             {/* Video Resources Section */}
             <div>
-                <h2 className="text-2xl font-serif font-bold mb-6">Video Resources</h2>
+                <h2 className="text-2xl font-serif font-bold mb-6">{t.videos.title}</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                     <a href="https://www.youtube.com/@neurotechx" target="_blank" rel="noopener noreferrer" className="card p-6 block hover:border-neuro-accent transition-colors group">
-                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">NeuroTech 101</h3>
-                        <p className="text-sm text-muted-foreground">Foundational concepts and tutorials.</p>
+                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">{t.videos.neurotech101Title}</h3>
+                        <p className="text-sm text-muted-foreground">{t.videos.neurotech101Body}</p>
                     </a>
                     <Link href="/education/webinars" className="card p-6 block hover:border-neuro-accent transition-colors group">
-                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">Webinar Series</h3>
-                        <p className="text-sm text-muted-foreground">Deep dives with industry experts.</p>
+                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">{t.videos.webinarsTitle}</h3>
+                        <p className="text-sm text-muted-foreground">{t.videos.webinarsBody}</p>
                     </Link>
                     <a href="https://www.youtube.com/neurotechx" target="_blank" rel="noopener noreferrer" className="card p-6 block hover:border-neuro-accent transition-colors group bg-muted/50">
-                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">Browse All Videos</h3>
-                        <p className="text-sm text-muted-foreground">Explore our full library on YouTube.</p>
+                        <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">{t.videos.allTitle}</h3>
+                        <p className="text-sm text-muted-foreground">{t.videos.allBody}</p>
                     </a>
                 </div>
             </div>

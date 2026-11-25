@@ -74,6 +74,8 @@ export function parsePublicPath(pathname: string): [Locale, string] {
 export const TRANSLATED_ROUTES = new Set<string>([
   '/', '/events', '/about', '/community',
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
+  '/education', '/education/webinars', '/primer', '/students', '/newsletter',
+  '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
 ]);
 
 /** True for an existing page whose body is still English only (unknown addresses are 404s, which are translated). */

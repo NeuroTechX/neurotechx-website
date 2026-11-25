@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import { getPlaylistVideos, getLatestVideosFromChannels } from '@/lib/youtube';
 import { Play, Calendar, ExternalLink, Building2 } from 'lucide-react';
 import styles from './page.module.css';
+import { alternatesFor, pageLocale, type Locale } from '@/i18n';
+import text from '@/i18n/pages/webinars';
 
-export const metadata: Metadata = {
-    title: 'Industry Webinars',
-    description:
-        'Technical workshops and webinar archives featuring neurotechnology hardware and software teams worldwide.',
-    alternates: { canonical: '/education/webinars' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/education/webinars'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/education/webinars', lang) };
+}
 
 export const revalidate = 86400; // Revalidate every 24 hours
 
@@ -40,7 +41,9 @@ const COMPANY_CHANNEL_IDS = [
     'UCMIYoORlCnvo9bahMCPF0PQ'
 ];
 
-export default async function WebinarsPage() {
+export default async function WebinarsPage({ params }: PageProps<'/[lang]/education/webinars'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     const [webinarVideos, companyVideos] = await Promise.all([
         getPlaylistVideos(WEBINAR_PLAYLIST_ID),
         getLatestVideosFromChannels(COMPANY_CHANNEL_IDS)
@@ -50,45 +53,45 @@ export default async function WebinarsPage() {
         <div className="container py-12">
             <div className={styles.header}>
                 <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-                    Industry <span className="text-neuro-accent">Webinars</span>
+                    {t.headingLead} <span className="text-neuro-accent">{t.headingAccent}</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                    Technical workshops and deep dives featuring experts from the leading neurotechnology companies worldwide.
+                    {t.subtitle}
                 </p>
             </div>
 
             <section className="mb-16">
                 <h2 className="text-2xl font-bold mb-8 flex items-center gap-2 border-b pb-2">
-                    <Play className="text-neuro-accent" size={24} /> NeuroTechX Webinar Series
+                    <Play className="text-neuro-accent" size={24} /> {t.seriesTitle}
                 </h2>
                 <div className={styles.grid}>
                     {webinarVideos.map((video) => (
-                        <VideoCard key={video.id} video={video} />
+                        <VideoCard key={video.id} video={video} lang={lang} watch={t.watch} />
                     ))}
                 </div>
             </section>
 
             <section>
                 <h2 className="text-2xl font-bold mb-8 flex items-center gap-2 border-b pb-2">
-                    <Building2 className="text-neuro-accent" size={24} /> Latest from Industry Partners
+                    <Building2 className="text-neuro-accent" size={24} /> {t.partnersTitle}
                 </h2>
                 <div className={styles.grid}>
                     {companyVideos.map((video) => (
-                        <VideoCard key={`${video.id}-${video.channelTitle}`} video={video} />
+                        <VideoCard key={`${video.id}-${video.channelTitle}`} video={video} lang={lang} watch={t.watch} />
                     ))}
                 </div>
             </section>
 
             {webinarVideos.length === 0 && companyVideos.length === 0 && (
                 <div className="text-center py-20">
-                    <p className="text-muted-foreground">No videos found. Please check back later.</p>
+                    <p className="text-muted-foreground">{t.empty}</p>
                 </div>
             )}
         </div>
     );
 }
 
-function VideoCard({ video }: { video: any }) {
+function VideoCard({ video, lang, watch }: { video: any; lang: Locale; watch: string }) {
     return (
         <a 
             href={`https://www.youtube.com/watch?v=${video.id}`} 
@@ -112,7 +115,7 @@ function VideoCard({ video }: { video: any }) {
                 <div className="flex justify-between items-start mb-2">
                     <div className={styles.date}>
                         <Calendar size={12} className="inline mr-1" />
-                        {new Date(video.publishedAt).toLocaleDateString('en-US', {
+                        {new Date(video.publishedAt).toLocaleDateString(lang === 'fr' ? 'fr-CA' : 'en-US', {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric'
@@ -127,7 +130,7 @@ function VideoCard({ video }: { video: any }) {
                 <h3 className={styles.title}>{video.title}</h3>
                 <p className={styles.description}>{video.description}</p>
                 <div className={styles.footer}>
-                    Watch Video <ExternalLink size={14} />
+                    {watch} <ExternalLink size={14} />
                 </div>
             </div>
         </a>

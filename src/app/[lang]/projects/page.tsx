@@ -4,18 +4,19 @@ import Link from '@/components/LocaleLink';
 import { ArrowRight, Star, GitFork, ExternalLink, Code2, BookOpen, Trophy } from 'lucide-react';
 import { CHALLENGES } from '@/data/challenges';
 import PageHeader from '@/components/PageHeader';
+import { alternatesFor, format, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/projects';
 import styles from './page.module.css';
 
-export const metadata: Metadata = {
-    title: 'Open Source Projects',
-    description:
-        'Open-source BCI benchmarks, EEG/neuroimaging toolkits, and community repositories from NeuroTechX and contributors worldwide.',
-    alternates: { canonical: '/projects' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/projects'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/projects', lang) };
+}
 
 export const revalidate = 3600; // Revalidate every hour
 
-function ProjectCard({ repo, featured = false }: { repo: GitHubRepo, featured?: boolean }) {
+function ProjectCard({ repo, featured = false, viewCode }: { repo: GitHubRepo, featured?: boolean, viewCode: string }) {
     return (
         <div className={`${styles.card} ${featured ? styles.featured : ''}`}>
             <div className={styles.cardHeader}>
@@ -51,7 +52,7 @@ function ProjectCard({ repo, featured = false }: { repo: GitHubRepo, featured?: 
                     {repo.language}
                 </span>
                 <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                    View Code <ExternalLink size={14} />
+                    {viewCode} <ExternalLink size={14} />
                 </a>
             </div>
         </div>
@@ -71,7 +72,9 @@ function getLanguageColor(lang: string) {
     return colors[lang] || '#8b9bb4';
 }
 
-export default async function ProjectsPage() {
+export default async function ProjectsPage({ params }: PageProps<'/[lang]/projects'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     const featuredRepos = await getFeaturedProjects();
     const communityRepos = await getCommunityProjects();
 
@@ -82,29 +85,29 @@ export default async function ProjectsPage() {
     return (
         <div className="container py-12">
             <PageHeader
-                eyebrow="Build"
-                title={<>Open Source <span className="text-gradient">Projects</span></>}
-                subtitle={<>Discover the tools powering the next generation of neurotechnology. Add your project by tagging your GitHub repository with <code className="rounded bg-[var(--surface-2)] px-2 py-1 text-sm font-mono">neurotechx</code>.</>}
+                eyebrow={t.eyebrow}
+                title={<>{t.titleStart}<span className="text-gradient">{t.titleHighlight}</span></>}
+                subtitle={<>{t.subtitleBefore}<code className="rounded bg-[var(--surface-2)] px-2 py-1 text-sm font-mono">neurotechx</code>{t.subtitleAfter}</>}
             />
 
             <section className="mb-16" id="challenges">
                 <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
-                    <Trophy className="text-neuro-accent" /> Open Challenges &amp; Leaderboards
+                    <Trophy className="text-neuro-accent" /> {t.challengesTitle}
                 </h2>
                 <p className="mb-6 text-sm text-muted-foreground">
-                    Benchmarks with sealed test data, where open methods compete on the same footing.
+                    {t.challengesLead}
                 </p>
                 <div className="grid gap-6">
-                    {CHALLENGES.map((c) => (
+                    {CHALLENGES[lang].map((c) => (
                         <article key={c.name} className="rounded-xl border-2 border-neuro-accent/20 bg-neuro-accent/5 p-6">
                             <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{c.organiser}</p>
                             <h3 className="mb-2 text-xl font-bold">{c.name}</h3>
                             <p className="mb-3 text-sm text-foreground/80">{c.about}</p>
-                            {c.prize && <p className="mb-3 text-sm"><strong>Prize: </strong>{c.prize}</p>}
+                            {c.prize && <p className="mb-3 text-sm"><strong>{t.prize}</strong>{c.prize}</p>}
                             <p className="mb-4 text-sm text-muted-foreground">{c.timing}</p>
                             {c.standings && (
                                 <div className="mb-4 rounded-lg border border-[var(--border)] bg-[var(--surface-1)] p-4">
-                                    <p className="mb-2 text-sm font-semibold">Leaderboard, {c.standings.asOf}</p>
+                                    <p className="mb-2 text-sm font-semibold">{format(t.leaderboardAsOf, { asOf: c.standings.asOf })}</p>
                                     <ul className="list-disc space-y-1 pl-5 text-sm text-foreground/80">
                                         {c.standings.lines.map((l) => <li key={l}>{l}</li>)}
                                     </ul>
@@ -112,11 +115,11 @@ export default async function ProjectsPage() {
                             )}
                             <div className="flex flex-wrap gap-4 text-sm font-semibold">
                                 <a href={c.leaderboard} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
-                                    Live leaderboard <ExternalLink size={14} />
+                                    {t.liveLeaderboard} <ExternalLink size={14} />
                                 </a>
                                 {c.enter && (
                                     <a href={c.enter} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
-                                        Rules and how to enter <ExternalLink size={14} />
+                                        {t.howToEnter} <ExternalLink size={14} />
                                     </a>
                                 )}
                             </div>
@@ -127,11 +130,11 @@ export default async function ProjectsPage() {
 
             <section className="mb-16">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                    <Star className="text-yellow-500 fill-yellow-500" /> Featured Projects
+                    <Star className="text-yellow-500 fill-yellow-500" /> {t.featuredTitle}
                 </h2>
                 <div className={styles.grid}>
                     {featuredRepos.map(repo => (
-                        <ProjectCard key={repo.id} repo={repo} featured={true} />
+                        <ProjectCard key={repo.id} repo={repo} featured={true} viewCode={t.viewCode} />
                     ))}
                     {/* Fallback for SCI Head Model if API fails or placeholder needed */}
                     <div className={`${styles.card} ${styles.featured}`}>
@@ -145,17 +148,15 @@ export default async function ProjectsPage() {
                             <a href="https://www.sci.utah.edu/software/" target="_blank" rel="noopener noreferrer">SCI Head Models</a>
                         </h3>
                         <p className={styles.description}>
-                            High-resolution anatomical head models for electromagnetic source imaging and stimulation.
+                            {t.sci.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>head-model</span>
-                            <span className={styles.topic}>mri</span>
-                            <span className={styles.topic}>segmentation</span>
+                            {t.sci.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
-                            <span className={styles.language}>Resource</span>
+                            <span className={styles.language}>{t.sci.kind}</span>
                             <a href="https://www.sci.utah.edu/software/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                Visit Website <ExternalLink size={14} />
+                                {t.visitWebsite} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>
@@ -172,17 +173,15 @@ export default async function ProjectsPage() {
                             <a href="https://openvibe.inria.fr/" target="_blank" rel="noopener noreferrer">OpenViBE</a>
                         </h3>
                         <p className={styles.description}>
-                            Software for Brain-Computer Interfaces and Real-Time Neurosciences. A graphical platform for designing BCI scenarios.
+                            {t.openvibe.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>C++</span>
-                            <span className={styles.topic}>Real-Time</span>
-                            <span className={styles.topic}>BCI</span>
+                            {t.openvibe.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
-                            <span className={styles.language}>Platform</span>
+                            <span className={styles.language}>{t.openvibe.kind}</span>
                             <a href="https://openvibe.inria.fr/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                Visit Website <ExternalLink size={14} />
+                                {t.visitWebsite} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>
@@ -199,12 +198,10 @@ export default async function ProjectsPage() {
                             <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" rel="noopener noreferrer" className={styles.smallRepoName} >riemannien_dimension_reduction</a>
                         </h3>
                         <p className={styles.description}>
-                            Riemannian dimension reduction for covariance matrices. Essential for advanced BCI signal processing.
+                            {t.spd.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>Riemannian</span>
-                            <span className={styles.topic}>Machine Learning</span>
-                            <span className={styles.topic}>BCI</span>
+                            {t.spd.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
                             <span className={styles.language}>
@@ -212,7 +209,7 @@ export default async function ProjectsPage() {
                                 Python
                             </span>
                             <a href="https://github.com/thibaultdesurrel/riemannien_dimension_reduction" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                View Code <ExternalLink size={14} />
+                                {t.viewCode} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>
@@ -221,18 +218,18 @@ export default async function ProjectsPage() {
 
             <section>
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                    <Code2 /> Community Projects
+                    <Code2 /> {t.communityTitle}
                 </h2>
                 <div className={styles.grid}>
                     {uniqueCommunityRepos.map(repo => (
-                        <ProjectCard key={repo.id} repo={repo} />
+                        <ProjectCard key={repo.id} repo={repo} viewCode={t.viewCode} />
                     ))}
                 </div>
             </section>
 
             <section className="mt-16">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                    <BookOpen /> Research & References
+                    <BookOpen /> {t.researchTitle}
                 </h2>
                 <div className={styles.grid}>
                     <div className={styles.card}>
@@ -248,17 +245,15 @@ export default async function ProjectsPage() {
                             </a>
                         </h3>
                         <p className={styles.description}>
-                            A high-bandwidth neuromotor interface offering performant out-of-the-box generalization across people. By Reality Labs at Meta.
+                            {t.nature.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>HCI</span>
-                            <span className={styles.topic}>EMG</span>
-                            <span className={styles.topic}>neuromotor</span>
+                            {t.nature.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
-                            <span className={styles.language}>Paper</span>
+                            <span className={styles.language}>{t.nature.kind}</span>
                             <a href="https://www.nature.com/articles/s41586-025-09255-w#Ack1" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                Read Article <ExternalLink size={14} />
+                                {t.readArticle} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>
@@ -275,16 +270,15 @@ export default async function ProjectsPage() {
                             <a href="https://www.braincode.ca/" target="_blank" rel="noopener noreferrer">Brain-CODE</a>
                         </h3>
                         <p className={styles.description}>
-                            A large-scale neuroinformatics platform for data management and sharing. Enables collaborative brain research across Canada.
+                            {t.braincode.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>Informatics</span>
-                            <span className={styles.topic}>Open Data</span>
+                            {t.braincode.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
-                            <span className={styles.language}>Platform</span>
+                            <span className={styles.language}>{t.braincode.kind}</span>
                             <a href="https://www.braincode.ca/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                Visit Website <ExternalLink size={14} />
+                                {t.visitWebsite} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>
@@ -298,19 +292,18 @@ export default async function ProjectsPage() {
                             </div>
                         </div>
                         <h3 className={styles.repoName}>
-                            <a href="https://braininstitute.ca/programs-opportunities/nerve-program" target="_blank" rel="noopener noreferrer">NERVE Program</a>
+                            <a href="https://braininstitute.ca/programs-opportunities/nerve-program" target="_blank" rel="noopener noreferrer">{t.nerve.name}</a>
                         </h3>
                         <p className={styles.description}>
-                            Neurotech Entrepreneurship to Validate Emerging Innovations. Supporting neurotech startups and entrepreneurs.
+                            {t.nerve.description}
                         </p>
                         <div className={styles.topics}>
-                            <span className={styles.topic}>Entrepreneurship</span>
-                            <span className={styles.topic}>Startup</span>
+                            {t.nerve.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
                         </div>
                         <div className={styles.cardFooter}>
-                            <span className={styles.language}>Program</span>
+                            <span className={styles.language}>{t.nerve.kind}</span>
                             <a href="https://braininstitute.ca/programs-opportunities/nerve-program" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                Learn More <ExternalLink size={14} />
+                                {t.learnMore} <ExternalLink size={14} />
                             </a>
                         </div>
                     </div>

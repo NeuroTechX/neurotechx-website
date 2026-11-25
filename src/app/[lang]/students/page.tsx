@@ -3,33 +3,38 @@ import Link from '@/components/LocaleLink';
 import { ArrowRight, Github, Globe, Mail, PlusCircle } from 'lucide-react';
 import { studentClubs } from '@/data/clubs';
 import styles from './page.module.css';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/students';
 
-export const metadata: Metadata = {
-    title: 'Student Clubs',
-    description:
-        'University neurotechnology student clubs connected with NeuroTechX — projects, competitions, and how to list your club.',
-    alternates: { canonical: '/students' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/students'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/students', lang) };
+}
 
-export default function StudentClubsPage() {
+export default async function StudentClubsPage({ params }: PageProps<'/[lang]/students'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    // Club descriptions come from src/data/clubs.ts and are written in English.
+    const dataLang = lang === 'en' ? undefined : 'en';
     return (
         <div className={styles.pageWrapper}>
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.container}>
-                    <h1 className={styles.title}>Student Clubs</h1>
+                    <h1 className={styles.title}>{t.title}</h1>
                     <p className={styles.subtitle}>
-                        The next generation of neurotechnology innovators. <br />
-                        Explore student-led groups from universities around the world.
+                        {t.subtitleLine1} <br />
+                        {t.subtitleLine2}
                     </p>
 
                     <Link href="/students/start-a-club" className={styles.addButton}>
                         <PlusCircle size={16} />
-                        <span>Starting a club, or want yours listed? Read the guide</span>
+                        <span>{t.addButton}</span>
                     </Link>
                     <p className={styles.subtitle}>
-                        Looking for travel grants, fellowships or outreach funding? See{' '}
-                        <Link href="/funding" style={{ color: 'var(--neuro-accent)' }}>funding opportunities</Link>.
+                        {t.fundingBefore}
+                        <Link href="/funding" style={{ color: 'var(--neuro-accent)' }}>{t.fundingLink}</Link>{t.fundingAfter}
                     </p>
                 </div>
             </section>
@@ -48,7 +53,7 @@ export default function StudentClubsPage() {
                                         </div>
                                         <div className={styles.socialLinks}>
                                             {club.website && (
-                                                <a href={club.website} target="_blank" rel="noopener noreferrer" className={styles.iconLink} title="Website">
+                                                <a href={club.website} target="_blank" rel="noopener noreferrer" className={styles.iconLink} title={t.website}>
                                                     <Globe size={18} />
                                                 </a>
                                             )}
@@ -58,7 +63,7 @@ export default function StudentClubsPage() {
                                                 </a>
                                             )}
                                             {club.email && (
-                                                <a href={`mailto:${club.email}`} className={styles.iconLink} title="Contact">
+                                                <a href={`mailto:${club.email}`} className={styles.iconLink} title={t.contact}>
                                                     <Mail size={18} />
                                                 </a>
                                             )}
@@ -70,7 +75,7 @@ export default function StudentClubsPage() {
                                         {club.university} • {club.location}
                                     </div>
 
-                                    <p className={styles.clubDesc}>
+                                    <p className={styles.clubDesc} lang={dataLang}>
                                         {club.description}
                                     </p>
                                 </div>
@@ -83,18 +88,17 @@ export default function StudentClubsPage() {
             {/* "Add Your Club" Call to Action (PR Flow) */}
             <section className={styles.ctaSection}>
                 <div className={styles.container}>
-                    <h2 className={styles.ctaTitle}>Don&apos;t see your club?</h2>
+                    <h2 className={styles.ctaTitle}>{t.ctaTitle}</h2>
                     <p className={styles.subtitle}>
-                        Read the <Link href="/students/start-a-club" style={{ color: 'var(--neuro-accent)' }}>guide to starting a student club</Link>, then
-                        write to <a href="mailto:studentclubs@neurotechx.org" style={{ color: 'var(--neuro-accent)' }}>studentclubs@neurotechx.org</a> with
-                        your club&apos;s name, university, web page and contact address. If you use GitHub, you can also open a pull request:
+                        {t.ctaReadThe}<Link href="/students/start-a-club" style={{ color: 'var(--neuro-accent)' }}>{t.ctaGuideLink}</Link>{t.ctaThenWrite}
+                        <a href="mailto:studentclubs@neurotechx.org" style={{ color: 'var(--neuro-accent)' }}>studentclubs@neurotechx.org</a>{t.ctaWith}
                     </p>
 
                     <div className={styles.codeBlock}>
-                        <p style={{ color: 'var(--muted-foreground)', marginBottom: '0.5rem' }}># 1. Fork the repo & edit this file:</p>
+                        <p style={{ color: 'var(--muted-foreground)', marginBottom: '0.5rem' }}>{t.codeStep1}</p>
                         <p style={{ color: 'var(--neuro-accent)', marginBottom: '1rem' }}>src/data/clubs.ts</p>
 
-                        <p style={{ color: 'var(--muted-foreground)', marginBottom: '0.5rem' }}># 2. Add your club object:</p>
+                        <p style={{ color: 'var(--muted-foreground)', marginBottom: '0.5rem' }}>{t.codeStep2}</p>
                         <pre style={{ color: 'var(--foreground)' }}>
                             {`{
   name: "Your Club Name",
@@ -113,7 +117,7 @@ export default function StudentClubsPage() {
                             className={styles.githubButton}
                         >
                             <Github style={{ marginRight: '0.5rem' }} size={20} />
-                            Edit on GitHub
+                            {t.editOnGithub}
                         </a>
                     </div>
                 </div>

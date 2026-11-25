@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import Link from '@/components/LocaleLink';
 import { ExternalLink, Mail } from 'lucide-react';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/newsletter';
 
-export const metadata: Metadata = {
-    title: 'Newsletter Archive',
-    description:
-        'Subscribe to the NeuroTechX newsletter and browse our archive of digests covering neurotechnology news, tools, research, and events.',
-    alternates: { canonical: '/newsletter' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/newsletter'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/newsletter', lang) };
+}
 
 const newsletterArchive = [
     {
@@ -73,27 +74,30 @@ const newsletterArchive = [
 
 const DEFAULT_NEWSLETTER_IMAGE = '/images/hero-bg.png'; // Using existing asset as placeholder
 
-export default function NewsletterArchivePage() {
+export default async function NewsletterArchivePage({ params }: PageProps<'/[lang]/newsletter'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    // Past issue titles are English documents and stay in their original language.
+    const issueLang = lang === 'en' ? undefined : 'en';
     return (
         <div className="container py-12">
             <div className="max-w-6xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16">
                     <div className="max-w-2xl">
-                        <h1 className="text-5xl font-serif font-bold mb-6">Newsletter Archive</h1>
+                        <h1 className="text-5xl font-serif font-bold mb-6">{t.title}</h1>
                         <p className="text-xl text-muted-foreground leading-relaxed">
-                            A curated history of the global neurotechnology ecosystem. 
-                            From technical deep dives to community highlights and industry breakthroughs.
+                            {t.introLine1} {t.introLine2}
                         </p>
                     </div>
                     <div className="bg-neuro-accent/5 p-8 rounded-2xl border border-neuro-accent/20 md:w-96">
                         <h3 className="font-bold text-lg flex items-center gap-2 mb-3">
                             <Mail className="w-5 h-5 text-neuro-accent" />
-                            Get the Digest
+                            {t.digestTitle}
                         </h3>
                         <p className="text-sm text-muted-foreground mb-6">
-                            Join 15,000+ subscribers receiving the best of neurotech in their inbox.
+                            {t.digestBody}
                         </p>
-                        <NewsletterSignup />
+                        <NewsletterSignup lang={lang} />
                     </div>
                 </div>
 
@@ -117,23 +121,24 @@ export default function NewsletterArchivePage() {
                                             <img
                                                 src={edition.image || DEFAULT_NEWSLETTER_IMAGE}
                                                 alt={edition.title}
+                                                lang={issueLang}
                                                 className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                                 <span className="text-white text-xs font-bold flex items-center gap-1">
-                                                    Read Edition <ExternalLink className="w-3 h-3" />
+                                                    {t.readEdition} <ExternalLink className="w-3 h-3" />
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="p-5 flex-1 flex flex-col">
                                             <div className="flex justify-between items-start gap-2">
-                                                <h3 className="font-bold text-lg leading-tight group-hover:text-neuro-accent transition-colors">
+                                                <h3 className="font-bold text-lg leading-tight group-hover:text-neuro-accent transition-colors" lang={issueLang}>
                                                     {edition.title}
                                                 </h3>
                                                 <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all" />
                                             </div>
                                             <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
-                                                Click to view the full newsletter on Mailchimp.
+                                                {t.viewOnMailchimp}
                                             </p>
                                         </div>
                                     </a>
@@ -144,17 +149,16 @@ export default function NewsletterArchivePage() {
                 </div>
 
                 <div className="mt-24 p-12 bg-muted/30 rounded-3xl text-center border border-border">
-                    <h2 className="text-2xl font-serif font-bold mb-4">Looking for something specific?</h2>
+                    <h2 className="text-2xl font-serif font-bold mb-4">{t.lookingTitle}</h2>
                     <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
-                        Our newsletters cover a wide range of topics, from technical tutorials to industry analysis. 
-                        If you can&apos;t find what you&apos;re looking for, feel free to reach out to our community on Slack.
+                        {t.lookingLine1} {t.lookingLine2}
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link href="/community" className="inline-flex items-center justify-center rounded-xl text-sm font-bold border border-border bg-background hover:bg-muted transition-all h-12 px-8">
-                            Back to Community
+                            {t.backToCommunity}
                         </Link>
                         <Link href="/" className="inline-flex items-center justify-center rounded-xl text-sm font-bold bg-foreground text-background hover:opacity-90 transition-all h-12 px-8">
-                            Return Home
+                            {t.returnHome}
                         </Link>
                     </div>
                 </div>
