@@ -1,6 +1,8 @@
-// Open data challenges and leaderboards shown on /projects.
+// Open data challenges and leaderboards shown on /projects (/fr/projets).
 // Organisers' leaderboards can't be embedded (their pages forbid framing), so each entry
 // carries a short, dated summary of the standings and links to the live board.
+// Write each entry in French first, then English, in the same position in both lists.
+import { bilingual } from '@/i18n/text';
 
 export interface Challenge {
     name: string;
@@ -14,7 +16,61 @@ export interface Challenge {
     enter?: string;
 }
 
-export const CHALLENGES: Challenge[] = [
+const fr: Challenge[] = [
+    {
+        name: 'EEG/EMG Foundation Challenge 2026',
+        organiser: "Yneuro, Inria et UC San Diego, avec l'atelier Brain and Body de NeurIPS",
+        about:
+            "Quatre volets de décodage où les modèles doivent généraliser à de nouveaux sujets et à de nouvelles conditions : EEG vers image, décodage ICM, endormissement et EMG vers posture de la main.",
+        prize: "Enveloppe de prix de 20\u00a0000\u00a0$\u00a0US, surtout 2\u00a0000\u00a0$ par équipe du podium de chaque volet, et des stages offerts par Alljoined et Muse.",
+        timing: 'Soumissions closes le 21 novembre 2026; prix remis à NeurIPS, à Sydney, les 11 et 12 décembre',
+        standings: {
+            asOf: 'novembre 2026',
+            lines: [
+                '844 soumissions classées dans les quatre volets.',
+                "Classement provisoire jusqu'à l'audit de reproductibilité (du 22 au 30 novembre); équipes avisées vers le 1er décembre.",
+            ],
+        },
+        leaderboard: 'https://neural-interfaces26.github.io/leaderboard.html',
+    },
+    {
+        name: 'TDBRAIN Challenge',
+        organiser: 'Brainclinics Foundation, prix cofinancé par Alto Neuroscience',
+        about:
+            "Prédire le diagnostic de dépression ou la réponse au traitement par SMTr à partir du seul EEG au repos. Environ 30 % du jeu de données TDBRAIN est mis de côté comme données de réplication scellées : chaque soumission est donc un véritable test hors échantillon.",
+        prize: "10 000 € pour la première prédiction qui franchit le seuil et reste en tête pendant deux mois : exactitude équilibrée supérieure à 70 % (diagnostic), ou nPPV supérieure à 130 % pour la réponse ou à 140 % pour la rémission, avec une sensibilité supérieure à 40 % (traitement).",
+        timing: 'Se déroule sur 18 mois à partir du 1er septembre 2026',
+        standings: {
+            asOf: 'novembre 2026',
+            lines: [
+                "Le prix n'a pas encore été remporté.",
+                "Rémission après SMT : quatre prédictions au-dessus de 130 % de nPPV, aucune encore au seuil de 140 %.",
+                "Diagnostic de dépression majeure : dix prédictions au-dessus de 60 % d'exactitude équilibrée, aucune encore à 70 %.",
+                "Analyse témoin : le sexe est prédit à partir de l'EEG avec 87 % d'exactitude équilibrée.",
+            ],
+        },
+        leaderboard: 'https://brainclinics.com/research/articles/tdbrain-challenge',
+        enter: 'https://brainclinics.com/research/brainclinics-prize',
+    },
+];
+
+const en: Challenge[] = [
+    {
+        name: 'EEG/EMG Foundation Challenge 2026',
+        organiser: 'Yneuro, Inria and UC San Diego, with the NeurIPS Brain and Body workshop',
+        about:
+            'Four decoding tracks where models must generalise to new subjects and conditions: EEG-to-image, BCI decoding, sleep onset and EMG-to-hand-pose.',
+        prize: 'A US$20,000 pool, mostly $2,000 per top-three team in each track, plus internships from Alljoined and Muse.',
+        timing: 'Submissions closed 21 November 2026; winners celebrated at NeurIPS in Sydney, 11–12 December',
+        standings: {
+            asOf: 'November 2026',
+            lines: [
+                '844 ranked entries across the four tracks.',
+                'Rankings are provisional until the reproducibility audit (22–30 November); teams are notified around 1 December.',
+            ],
+        },
+        leaderboard: 'https://neural-interfaces26.github.io/leaderboard.html',
+    },
     {
         name: 'TDBRAIN Challenge',
         organiser: 'Brainclinics Foundation, prize co-funded by Alto Neuroscience',
@@ -35,3 +91,5 @@ export const CHALLENGES: Challenge[] = [
         enter: 'https://brainclinics.com/research/brainclinics-prize',
     },
 ];
+
+export const CHALLENGES = bilingual(fr, en);
