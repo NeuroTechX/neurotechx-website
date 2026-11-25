@@ -2,15 +2,35 @@ import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import styles from './page.module.css';
 import InstagramImage from '@/components/InstagramImage';
+import Link from '@/components/LocaleLink';
+import { alternatesFor, format, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/about';
 
-export const metadata: Metadata = {
-    title: 'About',
-    description:
-        'Our story, origins, board of directors, and leadership — how NeuroTechX grew from Montreal in 2015 into the largest global neurotechnology community.',
-    alternates: { canonical: '/about' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/about'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/about', lang) };
+}
 
-export default function AboutPage() {
+type Person = { name: string; role: string; body: string };
+
+function People({ people }: { people: Person[] }) {
+    return (
+        <div className={styles.originsGrid}>
+            {people.map((person) => (
+                <div key={person.name} className={styles.card}>
+                    <h3 className={styles.cardTitle}>{person.name}</h3>
+                    <span className={styles.cardLabel}>{person.role}</span>
+                    <p className={styles.cardText}>{person.body}</p>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     return (
         <div className={styles.container}>
             {/* Top Images from Instagram */}
@@ -18,183 +38,73 @@ export default function AboutPage() {
                 <a href="https://www.instagram.com/p/DB_9Z_TSZ_S/" target="_blank" rel="noopener noreferrer" className={styles.instagramLink}>
                     <InstagramImage 
                         src="/images/about-instagram-1.png" 
-                        alt="NeuroTechX Event 1" 
+                        alt={format(t.photoAlt, { n: 1 })} 
                         className={styles.instagramImage} 
                         fallbackSrc="https://placehold.co/600x600/1a1a1a/ffffff?text=Instagram+Photo+1"
                     />
                     <div className="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors flex items-center justify-center">
-                        <span className="text-white font-bold opacity-0 hover:opacity-100 transition-opacity">View on Instagram</span>
+                        <span className="text-white font-bold opacity-0 hover:opacity-100 transition-opacity">{t.viewOnInstagram}</span>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/p/C_id_mOS_ST/" target="_blank" rel="noopener noreferrer" className={styles.instagramLink}>
                     <InstagramImage 
                         src="/images/about-instagram-2.png" 
-                        alt="NeuroTechX Event 2" 
+                        alt={format(t.photoAlt, { n: 2 })} 
                         className={styles.instagramImage} 
                         fallbackSrc="https://placehold.co/600x600/1a1a1a/ffffff?text=Instagram+Photo+2"
                     />
                     <div className="absolute inset-0 bg-black/20 hover:bg-black/0 transition-colors flex items-center justify-center">
-                        <span className="text-white font-bold opacity-0 hover:opacity-100 transition-opacity">View on Instagram</span>
+                        <span className="text-white font-bold opacity-0 hover:opacity-100 transition-opacity">{t.viewOnInstagram}</span>
                     </div>
                 </a>
             </div>
 
             <section className={styles.section}>
-                <h1 className={styles.title}>Our Story</h1>
-                <p className={styles.subtitle}>
-                    NeuroTechX was co-founded in 2015 by Yannick Roy, Sydney Swaine-Simon, Marion Le Borgne, Melanie Segado, and Ferdinand Ephrem — a dedicated team of engineers and scientists who recognized a critical gap: the lack of a bridge between the rigorous academic world of neuroscience and the fast-paced, hands-on culture of technology enthusiasts.
-                </p>
+                <h1 className={styles.title}>{t.storyTitle}</h1>
+                <p className={styles.subtitle}>{t.storyLead}</p>
                 <div className={styles.cardText}>
-                    <p>
-                        What began as a small group of hackers in Montreal quickly evolved into the largest global community for neurotechnology. Our mission remains centered on three pillars: Community, Education, and Professional Development. We continue to foster an open, global community dedicated to the advancement of neurotechnology.
-                    </p>
+                    <p>{t.storyBody}</p>
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>Our Origins</h2>
-                <p className="max-w-2xl mb-12 text-lg text-muted-foreground">
-                    NeuroTechX stands on the shoulders of giants. We acknowledge the founders and intellectual sources whose open-source contributions laid the technical foundation for our global community.
-                </p>
-                
+                <h2 className={styles.sectionTitle}>{t.originsTitle}</h2>
+                <p className="max-w-2xl mb-12 text-lg text-muted-foreground">{t.originsLead}</p>
+
                 <div className={styles.originsGrid}>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Paris: CogLab</h3>
-                        <span className={styles.cardLabel}>Historical Pillar</span>
-                        <p className={styles.cardText}>
-                            Founded in 2013 at <em>La Paillasse</em>, CogLab pioneered the &quot;Community Lab&quot; model, exploring cognitive science through DIY hardware and open citizen science.
-                        </p>
-                        <a href="https://coglab.fr/home-en/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            Visit CogLab <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>San Francisco: Berkeley CogTech</h3>
-                        <span className={styles.cardLabel}>Historical Pillar</span>
-                        <p className={styles.cardText}>
-                            The Cognitive Technology Group at Berkeley was a seminal student organization that set the standard for what would become <em>NeuroTech@Berkeley</em>.
-                        </p>
-                        <a href="http://www.explorecogtech.com/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            Visit Project <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Montreal: District 3 Workshop</h3>
-                        <span className={styles.cardLabel}>Educational Milestone (2018)</span>
-                        <p className={styles.cardText}>
-                            The &quot;Deep Learning for EEG&quot; workshop at Concordia University bridged the gap between raw signal processing and modern machine learning.
-                        </p>
-                        <a href="https://github.com/NeuroTechX/bci-workshop" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            View Materials <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Global: muse-lsl & eeg-notebooks</h3>
-                        <span className={styles.cardLabel}>Technical Milestone</span>
-                        <p className={styles.cardText}>
-                            The democratized access to EEG data through muse-lsl and eeg-notebooks enabled large-scale studies and hyperscanning protocols worldwide.
-                        </p>
-                        <div className="flex flex-col gap-2">
-                            <a href="https://github.com/NeuroTechX/eeg-notebooks" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                eeg-notebooks <ArrowUpRight className={styles.icon} />
-                            </a>
+                    {t.origins.map((origin) => (
+                        <div key={origin.title} className={styles.card}>
+                            <h3 className={styles.cardTitle}>{origin.title}</h3>
+                            <span className={styles.cardLabel}>{origin.label}</span>
+                            <p className={styles.cardText}>{origin.body}</p>
+                            {origin.links.map((link) =>
+                                link.href.startsWith('/') ? (
+                                    <Link key={link.href} href={link.href} className={styles.link}>
+                                        {link.label} <ArrowUpRight className={styles.icon} />
+                                    </Link>
+                                ) : (
+                                    <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                        {link.label} <ArrowUpRight className={styles.icon} />
+                                    </a>
+                                )
+                            )}
                         </div>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Open Science: MOABB</h3>
-                        <span className={styles.cardLabel}>Technical Milestone</span>
-                        <p className={styles.cardText}>
-                            The <strong>Mother of All BCI Benchmarks (MOABB)</strong> project set a new standard for reproducibility in BCI research, providing a comprehensive framework for dataset benchmarking.
-                        </p>
-                        <a href="https://github.com/NeuroTechX/moabb" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            View MOABB <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>NeuroTechX Services</h3>
-                        <span className={styles.cardLabel}>Strategic Milestone (2019 - 2024)</span>
-                        <p className={styles.cardText}>
-                            Launched in 2019, NTX Services provided expert advisory to the neurotech industry. Its successful operation and eventual transition in 2024 marked a pivotal moment, enabling the core NeuroTechX organization to redouble its commitment to community-driven open science.
-                        </p>
-                        <a href="/ntx-services-partnership-termination" className={styles.link}>
-                            Read the joint statement <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
-
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Queen&apos;s University</h3>
-                        <span className={styles.cardLabel}>Strategic Milestone (2026)</span>
-                        <p className={styles.cardText}>
-                            A grant-funded partnership to launch the Neurotech Micro-credential Program, setting a new standard for hands-on neurotechnology education.
-                        </p>
-                        <a href="https://neurotechmicrocreds.com/" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                            Visit Program <ArrowUpRight className={styles.icon} />
-                        </a>
-                    </div>
+                    ))}
                 </div>
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>Board of Directors</h2>
-                <div className={styles.originsGrid}>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Morgan Hough</h3>
-                        <span className={styles.cardLabel}>Director</span>
-                        <p className={styles.cardText}>
-                            A specialist in Clinical Neurology (Oxford) and Biophysics (Reed), Morgan co-founded NeuroFedora and bridges scientific research with open-source development.
-                        </p>
-                    </div>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>John Griffiths, PhD</h3>
-                        <span className={styles.cardLabel}>Director</span>
-                        <p className={styles.cardText}>
-                            Assistant Professor at the University of Toronto, John specializes in mathematical modeling of brain dynamics and neuroimaging analysis.
-                        </p>
-                    </div>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Susan Boehnke, PhD</h3>
-                        <span className={styles.cardLabel}>Director</span>
-                        <p className={styles.cardText}>
-                            Associate Professor at Queen&apos;s University and Director of the NeuroTech Micro-credential Program, leading ethics and education initiatives.
-                        </p>
-                    </div>
-                </div>
+                <h2 className={styles.sectionTitle}>{t.boardTitle}</h2>
+                <People people={t.board} />
             </section>
 
             <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>Officers & Leadership</h2>
-                <div className={styles.originsGrid}>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Han Cat Nguyen</h3>
-                        <span className={styles.cardLabel}>Officer</span>
-                        <p className={styles.cardText}>
-                            A biomedical engineer expert in biosensor design and DIY neurotechnology hardware development.
-                        </p>
-                    </div>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Dhruv Mehrotra</h3>
-                        <span className={styles.cardLabel}>Officer</span>
-                        <p className={styles.cardText}>
-                            Neuroscience researcher and developer of Pynapple, focusing on spontaneous brain activity and decision-making.
-                        </p>
-                    </div>
-                    <div className={styles.card}>
-                        <h3 className={styles.cardTitle}>Sophie Valentine</h3>
-                        <span className={styles.cardLabel}>Content Lab Lead</span>
-                        <p className={styles.cardText}>
-                            Experimental psychologist leading the NTX Content Laboratory with a focus on digital health innovation.
-                        </p>
-                    </div>
-                </div>
+                <h2 className={styles.sectionTitle}>{t.officersTitle}</h2>
+                <People people={t.officers} />
                 <p style={{ marginTop: '2rem' }}>
-                    <a href="/join-the-team" className={styles.link}>
-                        Join the team: see the roles we would like to fill <ArrowUpRight size={16} />
-                    </a>
+                    <Link href="/join-the-team" className={styles.link}>
+                        {t.joinTeam} <ArrowUpRight size={16} />
+                    </Link>
                 </p>
             </section>
         </div>

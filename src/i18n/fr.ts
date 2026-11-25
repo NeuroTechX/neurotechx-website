@@ -1,3 +1,5 @@
+import type { Strings } from './text';
+
 // French is the source text for the site. Write new strings here first; en.ts must have the
 // same keys (TypeScript fails the build otherwise), so English never gets ahead of French.
 // Quebec French: « infolettre », « courriel », « section locale ».
@@ -163,5 +165,4 @@ const fr = {
 
 export default fr;
 
-type Strings<T> = { [K in keyof T]: T[K] extends string ? string : Strings<T[K]> };
 export type Dictionary = Strings<typeof fr>;

@@ -13,6 +13,7 @@ export type Chapter = {
   linkLabel?: string;  // label for the primary link
   featured?: boolean;
   map: [number, number];
+  fr?: { note?: string; linkLabel?: string }; // French text, where it differs
 };
 
 // University / student clubs — shown on the map with a distinct (violet) pin
@@ -34,46 +35,55 @@ export const CHAPTERS: Chapter[] = [
     name: 'NeuroTechSF', city: 'San Francisco', status: 'active', featured: true,
     note: 'One of our largest and most active chapters, anchoring the Bay Area neurotech scene.',
     url: 'https://x.com/neurotechsf', linkLabel: '@neurotechsf', map: [159.9, 123.3],
+    fr: { note: "L'une de nos sections les plus grandes et les plus actives, pilier de la neurotech dans la région de la baie de San Francisco." },
   },
   {
     name: 'NeuroNYC', city: 'New York', status: 'active', featured: true,
     note: 'The New York City community — talks, socials, and hack nights.',
     url: 'https://x.com/NeuroTechNYC', linkLabel: '@NeuroTechNYC', map: [294.4, 110.7],
+    fr: { note: 'La communauté de New York — conférences, rencontres et soirées de hacking.' },
   },
   {
     name: 'NeuroTechX London', city: 'London · UK', status: 'active', featured: true,
     note: 'An active London chapter that also serves the wider UK community.',
     url: 'https://x.com/NeuroTechLDN', linkLabel: '@NeuroTechLDN', map: [499.6, 69.2],
+    fr: { note: 'Une section londonienne active qui rayonne dans tout le Royaume-Uni.' },
   },
   {
     name: 'Coglab', city: 'Paris', status: 'active', featured: true,
     note: 'NeuroTechX Paris — the Coglab community for cognitive science & neurotech.',
     url: 'https://coglab.fr/', linkLabel: 'coglab.fr', map: [506.5, 78.6],
+    fr: { note: 'NeuroTechX Paris — la communauté Coglab en sciences cognitives et en neurotech.' },
   },
   {
     name: 'NeuroTechX Toronto', city: 'Toronto', status: 'restarting', featured: true,
     note: 'Relaunching — get in touch to help reboot the Toronto chapter.',
     url: 'https://x.com/neurotechto', linkLabel: '@neurotechto', map: [279.5, 98.6],
+    fr: { note: 'En relance — écrivez-nous pour aider à redémarrer la section de Toronto.' },
   },
   {
     name: 'NeuroTechMTL', city: 'Montreal', status: 'restarting', featured: true,
     note: 'Where NeuroTechX began — the Montreal chapter is restarting.',
     url: 'https://x.com/NeuroTechMTL', linkLabel: '@NeuroTechMTL', map: [295.6, 91.3],
+    fr: { note: 'Là où NeuroTechX est née — la section de Montréal redémarre.' },
   },
   {
     name: 'NeuroTechX Houston', city: 'Houston', status: 'active', featured: true,
     note: 'A growing Texas hub with a couple of active local groups.',
     url: JOIN, linkLabel: 'Get involved', map: [235.1, 160.3],
+    fr: { note: 'Un pôle texan en croissance, avec quelques groupes locaux actifs.', linkLabel: 'Participer' },
   },
   {
     name: 'NeuroTechX Salt Lake City', city: 'Salt Lake City', status: 'active', featured: true,
     note: 'The Utah community for neurotech and neuroengineering.',
     url: JOIN, linkLabel: 'Get involved', map: [189.2, 110.5],
+    fr: { note: "La communauté de l'Utah en neurotech et en neuro-ingénierie.", linkLabel: 'Participer' },
   },
   {
     name: 'NeuroTechX Berlin', city: 'Berlin', status: 'active', featured: true,
     note: 'The Berlin community — part of the NeuroTechX Europe network.',
     url: 'https://x.com/NeuroTechX_EU', linkLabel: '@NeuroTechX_EU', map: [537.2, 65.7],
+    fr: { note: 'La communauté berlinoise — membre du réseau NeuroTechX Europe.' },
   },
 
   // ── Other chapters ──
@@ -132,13 +142,26 @@ export const STUDENT_CLUBS: StudentClub[] = [
 export const FEATURED_CHAPTERS = CHAPTERS.filter((c) => c.featured);
 export const OTHER_CHAPTERS = CHAPTERS.filter((c) => !c.featured);
 
-export const STATUS_LABEL: Record<ChapterStatus, string> = {
-  active: 'Active',
-  restarting: 'Restarting',
-  soon: 'Coming soon',
-  inactive: 'Inactive',
-  new: 'New',
-};
+// City and country names in French where they differ ('London · UK' → 'Londres · R.-U.').
+const FR_PLACES: [string, string][] = [
+  ['London · UK', 'Londres · R.-U.'],
+  ['Montreal', 'Montréal'],
+  ['Washington DC', 'Washington (D.C.)'],
+  ['Barcelona', 'Barcelone'],
+  ['Tokyo, Japan', 'Tokyo, Japon'],
+  ['Shanghai, China', 'Shanghai, Chine'],
+  [', Bolivia', ', Bolivie'],
+  [', Brazil', ', Brésil'],
+  [', Argentina', ', Argentine'],
+  [', Nigeria', ', Nigéria'],
+  [', India', ', Inde'],
+  [', Australia', ', Australie'],
+];
+
+export function cityIn(city: string, lang: 'en' | 'fr'): string {
+  if (lang === 'en') return city;
+  return FR_PLACES.reduce((name, [en, fr]) => name.replace(en, fr), city);
+}
 
 // Pin / badge colors per status (shared by the map, legend, and cards).
 export const STATUS_COLOR: Record<ChapterStatus, string> = {
