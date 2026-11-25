@@ -134,8 +134,7 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
             <li key={job.id}>
               <a
                 href={job.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(job.posted ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                 className="group flex flex-col gap-2 px-5 py-4 transition-colors hover:bg-[var(--surface-2)] md:flex-row md:items-center md:gap-6"
               >
                 <div className="min-w-0 flex-1">
@@ -144,6 +143,11 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
                     {job.isNew && (
                       <span className="ml-2 rounded-full bg-neuro-accent/15 px-2 py-0.5 align-middle text-xs font-bold text-neuro-accent">
                         New
+                      </span>
+                    )}
+                    {job.posted && (
+                      <span className="ml-2 rounded-full border border-[var(--border-strong)] px-2 py-0.5 align-middle text-xs font-semibold text-muted-foreground">
+                        Posted by NeuroTechX
                       </span>
                     )}
                   </h3>
