@@ -2,24 +2,23 @@ import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import EventsList from '@/components/EventsList';
 import { ArrowRight, Calendar } from 'lucide-react';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/events';
 
-export const metadata: Metadata = {
-    title: 'Events',
-    description:
-        'NeuroTechX events — hacknights, workshops, talks, and chapter meetups worldwide on our Luma calendar, plus the major neurotech conferences and hackathons.',
-    alternates: { canonical: '/events' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/events'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/events', lang) };
+}
 
 const LUMA = 'https://luma.com/neurotechx';
 
-export default function EventsPage() {
+export default async function EventsPage({ params }: PageProps<'/[lang]/events'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     return (
         <div className="container py-12">
-            <PageHeader
-                eyebrow="Events"
-                title="Events"
-                subtitle="Our live community calendar plus the major neurotech conferences and hackathons worldwide."
-            />
+            <PageHeader eyebrow={t.title} title={t.title} subtitle={t.subtitle} />
 
             {/* Prominent Luma calendar CTA */}
             <a
@@ -32,28 +31,23 @@ export default function EventsPage() {
                 <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                     <div>
                         <p className="eyebrow mb-2 flex items-center gap-2">
-                            <Calendar className="h-4 w-4" /> Live calendar
+                            <Calendar className="h-4 w-4" /> {t.lumaEyebrow}
                         </p>
                         <h2 className="mb-2 text-2xl md:text-3xl font-bold group-hover:text-neuro-accent transition-colors">
-                            NeuroTechX on Luma
+                            {t.lumaTitle}
                         </h2>
-                        <p className="max-w-xl text-muted-foreground">
-                            RSVP to hacknights, workshops, talks, and chapter meetups happening around the world — our full,
-                            always-current event calendar lives on Luma.
-                        </p>
+                        <p className="max-w-xl text-muted-foreground">{t.lumaBody}</p>
                     </div>
                     <span className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-neuro-accent px-7 py-4 text-lg font-bold text-[var(--background)] shadow-glow transition group-hover:brightness-110">
-                        View &amp; RSVP on Luma <ArrowRight width={20} height={20} />
+                        {t.lumaCta} <ArrowRight width={20} height={20} />
                     </span>
                 </div>
             </a>
 
             {/* Conferences & hackathons calendar */}
-            <h2 className="mb-2 text-2xl md:text-3xl font-bold">Conferences &amp; hackathons</h2>
-            <p className="mb-8 max-w-2xl text-muted-foreground">
-                Major neurotech, BCI, and neuroscience meetings — upcoming and recent.
-            </p>
-            <EventsList />
+            <h2 className="mb-2 text-2xl md:text-3xl font-bold">{t.conferencesTitle}</h2>
+            <p className="mb-8 max-w-2xl text-muted-foreground">{t.conferencesBody}</p>
+            <EventsList lang={lang} />
         </div>
     );
 }

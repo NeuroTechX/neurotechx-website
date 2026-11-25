@@ -18,62 +18,117 @@ export const EVENTS: NtxEvent[] = [
     name: 'Global NeuroHack 2026', tag: 'Hackathon', dateLabel: 'Apr 10–12, 2026', end: '2026-04-12',
     location: 'Frontier Tower, San Francisco', url: 'https://global-neurohack.github.io/',
     desc: 'A 48-hour student neurotech hackathon — 100+ students from world-leading universities.',
+    fr: {
+      dateLabel: "10 au 12 avr. 2026",
+      desc: "Un hackathon étudiant de 48 heures en neurotech — plus de 100 étudiants d'universités de premier plan.",
+    },
   },
   {
     name: 'California Neurotechnology Conference 2026', tag: 'Conference', dateLabel: 'Apr 26, 2026', end: '2026-04-26',
     location: 'UC Berkeley', url: 'https://neurotech.studentorg.berkeley.edu/conference.html',
     desc: '4th annual conference, co-hosted by UCLA, UCSD, UC Davis, UCSC & USC.',
+    fr: {
+      dateLabel: "26 avr. 2026",
+      desc: "4e conférence annuelle, coorganisée par UCLA, UCSD, UC Davis, UCSC et USC.",
+    },
   },
   {
     name: 'OHBM BrainHack 2026', tag: 'Hackathon', dateLabel: 'Jun 11–13, 2026', end: '2026-06-13',
     location: 'Bordeaux, France', url: 'https://ohbm.github.io/hackathon2026/',
     desc: 'OHBM hackathon — incl. the EEG101 & INDoS open/FAIR EEG workshops.',
+    fr: {
+      dateLabel: "11 au 13 juin 2026",
+      location: "Bordeaux, France",
+      desc: "Hackathon de l'OHBM — avec les ateliers EEG101 et INDoS sur l'EEG ouvert et FAIR.",
+    },
   },
   // ── Upcoming ──
   {
     name: 'NYC Neuromodulation Conference 2026', tag: 'Conference', dateLabel: 'Jul 30 – Aug 3, 2026', end: '2026-08-03',
     location: 'City College of New York', url: 'https://neuromodec.org/2026-nyc-neuromodulation-conference/',
     desc: "Marom Bikson's NYC Neuromodulation — the standout meeting on brain stimulation & brain interfaces.",
+    fr: {
+      dateLabel: "30 juil. au 3 août 2026",
+      desc: "NYC Neuromodulation, de Marom Bikson — la rencontre de référence sur la stimulation cérébrale et les interfaces cerveau-machine.",
+    },
   },
   {
     name: 'FUN26 — Focused Ultrasound Neuromodulation', tag: 'Conference', dateLabel: 'Jul 22–24, 2026', end: '2026-07-24',
     location: 'Paris, France', url: 'https://www.itrusst.com/fun26',
     desc: 'ITRUSST conference on transcranial ultrasound stimulation & neuromodulation.',
+    fr: {
+      dateLabel: "22 au 24 juil. 2026",
+      location: "Paris, France",
+      desc: "Conférence d'ITRUSST sur la stimulation transcrânienne par ultrasons et la neuromodulation.",
+    },
   },
   {
     name: 'CCN 2026 — Cognitive Computational Neuroscience', tag: 'Conference', dateLabel: 'Aug 3–6, 2026', end: '2026-08-06',
     location: 'New York University', url: 'https://2026.ccneuro.org/',
     desc: '9th annual conference uniting cognitive science, AI, and neuroscience.',
+    fr: {
+      dateLabel: "3 au 6 août 2026",
+      desc: "9e conférence annuelle réunissant sciences cognitives, IA et neurosciences.",
+    },
   },
   {
     name: 'CuttingGardens 2026', tag: 'Conference', dateLabel: '21–25 Sep 2026', end: '2026-09-25',
     location: 'Distributed · multi-hub', url: 'https://cuttingeeg.org/cuttinggardens2026/',
     desc: 'A distributed multi-hub conference on cutting-edge M/EEG analysis methods.',
+    fr: {
+      dateLabel: "21 au 25 sept. 2026",
+      location: "Distribuée · plusieurs pôles",
+      desc: "Une conférence distribuée sur plusieurs pôles consacrée aux méthodes d'analyse M/EEG de pointe.",
+    },
   },
   {
     name: 'IEEE SMC 2026', tag: 'Conference', dateLabel: 'Oct 4–7, 2026', end: '2026-10-07',
     location: 'Bellevue, WA', url: 'https://www.ieeesmc2026.org/',
     desc: 'IEEE Systems, Man & Cybernetics — including the Brain-Machine Interface (BMI) Workshop.',
+    fr: {
+      dateLabel: "4 au 7 oct. 2026",
+      location: "Bellevue (Washington)",
+      desc: "IEEE Systems, Man & Cybernetics — avec l'atelier sur les interfaces cerveau-machine (BMI).",
+    },
   },
   {
     name: 'BR41N.IO Hackathon @ IEEE SMC', tag: 'Hackathon', dateLabel: 'Oct 4–5, 2026', end: '2026-10-05',
     location: 'Bellevue, WA', url: 'https://www.br41n.io/IEEE-SMC-2026',
     desc: "g.tec's BCI hackathon during IEEE SMC — build brain-computer interface apps in a day.",
+    fr: {
+      dateLabel: "4 et 5 oct. 2026",
+      location: "Bellevue (Washington)",
+      desc: "Le hackathon ICM de g.tec pendant IEEE SMC — créer des applications d'interface cerveau-ordinateur en une journée.",
+    },
   },
   {
     name: 'NeuroTechX @ SF Tech Week', tag: 'Meetup', dateLabel: 'Oct 5–11, 2026', end: '2026-10-11',
     location: 'San Francisco', url: 'https://www.tech-week.com/',
     desc: 'A NeuroTechX × UC Berkeley event planned during SF Tech Week (details soon).',
+    fr: {
+      dateLabel: "5 au 11 oct. 2026",
+      desc: "Un événement NeuroTechX × UC Berkeley prévu pendant la SF Tech Week (détails à venir).",
+    },
   },
   {
     name: 'IEEE Brain Discovery & Neurotechnology Workshop', tag: 'Workshop', dateLabel: 'Nov 11–13, 2026', end: '2026-11-13',
     location: 'Washington, DC', url: 'https://brain.ieee.org/2026-ieee-brain-discovery-neurotechnology-workshop/',
     desc: 'The flagship neurotech satellite alongside Society for Neuroscience 2026.',
+    fr: {
+      dateLabel: "11 au 13 nov. 2026",
+      location: "Washington (D.C.)",
+      desc: "Le grand événement satellite en neurotech, en marge de la rencontre de la Society for Neuroscience 2026.",
+    },
   },
   {
     name: 'Neuroscience 2026 (SfN)', tag: 'Conference', dateLabel: 'Nov 14–18, 2026', end: '2026-11-18',
     location: 'Washington, DC', url: 'https://www.sfn.org/meetings/neuroscience-2026/',
     desc: "Society for Neuroscience 56th annual meeting — the world's largest neuroscience gathering.",
+    fr: {
+      dateLabel: "14 au 18 nov. 2026",
+      location: "Washington (D.C.)",
+      desc: "56e rencontre annuelle de la Society for Neuroscience — le plus grand rassemblement en neurosciences au monde.",
+    },
   },
   {
     name: 'Heroes of the Brain 2026', tag: 'Hackathon', dateLabel: 'Nov 14–15, 2026', end: '2026-11-15',
@@ -84,11 +139,21 @@ export const EVENTS: NtxEvent[] = [
     name: 'Brain Innovation Days 2026', tag: 'Conference', dateLabel: 'Nov 18–19, 2026', end: '2026-11-19',
     location: 'Area 42, Brussels, Belgium', url: 'https://www.braininnovationdays.eu/',
     desc: "The 6th edition of Europe's brain-innovation summit — startups, investors, researchers & clinicians across the brain ecosystem.",
+    fr: {
+      dateLabel: "18 et 19 nov. 2026",
+      location: "Area 42, Bruxelles, Belgique",
+      desc: "6e édition du sommet européen de l'innovation sur le cerveau — jeunes pousses, investisseurs, chercheurs et cliniciens de tout l'écosystème.",
+    },
   },
   {
-    name: 'EEG/EMG Foundation Challenge 2026', tag: 'Competition', dateLabel: 'Final submissions Nov 21, 2026', end: '2026-11-21',
+    name: 'EEG/EMG Foundation Challenge 2026', tag: 'Competition', dateLabel: 'Submissions closed Nov 21 · winners Dec 11–12', end: '2026-11-21',
     location: 'Online · winners at NeurIPS, Sydney', url: 'https://neural-interfaces26.github.io/',
-    desc: 'Neural-interface decoding competition run with the NeurIPS Brain and Body workshop — hosted by Yneuro, Inria & UC San Diego.',
+    desc: 'Neural-interface decoding competition run with the NeurIPS Brain and Body workshop — hosted by Yneuro, Inria & UC San Diego. Rankings are provisional until the reproducibility audit (end of November).',
+    fr: {
+      dateLabel: "Soumissions closes le 21 nov. · prix les 11 et 12 déc.",
+      location: "En ligne · prix remis à NeurIPS, Sydney",
+      desc: "Compétition de décodage des interfaces neuronales tenue avec l'atelier Brain and Body de NeurIPS — organisée par Yneuro, Inria et UC San Diego. Classement provisoire jusqu'à l'audit de reproductibilité (fin novembre).",
+    },
   },
   // `end` carries the closing time for evening events, so they stay "Upcoming" until they are over.
   {
@@ -132,11 +197,11 @@ export const EVENTS: NtxEvent[] = [
     },
   },
   {
-    name: 'Foundation Models for the Brain and Body — NeurIPS 2026 Workshop', tag: 'Workshop', dateLabel: 'Dec 12, 2026', end: '2026-12-12',
+    name: 'Foundation Models for the Brain and Body — NeurIPS 2026 Workshop', tag: 'Workshop', dateLabel: 'Dec 11–12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://brainbodyfm-workshop.github.io/',
     desc: 'Second edition of the NeurIPS workshop on foundation models for neural & biosignal data; hosts the EEG/EMG Foundation Challenge winners.',
     fr: {
-      dateLabel: '12 déc. 2026',
+      dateLabel: '11 et 12 déc. 2026',
       location: 'Sydney, Australie',
       desc: "Deuxième édition de l'atelier NeurIPS sur les modèles de fondation pour les données neuronales et les biosignaux; on y remet les prix du EEG/EMG Foundation Challenge.",
     },
