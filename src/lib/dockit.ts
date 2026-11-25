@@ -53,16 +53,20 @@ export function getAllDockitSlugs(): string[] {
         .map((file) => file.replace('.mdx', ''));
 }
 
-export interface HandbookSection {
+export interface Section {
     heading: string;
-    pages: { slug: string; title: string }[];
+    pages: { slug: string; title: string; href: string }[];
 }
 
-// Table of contents in the handbook's own order, written by the sync from its index.rst
-export function getHandbookSections(): HandbookSection[] {
-    const indexPath = path.join(COLLECTIONS.handbook, '_index.json');
+// Table of contents in the repository's own order, written by the sync from its index.rst
+export function getSections(collection: Collection): Section[] {
+    const indexPath = path.join(COLLECTIONS[collection], '_index.json');
     if (!fs.existsSync(indexPath)) {
         return [];
     }
     return JSON.parse(fs.readFileSync(indexPath, 'utf-8'));
+}
+
+export function getHandbookSections(): Section[] {
+    return getSections('handbook');
 }

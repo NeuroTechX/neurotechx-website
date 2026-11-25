@@ -10,6 +10,7 @@ export default bilingual(
     becomeMember: 'Devenir membre (gratuit)',
     readConduct: 'Lire le code de conduite',
     startChapter: 'Fonder une section',
+    guide: 'Guide des sections et des clubs',
     chapters: {
       eyebrow: 'Réseau international',
       title: 'Des sections partout dans le monde',
@@ -106,6 +107,7 @@ export default bilingual(
     becomeMember: 'Become a Member (Free)',
     readConduct: 'Read Code of Conduct',
     startChapter: 'Start a Chapter',
+    guide: 'Chapter and Club Guide',
     chapters: {
       eyebrow: 'Global network',
       title: 'Chapters around the world',
