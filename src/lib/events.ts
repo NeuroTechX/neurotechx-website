@@ -42,6 +42,16 @@ export const EVENTS: NtxEvent[] = [
       desc: "Hackathon de l'OHBM — avec les ateliers EEG101 et INDoS sur l'EEG ouvert et FAIR.",
     },
   },
+  {
+    name: 'MAIN 2026 — Montreal AI & Neuroscience', tag: 'Conference', dateLabel: 'Oct 29–30, 2026', end: '2026-10-30',
+    location: 'HEC Montréal, Montreal, QC', url: 'https://www.main2026.org/',
+    desc: '9th Montreal AI and Neuroscience conference: talks, keynotes and panels on biological and artificial intelligence, preceded by a two-day Educational Neuro-AI Workshop (Oct 26–27).',
+    fr: {
+      dateLabel: '29 et 30 oct. 2026',
+      location: 'HEC Montréal, Montréal (Québec)',
+      desc: "9e édition de la conférence Montreal AI and Neuroscience : conférences, conférenciers invités et tables rondes sur l'intelligence biologique et artificielle, précédée d'un atelier de formation Neuro-IA de deux jours (26 et 27 oct.).",
+    },
+  },
   // ── Upcoming ──
   {
     name: 'NYC Neuromodulation Conference 2026', tag: 'Conference', dateLabel: 'Jul 30 – Aug 3, 2026', end: '2026-08-03',
@@ -204,16 +214,6 @@ export const EVENTS: NtxEvent[] = [
       dateLabel: '11 et 12 déc. 2026',
       location: 'Sydney, Australie',
       desc: "Deuxième édition de l'atelier NeurIPS sur les modèles de fondation pour les données neuronales et les biosignaux; on y remet les prix du EEG/EMG Foundation Challenge.",
-    },
-  },
-  {
-    name: 'MAIN 2026 — Montreal AI & Neuroscience', tag: 'Conference', dateLabel: 'Dec 2026 · dates TBA', end: '2026-12-31',
-    location: 'Montreal, QC', url: 'https://www.main2025.org/',
-    desc: 'Annual Montreal conference at the intersection of AI and neuroscience.',
-    fr: {
-      dateLabel: 'Déc. 2026 · dates à confirmer',
-      location: 'Montréal (Québec)',
-      desc: "Conférence annuelle montréalaise à la croisée de l'intelligence artificielle et des neurosciences.",
     },
   },
   // ── 2027 ──
