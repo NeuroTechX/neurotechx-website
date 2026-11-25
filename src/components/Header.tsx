@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, X } from 'lucide-react';
+import { useState, useSyncExternalStore } from 'react';
 import styles from './Header.module.css';
 
 
@@ -18,13 +18,36 @@ const NAV_ITEMS = [
     { name: 'Jobs', href: '/jobs' },
 ];
 
-const JOIN_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform';
+// Change the id when the banner changes, so visitors who closed the old one see the new one.
+const BANNER_ID = 'bci-meeting-2027';
+const BANNER_EVENT = 'ntx-banner-dismissed';
+
+function bannerDismissed() {
+    try {
+        return localStorage.getItem('dismissedBanner') === BANNER_ID;
+    } catch {
+        return false;
+    }
+}
+
+function onBannerChange(callback: () => void) {
+    window.addEventListener(BANNER_EVENT, callback);
+    return () => window.removeEventListener(BANNER_EVENT, callback);
+}
 
 export default function Header() {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const closeMenu = () => setMobileMenuOpen(false);
     const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+    const bannerOpen = !useSyncExternalStore(onBannerChange, bannerDismissed, () => false);
+
+    const dismissBanner = () => {
+        try {
+            localStorage.setItem('dismissedBanner', BANNER_ID);
+        } catch {}
+        window.dispatchEvent(new Event(BANNER_EVENT));
+    };
 
     const navLinks = (onNavigate?: () => void) =>
         NAV_ITEMS.map((item) => {
@@ -61,9 +84,9 @@ export default function Header() {
                         <Link href="/donate" className={styles.donateLink}>
                             Donate
                         </Link>
-                        <a href={JOIN_FORM} target="_blank" rel="noopener noreferrer" className={styles.joinButton}>
+                        <Link href="/community" className={styles.joinButton}>
                             Join Community
-                        </a>
+                        </Link>
                         <button
                             id={styles.toggleNavButton}
                             className={styles.mobileNav}
@@ -83,28 +106,35 @@ export default function Header() {
             </header>
 
             <nav aria-label="Mobile" data-nav="mobile" id={mobileMenuOpen ? styles.mobileNavLinks : styles.hidden}>
-                <a href={JOIN_FORM} target="_blank" rel="noopener noreferrer" className={styles.joinButton} onClick={closeMenu}>
+                <Link href="/community" className={styles.joinButton} onClick={closeMenu}>
                     Join Community
-                </a>
+                </Link>
                 <Link href="/donate" className={styles.donateLink} onClick={closeMenu}>
                     Donate
                 </Link>
                 {navLinks(closeMenu)}
             </nav>
 
-            {/* Ticket Bar (Sub-header) - Restored "Wonderful" Style */}
-            <div className={styles.ticketBanner}>
-                <div className={styles.bannerContainer}>
-                    <div className={styles.bannerContent}>
-                        <span className={styles.badge}>Abstracts due Jan 15</span>
-                        <span className={styles.bannerTitle}>12th International BCI Meeting</span>
-                        <span className={styles.bannerDetails}>Šibenik, Croatia • Jun 7–10, 2027</span>
+            {/* Event banner: visitors can close it */}
+            {bannerOpen && (
+                <div className={styles.ticketBanner}>
+                    <div className={styles.bannerContainer}>
+                        <div className={styles.bannerContent}>
+                            <span className={styles.badge}>Abstracts due Jan 15</span>
+                            <span className={styles.bannerTitle}>12th International BCI Meeting</span>
+                            <span className={styles.bannerDetails}>Šibenik, Croatia • Jun 7–10, 2027</span>
+                        </div>
+                        <div className={styles.bannerActions}>
+                            <a href="https://bcisociety.org/bci-meeting/abstract-submission/" target="_blank" rel="noopener noreferrer" className={styles.ticketLink}>
+                                Learn more <ArrowRight width={14} height={14} />
+                            </a>
+                            <button type="button" className={styles.bannerClose} onClick={dismissBanner} aria-label="Close announcement">
+                                <X width={16} height={16} />
+                            </button>
+                        </div>
                     </div>
-                    <a href="https://bcisociety.org/bci-meeting/abstract-submission/" target="_blank" rel="noopener noreferrer" className={styles.ticketLink}>
-                        Learn more <ArrowRight width={14} height={14} />
-                    </a>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

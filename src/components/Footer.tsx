@@ -25,6 +25,47 @@ function HuggingFaceIcon({ width = 20, height = 20 }: { width?: number; height?:
     );
 }
 
+// Pages not in the top menu belong here so they stay findable.
+const FOOTER_SECTIONS = [
+    {
+        heading: 'Get involved',
+        links: [
+            { name: 'Join the community', href: '/community' },
+            { name: 'Join the team', href: '/join-the-team' },
+            { name: 'Students and clubs', href: '/students' },
+            { name: 'Newsletter', href: '/newsletter' },
+            { name: 'Donate', href: '/donate' },
+        ],
+    },
+    {
+        heading: 'Learn',
+        links: [
+            { name: 'Education', href: '/education' },
+            { name: 'The Neurotech Primer', href: '/primer' },
+            { name: 'Content Lab', href: '/content-lab' },
+            { name: 'Reports', href: '/reports' },
+        ],
+    },
+    {
+        heading: 'Resources',
+        links: [
+            { name: 'Funding', href: '/funding' },
+            { name: 'Jobs', href: '/jobs' },
+            { name: 'Ecosystem', href: '/ecosystem' },
+            { name: 'Volunteer handbook', href: '/handbook' },
+        ],
+    },
+    {
+        heading: 'Organization',
+        links: [
+            { name: 'About', href: '/about' },
+            { name: 'Events', href: '/events' },
+            { name: 'Projects', href: '/projects' },
+            { name: 'Transparency', href: '/transparency' },
+        ],
+    },
+];
+
 export default function Footer() {
     const socialLinks = [
         { name: 'Bluesky', url: 'https://bsky.app/profile/neurotechx.bsky.social', icon: BlueskyIcon },
@@ -39,6 +80,22 @@ export default function Footer() {
 
     return (
         <footer className={styles.footer}>
+            <nav aria-label="Footer" className={styles.sections}>
+                {FOOTER_SECTIONS.map((section) => (
+                    <div key={section.heading}>
+                        <h2 className={styles.sectionHeading}>{section.heading}</h2>
+                        <ul className={styles.sectionLinks}>
+                            {section.links.map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} className={styles.sectionLink}>
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </nav>
             <div className={styles.container}>
                 <div className={styles.copyright}>
                     <p>

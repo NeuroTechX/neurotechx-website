@@ -233,19 +233,29 @@ nav>.joinButton {
     border-radius: 9999px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
+.bannerActions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
 
-    0%,
-    100% {
-        opacity: 1;
-    }
+.bannerClose {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    color: var(--muted-foreground);
+    transition: color 0.2s, background-color 0.2s;
+}
 
-    50% {
-        opacity: 0.5;
-    }
+.bannerClose:hover {
+    color: var(--foreground);
+    background-color: rgba(34, 211, 238, 0.15);
 }
 
 .bannerTitle {

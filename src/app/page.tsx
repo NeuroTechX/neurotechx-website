@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 1800;
 
-const JOIN = 'https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform';
 
 const PILLARS = [
   { icon: BookOpen, title: 'Education', desc: 'The NeuroTech Primer, getting-started guides, and 100+ hours of webinar archives.', href: '/education' },
@@ -60,7 +59,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(34,211,238,0.10),transparent_55%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/30 via-transparent to-[var(--background)]" />
         <div className="container relative z-10 py-24 md:py-36 text-center">
-          <HeroCarousel mediumSlides={mediumSlides} />
+          <HeroCarousel mediumSlides={mediumSlides} today={new Date().toISOString().slice(0, 10)} />
         </div>
       </section>
 
@@ -182,10 +181,10 @@ export default async function Home() {
           Join thousands of innovators, students, and researchers shaping the field.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={JOIN} target="_blank" rel="noopener noreferrer"
+          <Link href="/community"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-neuro-accent px-6 py-3.5 font-bold text-[var(--background)] shadow-glow transition hover:brightness-110">
             Join the Community <ArrowRight width={18} height={18} />
-          </a>
+          </Link>
           <Link href="/donate"
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-2)] px-6 py-3.5 font-bold text-foreground transition hover:border-neuro-accent">
             Support the Mission
