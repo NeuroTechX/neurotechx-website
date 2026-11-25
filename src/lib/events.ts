@@ -74,6 +74,11 @@ export const EVENTS: NtxEvent[] = [
     desc: "Society for Neuroscience 56th annual meeting — the world's largest neuroscience gathering.",
   },
   {
+    name: 'Heroes of the Brain 2026', tag: 'Hackathon', dateLabel: 'Nov 14–15, 2026', end: '2026-11-15',
+    location: 'SKS, Wrocław University of Science and Technology', url: 'https://heroesofthebrain.pwr.edu.pl/',
+    desc: 'Third edition of a 24-hour BCI hackathon: build a working prototype on real BCI hardware with live brain signals, with industry and academic mentors and prizes across 4 categories.',
+  },
+  {
     name: 'Brain Innovation Days 2026', tag: 'Conference', dateLabel: 'Nov 18–19, 2026', end: '2026-11-19',
     location: 'Area 42, Brussels, Belgium', url: 'https://www.braininnovationdays.eu/',
     desc: "The 6th edition of Europe's brain-innovation summit — startups, investors, researchers & clinicians across the brain ecosystem.",
