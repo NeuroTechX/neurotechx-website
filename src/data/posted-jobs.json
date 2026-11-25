@@ -1,0 +1,113 @@
+[
+  {
+    "id": "atlas-mankind-data-scientist",
+    "approved": false,
+    "company": "Atlas Mankind",
+    "site": "https://atlasmankind.com",
+    "title": "Data Scientist (EEG, contract)",
+    "employment": "Contract, about 20 hours a week. No full-time applications.",
+    "location": "Remote, UK or EU",
+    "remote": true,
+    "regions": [
+      "europe"
+    ],
+    "topics": [
+      "eeg"
+    ],
+    "role": "software",
+    "postedAt": "2026-11-23",
+    "expires": "2027-01-22",
+    "summary": "Analyse behavioural, neural (EEG) and physiological data, and work with the experimental scientists on experiment design and on debugging data collection and pipelines.",
+    "requirements": [
+      "Based in the UK or EU",
+      "PhD in neuroscience",
+      "Several years of EEG analysis",
+      "Python, MNE and mixed-effects models",
+      "Strong statistics or computational modelling",
+      "Ideally, experience with production software systems"
+    ],
+    "apply": "Email your CV, a description or demo of one analysis project you led, your hourly or daily rate and your start date to andre@atlasmankind.com, with the subject \"Atlas - Data Scientist\".",
+    "source": ""
+  },
+  {
+    "id": "b1neuro-regulatory-affairs-lead",
+    "approved": true,
+    "company": "B1Neuro",
+    "site": "https://b1neuro.com",
+    "title": "Regulatory Affairs Lead",
+    "employment": "Full-time",
+    "location": "Singapore",
+    "remote": false,
+    "regions": [
+      "asia-pacific"
+    ],
+    "topics": [
+      "neuromodulation",
+      "neuroimaging"
+    ],
+    "role": "clinical",
+    "postedAt": "2026-11-24",
+    "expires": "2027-01-23",
+    "summary": "B1Neuro, a National University of Singapore spin-out, builds fMRI-guided TMS for precision brain stimulation. The Regulatory Affairs Lead owns regulatory strategy end to end: submissions for medical technology, compliance, procedures and work with regulators and notified bodies.",
+    "requirements": [
+      "Medtech regulatory affairs experience",
+      "ISO 13485:2016 knowledge or certification",
+      "Eligible to work in Singapore"
+    ],
+    "apply": "Apply by email as described on B1Neuro's careers page: CV (PDF) plus the short answers it asks for, subject \"Application: Regulatory Affairs Lead – your name\".",
+    "source": "https://b1neuro.com/careers/"
+  },
+  {
+    "id": "b1neuro-tms-technician",
+    "approved": true,
+    "company": "B1Neuro",
+    "site": "https://b1neuro.com",
+    "title": "TMS Technician",
+    "employment": "Full-time",
+    "location": "Singapore",
+    "remote": false,
+    "regions": [
+      "asia-pacific"
+    ],
+    "topics": [
+      "neuromodulation"
+    ],
+    "role": "clinical",
+    "postedAt": "2026-11-24",
+    "expires": "2027-01-23",
+    "summary": "Join B1Neuro's clinical team operating TMS equipment and supporting patient care in fMRI-guided brain stimulation.",
+    "requirements": [
+      "Clinical or patient-facing experience",
+      "Familiarity with TMS equipment is a plus",
+      "BCLS certification",
+      "Eligible to work in Singapore"
+    ],
+    "apply": "Apply by email as described on B1Neuro's careers page: CV (PDF) plus the short answers it asks for, subject \"Application: TMS Technician – your name\".",
+    "source": "https://b1neuro.com/careers/"
+  },
+  {
+    "id": "atricure-engineering-intern",
+    "approved": true,
+    "company": "AtriCure",
+    "site": "https://www.atricure.com",
+    "title": "Engineering Intern",
+    "employment": "Internship",
+    "location": "Pleasanton, CA",
+    "remote": false,
+    "regions": [
+      "north-america"
+    ],
+    "topics": [
+      "neuromodulation"
+    ],
+    "role": "hardware",
+    "postedAt": "2026-11-24",
+    "expires": "2027-01-23",
+    "summary": "Hands-on medical device engineering at AtriCure, including devices for peripheral nerve ablation: testing and validation, test protocols, process development, root-cause analysis and pilot builds.",
+    "requirements": [
+      "Studying for a bachelor's or master's in biomedical, mechanical or a related engineering field"
+    ],
+    "apply": "Apply on AtriCure's careers site.",
+    "source": "https://job-boards.greenhouse.io/atricure/jobs/4339615009"
+  }
+]

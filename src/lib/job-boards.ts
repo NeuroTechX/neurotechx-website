@@ -57,6 +57,7 @@ export type Job = {
   regions: string[];
   remote: boolean;
   internship: boolean;
+  posted?: boolean; // posted by NeuroTechX on the employer's behalf; links to /jobs/posted/<id>
 };
 
 export const TOPICS: Record<string, string> = {
