@@ -18,6 +18,7 @@ const FR_SEGMENTS: Record<string, string> = {
   'chapter-guidelines': 'lignes-directrices',
   'start-a-chapter': 'fonder-une-section',
   'content-lab': 'content-lab',
+  learn: 'apprendre',
   education: 'formation',
   webinars: 'webinaires',
   'getting-started': 'premiers-pas',
@@ -75,7 +76,7 @@ export function parsePublicPath(pathname: string): [Locale, string] {
 export const TRANSLATED_ROUTES = new Set<string>([
   '/', '/events', '/about', '/community',
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
-  '/education', '/education/webinars', '/primer', '/students', '/newsletter',
+  '/learn', '/education', '/education/webinars', '/primer', '/students', '/newsletter',
   '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
 ]);
 

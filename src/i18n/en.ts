@@ -41,7 +41,7 @@ const en: Dictionary = {
       education: 'Education',
       primer: 'The NeuroTech Primer',
       webinars: 'Webinars',
-      gettingStarted: 'Getting started',
+      startHere: 'Start here',
     },
     projects: {
       title: 'Projects',
@@ -117,7 +117,7 @@ const en: Dictionary = {
     doors: {
       learn: {
         title: 'Learn',
-        desc: 'The NeuroTech Primer, getting-started guides, and 100+ hours of webinar archives.',
+        desc: 'Where to start, the NeuroTech Primer, and 100+ hours of webinar archives.',
         cta: 'Start learning',
       },
       participate: {

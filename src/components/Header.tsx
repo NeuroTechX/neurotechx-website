@@ -41,8 +41,8 @@ function buildMenus(t: Dictionary['nav']): Menu[] {
             id: 'learn',
             title: t.learn.title,
             items: [
+                { label: t.learn.startHere, href: '/learn' },
                 { label: t.learn.education, href: '/education' },
-                { label: t.learn.gettingStarted, href: '/education/getting-started' },
                 { label: t.learn.primer, href: '/primer' },
                 { label: t.learn.webinars, href: '/education/webinars' },
             ],
