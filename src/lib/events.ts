@@ -6,6 +6,8 @@ export type NtxEvent = {
   location: string;
   url: string;
   desc: string;
+  // French text for the event card; English is shown on French pages when it is missing.
+  fr?: { dateLabel?: string; location?: string; desc: string };
 };
 
 // NeuroTechX-relevant neurotech/neuroscience conference calendar.
@@ -93,42 +95,82 @@ export const EVENTS: NtxEvent[] = [
     name: 'Stimulating Conversations: Advances in Neuromodulation', tag: 'Meetup', dateLabel: 'Nov 25, 2026 · 7 PM ET', end: '2026-11-25T23:00:00-05:00',
     location: 'Peter Gilgan Centre for Research and Learning, Toronto', url: 'https://luma.com/lvklsd9o',
     desc: 'NeuroTechX Toronto evening of short talks, two panels and demos on brain stimulation and the Toronto companies bringing it to patients — speakers from Ampa, sync2brain, Roga and Vielight. Tickets CA$9.',
+    fr: {
+      dateLabel: '25 nov. 2026 · 19 h (HE)',
+      location: 'Peter Gilgan Centre for Research and Learning, Toronto',
+      desc: "Soirée de NeuroTechX Toronto : courtes conférences, deux panels et démonstrations sur la stimulation cérébrale et les entreprises torontoises qui l'amènent aux patients — avec Ampa, sync2brain, Roga et Vielight. Billets : 9\u00a0$\u00a0CA.",
+    },
   },
   {
     name: 'Neurotech@Berkeley Symposium & Happy Hour', tag: 'Meetup', dateLabel: 'Dec 7, 2026 · 5–9 PM', end: '2026-12-07T21:00:00-08:00',
     location: 'Frontier Tower, San Francisco', url: 'https://luma.com/neurotechberkeley-showcase',
     desc: 'UC Berkeley undergraduate teams present their neurotech projects, live demos and published articles, followed by a mixer. Co-hosted by NeuroTechX — free with RSVP.',
+    fr: {
+      dateLabel: '7 déc. 2026 · 17 h à 21 h',
+      location: 'Frontier Tower, San Francisco',
+      desc: 'Des équipes étudiantes de premier cycle de UC Berkeley présentent leurs projets en neurotech, des démonstrations et des articles publiés, suivis d\'un cocktail réseautage. Coorganisé par NeuroTechX — gratuit, sur inscription.',
+    },
   },
   {
     name: 'BrainsConnected — SF Launch Event', tag: 'Meetup', dateLabel: 'Dec 9, 2026 · 6–9 PM', end: '2026-12-09T21:00:00-08:00',
     location: 'Frontier Tower, San Francisco', url: 'https://luma.com/brains-connected-launch-event',
     desc: 'Launch of BrainsConnected, a new web hub for consumer neurotech, with talks from its leadership team including Neurotech Reports founder James Cavuoto. Co-hosted by NeuroTechX.',
+    fr: {
+      dateLabel: '9 déc. 2026 · 18 h à 21 h',
+      location: 'Frontier Tower, San Francisco',
+      desc: 'Lancement de BrainsConnected, une nouvelle plateforme web sur la neurotech grand public, avec des présentations de son équipe de direction, dont James Cavuoto, fondateur de Neurotech Reports. Coorganisé par NeuroTechX.',
+    },
   },
   {
     name: 'NeurIPS 2026', tag: 'Conference', dateLabel: 'Dec 6–12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://neurips.cc/Conferences/2026/',
     desc: 'Flagship machine learning & computational neuroscience conference (satellites in Paris & Atlanta).',
+    fr: {
+      dateLabel: '6 au 12 déc. 2026',
+      location: 'Sydney, Australie',
+      desc: "Conférence phare en apprentissage automatique et en neurosciences computationnelles (antennes à Paris et à Atlanta).",
+    },
   },
   {
     name: 'Foundation Models for the Brain and Body — NeurIPS 2026 Workshop', tag: 'Workshop', dateLabel: 'Dec 12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://brainbodyfm-workshop.github.io/',
     desc: 'Second edition of the NeurIPS workshop on foundation models for neural & biosignal data; hosts the EEG/EMG Foundation Challenge winners.',
+    fr: {
+      dateLabel: '12 déc. 2026',
+      location: 'Sydney, Australie',
+      desc: "Deuxième édition de l'atelier NeurIPS sur les modèles de fondation pour les données neuronales et les biosignaux; on y remet les prix du EEG/EMG Foundation Challenge.",
+    },
   },
   {
     name: 'MAIN 2026 — Montreal AI & Neuroscience', tag: 'Conference', dateLabel: 'Dec 2026 · dates TBA', end: '2026-12-31',
     location: 'Montreal, QC', url: 'https://www.main2025.org/',
     desc: 'Annual Montreal conference at the intersection of AI and neuroscience.',
+    fr: {
+      dateLabel: 'Déc. 2026 · dates à confirmer',
+      location: 'Montréal (Québec)',
+      desc: "Conférence annuelle montréalaise à la croisée de l'intelligence artificielle et des neurosciences.",
+    },
   },
   // ── 2027 ──
   {
     name: 'FUN27 — Focused Ultrasound Neuromodulation Conference', tag: 'Conference', dateLabel: 'May 25–28, 2027 · abstracts due Jan 15', end: '2027-05-28',
     location: 'Washington University in St. Louis', url: 'https://itrusst.org/fun27',
     desc: 'ITRUSST\'s annual meeting on transcranial ultrasound stimulation. Regular abstracts are due January 15, 2027 (decisions February 19); late-breaking abstracts March 15.',
+    fr: {
+      dateLabel: '25 au 28 mai 2027',
+      location: 'Washington University in St. Louis',
+      desc: "Rencontre annuelle d'ITRUSST sur la stimulation transcrânienne par ultrasons. Résumés réguliers attendus le 15 janvier 2027 (décisions le 19 février); résumés de dernière heure, le 15 mars.",
+    },
   },
   {
     name: '12th International BCI Meeting', tag: 'Conference', dateLabel: 'Jun 7–10, 2027 · abstracts due Jan 15', end: '2027-06-10',
     location: 'Šibenik, Croatia', url: 'https://bcisociety.org/bci-meeting/',
     desc: "The BCI Society's meeting. Abstracts for oral and poster presentations are due January 15, 2027.",
+    fr: {
+      dateLabel: '7 au 10 juin 2027 · résumés avant le 15 janv.',
+      location: 'Šibenik, Croatie',
+      desc: 'La rencontre de la BCI Society. Les résumés pour les présentations orales et par affiches sont attendus le 15 janvier 2027.',
+    },
   },
 ];
 

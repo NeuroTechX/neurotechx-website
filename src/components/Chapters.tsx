@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { ArrowUpRight } from 'lucide-react';
 import WorldMap from './WorldMap';
 import { FEATURED_CHAPTERS, OTHER_CHAPTERS, STUDENT_CLUBS, STATUS_LABEL, STATUS_COLOR, type ChapterStatus } from '@/lib/chapters';
