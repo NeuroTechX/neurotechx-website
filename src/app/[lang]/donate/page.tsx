@@ -1,31 +1,32 @@
 import type { Metadata } from 'next';
 import { Heart } from 'lucide-react';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/donate';
 
-export const metadata: Metadata = {
-    title: 'Donate',
-    description:
-        'Support NeuroTechX (Société BCI Montréal), an all-volunteer non-profit advancing open neurotechnology education, tools, and chapters worldwide.',
-    alternates: { canonical: '/donate' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/donate'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/donate', lang) };
+}
 
-export default function DonatePage() {
+export default async function DonatePage({ params }: PageProps<'/[lang]/donate'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     return (
         <div className="container py-12 max-w-4xl">
             <div className="text-center mb-16">
-                <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">Support Our Mission</span>
-                <h1 className="text-5xl font-serif font-bold mb-6">Fuel the Neurotech Revolution</h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    NeuroTechX is an all-volunteer community. Your support directly funds our educational resources, open data initiatives, and local chapters.
-                </p>
+                <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">{t.eyebrow}</span>
+                <h1 className="text-5xl font-serif font-bold mb-6">{t.heading}</h1>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{t.lead}</p>
             </div>
 
             {/* Disclaimer Box */}
             <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 p-6 rounded-lg mb-12 text-center">
                 <p className="text-amber-800 dark:text-amber-200 text-sm font-medium">
-                    <strong>Please Note:</strong> NeuroTechX is a Canadian Non-Profit Organization (NPO),
-                    <span className="underline decoration-wavy underline-offset-2 ml-1">not a registered charity</span>.
+                    <strong>{t.noteLabel}</strong> {t.noteNpo}
+                    <span className="underline decoration-wavy underline-offset-2 ml-1">{t.noteCharity}</span>.
                     <br />
-                    Donations are <strong>not tax-deductible</strong>. We appreciate your direct support of our operational costs.
+                    {t.noteDeductibleBefore}<strong>{t.noteDeductible}</strong>{t.noteDeductibleAfter}
                 </p>
             </div>
 
@@ -37,22 +38,19 @@ export default function DonatePage() {
                             <Heart className="w-6 h-6 fill-current" />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold">Credit Card or PayPal</h2>
-                            <p className="text-muted-foreground">The simplest way to contribute.</p>
+                            <h2 className="text-2xl font-bold">{t.cardTitle}</h2>
+                            <p className="text-muted-foreground">{t.cardLead}</p>
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
                         <a href="https://www.paypal.com/donate/?hosted_button_id=D5FANXSC6A3UU" target="_blank" rel="noopener noreferrer" className="btn bg-[#0070BA] hover:bg-[#003087] text-white flex-1 py-4 text-lg">
-                            Donate via PayPal
+                            {t.paypal}
                         </a>
                         {/* Placeholder for Stripe or other processors */}
                     </div>
-                    <p className="text-xs text-muted-foreground mt-4 text-center">
-                        Secure payment processing. You can set up a monthly recurring donation.
-                    </p>
+                    <p className="text-xs text-muted-foreground mt-4 text-center">{t.secure}</p>
                 </section>
-
             </div>
         </div>
     );

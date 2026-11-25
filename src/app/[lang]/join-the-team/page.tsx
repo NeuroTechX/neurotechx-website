@@ -3,27 +3,26 @@ import Link from '@/components/LocaleLink';
 import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import { TEAM_CONTACT, teamRoles } from '@/data/team-roles';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/join-the-team';
 
-export const metadata: Metadata = {
-    title: 'Join the Team',
-    description:
-        'Volunteer roles NeuroTechX is looking to fill: community, Content Lab, chapters, website and open-source projects.',
-    alternates: { canonical: '/join-the-team' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/join-the-team'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang];
+    return { title: t.title, description: t.description, alternates: alternatesFor('/join-the-team', lang) };
+}
 
 const ctaClass = 'mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline';
 
-export default function JoinTheTeamPage() {
+export default async function JoinTheTeamPage({ params }: PageProps<'/[lang]/join-the-team'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang];
     return (
         <div className="container py-12">
-            <PageHeader
-                eyebrow="Join the Team"
-                title="Help run NeuroTechX"
-                subtitle="NeuroTechX is run by volunteers. These are the roles we would most like to fill."
-            />
+            <PageHeader eyebrow={t.title} title={t.heading} subtitle={t.subtitle} />
 
             <div className="grid gap-6 md:grid-cols-2">
-                {teamRoles.map((role) => (
+                {teamRoles[lang].map((role) => (
                     <section key={role.title} className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
                         <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{role.area}</p>
                         <h2 className="mb-2 text-xl font-bold">{role.title}</h2>
@@ -51,19 +50,19 @@ export default function JoinTheTeamPage() {
             </div>
 
             <section className="mt-12 max-w-3xl">
-                <h2 className="mb-3 text-2xl font-bold">Something else in mind?</h2>
+                <h2 className="mb-3 text-2xl font-bold">{t.otherTitle}</h2>
                 <p className="text-muted-foreground">
-                    If you would like to help in a way that is not listed here, write to{' '}
+                    {t.otherBefore}{' '}
                     <a className="text-neuro-accent underline" href={`mailto:${TEAM_CONTACT}`}>{TEAM_CONTACT}</a>{' '}
-                    and tell us what you would like to do.
+                    {t.otherAfter}
                 </p>
                 <p className="mt-4 text-muted-foreground">
-                    How joining works, and what we ask of volunteers, is in the{' '}
-                    <Link className="text-neuro-accent underline" href="/handbook">volunteer handbook</Link>.
+                    {t.handbookBefore}{' '}
+                    <Link className="text-neuro-accent underline" href="/handbook">{t.handbookLink}</Link>.
                 </p>
                 <p className="mt-4 text-muted-foreground">
-                    Looking for paid work in neurotechnology? See the{' '}
-                    <Link className="text-neuro-accent underline" href="/jobs">jobs page</Link>.
+                    {t.jobsBefore}{' '}
+                    <Link className="text-neuro-accent underline" href="/jobs">{t.jobsLink}</Link>.
                 </p>
             </section>
         </div>

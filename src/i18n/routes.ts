@@ -71,7 +71,10 @@ export function parsePublicPath(pathname: string): [Locale, string] {
 
 // Pages whose body text exists in French. Every other page shows the French menu and footer
 // with its English text and a notice. Add a route here when its French version is merged.
-export const TRANSLATED_ROUTES = new Set<string>(['/', '/events', '/about', '/community']);
+export const TRANSLATED_ROUTES = new Set<string>([
+  '/', '/events', '/about', '/community',
+  '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
+]);
 
 /** True for an existing page whose body is still English only (unknown addresses are 404s, which are translated). */
 export const needsTranslation = (routePath: string) =>
