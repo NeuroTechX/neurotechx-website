@@ -79,9 +79,16 @@ export const TRANSLATED_ROUTES = new Set<string>([
   '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
 ]);
 
+// Sections translated as a whole, including the pages made from data under them (/jobs/eeg).
+const TRANSLATED_SECTIONS = ['/jobs'];
+
+export const isTranslated = (routePath: string) =>
+  TRANSLATED_ROUTES.has(routePath) ||
+  TRANSLATED_SECTIONS.some((section) => routePath === section || routePath.startsWith(`${section}/`));
+
 /** True for an existing page whose body is still English only (unknown addresses are 404s, which are translated). */
 export const needsTranslation = (routePath: string) =>
-  !TRANSLATED_ROUTES.has(routePath) && routePath.split('/')[1] in FR_SEGMENTS;
+  !isTranslated(routePath) && routePath.split('/')[1] in FR_SEGMENTS;
 
 /**
  * Metadata `alternates` for a translated page: its own address as canonical, plus hreflang

@@ -3,8 +3,12 @@
 import { useMemo, useState } from 'react';
 import { ArrowUpRight, MapPin, Search } from 'lucide-react';
 import { REGIONS, ROLES, TOPICS, type Job } from '@/lib/job-boards';
+import { format, type Locale } from '@/i18n';
+import type text from '@/i18n/pages/jobs';
 
-const DATE = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+type Text = Pick<(typeof text)[Locale], 'browser' | 'topics' | 'roles' | 'regions'>;
+
+const DATE_LOCALE: Record<Locale, string> = { en: 'en-US', fr: 'fr-CA' };
 
 const FIELD =
   'h-11 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-1)] px-3 text-sm text-foreground focus:border-neuro-accent focus:outline-none';
@@ -36,7 +40,12 @@ function Select({
 const PAGE = 60;
 
 // Search and filters over the roles it is given.
-export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
+export default function JobsBrowser({ jobs, lang, t }: { jobs: Job[]; lang: Locale; t: Text }) {
+  const b = t.browser;
+  const date = useMemo(
+    () => new Intl.DateTimeFormat(DATE_LOCALE[lang], { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }),
+    [lang]
+  );
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('');
   const [role, setRole] = useState('');
@@ -46,19 +55,19 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
   const [limit, setLimit] = useState(PAGE);
 
   const options = useMemo(() => {
-    const present = (labels: Record<string, string>, has: (job: Job, key: string) => boolean) =>
-      Object.entries(labels).filter(([key]) => jobs.some((job) => has(job, key)));
+    const present = (keys: string[], labels: Record<string, string>, has: (job: Job, key: string) => boolean) =>
+      keys.filter((key) => jobs.some((job) => has(job, key))).map((key) => [key, labels[key] ?? key] as [string, string]);
     return {
-      topics: present(TOPICS, (job, key) => job.topics.includes(key)),
-      roles: present(ROLES, (job, key) => job.role === key),
+      topics: present(TOPICS, t.topics, (job, key) => job.topics.includes(key)),
+      roles: present(ROLES, t.roles, (job, key) => job.role === key),
       regions: [
-        ...present(REGIONS, (job, key) => job.regions.includes(key)),
-        ...(jobs.some((job) => job.remote) ? [['remote', 'Remote'] as [string, string]] : []),
+        ...present(REGIONS, t.regions, (job, key) => job.regions.includes(key)),
+        ...(jobs.some((job) => job.remote) ? [['remote', t.regions.remote] as [string, string]] : []),
       ],
       companies: [...new Set(jobs.map((job) => job.company))].sort().map((name) => [name, name] as [string, string]),
       internships: jobs.some((job) => job.internship) && !jobs.every((job) => job.internship),
     };
-  }, [jobs]);
+  }, [jobs, t]);
 
   const shown = useMemo(() => {
     const words = query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -88,20 +97,20 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <label className="relative min-w-[16rem] flex-1">
-          <span className="sr-only">Search roles</span>
+          <span className="sr-only">{b.search}</span>
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by title, company or place"
+            placeholder={b.placeholder}
             className={`${FIELD} w-full pl-9`}
           />
         </label>
-        <Select label="All topics" value={topic} onChange={setTopic} options={options.topics} />
-        <Select label="All role types" value={role} onChange={setRole} options={options.roles} />
-        <Select label="All regions" value={region} onChange={setRegion} options={options.regions} />
-        <Select label="All companies" value={company} onChange={setCompany} options={options.companies} />
+        <Select label={b.allTopics} value={topic} onChange={setTopic} options={options.topics} />
+        <Select label={b.allRoles} value={role} onChange={setRole} options={options.roles} />
+        <Select label={b.allRegions} value={region} onChange={setRegion} options={options.regions} />
+        <Select label={b.allCompanies} value={company} onChange={setCompany} options={options.companies} />
         {options.internships && (
           <label className="flex h-11 cursor-pointer items-center gap-2 text-sm text-muted-foreground">
             <input
@@ -110,23 +119,25 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
               onChange={(e) => setInternships(e.target.checked)}
               className="h-4 w-4 accent-[var(--neuro-accent)]"
             />
-            Internships only
+            {b.internshipsOnly}
           </label>
         )}
       </div>
 
       <p className="mb-4 text-sm text-muted-foreground" aria-live="polite">
-        {filtered ? `${shown.length} of ${jobs.length} roles` : `${jobs.length} roles`}
+        {filtered
+          ? format(b.countFiltered, { shown: shown.length, total: jobs.length })
+          : format(b.count, { total: jobs.length })}
         {filtered && (
           <button type="button" onClick={reset} className="ml-3 text-neuro-accent hover:underline">
-            Clear filters
+            {b.clear}
           </button>
         )}
       </p>
 
       {shown.length === 0 ? (
         <p className="rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8 text-center text-muted-foreground">
-          No roles match. Try fewer filters.
+          {b.none}
         </p>
       ) : (
         <ul className="divide-y divide-[var(--border)] overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)]">
@@ -142,12 +153,12 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
                     {job.title}
                     {job.isNew && (
                       <span className="ml-2 rounded-full bg-neuro-accent/15 px-2 py-0.5 align-middle text-xs font-bold text-neuro-accent">
-                        New
+                        {b.isNew}
                       </span>
                     )}
                     {job.posted && (
                       <span className="ml-2 rounded-full border border-[var(--border-strong)] px-2 py-0.5 align-middle text-xs font-semibold text-muted-foreground">
-                        Posted by NeuroTechX
+                        {b.postedBy}
                       </span>
                     )}
                   </h3>
@@ -159,12 +170,12 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
                         {job.location}
                       </span>
                     )}
-                    {job.remote && !/remote/i.test(job.location) && <span>Remote</span>}
+                    {job.remote && !/remote/i.test(job.location) && <span>{b.remote}</span>}
                   </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3 text-xs text-muted-foreground md:justify-end">
-                  <span className="whitespace-nowrap rounded-full border border-[var(--border-strong)] px-2.5 py-1">{ROLES[job.role]}</span>
-                  {job.postedAt && <time className="whitespace-nowrap" dateTime={job.postedAt}>{DATE.format(new Date(job.postedAt))}</time>}
+                  <span className="whitespace-nowrap rounded-full border border-[var(--border-strong)] px-2.5 py-1">{t.roles[job.role as keyof Text['roles']] ?? job.role}</span>
+                  {job.postedAt && <time className="whitespace-nowrap" dateTime={job.postedAt}>{date.format(new Date(job.postedAt))}</time>}
                   <ArrowUpRight className="h-4 w-4 shrink-0 group-hover:text-neuro-accent" />
                 </div>
               </a>
@@ -180,7 +191,7 @@ export default function JobsBrowser({ jobs }: { jobs: Job[] }) {
             onClick={() => setLimit(limit + PAGE)}
             className="rounded-full border border-foreground/20 px-7 py-3 font-bold transition-colors hover:bg-muted-foreground/10"
           >
-            Show more roles ({shown.length - limit} left)
+            {format(b.more, { n: shown.length - limit })}
           </button>
         </div>
       )}
