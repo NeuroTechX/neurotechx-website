@@ -6,6 +6,9 @@ import matter from 'gray-matter';
 // Two documentation repositories are published as pages on this site, never linked to on GitHub.
 // Each page listed in a repository's index.rst toctree is converted with pandoc to
 // src/content/<collection>/<slug>.mdx, and the table of contents is written to _index.json.
+// French translations live in the repository's fr/ folder (fr/index.rst plus one fr/<page>.rst
+// per translated page); they become <slug>.fr.mdx and _index.fr.json. The site addresses that
+// have French text are listed in src/content/translated-routes.json.
 const SOURCES = [
     {
         name: 'NTX-dockit',
@@ -28,6 +31,11 @@ const SOURCES = [
             'chapter-onboarding': 'Starting a Chapter',
             'student-club-onboarding': 'Starting a Student Club',
         },
+        titlesFr: {
+            'chapter-onboarding': 'Fonder une section locale',
+            'student-club-onboarding': 'Fonder un club étudiant',
+            conduct: 'Code de conduite',
+        },
     },
     {
         name: 'NTX-handbook',
@@ -37,24 +45,27 @@ const SOURCES = [
         routes: {},
         skip: [],
         titles: {},
+        titlesFr: {},
     },
 ];
+
+const TRANSLATED_ROUTES = 'src/content/translated-routes.json';
 
 // Old Read the Docs addresses of the dockit, rewritten to the site
 const READTHEDOCS = /https?:\/\/ntx-dockit\.readthedocs\.(?:io|org)\/en\/latest\/?([A-Za-z0-9-]*)(?:\.html)?/g;
 
 function syncAll() {
     const allRoutes = {};
-    const allTitles = {};
+    const allTitles = { en: {}, fr: {} };
     const converted = SOURCES.map((source) => {
         const result = convertSource(source);
         Object.assign(allRoutes, result.routes);
-        for (const [slug, page] of Object.entries(result.pages)) allTitles[slug] = page.title;
+        for (const [slug, page] of Object.entries(result.pages)) allTitles.en[slug] = page.title;
+        for (const [slug, page] of Object.entries(result.fr?.pages ?? {})) allTitles.fr[slug] = page.title;
         return result;
     });
-    for (const result of converted) {
-        writeSource(result, allRoutes, allTitles);
-    }
+    const translated = converted.flatMap((result) => writeSource(result, allRoutes, allTitles));
+    writeFileIfChanged(TRANSLATED_ROUTES, `${JSON.stringify([...new Set(translated)].sort(), null, 2)}\n`);
     console.log('Sync complete.');
 }
 
@@ -62,65 +73,109 @@ function convertSource(source) {
     const tempDir = path.join(process.cwd(), `temp_sync_${source.name}`);
     console.log(`Cloning ${source.repo}...`);
     fs.rmSync(tempDir, { recursive: true, force: true });
-    execFileSync('git', ['clone', '--depth', '1', source.repo, tempDir], { stdio: 'inherit' });
+    // SYNC_FROM=<folder> clones <folder>/<name> instead, to preview a local branch
+    const from = process.env.SYNC_FROM ? path.resolve(process.env.SYNC_FROM, source.name) : source.repo;
+    execFileSync('git', ['clone', '--depth', '1', from, tempDir], { stdio: 'inherit' });
     const branch = execFileSync('git', ['-C', tempDir, 'rev-parse', '--abbrev-ref', 'HEAD']).toString().trim();
 
     const sections = parseToctree(fs.readFileSync(path.join(tempDir, 'index.rst'), 'utf8'));
     const routes = {};
-    const pages = {};
     for (const section of sections) {
         for (const file of section.pages) {
             const slug = file.toLowerCase();
             routes[slug] = source.routes[slug] || `${source.basePath}/${slug}`;
+        }
+    }
+    const pages = convertPages(source, tempDir, '', sections, source.titles);
+
+    // French: only the pages that have a translation in fr/
+    let fr = null;
+    const frIndex = path.join(tempDir, 'fr', 'index.rst');
+    if (fs.existsSync(frIndex)) {
+        const frSections = parseToctree(fs.readFileSync(frIndex, 'utf8'));
+        fr = { sections: frSections, pages: convertPages(source, tempDir, 'fr/', frSections, source.titlesFr) };
+    }
+    fs.rmSync(tempDir, { recursive: true, force: true });
+    return { source, sections, routes, pages, fr, branch };
+}
+
+function convertPages(source, dir, prefix, sections, titles) {
+    const pages = {};
+    for (const section of sections) {
+        for (const file of section.pages) {
+            const slug = file.toLowerCase();
             if (source.skip.includes(slug)) continue;
-            const rstPath = path.join(tempDir, `${file}.rst`);
+            const rstPath = path.join(dir, `${prefix}${file}.rst`);
             if (!fs.existsSync(rstPath)) {
-                console.warn(`Warning: ${source.name} page ${file}.rst not found.`);
+                // A page without a French translation yet is shown in English
+                if (!prefix) console.warn(`Warning: ${source.name} page ${file}.rst not found.`);
                 continue;
             }
             const markdown = execFileSync('pandoc', [rstPath, '-f', 'rst', '-t', 'gfm', '--wrap=none']).toString();
-            const title = source.titles[slug] || (markdown.match(/^# (.+)$/m) || [])[1] || prettify(slug);
-            pages[slug] = { markdown, title, file };
+            // Titles are plain text: drop pandoc's Markdown escapes ("\\#HackNights")
+            const heading = (markdown.match(/^# (.+)$/m) || [])[1]?.replace(/\\([\\`*_{}\[\]()#+.!-])/g, '$1');
+            const title = titles[slug] || heading || prettify(slug);
+            pages[slug] = { markdown, title, file: `${prefix}${file}` };
         }
     }
-    fs.rmSync(tempDir, { recursive: true, force: true });
-    return { source, sections, routes, pages, branch };
+    return pages;
 }
 
-function writeSource({ source, sections, routes, pages, branch }, allRoutes, allTitles) {
+// Writes the pages and table of contents of one repository; returns the site addresses with French text.
+function writeSource({ source, sections, routes, pages, fr, branch }, allRoutes, allTitles) {
     const outDir = path.join(process.cwd(), source.outDir);
     fs.mkdirSync(outDir, { recursive: true });
+    const frPages = fr?.pages ?? {};
 
-    for (const [slug, { markdown, title, file }] of Object.entries(pages)) {
-        const body = sanitizeMdx(linkReferences(markdown, allRoutes, allTitles));
-        writeIfChanged(path.join(outDir, `${slug}.mdx`), body, {
-            title,
-            // Kept for maintainers; not shown on the site
-            sourceUrl: `${source.repo.replace('.git', '')}/blob/${branch}/${file}.rst`,
-            updatedAt: new Date().toISOString().split('T')[0],
-        });
-    }
+    const write = (pageSet, suffix, titles) => {
+        for (const [slug, { markdown, title, file }] of Object.entries(pageSet)) {
+            const body = sanitizeMdx(linkReferences(markdown, allRoutes, titles));
+            writeIfChanged(path.join(outDir, `${slug}${suffix}.mdx`), body, {
+                title,
+                // Kept for maintainers; not shown on the site
+                sourceUrl: `${source.repo.replace('.git', '')}/blob/${branch}/${file}.rst`,
+                updatedAt: new Date().toISOString().split('T')[0],
+            });
+        }
+    };
+    write(pages, '', allTitles.en);
+    // Untranslated pages link to the English title
+    write(frPages, '.fr', { ...allTitles.en, ...allTitles.fr });
 
     // Pages removed upstream disappear from the site too
     for (const file of fs.readdirSync(outDir)) {
-        if (file.endsWith('.mdx') && !pages[file.replace('.mdx', '')]) {
+        const french = file.endsWith('.fr.mdx');
+        const slug = file.replace(/(\.fr)?\.mdx$/, '');
+        if (file.endsWith('.mdx') && !(french ? frPages[slug] : pages[slug])) {
             fs.rmSync(path.join(outDir, file));
             console.log(`Removed ${file}`);
         }
     }
 
-    const index = sections.map((section) => ({
+    const toc = (tocSections, pageTitle) => tocSections.map((section) => ({
         heading: section.heading,
         pages: section.pages
             .map((file) => file.toLowerCase())
             .filter((slug) => pages[slug] || routes[slug] !== `${source.basePath}/${slug}`)
-            .map((slug) => ({ slug, title: pages[slug]?.title || prettify(slug), href: routes[slug] })),
+            .map((slug) => ({ slug, title: pageTitle(slug), href: routes[slug] })),
     }));
-    const indexPath = path.join(outDir, '_index.json');
-    const indexJson = `${JSON.stringify(index, null, 2)}\n`;
-    if (!fs.existsSync(indexPath) || fs.readFileSync(indexPath, 'utf8') !== indexJson) {
-        fs.writeFileSync(indexPath, indexJson);
-        console.log(`Saved ${indexPath}`);
+    const english = (slug) => pages[slug]?.title || prettify(slug);
+    writeFileIfChanged(path.join(outDir, '_index.json'), `${JSON.stringify(toc(sections, english), null, 2)}\n`);
+
+    const frIndexPath = path.join(outDir, '_index.fr.json');
+    if (!fr) {
+        if (fs.existsSync(frIndexPath)) fs.rmSync(frIndexPath);
+        return [];
+    }
+    const french = (slug) => frPages[slug]?.title || source.titlesFr[slug] || allTitles.fr[slug] || english(slug);
+    writeFileIfChanged(frIndexPath, `${JSON.stringify(toc(fr.sections, french), null, 2)}\n`);
+    return [source.basePath, ...Object.keys(frPages).map((slug) => routes[slug])];
+}
+
+function writeFileIfChanged(filePath, text) {
+    if (!fs.existsSync(filePath) || fs.readFileSync(filePath, 'utf8') !== text) {
+        fs.writeFileSync(filePath, text);
+        console.log(`Saved ${filePath}`);
     }
 }
 

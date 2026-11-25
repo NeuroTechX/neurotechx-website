@@ -1,0 +1,117 @@
+[
+  {
+    "heading": "Découvrir NeuroTechX",
+    "pages": [
+      {
+        "slug": "about",
+        "title": "À propos",
+        "href": "/guide/about"
+      },
+      {
+        "slug": "initiatives",
+        "title": "Initiatives",
+        "href": "/guide/initiatives"
+      },
+      {
+        "slug": "conduct",
+        "title": "Code de conduite",
+        "href": "/code-of-conduct"
+      },
+      {
+        "slug": "social-media",
+        "title": "Médias sociaux de NTX",
+        "href": "/guide/social-media"
+      }
+    ]
+  },
+  {
+    "heading": "Lignes directrices des sections",
+    "pages": [
+      {
+        "slug": "chapter-guidelines",
+        "title": "Lignes directrices des sections locales",
+        "href": "/community/chapter-guidelines"
+      },
+      {
+        "slug": "expectations",
+        "title": "Attentes envers les administrateurs et administratrices de section",
+        "href": "/guide/expectations"
+      },
+      {
+        "slug": "resources",
+        "title": "Ressources",
+        "href": "/education/resources"
+      },
+      {
+        "slug": "sponsorship",
+        "title": "Commandite et partenariat",
+        "href": "/guide/sponsorship"
+      }
+    ]
+  },
+  {
+    "heading": "Faire grandir une communauté",
+    "pages": [
+      {
+        "slug": "community-growth",
+        "title": "Faire grandir votre communauté",
+        "href": "/community/growth"
+      },
+      {
+        "slug": "meetups",
+        "title": "Rencontres",
+        "href": "/guide/meetups"
+      },
+      {
+        "slug": "hacknights",
+        "title": "#HackNights et tutoriels",
+        "href": "/guide/hacknights"
+      }
+    ]
+  },
+  {
+    "heading": "Pour commencer",
+    "pages": [
+      {
+        "slug": "getting-started",
+        "title": "Premiers pas",
+        "href": "/education/getting-started"
+      },
+      {
+        "slug": "chapter-onboarding",
+        "title": "Fonder une section locale",
+        "href": "/community/start-a-chapter"
+      },
+      {
+        "slug": "student-club-onboarding",
+        "title": "Fonder un club étudiant",
+        "href": "/students/start-a-club"
+      }
+    ]
+  },
+  {
+    "heading": "FAQ",
+    "pages": [
+      {
+        "slug": "faq",
+        "title": "Foire aux questions",
+        "href": "/guide/faq"
+      }
+    ]
+  },
+  {
+    "heading": "Contacts",
+    "pages": [
+      {
+        "slug": "contact",
+        "title": "Contacts",
+        "href": "/guide/contact"
+      },
+      {
+        "slug": "team",
+        "title": "Équipe",
+        "href": "/guide/team"
+      }
+    ]
+  }
+]

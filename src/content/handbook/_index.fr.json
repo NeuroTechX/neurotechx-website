@@ -1,0 +1,82 @@
+[
+  {
+    "heading": "Pour commencer",
+    "pages": [
+      {
+        "slug": "welcome",
+        "title": "Bienvenue",
+        "href": "/handbook/welcome"
+      },
+      {
+        "slug": "joining",
+        "title": "Se joindre à nous",
+        "href": "/handbook/joining"
+      },
+      {
+        "slug": "agreement",
+        "title": "L'entente de contribution",
+        "href": "/handbook/agreement"
+      }
+    ]
+  },
+  {
+    "heading": "Notre fonctionnement",
+    "pages": [
+      {
+        "slug": "organization",
+        "title": "L'organisation de NeuroTechX",
+        "href": "/handbook/organization"
+      },
+      {
+        "slug": "tools-and-access",
+        "title": "Outils et accès",
+        "href": "/handbook/tools-and-access"
+      },
+      {
+        "slug": "working-together",
+        "title": "Travailler ensemble",
+        "href": "/handbook/working-together"
+      },
+      {
+        "slug": "privacy",
+        "title": "Renseignements personnels",
+        "href": "/handbook/privacy"
+      },
+      {
+        "slug": "money",
+        "title": "Argent",
+        "href": "/handbook/money"
+      },
+      {
+        "slug": "open-source",
+        "title": "Code, contenu et licences",
+        "href": "/handbook/open-source"
+      },
+      {
+        "slug": "leaving",
+        "title": "Prendre du recul ou partir",
+        "href": "/handbook/leaving"
+      }
+    ]
+  },
+  {
+    "heading": "Pour les responsables de l'intégration",
+    "pages": [
+      {
+        "slug": "onboarders",
+        "title": "Liste de vérification pour l'intégration",
+        "href": "/handbook/onboarders"
+      },
+      {
+        "slug": "roles",
+        "title": "Rôles",
+        "href": "/handbook/roles"
+      },
+      {
+        "slug": "contacts",
+        "title": "Contacts",
+        "href": "/handbook/contacts"
+      }
+    ]
+  }
+]

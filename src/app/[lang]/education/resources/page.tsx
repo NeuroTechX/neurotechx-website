@@ -1,24 +1,11 @@
 import type { Metadata } from 'next';
-import { getDockitContent } from '@/lib/dockit';
-import { DockitRenderer } from '@/components/DockitRenderer';
-import { notFound } from 'next/navigation';
+import DockitPage, { dockitMetadata } from '@/components/DockitPage';
+import { pageLocale } from '@/i18n';
 
-export const metadata: Metadata = {
-    title: 'Chapter Resources',
-    description: 'NeuroTechX branding assets, organizer templates, and neurotechnology reference links.',
-    alternates: { canonical: '/education/resources' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/education/resources'>): Promise<Metadata> {
+    return dockitMetadata('resources', '/education/resources', await pageLocale(params));
+}
 
-export default function EducationResourcesPage() {
-    const content = getDockitContent('resources');
-
-    if (!content) {
-        notFound();
-    }
-
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <DockitRenderer content={content} />
-        </div>
-    );
+export default async function ResourcesPage({ params }: PageProps<'/[lang]/education/resources'>) {
+    return <DockitPage slug="resources" lang={await pageLocale(params)} />;
 }

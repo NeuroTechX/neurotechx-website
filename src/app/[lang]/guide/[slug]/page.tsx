@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import Link from '@/components/LocaleLink';
 import { notFound } from 'next/navigation';
 import { DockitRenderer } from '@/components/DockitRenderer';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/guide';
 import { getContent, getSections } from '@/lib/dockit';
 
-type Params = { slug: string };
+type Props = PageProps<'/[lang]/guide/[slug]'>;
 
 // Pages with their own address elsewhere on the site (e.g. /community/growth) are not repeated here
 function guidePages() {
@@ -13,30 +15,34 @@ function guidePages() {
         .filter((page) => page.href === `/guide/${page.slug}`);
 }
 
-export function generateStaticParams(): Params[] {
+export function generateStaticParams(): { slug: string }[] {
     return guidePages().map((page) => ({ slug: page.slug }));
 }
 
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const lang = await pageLocale(params);
     const { slug } = await params;
-    const content = getContent('dockit', slug);
+    const content = getContent('dockit', slug, lang);
+    const name = text[content?.lang ?? lang].guide.title;
     return {
-        title: content ? `${content.frontmatter.title} · Chapter and Club Guide` : 'Chapter and Club Guide',
-        alternates: { canonical: `/guide/${slug}` },
+        title: content ? `${content.frontmatter.title} · ${name}` : name,
+        // Until it has French text, the French address points search engines at the English page
+        alternates: content?.lang === lang ? alternatesFor(`/guide/${slug}`, lang) : { canonical: `/guide/${slug}` },
     };
 }
 
-export default async function GuideArticlePage({ params }: { params: Promise<Params> }) {
+export default async function GuideArticlePage({ params }: Props) {
+    const lang = await pageLocale(params);
     const { slug } = await params;
-    const content = getContent('dockit', slug);
+    const content = getContent('dockit', slug, lang);
     if (!content) {
         notFound();
     }
 
     // Previous and next page in the guide's own order
-    const order = getSections('dockit').flatMap((section) => section.pages);
+    const order = getSections('dockit', lang).flatMap((section) => section.pages);
     const at = order.findIndex((page) => page.slug === slug);
     const prev = order[at - 1];
     const next = order[at + 1];
@@ -44,7 +50,7 @@ export default async function GuideArticlePage({ params }: { params: Promise<Par
     return (
         <div className="container mx-auto px-4 py-8">
             <p className="mb-6 text-sm">
-                <Link href="/guide" className="text-neuro-accent hover:underline">← Chapter and club guide</Link>
+                <Link href="/guide" className="text-neuro-accent hover:underline">{text[lang].guide.back}</Link>
             </p>
             <DockitRenderer content={content} />
             <nav className="mt-12 flex justify-between gap-4 border-t border-[var(--border)] pt-6 text-sm">
