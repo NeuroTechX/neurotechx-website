@@ -248,7 +248,7 @@ export default bilingual(
           items: [
             {
               name: 'Accélérateurs et financement',
-              body: "NERVE et NERD de l'Ontario Brain Institute, l'accélérateur de MSWA à Perth, NeuroTech Harbor et d'autres, avec leurs dates limites.",
+              body: "NERVE et NERD de l'Ontario Brain Institute, le volet Neuro du Creative Destruction Lab, l'accélérateur de MSWA à Perth, NeuroTech Harbor et d'autres, avec leurs dates limites.",
               href: '/funding',
               english: false,
             },
@@ -525,7 +525,7 @@ export default bilingual(
           items: [
             {
               name: 'Accelerators and funding',
-              body: "The Ontario Brain Institute's NERVE and NERD, MSWA's accelerator in Perth, NeuroTech Harbor and more, with their deadlines.",
+              body: "The Ontario Brain Institute's NERVE and NERD, Creative Destruction Lab's Neuro stream, MSWA's accelerator in Perth, NeuroTech Harbor and more, with their deadlines.",
               href: '/funding',
               english: false,
             },
