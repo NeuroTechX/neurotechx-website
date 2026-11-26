@@ -201,6 +201,61 @@ export default bilingual(
         ],
       },
     },
+    launch: {
+      eyebrow: 'Et ensuite',
+      title: 'De la formation à la jeune pousse',
+      lead: "Vous voulez transformer une idée en produit? Ces programmes s'enchaînent bien. Les étapes 1 et 2 peuvent se faire dans l'ordre qui vous convient : commencez par l'étape 2 si vous venez du génie, par l'étape 1 si vous venez des neurosciences ou de la clinique.",
+      stages: [
+        {
+          title: 'Apprendre le chemin vers le marché',
+          body: 'Réglementation, essais cliniques, propriété intellectuelle, financement et remboursement.',
+          items: [
+            {
+              name: 'NeuroTech Course',
+              body: "Cours en ligne gratuit et à votre rythme, financé par les NIH, avec certificat en transfert des neurotechnologies et un atelier pratique.",
+              href: 'https://www.neurotechcourse.org/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Approfondir, avec une attestation',
+          body: "L'enregistrement, la neuroimagerie, la neuromodulation, l'entrepreneuriat et l'éthique, puis un projet pratique.",
+          items: [
+            {
+              name: 'NeuroTech Microcredential Program',
+              body: "Queen's, Western, York et Nipissing. Modules en ligne d'environ 50 heures et projet intégrateur facultatif de deux semaines sur un campus.",
+              href: 'https://neurotechmicrocreds.com/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Former une équipe et une entreprise',
+          body: 'Partir d’un vrai besoin clinique, bâtir le modèle d’affaires et présenter devant des investisseurs.',
+          items: [
+            {
+              name: 'NeuroDesign Entrepreneurs Workshop',
+              body: "Atelier annuel à Cleveland (septembre), désormais aussi à Munich, avec des mentors de l'industrie. Gratuit pour les étudiants admis.",
+              href: 'https://www.clevelandneurodesign.com/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Accélérer',
+          body: 'Financement, mentorat et premiers essais avec des patients.',
+          items: [
+            {
+              name: 'Accélérateurs et financement',
+              body: "NERVE et NERD de l'Ontario Brain Institute, l'accélérateur de MSWA à Perth, NeuroTech Harbor et d'autres, avec leurs dates limites.",
+              href: '/funding',
+              english: false,
+            },
+          ],
+        },
+      ],
+    },
     further: {
       title: 'Pour aller plus loin',
       body: "Microcertification, programmes de maîtrise, données ouvertes, outils d'analyse et écoles d'été : toutes nos ressources choisies sont sur la page Formation.",
@@ -422,6 +477,61 @@ export default bilingual(
           },
         ],
       },
+    },
+    launch: {
+      eyebrow: 'What comes next',
+      title: 'From learning to launching',
+      lead: "Want to turn an idea into a product? These programmes build on each other. Take stages 1 and 2 in whichever order suits you: start with stage 2 if you come from engineering, with stage 1 if you come from neuroscience or the clinic.",
+      stages: [
+        {
+          title: 'Learn the path to market',
+          body: 'Regulation, clinical trials, intellectual property, funding and reimbursement.',
+          items: [
+            {
+              name: 'NeuroTech Course',
+              body: 'Free, self-paced and NIH-funded, with a Certificate in Neurotechnology Translation and a hands-on workshop.',
+              href: 'https://www.neurotechcourse.org/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Go deeper, with a credential',
+          body: 'Recording, neuroimaging, neuromodulation, entrepreneurship and ethics, then a hands-on project.',
+          items: [
+            {
+              name: 'NeuroTech Microcredential Program',
+              body: "Queen's, Western, York and Nipissing. Online modules of about 50 hours each and an optional two-week capstone on campus.",
+              href: 'https://neurotechmicrocreds.com/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Form a team and a venture',
+          body: 'Start from a real clinical need, build the business model and pitch to investors.',
+          items: [
+            {
+              name: 'NeuroDesign Entrepreneurs Workshop',
+              body: 'Annual in Cleveland (September), now also in Munich, with industry mentors. Free for accepted students.',
+              href: 'https://www.clevelandneurodesign.com/',
+              english: true,
+            },
+          ],
+        },
+        {
+          title: 'Accelerate',
+          body: 'Funding, mentors and first trials with patients.',
+          items: [
+            {
+              name: 'Accelerators and funding',
+              body: "The Ontario Brain Institute's NERVE and NERD, MSWA's accelerator in Perth, NeuroTech Harbor and more, with their deadlines.",
+              href: '/funding',
+              english: false,
+            },
+          ],
+        },
+      ],
     },
     further: {
       title: 'Going further',

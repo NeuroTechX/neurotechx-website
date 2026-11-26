@@ -115,6 +115,31 @@ const fr: FundingOpportunity[] = [
         href: 'https://braininstitute.ca/programs-opportunities/nerve-program',
     },
     {
+        name: 'NERD: Neurotech Early Research and Development',
+        funder: 'Ontario Brain Institute',
+        audience: 'startups',
+        who: "Entreprises qui commercialisent une neurotechnologie et dont le produit a dépassé le stade des subventions de recherche sans être prêt pour le capital privé. Un investissement par jalons, versé directement aux organismes de recherche contractuelle et aux fournisseurs de services; l'entreprise garde toute sa propriété intellectuelle. L'étape naturelle après NERVE.",
+        timing: "En continu; communiquez avec l'OBI",
+        href: 'https://braininstitute.ca/programs-opportunities/nerd',
+    },
+    {
+        name: 'CORTEX: Community-Led Real-World Neurotech Experience',
+        funder: 'Ontario Brain Institute',
+        audience: 'startups',
+        who: "Entreprises neurotech et organismes communautaires qui veulent tester une neurotechnologie dans la vraie vie, auprès des personnes atteintes d'un trouble du cerveau et de leurs proches, avec des échelles cliniques et des mesures rapportées par les patients. Près de 1\u00a0500 participants dans 10 collaborations en 2025.",
+        timing: "En continu; communiquez avec l'OBI",
+        href: 'https://braininstitute.ca/programs-opportunities/cortex',
+    },
+    {
+        name: 'MS & Neurological Care Accelerator',
+        funder: 'MSWA et Founders Factory',
+        audience: 'startups',
+        who: "Jeunes pousses en démarrage de partout dans le monde qui utilisent l'IA, la robotique, les dispositifs portables ou la santé numérique pour la sclérose en plaques, l'AVC, la maladie de Parkinson, la maladie de Huntington, la maladie du motoneurone ou les lésions cérébrales acquises. Programme de 16 semaines basé à Perth (Australie), avec des essais auprès du réseau clinique et de la communauté de MSWA. Première cohorte de cinq jeunes pousses en juin 2026, dont une interface cerveau-ordinateur sous-cutanée pour la parole.",
+        amount: "200\u00a0000\u00a0AUD d'investissement en argent",
+        timing: 'Inscriptions ouvertes; aucune date limite publiée',
+        href: 'https://foundersfactory.com/mswa-ms-neurological-care-accelerator/',
+    },
+    {
         name: 'NIA Start-Up Challenge and Accelerator',
         funder: 'National Institute on Aging des NIH',
         audience: 'startups',
@@ -313,6 +338,15 @@ const fr: FundingOpportunity[] = [
         timing: 'Annuel; prochaine période prévue en septembre et octobre 2027',
         href: 'https://ibro.org/grant/brain-awareness-week-grants/',
     },
+    {
+        name: 'Event Funding Program',
+        funder: 'Ontario Brain Institute',
+        audience: 'outreach',
+        who: "Organismes sans but lucratif enregistrés (universités, collèges, hôpitaux, instituts de recherche, fondations, groupes de patients) qui tiennent un événement sur la santé du cerveau en Ontario. Les clubs étudiants et les sections locales présentent leur demande par l'entremise d'un de ces organismes, par exemple leur université.",
+        amount: "Jusqu'à 5\u00a0000\u00a0CAD",
+        timing: "Deux périodes par année : en mars (événements d'avril à septembre) et en août (événements d'octobre à mars)",
+        href: 'https://braininstitute.ca/programs-opportunities/event-funding-program',
+    },
 ];
 
 const en: FundingOpportunity[] = [
@@ -351,6 +385,31 @@ const en: FundingOpportunity[] = [
         amount: 'Up to CAD 100,000',
         timing: 'Annual. The 2026 call closed in April; watch for the 2027 call',
         href: 'https://braininstitute.ca/programs-opportunities/nerve-program',
+    },
+    {
+        name: 'NERD: Neurotech Early Research and Development',
+        funder: 'Ontario Brain Institute',
+        audience: 'startups',
+        who: 'Companies commercialising a neurotechnology that has outgrown research grants but is not yet ready for private capital. Milestone-based investment paid directly to contract research organisations and service providers; the company keeps all its IP. The natural next step after NERVE.',
+        timing: 'Rolling; contact OBI',
+        href: 'https://braininstitute.ca/programs-opportunities/nerd',
+    },
+    {
+        name: 'CORTEX: Community-Led Real-World Neurotech Experience',
+        funder: 'Ontario Brain Institute',
+        audience: 'startups',
+        who: 'Neurotech companies and community organisations that want to test a neurotechnology in real life, with people affected by a brain disorder and their caregivers, using clinical scales and patient-reported outcomes. Nearly 1,500 participants across 10 collaborations in 2025.',
+        timing: 'Rolling; contact OBI',
+        href: 'https://braininstitute.ca/programs-opportunities/cortex',
+    },
+    {
+        name: 'MS & Neurological Care Accelerator',
+        funder: 'MSWA and Founders Factory',
+        audience: 'startups',
+        who: "Early-stage startups from anywhere using AI, robotics, wearables or digital health for multiple sclerosis, stroke, Parkinson's, Huntington's, motor neurone disease or acquired brain injury. A 16-week programme run from Perth, Australia, with pilots alongside MSWA's clinical network and community. The first cohort of five startups was announced in June 2026, including a subscalp brain–computer interface for speech.",
+        amount: 'A$200,000 cash investment',
+        timing: 'Applications open; no closing date published',
+        href: 'https://foundersfactory.com/mswa-ms-neurological-care-accelerator/',
     },
     {
         name: 'NIA Start-Up Challenge and Accelerator',
@@ -550,6 +609,15 @@ const en: FundingOpportunity[] = [
         amount: 'Up to USD 1,250',
         timing: 'Annual; next window expected September–October 2027',
         href: 'https://ibro.org/grant/brain-awareness-week-grants/',
+    },
+    {
+        name: 'Event Funding Program',
+        funder: 'Ontario Brain Institute',
+        audience: 'outreach',
+        who: 'Registered not-for-profits (universities, colleges, hospitals, research institutes, foundations, patient groups) holding a brain health event in Ontario. Student clubs and chapters apply through one of these, such as their university.',
+        amount: 'Up to C$5,000',
+        timing: 'Two intakes a year: March (events April to September) and August (events October to March)',
+        href: 'https://braininstitute.ca/programs-opportunities/event-funding-program',
     },
 ];
 
