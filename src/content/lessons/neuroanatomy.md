@@ -1,6 +1,6 @@
 ---
 title: "Neuroanatomy and Brain Organization"
-description: ""
+description: "A tour of major brain structures, cortical lobes, and functional regions relevant to neuroimaging and brain-computer interfaces."
 module: neuro
 sourceUrl: "https://learn.neurotechedu.com/neuroanatomy_and_brain_organization/"
 ---

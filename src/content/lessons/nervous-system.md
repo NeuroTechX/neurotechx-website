@@ -1,6 +1,6 @@
 ---
 title: "The Nervous System"
-description: ""
+description: "An overview of the central and peripheral nervous systems, how sensory and motor pathways are organized, and how the body communicates with the brain."
 module: neuro
 sourceUrl: "https://learn.neurotechedu.com/the_nervous_system/"
 ---

@@ -8,6 +8,8 @@ import { alternatesFor, format, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/projects';
 import styles from './page.module.css';
 
+const PIEEG_XR = 'https://www.kickstarter.com/projects/42415505/pieeg-xr-neural-face-interface-for-spatial-computing';
+
 export async function generateMetadata({ params }: PageProps<'/[lang]/projects'>): Promise<Metadata> {
     const lang = await pageLocale(params);
     const t = text[lang];
@@ -136,6 +138,31 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                     {featuredRepos.map(repo => (
                         <ProjectCard key={repo.id} repo={repo} featured={true} viewCode={t.viewCode} />
                     ))}
+                    {/* PiEEG XR: community hardware on Kickstarter until Dec 31, 2026; drop or update the card after the campaign */}
+                    <div className={`${styles.card} ${styles.featured}`}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-green-100 text-green-700 flex items-center justify-center`}>Pi</div>
+                                <span>PiEEG</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href={PIEEG_XR} target="_blank" rel="noopener noreferrer">PiEEG XR</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.pieegxr.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.pieegxr.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={styles.language}>{t.pieegxr.kind}</span>
+                            <a href={PIEEG_XR} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.pieegxr.back} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
                     {/* Fallback for SCI Head Model if API fails or placeholder needed */}
                     <div className={`${styles.card} ${styles.featured}`}>
                         <div className={styles.cardHeader}>

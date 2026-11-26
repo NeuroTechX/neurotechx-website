@@ -1,6 +1,6 @@
 ---
 title: "Cellular Components"
-description: ""
+description: "How neurons and glial cells work, how action potentials and synapses transmit signals, and why electrical brain activity can be recorded."
 module: neuro
 sourceUrl: "https://learn.neurotechedu.com/cellular_components/"
 ---

@@ -3,6 +3,7 @@ import { CATEGORIES } from '@/lib/job-boards';
 import { getHandbookSections, getSections } from '@/lib/dockit';
 import { getLessonSlugs } from '@/lib/lessons';
 import { isTranslated, localizePath } from '@/i18n/routes';
+import { LEARN_LAB_PATHS, PRIMER_CHECKS, primerCheckPath } from '@/content/learn/primer-chapters';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://neurotechx.org';
@@ -11,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/community/start-a-chapter',
     '/learn', '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
     '/glossary', '/safety-and-ethics',
+    ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
     '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs', '/funding', '/join-the-team',
     '/transparency', '/donate', '/students', '/students/start-a-club', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',

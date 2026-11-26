@@ -1,6 +1,6 @@
 ---
 title: "Brain Diseases and Disorders"
-description: ""
+description: "An introduction to major neurological and psychiatric conditions and how neurotechnology is used in diagnosis, rehabilitation, and treatment."
 module: neuro
 sourceUrl: "https://learn.neurotechedu.com/brain_diseases_and_disorders/"
 ---
