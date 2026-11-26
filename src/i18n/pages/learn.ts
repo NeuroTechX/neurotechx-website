@@ -27,6 +27,12 @@ export default bilingual(
             href: '/education/webinars',
             english: true,
           },
+          {
+            name: 'ENIGMA-U',
+            body: "Une école en ligne gratuite en neurosciences et en neuroimagerie, pour les élèves et les débutants : vidéos à son rythme, quiz et mentorat.",
+            href: 'https://medicine.utah.edu/neurology/research/utah-tbi/education/enigma-u',
+            english: true,
+          },
         ],
       },
       track: {
@@ -313,6 +319,12 @@ export default bilingual(
             name: 'NeuroTechX webinars',
             body: 'Companies and labs present their work. A good way to see what the field looks like today.',
             href: '/education/webinars',
+            english: true,
+          },
+          {
+            name: 'ENIGMA-U',
+            body: 'A free online school in neuroscience and neuroimaging for students and beginners: self-paced videos, quizzes and mentoring.',
+            href: 'https://medicine.utah.edu/neurology/research/utah-tbi/education/enigma-u',
             english: true,
           },
         ],
