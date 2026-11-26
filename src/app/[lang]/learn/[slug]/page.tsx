@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const lesson = getLesson(slug);
     // The lessons are English only, so the French address points search engines at the English page
     return lesson
-        ? { title: `${lesson.title} · NeuroTechX`, description: lesson.description, alternates: { canonical: `/learn/${slug}` } }
+        ? { title: lesson.title, description: lesson.description, alternates: { canonical: `/learn/${slug}` } }
         : {};
 }
 
@@ -52,7 +52,7 @@ export default async function LessonPage({ params }: Props) {
             <p className="mb-2 text-sm font-semibold text-muted-foreground">
                 {t.lessons.modules[lesson.module]} · {t.lesson.lessonOf.replace('{n}', String(at + 1)).replace('{total}', String(order.length))}
             </p>
-            <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg">
+            <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">
                 <h1>{lesson.title}</h1>
                 {lesson.description && <p className="lead">{lesson.description}</p>}
                 {authors.length > 0 && (
