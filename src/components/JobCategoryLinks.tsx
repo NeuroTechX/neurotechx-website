@@ -1,8 +1,11 @@
 import Link from '@/components/LocaleLink';
 import { CATEGORIES, inCategory, type Job } from '@/lib/job-boards';
+import type { Locale } from '@/i18n';
+import text from '@/i18n/pages/jobs';
 
 // Links to the /jobs/<slug> pages that have at least one open role.
-export default function JobCategoryLinks({ jobs, current }: { jobs: Job[]; current?: string }) {
+export default function JobCategoryLinks({ jobs, current, lang }: { jobs: Job[]; current?: string; lang: Locale }) {
+  const t = text[lang];
   const links = CATEGORIES.map((category) => ({
     category,
     count: jobs.filter((job) => inCategory(job, category)).length,
@@ -16,7 +19,7 @@ export default function JobCategoryLinks({ jobs, current }: { jobs: Job[]; curre
             href="/jobs"
             className="inline-flex items-center gap-2 rounded-full border border-neuro-accent/40 px-4 py-1.5 text-sm font-semibold text-neuro-accent transition-colors hover:bg-neuro-accent/10"
           >
-            All roles <span className="text-xs opacity-70">{jobs.length}</span>
+            {t.category.allRoles} <span className="text-xs opacity-70">{jobs.length}</span>
           </Link>
         </li>
       )}
@@ -26,7 +29,7 @@ export default function JobCategoryLinks({ jobs, current }: { jobs: Job[]; curre
             href={`/jobs/${category.slug}`}
             className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-4 py-1.5 text-sm font-semibold transition-colors hover:border-neuro-accent hover:text-neuro-accent"
           >
-            {category.label} <span className="text-xs text-muted-foreground">{count}</span>
+            {t.categories[category.slug as keyof typeof t.categories].label} <span className="text-xs text-muted-foreground">{count}</span>
           </Link>
         </li>
       ))}

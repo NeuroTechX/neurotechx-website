@@ -2,27 +2,30 @@ import type { Metadata } from 'next';
 import Link from '@/components/LocaleLink';
 import PageHeader from '@/components/PageHeader';
 import { getSections } from '@/lib/dockit';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/guide';
 
-export const metadata: Metadata = {
-    title: 'Chapter and Club Guide',
-    description:
-        'The NeuroTechX guide for chapters and student clubs: getting started, chapter guidelines, growing a community, meetups, hacknights and sponsorship.',
-    alternates: { canonical: '/guide' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/guide'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang].guide;
+    return { title: t.title, description: t.description, alternates: alternatesFor('/guide', lang) };
+}
 
-export default function GuidePage() {
-    const sections = getSections('dockit');
+export default async function GuidePage({ params }: PageProps<'/[lang]/guide'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang].guide;
+    const sections = getSections('dockit', lang);
 
     return (
         <div className="container py-12">
             <PageHeader
-                eyebrow="Guide"
-                title="Chapter and club guide"
-                subtitle="Everything a NeuroTechX chapter or student club needs: how to start, what we expect, and how to grow."
+                eyebrow={t.eyebrow}
+                title={t.heading}
+                subtitle={t.subtitle}
             />
             <p className="mb-10 max-w-3xl text-muted-foreground">
-                Volunteering for NeuroTechX itself? See the{' '}
-                <Link className="text-neuro-accent underline" href="/handbook">volunteer handbook</Link>.
+                {t.handbookBefore}
+                <Link className="text-neuro-accent underline" href="/handbook">{t.handbookLink}</Link>.
             </p>
             <div className="grid gap-8 md:grid-cols-3">
                 {sections.map((section) => (

@@ -1,24 +1,11 @@
 import type { Metadata } from 'next';
-import { getDockitContent } from '@/lib/dockit';
-import { DockitRenderer } from '@/components/DockitRenderer';
-import { notFound } from 'next/navigation';
+import DockitPage, { dockitMetadata } from '@/components/DockitPage';
+import { pageLocale } from '@/i18n';
 
-export const metadata: Metadata = {
-    title: 'Getting Started',
-    description: 'Step-by-step guide to starting a new NeuroTechX chapter in your city.',
-    alternates: { canonical: '/education/getting-started' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/education/getting-started'>): Promise<Metadata> {
+    return dockitMetadata('getting-started', '/education/getting-started', await pageLocale(params));
+}
 
-export default function GettingStartedPage() {
-    const content = getDockitContent('getting-started');
-
-    if (!content) {
-        notFound();
-    }
-
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <DockitRenderer content={content} />
-        </div>
-    );
+export default async function GettingStartedPage({ params }: PageProps<'/[lang]/education/getting-started'>) {
+    return <DockitPage slug="getting-started" lang={await pageLocale(params)} />;
 }

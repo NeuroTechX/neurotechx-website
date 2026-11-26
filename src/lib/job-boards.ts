@@ -23,6 +23,7 @@ export type JobSource = {
   site: string;
   careers: string;
   about?: string;
+  fr?: { about: string };
   fields?: string[]; // topic slugs every role at this company belongs to
   region?: string; // used when a role's location names no region
   ats?: Ats;
@@ -60,129 +61,31 @@ export type Job = {
   posted?: boolean; // posted by NeuroTechX on the employer's behalf; links to /jobs/posted/<id>
 };
 
-export const TOPICS: Record<string, string> = {
-  bci: 'Brain–computer interfaces',
-  eeg: 'EEG',
-  neuromodulation: 'Neuromodulation',
-  neuroimaging: 'Neuroimaging',
-  'computational-neuroscience': 'Computational neuroscience & ML',
-};
-
-export const ROLES: Record<string, string> = {
-  software: 'Software, data & ML',
-  hardware: 'Hardware & engineering',
-  research: 'Research & science',
-  clinical: 'Clinical, regulatory & quality',
-  business: 'Operations & business',
-};
-
-export const REGIONS: Record<string, string> = {
-  'north-america': 'North America',
-  europe: 'Europe',
-  'asia-pacific': 'Asia-Pacific',
-};
+// Tags set on every role below. Their labels, in both languages, are in src/i18n/pages/jobs.ts.
+export const TOPICS = ['bci', 'eeg', 'neuromodulation', 'neuroimaging', 'computational-neuroscience'];
+export const ROLES = ['software', 'hardware', 'research', 'clinical', 'business'];
+export const REGIONS = ['north-america', 'europe', 'asia-pacific'];
 
 export type Category = {
   slug: string;
   kind: 'topic' | 'role' | 'region' | 'internship' | 'remote';
-  label: string;
-  title: string;
-  intro: string;
 };
 
-// The landing pages under /jobs/<slug>.
+// The landing pages under /jobs/<slug>, in the order they are linked.
 export const CATEGORIES: Category[] = [
-  {
-    slug: 'bci',
-    kind: 'topic',
-    label: 'BCI',
-    title: 'Brain–Computer Interface Jobs',
-    intro: 'Open roles at companies building brain–computer interfaces, implanted and non-invasive.',
-  },
-  {
-    slug: 'eeg',
-    kind: 'topic',
-    label: 'EEG',
-    title: 'EEG Jobs',
-    intro: 'Open roles at companies working with EEG, from clinical monitoring to consumer headsets.',
-  },
-  {
-    slug: 'neuromodulation',
-    kind: 'topic',
-    label: 'Neuromodulation',
-    title: 'Neuromodulation Jobs',
-    intro: 'Open roles in neurostimulation and neuromodulation: implanted, magnetic, electrical and ultrasound.',
-  },
-  {
-    slug: 'neuroimaging',
-    kind: 'topic',
-    label: 'Neuroimaging',
-    title: 'Neuroimaging Jobs',
-    intro: 'Open roles in brain imaging and brain mapping.',
-  },
-  {
-    slug: 'computational-neuroscience',
-    kind: 'topic',
-    label: 'Computational & ML',
-    title: 'Computational Neuroscience & Machine Learning Jobs',
-    intro: 'Open roles in computational neuroscience, neural data and machine learning at neurotech companies.',
-  },
-  {
-    slug: 'software',
-    kind: 'role',
-    label: 'Software',
-    title: 'Neurotech Software Jobs',
-    intro: 'Software, firmware, data and machine-learning roles at neurotech companies.',
-  },
-  {
-    slug: 'hardware',
-    kind: 'role',
-    label: 'Hardware',
-    title: 'Neurotech Hardware & Engineering Jobs',
-    intro: 'Electrical, mechanical, manufacturing and systems engineering roles at neurotech companies.',
-  },
-  {
-    slug: 'research',
-    kind: 'role',
-    label: 'Research',
-    title: 'Neurotech Research Jobs',
-    intro: 'Scientist and research roles at neurotech companies.',
-  },
-  {
-    slug: 'clinical',
-    kind: 'role',
-    label: 'Clinical',
-    title: 'Clinical, Regulatory & Quality Jobs in Neurotech',
-    intro: 'Clinical, regulatory and quality roles at neurotech companies.',
-  },
-  {
-    slug: 'internships',
-    kind: 'internship',
-    label: 'Internships',
-    title: 'Neurotech Internships',
-    intro: 'Internships, co-ops and student roles at neurotech companies.',
-  },
-  {
-    slug: 'remote',
-    kind: 'remote',
-    label: 'Remote',
-    title: 'Remote Neurotech Jobs',
-    intro: 'Roles at neurotech companies that the employer lists as remote.',
-  },
-  {
-    slug: 'north-america',
-    kind: 'region',
-    label: 'North America',
-    title: 'Neurotech Jobs in North America',
-    intro: 'Open roles at neurotech companies in the United States and Canada.',
-  },
-  {
-    slug: 'europe',
-    kind: 'region',
-    label: 'Europe',
-    title: 'Neurotech Jobs in Europe',
-    intro: 'Open roles at neurotech companies in Europe.',
-  },
+  { slug: 'bci', kind: 'topic' },
+  { slug: 'eeg', kind: 'topic' },
+  { slug: 'neuromodulation', kind: 'topic' },
+  { slug: 'neuroimaging', kind: 'topic' },
+  { slug: 'computational-neuroscience', kind: 'topic' },
+  { slug: 'software', kind: 'role' },
+  { slug: 'hardware', kind: 'role' },
+  { slug: 'research', kind: 'role' },
+  { slug: 'clinical', kind: 'role' },
+  { slug: 'internships', kind: 'internship' },
+  { slug: 'remote', kind: 'remote' },
+  { slug: 'north-america', kind: 'region' },
+  { slug: 'europe', kind: 'region' },
 ];
 
 export function inCategory(job: Job, c: Category): boolean {
@@ -300,7 +203,7 @@ export function normalize(source: JobSource, raw: RawJob): Job | null {
     url,
     department,
     postedAt: isoDate(raw.postedAt),
-    topics: Object.keys(TOPICS).filter((slug) => topics.has(slug)),
+    topics: TOPICS.filter((slug) => topics.has(slug)),
     role,
     regions,
     remote: Boolean(raw.remote) || /\bremote\b/i.test(`${location} ${title}`),

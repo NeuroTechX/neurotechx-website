@@ -6,32 +6,40 @@ import JobsBrowser from '@/components/JobsBrowser';
 import JobCategoryLinks from '@/components/JobCategoryLinks';
 import { CATEGORIES, inCategory } from '@/lib/job-boards';
 import { loadJobs } from '@/lib/jobs';
+import { alternatesFor, format, pageLocale, type Locale } from '@/i18n';
+import text from '@/i18n/pages/jobs';
 
 export const revalidate = 14400;
 export const dynamicParams = false;
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = PageProps<'/[lang]/jobs/[slug]'>;
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ slug: c.slug }));
 }
 
+function categoryText(slug: string, lang: Locale) {
+  const categories = text[lang].categories;
+  return slug in categories ? categories[slug as keyof typeof categories] : undefined;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const lang = await pageLocale(params);
   const { slug } = await params;
-  const category = CATEGORIES.find((c) => c.slug === slug);
+  const category = categoryText(slug, lang);
   return category
-    ? {
-        title: category.title,
-        description: category.intro,
-        alternates: { canonical: `/jobs/${category.slug}` },
-      }
+    ? { title: category.title, description: category.intro, alternates: alternatesFor(`/jobs/${slug}`, lang) }
     : {};
 }
 
 export default async function JobCategoryPage({ params }: Props) {
+  const lang = await pageLocale(params);
   const { slug } = await params;
   const category = CATEGORIES.find((c) => c.slug === slug);
-  if (!category) notFound();
+  const words = categoryText(slug, lang);
+  if (!category || !words) notFound();
+  const t = text[lang];
+  const c = t.category;
 
   const { jobs } = await loadJobs();
   const matching = jobs.filter((job) => inCategory(job, category));
@@ -40,34 +48,35 @@ export default async function JobCategoryPage({ params }: Props) {
   return (
     <div className="container py-12">
       <PageHeader
-        eyebrow="Neurotech jobs"
-        title={category.title}
+        eyebrow={c.eyebrow}
+        title={words.title}
         subtitle={
           <>
-            {category.intro}{' '}
+            {words.intro}{' '}
             {matching.length > 0 &&
-              `${matching.length} open ${matching.length === 1 ? 'role' : 'roles'} at ${companies} ${
-                companies === 1 ? 'company' : 'companies'
-              }, read from each employer’s own careers page.`}
+              format(c.count, {
+                roles: format(matching.length === 1 ? c.roleOne : c.roleMany, { n: matching.length }),
+                companies: format(companies === 1 ? c.companyOne : c.companyMany, { n: companies }),
+              })}
           </>
         }
       />
 
       {matching.length > 0 ? (
-        <JobsBrowser jobs={matching} />
+        <JobsBrowser jobs={matching} lang={lang} t={t} />
       ) : (
         <p className="rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8 text-center text-muted-foreground">
-          No open roles in this category right now.{' '}
+          {c.none}
           <Link href="/jobs" className="text-neuro-accent hover:underline">
-            See all neurotech jobs
+            {c.allJobs}
           </Link>
           .
         </p>
       )}
 
       <section className="mt-16">
-        <h2 className="mb-6 text-2xl font-serif font-bold">More neurotech jobs</h2>
-        <JobCategoryLinks jobs={jobs} current={category.slug} />
+        <h2 className="mb-6 text-2xl font-serif font-bold">{c.moreHeading}</h2>
+        <JobCategoryLinks jobs={jobs} current={category.slug} lang={lang} />
       </section>
     </div>
   );

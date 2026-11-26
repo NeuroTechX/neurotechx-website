@@ -43,3 +43,4 @@ jobs:
           add-paths: |
             src/content/dockit
             src/content/handbook
+            src/content/translated-routes.json

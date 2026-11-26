@@ -5,13 +5,14 @@ import PageHeader from '@/components/PageHeader';
 import JobsBrowser from '@/components/JobsBrowser';
 import JobCategoryLinks from '@/components/JobCategoryLinks';
 import { loadJobs } from '@/lib/jobs';
+import { alternatesFor, format, pageLocale, type Locale } from '@/i18n';
+import text from '@/i18n/pages/jobs';
 
-export const metadata: Metadata = {
-  title: 'Neurotech Jobs',
-  description:
-    'Open jobs and internships at neurotechnology companies: brain–computer interfaces, EEG, neuromodulation and neuroimaging. Read from each employer’s own careers page and refreshed through the day.',
-  alternates: { canonical: '/jobs' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/jobs'>): Promise<Metadata> {
+  const lang = await pageLocale(params);
+  const t = text[lang];
+  return { title: t.title, description: t.description, alternates: alternatesFor('/jobs', lang) };
+}
 
 // The boards are read again at most every four hours.
 export const revalidate = 14400;
@@ -20,67 +21,51 @@ export const revalidate = 14400;
 const EMPLOYER_CONTACT = 'info@neurotechx.org';
 
 const OTHER_BOARDS = [
-  {
-    name: 'NeuroTech Futures',
-    href: 'https://neurotechjobs.io',
-    about: 'A job board for the neurotech industry.',
-  },
-  {
-    name: 'reccy neuro',
-    href: 'https://neuro.reccy.dev/',
-    about: 'A neurotech job board with company and investor directories.',
-  },
-  {
-    name: 'Bernstein Network job pool',
-    href: 'https://bernstein-network.de/en/career/job-pool/',
-    about: 'Academic positions in computational neuroscience.',
-  },
-];
+  { key: 'futures', name: 'NeuroTech Futures', href: 'https://neurotechjobs.io' },
+  { key: 'reccy', name: 'reccy neuro', href: 'https://neuro.reccy.dev/' },
+  { key: 'bernstein', name: 'Bernstein Network job pool', href: 'https://bernstein-network.de/en/career/job-pool/' },
+] as const;
 
-const CHECKED = new Intl.DateTimeFormat('en-US', {
-  month: 'short',
-  day: 'numeric',
-  year: 'numeric',
-  hour: 'numeric',
-  minute: '2-digit',
-  timeZone: 'UTC',
-});
+const DATE_LOCALE: Record<Locale, string> = { en: 'en-US', fr: 'fr-CA' };
 
-export default async function JobsPage() {
+export default async function JobsPage({ params }: PageProps<'/[lang]/jobs'>) {
+  const lang = await pageLocale(params);
+  const t = text[lang];
   const { jobs, employers, linked, checkedAt } = await loadJobs();
   const hiring = employers.filter((e) => e.openRoles > 0);
+  const checked = new Intl.DateTimeFormat(DATE_LOCALE[lang], {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'UTC',
+  });
+  const about = (e: { about?: string; fr?: { about: string } }) => (lang === 'fr' && e.fr ? e.fr.about : e.about);
 
   return (
     <div className="container py-12">
       <PageHeader
-        eyebrow="Careers"
-        title="Neurotech jobs"
-        subtitle={
-          <>
-            {jobs.length} open roles at {hiring.length} neurotechnology companies, read directly from each
-            employer&apos;s own careers page. Every role links to the employer&apos;s posting, where you apply.
-          </>
-        }
+        eyebrow={t.eyebrow}
+        title={t.heading}
+        subtitle={format(t.subtitle, { jobs: jobs.length, companies: hiring.length })}
       />
 
-      <section className="mb-10" aria-label="Browse by category">
-        <JobCategoryLinks jobs={jobs} />
+      <section className="mb-10" aria-label={t.browseLabel}>
+        <JobCategoryLinks jobs={jobs} lang={lang} />
       </section>
 
-      <JobsBrowser jobs={jobs} />
+      <JobsBrowser jobs={jobs} lang={lang} t={t} />
 
       <p className="mt-4 text-sm text-muted-foreground">
-        Last read from the employers&apos; boards on {CHECKED.format(new Date(checkedAt))} UTC. NeuroTechX does not
-        take applications for these roles.
+        {format(t.checked, { date: checked.format(new Date(checkedAt)) })}
       </p>
 
       <section className="mt-20">
         <h2 className="mb-2 flex items-center gap-2 text-2xl font-serif font-bold">
-          <Building2 className="h-6 w-6 text-neuro-accent" /> Companies on this page
+          <Building2 className="h-6 w-6 text-neuro-accent" /> {t.companiesHeading}
         </h2>
-        <p className="mb-6 text-muted-foreground">
-          Their openings are read for the list above. Each name links to the company&apos;s own careers page.
-        </p>
+        <p className="mb-6 text-muted-foreground">{t.companiesBody}</p>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {employers.map((e) => (
             <li key={e.company}>
@@ -92,10 +77,10 @@ export default async function JobsPage() {
               >
                 <span>
                   <span className="block font-bold group-hover:text-neuro-accent">{e.company}</span>
-                  {e.about && <span className="mt-1 block text-sm text-muted-foreground">{e.about}</span>}
+                  {about(e) && <span className="mt-1 block text-sm text-muted-foreground">{about(e)}</span>}
                 </span>
                 <span className="shrink-0 whitespace-nowrap text-sm text-muted-foreground">
-                  {e.openRoles === 0 ? 'None open' : e.openRoles === 1 ? '1 role' : `${e.openRoles} roles`}
+                  {e.openRoles === 0 ? t.rolesNone : e.openRoles === 1 ? t.rolesOne : format(t.rolesMany, { n: e.openRoles })}
                 </span>
               </a>
             </li>
@@ -105,10 +90,8 @@ export default async function JobsPage() {
 
       {linked.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-2 text-2xl font-serif font-bold">More neurotech employers</h2>
-          <p className="mb-6 text-muted-foreground">
-            We can&apos;t read these companies&apos; openings automatically, so here are their own pages.
-          </p>
+          <h2 className="mb-2 text-2xl font-serif font-bold">{t.moreHeading}</h2>
+          <p className="mb-6 text-muted-foreground">{t.moreBody}</p>
           <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {linked.map((e) => (
               <li key={e.company}>
@@ -116,7 +99,7 @@ export default async function JobsPage() {
                   <span className="font-semibold group-hover:text-neuro-accent">{e.company}</span>
                   <ArrowUpRight className="h-3.5 w-3.5 self-center text-muted-foreground group-hover:text-neuro-accent" />
                 </a>
-                {e.about && <p className="text-sm text-muted-foreground">{e.about}</p>}
+                {about(e) && <p className="text-sm text-muted-foreground">{about(e)}</p>}
               </li>
             ))}
           </ul>
@@ -124,45 +107,40 @@ export default async function JobsPage() {
       )}
 
       <p className="mt-16 text-muted-foreground">
-        Looking for grants, fellowships or awards instead?{' '}
+        {t.fundingBefore}
         <Link href="/funding" className="font-semibold text-neuro-accent hover:underline">
-          See funding opportunities
+          {t.fundingLink}
         </Link>
         .
       </p>
 
       <section className="mt-8 rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
         <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-          <Users className="h-5 w-5 text-neuro-accent" /> Join the NeuroTechX team
+          <Users className="h-5 w-5 text-neuro-accent" /> {t.teamHeading}
         </h2>
-        <p className="mb-5 text-muted-foreground">
-          NeuroTechX is run by volunteers, and we have roles of our own to fill.
-        </p>
+        <p className="mb-5 text-muted-foreground">{t.teamBody}</p>
         <Link href="/join-the-team" className="inline-flex items-center gap-1 font-semibold text-neuro-accent hover:underline">
-          See our open roles <ArrowUpRight className="h-3.5 w-3.5" />
+          {t.teamLink} <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </section>
 
       <div className="mt-8 grid gap-8 md:grid-cols-2">
         <section className="rounded-2xl border border-neuro-accent/20 bg-neuro-accent/5 p-8">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <Mail className="h-5 w-5 text-neuro-accent" /> Hiring in neurotech?
+            <Mail className="h-5 w-5 text-neuro-accent" /> {t.hiringHeading}
           </h2>
-          <p className="mb-6 text-muted-foreground">
-            Email us your job postings or the link to your careers page. Listing is free and at NeuroTechX&apos;s
-            discretion. Once your company is added, its roles appear here and stay up to date on their own.
-          </p>
+          <p className="mb-6 text-muted-foreground">{t.hiringBody}</p>
           <a
-            href={`mailto:${EMPLOYER_CONTACT}?subject=${encodeURIComponent('Job posting for the NeuroTechX jobs page')}`}
+            href={`mailto:${EMPLOYER_CONTACT}?subject=${encodeURIComponent(t.hiringSubject)}`}
             className="inline-flex items-center gap-2 rounded-full bg-neuro-accent px-7 py-3 font-bold text-[var(--background)] transition hover:brightness-110"
           >
-            Email {EMPLOYER_CONTACT}
+            {format(t.hiringEmail, { email: EMPLOYER_CONTACT })}
           </a>
         </section>
 
         <section className="rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-8">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <Compass className="h-5 w-5 text-neuro-accent" /> Other places to look
+            <Compass className="h-5 w-5 text-neuro-accent" /> {t.otherHeading}
           </h2>
           <ul className="space-y-4">
             {OTHER_BOARDS.map((board) => (
@@ -175,7 +153,7 @@ export default async function JobsPage() {
                 >
                   {board.name} <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
-                <p className="text-sm text-muted-foreground">{board.about}</p>
+                <p className="text-sm text-muted-foreground">{t.boards[board.key]}</p>
               </li>
             ))}
           </ul>
