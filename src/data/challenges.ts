@@ -21,6 +21,16 @@ export interface Challenge {
 
 const fr: Challenge[] = [
     {
+        name: 'Hackathon de reproduction NeurIPS 2026 × ML Intern',
+        organiser: 'Gradio et Hugging Face, commandité par Modal',
+        about:
+            "Un agent d'IA peut-il reproduire le résultat principal d'un article de NeurIPS 2026? Choisissez jusqu'à cinq articles dans une liste de milliers de résultats, reproduisez-les avec ML Intern de Hugging Face ou un autre agent, puis publiez votre code, vos journaux et votre verdict : vérifié, réfuté ou non concluant. La liste compte des articles en neurotech, dont six sur l'EEG (imagerie motrice, modèles de fondation EEG, décodage EEG vers image) et six en IRMf.",
+        prize: "Plus de 10 000 $ US en crédits, dont 5 000 $ en crédits Modal pour la meilleure reproduction; 170 $ en crédits de calcul et de LLM pour chacun des 1 000 premiers participants admissibles.",
+        timing: 'Du 30 novembre au 13 décembre 2026; inscription avant le 29 novembre',
+        leaderboard: 'https://huggingface.co/Neurips-2026-MLIntern-Repro',
+        leaderboardLabel: "Détails et inscription",
+    },
+    {
         name: 'EEG/EMG Foundation Challenge 2026',
         organiser: "Yneuro, Inria et UC San Diego, avec l'atelier Brain and Body de NeurIPS",
         about:
@@ -76,6 +86,16 @@ const fr: Challenge[] = [
 ];
 
 const en: Challenge[] = [
+    {
+        name: 'NeurIPS 2026 × ML Intern Repro Hackathon',
+        organiser: 'Gradio and Hugging Face, sponsored by Modal',
+        about:
+            "Can an AI agent reproduce the main result of a NeurIPS 2026 paper? Pick up to five papers from a list of thousands of claims, reproduce them with Hugging Face's ML Intern or another agent, and publish your code, logs and verdict: verified, falsified or inconclusive. The list includes neurotech papers, among them six on EEG (motor imagery, EEG foundation models, EEG-to-image decoding) and six on fMRI.",
+        prize: 'Over US$10,000 in credits, including $5,000 in Modal credits for the best reproduction; $170 in compute and LLM credits for each of the first 1,000 eligible participants.',
+        timing: 'November 30 to December 13, 2026; register by November 29',
+        leaderboard: 'https://huggingface.co/Neurips-2026-MLIntern-Repro',
+        leaderboardLabel: 'Details and registration',
+    },
     {
         name: 'EEG/EMG Foundation Challenge 2026',
         organiser: 'Yneuro, Inria and UC San Diego, with the NeurIPS Brain and Body workshop',
