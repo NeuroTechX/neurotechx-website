@@ -8,10 +8,15 @@ import { MdxLink } from '@/components/DockitRenderer';
 import { pageLocale } from '@/i18n';
 import text from '@/i18n/pages/learn';
 import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
+import { erpText } from '@/content/learn/erp-averaging';
+import { filteringText } from '@/content/learn/eeg-filtering';
+import { firstEegText } from '@/content/learn/first-eeg';
+import { ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
 const REPO = 'https://github.com/NeuroTechX/neurotechx-website/edit/main/src/content/lessons';
+const EEG_LESSONS = new Set(['intro-to-bci', 'preprocessing', 'neural-oscillations']);
 
 export function generateStaticParams(): { slug: string }[] {
     return getLessonSlugs().map((slug) => ({ slug }));
@@ -52,6 +57,15 @@ export default async function LessonPage({ params }: Props) {
             <p className="mb-2 text-sm font-semibold text-muted-foreground">
                 {t.lessons.modules[lesson.module]} · {t.lesson.lessonOf.replace('{n}', String(at + 1)).replace('{total}', String(order.length))}
             </p>
+            {(slug === 'event-related-potentials' || slug === 'preprocessing') && (
+                <div className="my-4 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm font-semibold">
+                    {slug === 'preprocessing' ? (
+                        <Link href={FILTERING_LAB_PATH} className="text-neuro-accent hover:underline">{filteringText[lang].title} →</Link>
+                    ) : (
+                        <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
+                    )}
+                </div>
+            )}
             <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">
                 <h1>{lesson.title}</h1>
                 {lesson.description && <p className="lead">{lesson.description}</p>}
@@ -66,6 +80,12 @@ export default async function LessonPage({ params }: Props) {
                     options={{ mdxOptions: { format: 'md', remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
                 />
             </article>
+            {EEG_LESSONS.has(slug) && (
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm font-semibold">
+                    <Link href={FIRST_EEG_PATH} className="text-neuro-accent hover:underline">{firstEegText[lang].title} →</Link>
+                    <Link href={primerCheckPath('eeg')} className="text-neuro-accent hover:underline">{firstEegText[lang].selfCheck} →</Link>
+                </div>
+            )}
             <p className="mt-10 text-sm text-muted-foreground">
                 {t.lesson.origin}{' '}
                 <a href={`https://web.archive.org/web/2025/${lesson.sourceUrl}`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.original}</a>

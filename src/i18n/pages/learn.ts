@@ -3,15 +3,6 @@ import { bilingual } from '../text';
 // Links starting with '/' are pages on this site; the others open the outside resource.
 export default bilingual(
   {
-    title: 'Par où commencer en neurotech',
-    description:
-      "Comment commencer à apprendre la neurotechnologie : un parcours en quatre étapes selon votre formation, avec des ressources gratuites, des données ouvertes et la communauté NeuroTechX.",
-    eyebrow: 'Apprendre',
-    subtitle:
-      "La question qu'on nous pose le plus souvent. Voici notre réponse : quatre étapes, des ressources gratuites et un parcours adapté à votre formation.",
-    noNeed:
-      "Pas besoin d'un diplôme en neurosciences ni d'un casque EEG pour commencer. La plupart des gens commencent avec un livre gratuit, des données ouvertes et un ordinateur portable.",
-    step: 'Étape',
     english: 'en anglais',
     steps: {
       understand: {
@@ -300,15 +291,6 @@ export default bilingual(
     },
   },
   {
-    title: 'How to start learning neurotech',
-    description:
-      'How to start learning neurotechnology: a four-step path by background, with free resources, open data and the NeuroTechX community.',
-    eyebrow: 'Learn',
-    subtitle:
-      'The question we get asked most. Here is our answer: four steps, free resources, and a path that fits your background.',
-    noNeed:
-      "You don't need a neuroscience degree or an EEG headset to start. Most people begin with a free book, open data and a laptop.",
-    step: 'Step',
     english: 'in English',
     steps: {
       understand: {

@@ -1,16 +1,27 @@
 import type { Metadata } from 'next';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { Activity, ArrowRight, BookOpenCheck, ExternalLink } from 'lucide-react';
 import Link from '@/components/LocaleLink';
 import PageHeader from '@/components/PageHeader';
 import { alternatesFor, pageLocale } from '@/i18n';
 import type { Locale } from '@/i18n/routes';
 import text from '@/i18n/pages/learn';
+import primerText from '@/i18n/pages/primer';
+import { learnPaths, modalityGroups } from '@/content/learn/paths';
+import { firstEegText } from '@/content/learn/first-eeg';
+import { erpText } from '@/content/learn/erp-averaging';
+import { capstoneText } from '@/content/learn/eeg-capstone';
+import { filteringText } from '@/content/learn/eeg-filtering';
+import { mriText } from '@/content/learn/mri-and-bold';
+import {
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
+    primerChapterPdf, primerCheckPath,
+} from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/learn'>): Promise<Metadata> {
     const lang = await pageLocale(params);
-    const t = text[lang];
-    return { title: t.title, description: t.description, alternates: alternatesFor('/learn', lang) };
+    const t = learnPaths[lang];
+    return { title: t.title, description: t.intro, alternates: alternatesFor('/learn', lang) };
 }
 
 type Item = { name: string; body: string; href: string; english: boolean };
@@ -38,24 +49,16 @@ function Resource({ item, lang, englishLabel }: { item: Item; lang: Locale; engl
     );
 }
 
-function Step({ n, label, title, lead, children }: {
-    n: number;
-    label: string;
+function ResourceSection({ title, lead, children }: {
     title: string;
     lead: string;
     children: React.ReactNode;
 }) {
     return (
-        <section className="mb-14 grid gap-6 md:grid-cols-[3rem_1fr]">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neuro-accent text-xl font-bold text-[var(--background)]" aria-hidden>
-                {n}
-            </div>
-            <div>
-                <p className="eyebrow mb-1">{label} {n}</p>
-                <h2 className="mb-2 text-3xl font-serif font-bold">{title}</h2>
-                <p className="mb-6 max-w-3xl text-muted-foreground">{lead}</p>
-                {children}
-            </div>
+        <section className="mb-14">
+            <h2 className="mb-2 text-3xl font-serif font-bold">{title}</h2>
+            <p className="mb-6 max-w-3xl text-muted-foreground">{lead}</p>
+            {children}
         </section>
     );
 }
@@ -64,19 +67,91 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
     const lang = await pageLocale(params);
     const t = text[lang];
     const { understand, track, build, people } = t.steps;
+    const paths = learnPaths[lang];
+    const lab = firstEegText[lang];
+    const { chapters } = primerText[lang];
+    const labs = [
+        { href: FILTERING_LAB_PATH, content: filteringText[lang] },
+        { href: ERP_LAB_PATH, content: erpText[lang] },
+        { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
+        { href: MRI_LAB_PATH, content: mriText[lang] },
+    ];
     const modules = getModules();
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
     return (
         <div className="container py-12">
-            <PageHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} />
+            <PageHeader title={paths.title} subtitle={paths.intro} />
 
-            <p className="mb-14 max-w-3xl rounded-xl border border-neuro-accent/30 bg-neuro-accent/5 p-6 text-lg">
-                {t.noNeed}
-            </p>
+            <div className="mb-14 grid gap-5 lg:grid-cols-[1.1fr_1fr]">
+                <section className="rounded-2xl border border-neuro-accent/30 bg-gradient-to-br from-neuro-accent/10 to-[var(--surface-1)] p-6 sm:p-8">
+                    <Activity aria-hidden className="mb-5 text-neuro-accent" size={28} />
+                    <p className="mb-2 text-sm font-semibold text-neuro-accent">{lab.requirements}</p>
+                    <h2 className="mb-3 text-3xl font-bold">{lab.title}</h2>
+                    <p className="mb-6 max-w-prose text-muted-foreground">{lab.intro}</p>
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                        <Link href={FIRST_EEG_PATH} className="inline-flex items-center gap-2 rounded-full bg-neuro-accent px-5 py-2.5 text-sm font-bold text-background hover:text-background hover:brightness-110">
+                            {paths.start} <ArrowRight aria-hidden size={16} />
+                        </Link>
+                        <a href="#modalities" className="text-sm font-semibold text-neuro-accent underline underline-offset-4">{paths.browse}</a>
+                    </div>
+                </section>
+                <section className="card p-6 sm:p-8">
+                    <BookOpenCheck aria-hidden className="mb-5 text-neuro-accent" size={28} />
+                    <h2 className="mb-2 text-2xl font-bold">{paths.primer}</h2>
+                    <p className="mb-4 text-sm text-muted-foreground">{paths.primerBody}</p>
+                    <ul className="mb-4 divide-y divide-[var(--border)]">
+                        {([{ chapter: 2, slug: 'eeg' }, { chapter: 4, slug: 'fmri' }, { chapter: 16, slug: 'neuroethics' }] as const).map(({ chapter, slug }) => (
+                            <li key={slug} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2 text-sm">
+                                <span>{chapters[chapter - 1]}</span>
+                                <Link href={primerCheckPath(slug)} aria-label={`${paths.check} · ${chapters[chapter - 1]}`} className="shrink-0 font-semibold text-neuro-accent hover:underline">
+                                    {paths.check} →
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <Link href="/primer#chapters" className="text-sm text-neuro-accent underline underline-offset-4">{paths.allChapters}</Link>
+                </section>
+            </div>
 
-            <Step n={1} label={t.step} title={understand.title} lead={understand.lead}>
-                <div className="grid gap-4 md:grid-cols-3">{understand.items.map(resource)}</div>
-            </Step>
+            <ResourceSection title={paths.labs} lead={paths.labsIntro}>
+                <div className="grid gap-4 md:grid-cols-2">
+                    {labs.map(({ href, content }) => resource({ name: content.title, body: content.intro, href, english: false }))}
+                </div>
+            </ResourceSection>
+
+            <section id="modalities" className="mb-14 scroll-mt-24">
+                <h2 className="mb-2 text-3xl font-bold">{paths.modalityTitle}</h2>
+                <p className="mb-6 max-w-3xl text-muted-foreground">{paths.modalityIntro}</p>
+                <div className="grid items-start gap-4 md:grid-cols-3">
+                    {modalityGroups.map((group, index) => (
+                        <div key={paths.modalityGroups[index]} className="card">
+                            <h3 className="mb-3 text-lg font-bold">{paths.modalityGroups[index]}</h3>
+                            <ul className="divide-y divide-[var(--border)]">
+                                {group.map((chapter) => (
+                                    <li key={chapter} className="py-2">
+                                        <a href={primerChapterPdf(chapter)} className="font-semibold text-neuro-accent hover:underline">
+                                            {chapters[chapter - 1]} <span className="sr-only">({paths.readPdf})</span>
+                                        </a>
+                                        <p className="text-sm text-muted-foreground">{paths.modalityDescriptions[chapter]}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <ResourceSection title={paths.berkeley} lead={paths.berkeleyIntro}>
+                <div className="grid gap-4 md:grid-cols-2">
+                    {resource({ name: paths.course, body: paths.courseBody, href: BERKELEY_COURSE, english: true })}
+                    {resource({ name: paths.textbook, body: paths.textbookBody, href: BERKELEY_TEXTBOOK, english: true })}
+                </div>
+                <h3 className="mb-2 mt-5 font-bold">{paths.tools}</h3>
+                <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-neuro-accent">
+                    <li><a href="https://eegedu.com/" className="underline underline-offset-4">{paths.eegEdu}</a></li>
+                    <li><a href="https://gloneuro.org/sim-eeg.html" className="underline underline-offset-4">{paths.erp}</a></li>
+                </ul>
+            </ResourceSection>
 
             <section id="lessons" className="mb-14 scroll-mt-24">
                 <p className="eyebrow mb-1">{t.lessons.eyebrow}</p>
@@ -106,7 +181,11 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                 </p>
             </section>
 
-            <Step n={2} label={t.step} title={track.title} lead={track.lead}>
+            <ResourceSection title={understand.title} lead={understand.lead}>
+                <div className="grid gap-4 md:grid-cols-3">{understand.items.map(resource)}</div>
+            </ResourceSection>
+
+            <ResourceSection title={track.title} lead={track.lead}>
                 <div className="grid gap-6 lg:grid-cols-2">
                     {track.tracks.map((path) => (
                         <div key={path.title} className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-6">
@@ -116,15 +195,15 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         </div>
                     ))}
                 </div>
-            </Step>
+            </ResourceSection>
 
-            <Step n={3} label={t.step} title={build.title} lead={build.lead}>
+            <ResourceSection title={build.title} lead={build.lead}>
                 <div className="grid gap-4 md:grid-cols-2">{build.items.map(resource)}</div>
-            </Step>
+            </ResourceSection>
 
-            <Step n={4} label={t.step} title={people.title} lead={people.lead}>
+            <ResourceSection title={people.title} lead={people.lead}>
                 <div className="grid gap-4 md:grid-cols-2">{people.items.map(resource)}</div>
-            </Step>
+            </ResourceSection>
 
             <section className="mb-14">
                 <p className="eyebrow mb-1">{t.launch.eyebrow}</p>
