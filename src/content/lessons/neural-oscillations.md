@@ -4,6 +4,8 @@ description: "This tutorial serves as an introduction to extracting neural oscil
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/oscillations/"
 ---
+*Updated November 2026: code examples updated for MNE-Python 1.13.*
+
 # What are Neural Oscillations?
 
 Neural oscillations are repetitive, rhythmic synchronized frequency patterns in the central nervous system. They occur during activation of large clusters of neurons, though they can occur with a single neuron as well. Although the raw data obtained from electroencephalograms are formatted as a function of time, neural oscillations are visualized in terms of frequency and measured in units of Hertz (Hz); one cycle per second. As such the neural clusters generate neural oscillations that can be characterized by the frequency range in which they occur:
@@ -40,7 +42,7 @@ As previously mentioned data obtained by EEF are captured as a function of time,
 
 The Fourier transform is a highly regarded formula which is the mainstay formula for signal processing and signal decomposition. If you would like to learn more about the Fourier transform and FFT, I recommend this [video](https://www.youtube.com/watch?v=FjmwwDHT98c). It's a little long but it's worth the watch!
 
-![This will display an animated GIF](https://github.com/NeuroTechX/eeg-101/blob/dano-dev/EEG101/src/assets/wavedecomposition.gif)
+
 
 The best way to extract neural oscillations is to perform a Fourier transform on your preprocessed data and then plot the resulting frequency patterns in the category of brain waves your interested in seeing. You can further preprocess your data to exclude certain channels, or target specific frequency ranges to observe features of the neural oscillation. *See NeuroTechX.edu "Preprocessing" for a detailed look at the preprocessing steps that can be applied to your data.*
 
@@ -54,20 +56,29 @@ Before extracting neural oscillations there are several steps that must be under
 
 ### Importing, reading, and formatting data
 
-In the below example I have used a dataset created by experimental runs by (research reference) so when data is fetched it will have already underwent some preprocessing which will not be covered in either examples. However in both cases data will be fetched using the below commands:
+In the below example I have used a dataset created by experimental runs by (research reference) so when data is fetched it will have already underwent some preprocessing which will not be covered in either examples. However in both cases data will be fetched using the below commands. First, import the modules used in this lesson:
+
+```python
+import mne
+from mne.datasets import eegbci
+from mne.io import concatenate_raws, read_raw_edf
+```
+
+Then load the data:
 
 ```python
 subject = 1
 runs = [3]
 tmin = -0.1
 tmax = 0.3
-raw_fnames = eegbci.load_data(subject,runs)
+raw_fnames = eegbci.load_data(subject, runs)
 raw_files = [read_raw_edf(f, preload=True) for f in raw_fnames]
 raw = concatenate_raws(raw_files)
-raw.ch_names.index('STI 014')
+eegbci.standardize(raw)  # strip the trailing "." from the channel names
+raw.set_montage('colin27_1005')  # electrode positions for topomaps ('standard_1005' before MNE 1.13)
 ```
 
-The above code can be broken down into two components. Line 1 - 4 set parameters to define which parts of the dataset are to be analyzed, while line 5-8 pulls data and connects what it does **(What do these lines actually do?)**
+The above code can be broken down into two components. Line 1 - 4 set parameters to define which parts of the dataset are to be analyzed, while line 5-9 pulls data and connects what it does **(What do these lines actually do?)**
 
 Line 2 is relevant in this example, as there are 14 experimental runs to choose from that were performed in this study and each was tested under different conditions. In this experiment run 3 measured the EEG signal obtained during movement of the left and right hands, both separately and simultaneously.
 
@@ -80,20 +91,22 @@ Preprocessing is a critical step when analyzing EEG data. EEG data contains a lo
 Epoching is dividing data into segments of data based on a timeframe of interest. The interest is generall determined by an event whether an evoked event or an induced event. **(do we have a segment of information that explores epoching more in depth?)**. To epoch your data you can follow the steps below:
 
 ```python
-events = mne.find_events(raw, stim_channel='STI 014', verbose=True)
-picks = pick_types)raw.info, meg=Fale, eeg=True, stim=False, eog=False, exclude='bas')
-baseline = 0, None
+# The EDF files store events as annotations: T0 is rest, T1 is the left fist, T2 is the right fist
+raw.annotations.rename(dict(T0='rest', T1='left', T2='right'))
+events, event_id = mne.events_from_annotations(raw, event_id=dict(left=2, right=3))
+picks = mne.pick_types(raw.info, meg=False, eeg=True, stim=False, eog=False, exclude='bads')
+baseline = (0, None)
 ```
 
 The above defines the events you want to look for, as well as the type of signal your program should expect to analyze (meg vs. eeg vs. eog). I selected the eeg=True as data we will be looking at were obtained using an EEG headset. Below we continue the necessary inputs for epoching:
 
 ```python
-epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks, baseline-baselin, preload=True)
-epochs_train=epochs.copy().crop(tmin=-0.2,tmax=0.5)
-labels=epochs.events[:,-1]-
+epochs = mne.Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks, baseline=baseline, preload=True)
+epochs_train = epochs.copy().crop(tmin=0.0, tmax=0.3)
+labels = epochs.events[:, -1] - 2
 ```
 
-The above code defines the epochs which will be further manipulated. Try the function **plot.epochs()** to see how your data have transformed! (Hint: It might look something like the image below!)
+The above code defines the epochs which will be further manipulated. Try the function **epochs.plot()** to see how your data have transformed! (Hint: It might look something like the image below!)
 
 ![](/learn/images/oscillations/plot-epochs.png)
 
@@ -101,11 +114,19 @@ The following steps will diverge depending on the methods of visualization you w
 
 ### Using PSD to categorize oscillatory occurrence based on power spectral content
 
-Power spectral density measure the power of a signal in microvolts. The function **epochs\[events\].plot\_psd()** can be used to plot specific epoched events as a function of power spectral density over a specific frequency range. Below is an example of a script you can run to achieve this. Note that the dataset imported from eegbci is already preprocessed and transformed using the Fourier function, so the steps you should see below are:
+Power spectral density measure the power of a signal in microvolts. The function **epochs\[event\].compute\_psd().plot()** can be used to plot specific epoched events as a function of power spectral density over a specific frequency range. Below is an example of a script you can run to achieve this. Note that the dataset imported from eegbci is already preprocessed and transformed using the Fourier function, so the steps you should see below are:
 
 -   Importing, read, and format your data
 -   Epoch data
--   Plot data with the **epochs\[events\].plot\_psd()**
+-   Plot data with the **epochs\[event\].compute\_psd().plot()**
+
+```python
+# Figure 1: electrode C3 during right hand movement
+epochs['right'].compute_psd(fmin=2, fmax=40, picks='C3').plot()
+
+# Figure 2: electrode C4 during left hand movement
+epochs['left'].compute_psd(fmin=2, fmax=40, picks='C4').plot()
+```
 
 ![](/learn/images/oscillations/CH3.png)
 

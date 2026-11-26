@@ -4,6 +4,8 @@ description: "This tutorial will explain how to extract Event Related Potentials
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/erp/"
 ---
+*Updated November 2026: code examples updated for MNE-Python 1.13.*
+
 # Goals:
 
 -   Readers should know which ERP to use in which situation
@@ -69,15 +71,24 @@ In the last decade, P3-based BCIs have emerged as one of the main BCI categories
 
 # How to record, process, and classify an ERP
 
-This section presents a hands-on tutorial on how to extract ERPs from EEG data. We use the [Python MNE Library](http://martinos.org/mne/stable/index.html), which has good tools for eeg and MEG data analysis. In addition, this library includes EEG datasets which can be downloaded for free.
+This section presents a hands-on tutorial on how to extract ERPs from EEG data. We use the [Python MNE Library](https://mne.tools/stable/index.html), which has good tools for eeg and MEG data analysis. In addition, this library includes EEG datasets which can be downloaded for free.
 
 ### MNE Sample Dataset
 
-We use the sample dataset provided by MNE and recorded in an experiment where checkerboard patterns were presented to the subject into the left and right visual field, interspersed by tones to the left or right ear according to the following settings: ---The interval between the stimuli was 750 ms. ---Occasionally, a smiley face was presented at the center of the visual field. ---Subject was asked to press a key with the right index finder as soon as possible after the appearance of the face. ---EEG data from a 60-channel electrode cap was acquired simultaneously with MEG data.
+We use the sample dataset provided by MNE and recorded in an experiment where checkerboard patterns were presented to the subject into the left and right visual field, interspersed by tones to the left or right ear according to the following settings:
 
-The sample dataset can be downloaded with the following command:
+-   The interval between the stimuli was 750 ms.
+-   Occasionally, a smiley face was presented at the center of the visual field.
+-   Subject was asked to press a key with the right index finder as soon as possible after the appearance of the face.
+-   EEG data from a 60-channel electrode cap was acquired simultaneously with MEG data.
 
-mne.datasets.sample.data\_path(verbose=True)
+The sample dataset can be downloaded with the following command (it is a large download, about 1.6 GB):
+
+```python
+import mne
+
+mne.datasets.sample.data_path(verbose=True)
+```
 
 The trigger codes for each kind of stimulus are shown in the table below:
 
@@ -90,13 +101,21 @@ The trigger codes for each kind of stimulus are shown in the table below:
 | smiley | 5 | Response to the smiley face |
 | button | 32 | Response triggered by the button press |
 
-For more information on processing examples of this dataset check [this link](http://martinos.org/mne/stable/manual/sample_dataset.html)
+For more information on processing examples of this dataset check [this link](https://mne.tools/stable/documentation/datasets.html)
 
 ### Importing data
 
-> > import mne from mne.datasets import sample
+```python
+import mne
+from mne.datasets import sample
 
-> > data\_path = sample.data\_path() raw\_fname = data\_path + '/MEG/sample/sample\_audvis\_filt-0-40\_raw.fif' Event\_fname = data\_path + '/MEG/sample/sample\_audvis\_filt-0-40\_raw-eve.fif' raw = mne.io.read\_raw\_fif(raw\_fname, preload=True) raw.set\_eeg\_reference() # set EEG average reference
+data_path = sample.data_path()  # a pathlib.Path
+raw_fname = data_path / 'MEG' / 'sample' / 'sample_audvis_filt-0-40_raw.fif'
+event_fname = data_path / 'MEG' / 'sample' / 'sample_audvis_filt-0-40_raw-eve.fif'
+raw = mne.io.read_raw_fif(raw_fname, preload=True)
+raw_no_ref = raw.copy().set_eeg_reference([])  # keep a copy with the original reference
+raw.set_eeg_reference()  # set EEG average reference
+```
 
 ### EEG Montage
 
@@ -106,7 +125,8 @@ For more information on processing examples of this dataset check [this link](ht
 
 Before starting to extract features from a signal, it's important to remove the artifacts in order to clean the signals to enhance relevant information embedded in these signals. EEG signals are known to be very noisy, as they can be easilyh affected by the electrical activity of the body (EOG and EMG) and environmental artifacts (e.g. 50 or 60 Hz power line). The preprocessing step aims at increasing the SNR (Signal-to-Noise Ratio) of the signals.
 
-\--- *Bandpass 0.15 - 40 Hz* --- \_Select the most important channels (manually removing the less important channels for now)
+-   *Bandpass 0.15 - 40 Hz*
+-   *Select the most important channels (manually removing the less important channels for now)*
 
 ### Epoching
 
@@ -120,15 +140,24 @@ Here is an example of Ephochs in a real time application: **insert gif**
 
 # Defining Epochs and computing ERP for left auditory condition
 
-> > reject = dict(eeg=180e-6, eog=150e-6) event\_id, tmin, tmax = {'left/auditory': 1}, -0.2, 0.5 events = mne.read\_events(event\_fname) epochs\_params = dict(events=events, event\_id=event\_id, tmin=tmin, tmax=tmax,reject=reject)
+```python
+reject = dict(eeg=180e-6, eog=150e-6)
+event_id, tmin, tmax = {'left/auditory': 1}, -0.2, 0.5
+events = mne.read_events(event_fname)
+epochs_params = dict(events=events, event_id=event_id, tmin=tmin, tmax=tmax, reject=reject)
+```
 
 ### Extracting features
 
 Since a lot of modern-day ERP processing involves machine learning, the term 'feature' is frequently used in ERP analysis. A *feature* is a measured property of a signal that is used as input to the machine learning algorithm. For example, a commonly used feature for ERPs is *average voltage* of the signal at each time point across all the epochs. Extracting this feature does not require major computation or processing, and it is easy to implement in MNE:
 
-> > evoked\_no\_ref = mne.Epochs(raw\_no\_ref, \*\*epochs\_params).average() del raw\_no\_ref # save memory
+```python
+evoked_no_ref = mne.Epochs(raw_no_ref, **epochs_params).average()
+del raw_no_ref  # save memory
 
-> > title = 'EEG with Original reference' evoked\_no\_ref.plot(titles=dict(eeg=title)) del raw\_no\_ref # save memory
+title = 'EEG with Original reference'
+evoked_no_ref.plot(titles=dict(eeg=title))
+```
 
 ![Figure 2](/learn/images/erp/Figure-2-EEG-original.png)
 
@@ -158,7 +187,7 @@ If you are interested in broadening your knowledge on ERPs and BCIs, we recommen
 
 ### General on ERPs
 
--   Luck, Steven J. *An Introduction to the Event-Related Potential Technique.* 2nd ed. MIT Press. **The big book of ERPs: [Official website](https://mitpress.mit.edu/books/introduction-event-related-potential-technique-0)and... [PDF](http://libgen.io/get.php?md5=B714ED5B0251ED7628369F5BEA1096A4&key=0GSQ1BJ67SS26SZN)**
+-   Luck, Steven J. *An Introduction to the Event-Related Potential Technique.* 2nd ed. MIT Press. **The big book of ERPs: [Official website](https://mitpress.mit.edu/books/introduction-event-related-potential-technique-0)**
 -   Luck, Steven J. 2004. "Ten Simple Rules for Designing and Interpreting ERP Experiments." In *Event-Related Potentials: A Methods Handbook* edited by T.C. Handy. **Good tutorial for designing ERP experiments, but also useful to us**
 -   Jung, Tzyy Ping, Scott Makeig, Marissa Westerfield, Jeanne Townsend, Eric Courchesne, and Terrence J. Sejnowski. 2001. "Analysis and Visualization of Single-Trial Event-Related Potentials" *Human Brain Mapping* 14 (3): 166-85. doi:10.1002/hbm.1050. **Another tutorial**
 -   Comerchero, Marco D., and John Polich. 1999. "P3a and P3b from Typical Auditory and Visual Stimuli." *Clinical Neurophysiology* 100 (1): 24-30

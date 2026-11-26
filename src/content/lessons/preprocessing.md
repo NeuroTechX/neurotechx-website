@@ -4,6 +4,8 @@ description: "This tutorial serves as an introduction to EEG data preprocessing.
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/preprocessing/"
 ---
+*Updated November 2026: code examples updated for MNE-Python 1.13.*
+
 [Link to notebook](https://github.com/NeuroTechX/learn.neurotechedu.com/blob/ubc-preprocessing/scripts/preprocessing.ipynb)
 
 # 1\. What Is Preprocessing?
@@ -15,73 +17,55 @@ In general, preprocessing is the procedure of transforming raw data into a forma
 There are several reasons why preprocessing is necessary for EEG data. First of all, the signals that are picked up from the scalp are not necessarily an accurate representation of the signals originating from the brain, as the spatial information gets lost. Secondly, EEG data tends to contain a lot of noise which can obscure weaker EEG signals. Artifacts such as blinking or muscle movement can contaminate the data and distort the picture. Finally, we want to separate the relevant neural signals from random neural activity that occurs during EEG recordings.
 
 ![](/learn/images/filtered_unfiltered.png)  
-*An example of unfiltered (left) vs filtered (right) EEG data - Image taken from [http://clinicalgate.com/filters-in-the-electroencephalogram/](http://clinicalgate.com/filters-in-the-electroencephalogram/) [(1)](#references)*
+*An example of unfiltered (left) vs filtered (right) EEG data - Image taken from http://clinicalgate.com/filters-in-the-electroencephalogram/ [(1)](#references)*
 
 ### 1.2. How would preprocessing differ based on the desired analysis
 
 As EEG preprocessing is still an active area of research, there is no universally adopted EEG preprocessing pipeline, which means that researchers have some freedom in choosing how to transform the raw data. Below are some questions that might help you choose the more appropriate preprocessing techniques:
 
 -   What kinds of artifacts might be present in your data? Which ones do you want to remove, and which ones do you want to flag to be aware of?
-    -   ```
-        For example, depending on your experiment eye movements and blinking could be considered a source of noise but they could also reveal important patterns
-        ```
-        
+    -   For example, depending on your experiment eye movements and blinking could be considered a source of noise but they could also reveal important patterns
 -   Is your analysis being done online or offline?
-    -   ```
-        If you’re preprocessing data as soon as it arrives, you might not be able to use more computationally expensive methods
-        ```
-        
+    -   If you’re preprocessing data as soon as it arrives, you might not be able to use more computationally expensive methods
 -   Which features do you want to focus on?
-    -   ```
-        For example, if you want to look at event-related potentials (ERPs), you will need to have accurate temporal information, whereas for motor imagery classification you will need accurate spatial information
-        ```
-        
+    -   For example, if you want to look at event-related potentials (ERPs), you will need to have accurate temporal information, whereas for motor imagery classification you will need accurate spatial information
 
 Finally, keep in mind that even the best preprocessing techniques will not be able to account for bad data - if your subjects weren’t performing the task correctly or weren’t paying attention to the task or if your equipment was malfunctioning, it may be best to simply run the experiment again, rather that trying to salvage the data.
 
 ## 2\. Importing Data
 
-The majority of this article will be aimed at Python users, referencing the [MNE library](https://martinos.org/mne/stable/index.html) [(2)](#references) for MEG and EEG analysis. It is also [available for C](https://martinos.org/mne/stable/manual/c_reference.html) [(3)](#references), and most of the concepts mentioned should have equivalents in other languages too. For example, if working with Matlab (or Octave), libraries such as [EEGlab](https://sccn.ucsd.edu/eeglab/), [Fieldtrip](http://www.fieldtriptoolbox.org/) and [Brainstorm](http://neuroimage.usc.edu/brainstorm/) were all created to do this sort of thing and more!
+The majority of this article will be aimed at Python users, referencing the [MNE library](https://mne.tools/stable/index.html) [(2)](#references) for MEG and EEG analysis. It is also [available for C](https://web.archive.org/web/20190824170457/http://martinos.org:80/mne/stable/manual/c_reference.html) [(3)](#references), and most of the concepts mentioned should have equivalents in other languages too. For example, if working with Matlab (or Octave), libraries such as [EEGlab](https://sccn.ucsd.edu/eeglab/), [Fieldtrip](http://www.fieldtriptoolbox.org/) and [Brainstorm](http://neuroimage.usc.edu/brainstorm/) were all created to do this sort of thing and more!
 
 ### 2.1. FIF
 
-The primary file format supported by MNE is .fif, or the [Functional Imaging file format](http://martinos.org/mne/stable/tutorials/seven_stories_about_mne.html?highlight=fif#what-the-fif-does-mne-stand-for) [(4)](#references).  
+The primary file format supported by MNE is .fif, or the [Functional Imaging file format](https://web.archive.org/web/20170904000120/http://martinos.org:80/mne/stable/tutorials/seven_stories_about_mne.html?highlight=fif) [(4)](#references).  
 To take a look at a .fif file, you can use one of the MNE example data sets, for example the somatosensory data is fetched by:
 
 ```python
->>> mne.datasets.somato.data_path() # Caution: ~589 MB download!  
-Using default location ~/mne_data for somato...  
-Downloading or reinstalling data archive MNE-somato-data.tar.gz at location ~/mne_data  
-Downloading data from https://mne-tools.s3.amazonaws.com/datasets/MNE-somato-data.tar.gz (589.1 MB)  
-[........................................] 100.00000 | (589.1 MB / 589.1 MB)   
-Verifying download hash.   
-Decompressing the archive: ~/mne_data/MNE-somato-data.tar.gz  
-(please be patient, this can take some time)  
-'~/mne_data/MNE-somato-data'  
+import mne
+
+mne.datasets.somato.data_path()  # Caution: large download (about 600 MB)!
+# Returns the dataset folder as a pathlib.Path, e.g. ~/mne_data/MNE-somato-data
 ```
 
-Given the data, we can now use the MNE function [read\_raw\_fif](http://martinos.org/mne/dev/generated/mne.io.read_raw_fif.html) [(5)](#references) to read the data from the file into memory:
+Given the data, we can now use the MNE function [read\_raw\_fif](https://mne.tools/stable/generated/mne.io.read_raw_fif.html) [(5)](#references) to read the data from the file into memory:
 
 ```python
->>> path = mne.datasets.somato.data_path() + '/MEG/somato/sef_raw_sss.fif'  
->>> raw = mne.io.read_raw_fif(path)
-Opening raw data file /home/pat/mne_data/MNE-somato-data/MEG/somato/sef_raw_sss.fif...  
-    Range : 237600 ... 506999 =    791.189 ...  1688.266 secs  
-Ready.  
-Current compensation grade : 0  
+# The somato dataset is stored in the BIDS folder layout
+path = mne.datasets.somato.data_path() / 'sub-01' / 'meg' / 'sub-01_task-somato_meg.fif'
+raw = mne.io.read_raw_fif(path)
 ```
 
 This contains a collection of metadata about the recording - all can be listed at raw.info, or alternatively single pieces are accessible via calls like:
 
 ```python
->>> raw.info.get('nchan') # number of channels  
-316  
+raw.info.get('nchan')  # number of channels
 ```
 
 To inspect all the data, we can use MNE’s inbuilt plotting functionality:
 
 ```python
->>> raw.plot()  
+raw.plot()
 ```
 
 ![](/learn/images/raw_plot.png)
@@ -89,22 +73,17 @@ To inspect all the data, we can use MNE’s inbuilt plotting functionality:
 Now that the data is loaded, the raw recordings are all accessible:
 
 ```python
->>> raw.get_data().shape # (channels, recordings)  
-(316, 269400)  
->>> raw.get_data()[0] # 269400 recordings for the first channel, as numpy array  
-array([ -5.57487584e-12,  -2.98327676e-12,   3.76587444e-12, ...,  
-        -6.26239056e-12,  -9.57932650e-12,  -1.47683897e-11])  
+raw.get_data().shape  # (channels, recordings)
+raw.get_data()[0]  # all recordings for the first channel, as a numpy array
 ```
 
 MNE also supports writing raw data back out to FIF, which is useful when combined with preprocessing above for storing processed values for later use:
 
 ```python
->>> raw.save(‘example.raw.fif')
-Writing ~/example.raw.fif
-Closing ~/example.raw.fif [done]
+raw.save('example.raw.fif')
 ```
 
-For a full example of the reading and writing of FIF files, including some of the options available for each, you can also see the [MNE tutorial on the topic](http://martinos.org/mne/dev/auto_examples/io/plot_read_and_write_raw_data.html) [(6)](#references).
+For a full example of the reading and writing of FIF files, including some of the options available for each, you can also see the [MNE tutorial on the topic](https://mne.tools/stable/auto_tutorials/raw/10_raw_overview.html) [(6)](#references).
 
 ### 2.2. EDF / EDF+
 
@@ -113,14 +92,14 @@ A second example of a file format that is often used for EEG content is EDF, the
 MNE itself contains a collection of EDF files as sample datasets - for example, to load one EDF from its eegbci set:
 
 ```python
->>> path = mne.datasets.eegbci.load_data(1, 1) # Note: 1.2 MB  
->>> path[0]  
-u'~/mne_data/MNE-eegbci-data/physiobank/database/eegmmidb/S001/S001R01.edf'  
+path = mne.datasets.eegbci.load_data(1, [1])  # Note: 1.2 MB
+path[0]
+# PosixPath('~/mne_data/MNE-eegbci-data/files/eegmmidb/1.0.0/S001/S001R01.edf')
 ```
 
 From inspecting the file, we can observe that it starts with:
 
-```python
+```text
 0 X X X X  Startdate 12-AUG-2009 X X BCI2000  12.08.0916.15.0016896 EDF+C                                       61 1 65
 ```
 
@@ -130,12 +109,16 @@ etc…, which corresponds to some per-recording metadata, as detailed here:
 MNE provides the function mne.io.read\_raw\_edf (8) to load the file:
 
 ```python
->>> raw = mne.io.read_raw_edf(path[0], preload=True)   
-Extracting edf Parameters from /home/pat/mne_data/MNE-eegbci-data/physiobank/database/eegmmidb/S001/S001R01.edf...   
-Setting channel info structure...   
-Creating Raw.info structure...   
-Reading 0 ... 9759  =      0.000 ...    60.994 secs...   
-Ready.   
+raw = mne.io.read_raw_edf(path[0], preload=True)
+```
+
+MNE prints a short log while it reads the file:
+
+```text
+Extracting EDF parameters from ~/mne_data/MNE-eegbci-data/files/eegmmidb/1.0.0/S001/S001R01.edf...
+Setting channel info structure...
+Creating raw.info structure...
+Reading 0 ... 9759  =      0.000 ...    60.994 secs...
 ```
 
 Once loaded, it can be manipulated in the same way as the FIF files mentioned above. When given preload=True, this will load it all into memory at the time of call.
@@ -143,26 +126,30 @@ Once loaded, it can be manipulated in the same way as the FIF files mentioned ab
 Data can now be inspected in the same way as described above for FIF files, e.g. calling:
 
 ```python
->>> raw.plot()   
+raw.plot()
 ```
 
 ![](/learn/images/raw_plot-2.png)
 
 ### 2.4. Other standard formats
 
-FIF and EDF are two of the more common formats that MNE can load, but it does natively support a large collection of some of the more standard formats used. The full selection can be found in the [MNE file documentation](http://martinos.org/mne/dev/manual/io.html), and generally require calling functions like mne.io.read\_raw\_egi(...) or mne.io.read\_raw\_eeglab(...).
+FIF and EDF are two of the more common formats that MNE can load, but it does natively support a large collection of some of the more standard formats used. The full selection can be found in the [MNE file documentation](https://mne.tools/stable/auto_tutorials/io/index.html), and generally require calling functions like mne.io.read\_raw\_egi(...) or mne.io.read\_raw\_eeglab(...).
 
 ### 2.3. Other non-standard formats (CSV / .mat)
 
 There are lots of different file formats in use for EEG data across the world. For example, it’s common to come across matlab .mat files, or the textual comma-separated variables (CSV) for storing the signals. Assuming you can read the samples into a big matrix of recordings (e.g. using [scipy.io.loadmat](https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.loadmat.html) [(9)](#references) for .mat, or [numpy.genfromtxt](https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html) [(10)](#references) for .csv), MNE also provides a way to convert these into the format it uses:
 
 ```python
->>> ch_names = [‘A’, ‘B’] # channel names   
->>> sfreq = 200 # sampling frequency, in hertz  
->>> info = mne.create_info(ch_names, sfreq) # See [docs](http://martinos.org/mne/stable/generated/mne.Info.html) for full list of Info options.   
->>> samples = np.array([[-1, 0, -1], [0, 1, 0]]) # Samples for each channel  
->>> raw = mne.io.RawArray(samples, info)   
+import numpy as np
+
+ch_names = ['A', 'B']  # channel names
+sfreq = 200  # sampling frequency, in hertz
+info = mne.create_info(ch_names, sfreq, ch_types='eeg')  # See https://mne.tools/stable/generated/mne.create_info.html for all options.
+samples = np.array([[-1, 0, -1], [0, 1, 0]])  # Samples for each channel
+raw = mne.io.RawArray(samples, info)
 ```
+
+[The MNE docs](https://mne.tools/stable/generated/mne.Info.html) list everything an Info object can hold.
 
 This can now be used like the raw variables above that were loaded from FIF or EDF.
 
@@ -184,18 +171,18 @@ You can detect bad channels even before you have finished collecting the data. F
 The most common way of detecting bad channels after the data has been collected is by visualizing the raw data. Using MNE, this can be done by the following command:
 
 ```python
-raw.plot()  
+raw.plot()
 ```
 
 Now you can look for channels that either have no signal (a flat line) or seem significantly noisier than others.
 
 ![](/learn/images/bad_channel.png)  
-*In this example, the channel at the top is significantly noisier than the others (image taken from [https://www.nbtwiki.net/doku.php?id=tutorial:rejection\_of\_transient\_artifacts](https://www.nbtwiki.net/doku.php?id=tutorial:rejection_of_transient_artifacts))*
+*In this example, the channel at the top is significantly noisier than the others (image taken from https://www.nbtwiki.net/doku.php?id=tutorial:rejection\_of\_transient\_artifacts)*
 
 Note that the decision to remove a channel post-hoc because of high noise level can be a bit arbitrary - use your experience and judgement to determine how much noise is appropriate. You should take into account that [ICA](#91-ica-independent-component-analysis) will be able to remove some of the noise without having to remove an entire channel. Once you've decided which channels to remove, you can mark bad channels either via an MNE command:
 
 ```python
-raw.info['bads'] += ['names of channels to remove']    
+raw.info['bads'] += ['names of channels to remove']
 ```
 
 Or interactively, by clicking on the channel line or channel name in the window. The channels you clicked on will then be marked as bad once you close the window.
@@ -205,14 +192,14 @@ Or interactively, by clicking on the channel line or channel name in the window.
 Once you have identified the bad channels, you can exclude them from further analysis by picking a subset of channels that excludes the ones marked as ‘bad’:
 
 ```python
-picks = mne.pick_types(raw.info, exclude='bads')   
+picks = mne.pick_types(raw.info, meg=True, eeg=True, exclude='bads')
 ```
 
 Now when you do further analysis, you can set picks as the channels that will be analysed. For example, if you want to split the data into epochs,
 
 ```python
-epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks,  
-                    baseline=(None, 0), reject=reject, preload=False)   
+epochs = mne.Epochs(raw, events, event_id, tmin, tmax, picks=picks,
+                    baseline=(None, 0), reject=reject, preload=False)
 ```
 
 will have the bad channels excluded since picks does not contain bad channels.
@@ -229,12 +216,12 @@ There are a few ways of interpolating EEG data, but by far the most common is in
 2.  Compute a matrix that describes the relationship between the good and bad electrodes
 3.  Use the result from (2) to interpolate the data for bad electrodes
 
-A detailed description of the method can be found at [http://martinos.org/mne/stable/manual/channel\_interpolation.html#channel-interpolation](http://martinos.org/mne/stable/manual/channel_interpolation.html#channel-interpolation) [(16)](#references).
+A detailed description of the method can be found at [http://martinos.org/mne/stable/manual/channel\_interpolation.html#channel-interpolation](https://mne.tools/stable/auto_tutorials/preprocessing/15_handling_bad_channels.html) [(16)](#references).
 
 This method can be easily implemented in MNE via the following command:
 
 ```python
-raw.interpolate_bads(reset_bads=False)  
+raw.interpolate_bads(reset_bads=False)
 ```
 
 ## 4\. Filtering
@@ -253,18 +240,23 @@ In the world of EEG, these are useful for a number of things when processing you
     This image (from [http://blricrex.hypotheses.org/ressources/eeg/pre-processing-for-erps](http://blricrex.hypotheses.org/ressources/eeg/pre-processing-for-erps) [(11)](#references)) shows clearly some 50Hz noise from electricity (note that some countries, like USA, use 60Hz). To remove these, a notch filter can be performed on the raw signal with MNE to remove 50Hz and its multiples.
 
 ```python
-raw.notch_filter(np.arange(50, 251, 50))  
+# 50 Hz and its multiples, up to 250 Hz (all must be below half the sampling rate)
+raw.notch_filter(np.arange(50, 251, 50))
 ```
 
 -   Often you only care about a certain frequency range - e.g. if looking at alpha waves, only the 7.5Hz - 12.5Hz range is needed, so it can be useful to perform a band-pass filter between these values to remove any noise outside that range:
 
 ```python
-mne.filter.filter_data(raw, sFreq, l_freq=7.5, h_freq=12.5)  
+# Filter a copy of the Raw object
+raw_alpha = raw.copy().filter(l_freq=7.5, h_freq=12.5)
+
+# Or filter a plain NumPy array of shape (channels, samples)
+alpha_data = mne.filter.filter_data(raw.get_data(), raw.info['sfreq'], l_freq=7.5, h_freq=12.5)
 ```
 
 -   High-pass filtering can be added to remove very low frequency signals. These are too slow to originate from the brain, and are usually a sign of long-term drift in the recording environment.
 
-Care needs to be taken when performing any filtering however, to ensure that it introduces no extra source of error. For more details on where potential pitfalls have been found, see the [MNE documentation](https://martinos.org/mne/stable/auto_tutorials/plot_background_filtering.html#some-pitfalls-of-filtering) [(12)](#references) on filtering issues. Additionally, if you're interested at how these work, or want to know the difference between the `method='fir'` (default) and `method='iir'` options, see the video [Overview of FIR and IIR Filters](https://www.youtube.com/watch?v=9yNQBWKRSs4).
+Care needs to be taken when performing any filtering however, to ensure that it introduces no extra source of error. For more details on where potential pitfalls have been found, see the [MNE documentation](https://mne.tools/stable/auto_tutorials/preprocessing/25_background_filtering.html) [(12)](#references) on filtering issues. Additionally, if you're interested at how these work, or want to know the difference between the `method='fir'` (default) and `method='iir'` options, see the video [Overview of FIR and IIR Filters](https://www.youtube.com/watch?v=9yNQBWKRSs4).
 
 ## 5\. Downsampling
 
@@ -285,7 +277,7 @@ MNE provides the ‘resample’ method that will perform the decimating techniqu
 
 ```python
 # Resample to 100 Hz
-raw_resampled = raw.copy().resample(100, npad='auto')  
+raw_resampled = raw.copy().resample(100, npad='auto')
 ```
 
 ### 5.3. Notes on downsampling
@@ -306,7 +298,7 @@ You may have noticed that the *Strict Downsampling* section talked about keeping
 In EEG data, the voltage for each electrode is recorded relative to other electrodes. The ‘reference’, which can be one or a combination of electrodes, is what the voltage will be relative to. This means that neural activity at the reference electrode will also be reflected in all the other electrodes, which could contaminate your signal. This also means that your choice of reference will have a critical impact on your data, as illustrated below:
 
 ![](/learn/images/different-references.png)  
-*The same EEG dataset with different choices of reference - Image taken from [http://martinos.org/mne/stable/auto\_examples/preprocessing/plot\_rereference\_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py](http://martinos.org/mne/stable/auto_examples/preprocessing/plot_rereference_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py) [(15)](#references)*
+*The same EEG dataset with different choices of reference - Image taken from [http://martinos.org/mne/stable/auto\_examples/preprocessing/plot\_rereference\_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py](https://mne.tools/stable/auto_tutorials/preprocessing/55_setting_eeg_reference.html) [(15)](#references)*
 
 ### 6.2. How are references chosen?
 
@@ -321,22 +313,22 @@ Some common choices of reference include:
 
 Any given EEG headset comes with a pre-defined reference; however, it is possible to re-reference the data after data has been collected. In MNE, you can change the reference via the `set_eeg_reference()` command.
 
-By default, MNE re-references data to the average of all electrodes, but you can also set the average reference explicitly:
+MNE does not change the reference of your data unless you ask it to. You can set the average reference explicitly:
 
 ```python
-raw.set_eeg_reference()  
+raw.set_eeg_reference()
 ```
 
 will set the reference to the average. To set the reference to the default that came with the headset, you can use
 
 ```python
-raw.set_eeg_reference([])  
+raw.set_eeg_reference([])
 ```
 
 To set the reference to a custom combination of electrodes, you can use
 
 ```python
-raw.set_eeg_reference([electrodes_to_use])  
+raw.set_eeg_reference(electrodes_to_use)  # a list of channel names, e.g. ['M1', 'M2']
 ```
 
 Which will set the reference to the average of the electrodes in \[electrodes\_to\_use\].
@@ -358,16 +350,16 @@ Artifacts are signals that are picked up by the EEG system but do not actually o
 One way of finding artifacts is by simply looking at the data, as biological artifacts tend to have recognizable patterns. For example, if you plot the sample BCI dataset from MNE:
 
 ```python
-from mne.datasets import eegbci  
-from mne.io import concatenate_raws, read_raw_edf  
+from mne.datasets import eegbci
+from mne.io import concatenate_raws, read_raw_edf
 
-subject = 1  
-runs = [1,2,3]   
-raw_fnames = eegbci.load_data(subject,runs)  
-raw_files = [read_raw_edf(f, preload=True) for f in raw_fnames]  
-raw = concatenate_raws(raw_files)  
-raw.filter(0.5, 30)  
-raw.plot(n_channels=10, block=True)  
+subject = 1
+runs = [1, 2, 3]
+raw_fnames = eegbci.load_data(subject, runs)
+raw_files = [read_raw_edf(f, preload=True) for f in raw_fnames]
+raw = concatenate_raws(raw_files)
+raw.filter(0.5, 30)
+raw.plot(n_channels=10, block=True)
 ```
 
 ![](/learn/images/artifacts1.png)
@@ -384,20 +376,23 @@ As you compile the data into epochs for further analysis, the marked segments wi
 Note that finding artifacts based on their visualization can be unreliable since it relies on observer judgement. However, there are ways to detect bad segments automatically, for example, based on the variance of the signal, the probability of the pattern of activity being seen in a particular channel, or the magnitude of voltage increases. MNE provides support for automatic epoch rejection based on the peak-to-peak amplitude: each Epoch has a *reject* dictionary that contains the channel types and the threshold amplitude values. You can set those values by creating a dictionary:
 
 ```python
-reject = dict(eeg=5e-6) #if you have EOG, MEG or other data, you can set the thresholds for those as well   
+reject = dict(eeg=5e-6)  # if you have EOG, MEG or other data, you can set the thresholds for those as well
 ```
 
 ...passing this dictionary you created when you construct your epochs...
 
 ```python
-epochs = mne.Epochs(raw, events, event_id, tmin, tmax, proj=True,  
-                    reject=reject, reject_by_annotation=True)  
+# The EEGBCI files store their events as annotations
+events, event_id = mne.events_from_annotations(raw)
+tmin, tmax = -0.2, 0.5
+epochs = mne.Epochs(raw, events, event_id, tmin, tmax, proj=True,
+                    reject=reject, reject_by_annotation=True)
 ```
 
 ...and dropping the rejected epochs:
 
 ```python
-epochs.drop_bad()  
+epochs.drop_bad()
 ```
 
 When you run this command, you should be able to see how many epochs were dropped. You might need to adjust the thresholds based on how many epochs were rejected, since those values are highly dependent on the data you have.
@@ -465,32 +460,32 @@ This concept is reasonable, as has been discussed by many publications for decad
 
 ## References
 
-1.  Background on filters for EEG: [http://clinicalgate.com/filters-in-the-electroencephalogram/](http://clinicalgate.com/filters-in-the-electroencephalogram/)
-2.  MNE Library: [https://martinos.org/mne/stable/index.html](https://martinos.org/mne/stable/index.html)
-3.  MNE (C implementation): [https://martinos.org/mne/stable/manual/c\_reference.html](https://martinos.org/mne/stable/manual/c_reference.html)
-4.  FIF Documentation: [http://martinos.org/mne/stable/tutorials/seven\_stories\_about\_mne.html?highlight=fif#what-the-fif-does-mne-stand-for](http://martinos.org/mne/stable/tutorials/seven_stories_about_mne.html?highlight=fif#what-the-fif-does-mne-stand-for)
-5.  read\_raw\_fif Documentation: [http://martinos.org/mne/dev/generated/mne.io.read\_raw\_fif.html](http://martinos.org/mne/dev/generated/mne.io.read_raw_fif.html)
-6.  Reading and Writing Raw Data in MNE: [http://martinos.org/mne/dev/auto\_examples/io/plot\_read\_and\_write\_raw\_data.html](http://martinos.org/mne/dev/auto_examples/io/plot_read_and_write_raw_data.html)
-7.  EDF File Format Specification: [http://www.edfplus.info/specs/edf.html](http://martinos.org/mne/dev/auto_examples/io/plot_read_and_write_raw_data.html)
-8.  read\_raw\_edf Documentation: [http://www.martinos.org/mne/stable/generated/mne.io.read\_raw\_edf.html](http://martinos.org/mne/dev/auto_examples/io/plot_read_and_write_raw_data.html)
-9.  Loading Matrices in SciPy: [https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.loadmat.html](http://martinos.org/mne/dev/auto_examples/io/plot_read_and_write_raw_data.html)
+1.  Background on filters for EEG: http://clinicalgate.com/filters-in-the-electroencephalogram/
+2.  MNE Library: [https://mne.tools/stable/index.html](https://mne.tools/stable/index.html)
+3.  MNE (C implementation): [https://martinos.org/mne/stable/manual/c\_reference.html](https://web.archive.org/web/20190824170457/http://martinos.org:80/mne/stable/manual/c_reference.html)
+4.  FIF Documentation: [http://martinos.org/mne/stable/tutorials/seven\_stories\_about\_mne.html?highlight=fif#what-the-fif-does-mne-stand-for](https://web.archive.org/web/20170904000120/http://martinos.org:80/mne/stable/tutorials/seven_stories_about_mne.html?highlight=fif)
+5.  read\_raw\_fif Documentation: [http://martinos.org/mne/dev/generated/mne.io.read\_raw\_fif.html](https://mne.tools/stable/generated/mne.io.read_raw_fif.html)
+6.  Reading and Writing Raw Data in MNE: [http://martinos.org/mne/dev/auto\_examples/io/plot\_read\_and\_write\_raw\_data.html](https://mne.tools/stable/auto_tutorials/raw/10_raw_overview.html)
+7.  EDF File Format Specification: [http://www.edfplus.info/specs/edf.html](https://mne.tools/stable/auto_tutorials/raw/10_raw_overview.html)
+8.  read\_raw\_edf Documentation: [http://www.martinos.org/mne/stable/generated/mne.io.read\_raw\_edf.html](https://mne.tools/stable/auto_tutorials/raw/10_raw_overview.html)
+9.  Loading Matrices in SciPy: [https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.loadmat.html](https://mne.tools/stable/auto_tutorials/raw/10_raw_overview.html)
 10.  Loading Matrices from .txt in NumPy: [https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html](https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html)
 11.  [http://blricrex.hypotheses.org/ressources/eeg/pre-processing-for-erps](http://blricrex.hypotheses.org/ressources/eeg/pre-processing-for-erps)
-12.  MNE Filtering Tutorial: [https://martinos.org/mne/stable/auto\_tutorials/plot\_background\_filtering.html#some-pitfalls-of-filtering](https://martinos.org/mne/stable/auto_tutorials/plot_background_filtering.html#some-pitfalls-of-filtering)
+12.  MNE Filtering Tutorial: [https://martinos.org/mne/stable/auto\_tutorials/plot\_background\_filtering.html#some-pitfalls-of-filtering](https://mne.tools/stable/auto_tutorials/preprocessing/25_background_filtering.html)
 13.  Downsampling Example: [https://www.youtube.com/watch?v=yWqrx08UeUs](https://www.youtube.com/watch?v=yWqrx08UeUs)
 14.  Nyquist-Shannon Sampling Theorem: [https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon\_sampling\_theorem](https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem)
-15.  Re-Referencing in MNE: [http://martinos.org/mne/stable/auto\_examples/preprocessing/plot\_rereference\_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py](http://martinos.org/mne/stable/auto_examples/preprocessing/plot_rereference_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py)
-16.  Channel Interpolation in MNE: [http://martinos.org/mne/stable/manual/channel\_interpolation.html#channel-interpolation](http://martinos.org/mne/stable/manual/channel_interpolation.html#channel-interpolation)
+15.  Re-Referencing in MNE: [http://martinos.org/mne/stable/auto\_examples/preprocessing/plot\_rereference\_eeg.html#sphx-glr-auto-examples-preprocessing-plot-rereference-eeg-py](https://mne.tools/stable/auto_tutorials/preprocessing/55_setting_eeg_reference.html)
+16.  Channel Interpolation in MNE: [http://martinos.org/mne/stable/manual/channel\_interpolation.html#channel-interpolation](https://mne.tools/stable/auto_tutorials/preprocessing/15_handling_bad_channels.html)
 17.  Validation of consumer EEG: [http://journal.frontiersin.org/article/10.3389/fnins.2017.00109/full](http://journal.frontiersin.org/article/10.3389/fnins.2017.00109/full)
 18.  A direct comparison of wet, dry and insulating bioelectric  
     recording electrodes (A Searle and L Kirkup 1999): [https://www.google.ca/url?sa=t&source=web&rct=j&url=http://iopscience.iop.org/article/10.1088/0967-3334/21/2/307/pdf&ved=0ahUKEwj9vYyD36nTAhVJ4mMKHfaPBGwQFggaMAA&usg=AFQjCNF6PP563IoHmjCoHLiLl1aNFReZ9g&sig2=xDblyqx0iIN6JguVhHwXZQ](https://www.google.ca/url?sa=t&source=web&rct=j&url=http://iopscience.iop.org/article/10.1088/0967-3334/21/2/307/pdf&ved=0ahUKEwj9vYyD36nTAhVJ4mMKHfaPBGwQFggaMAA&usg=AFQjCNF6PP563IoHmjCoHLiLl1aNFReZ9g&sig2=xDblyqx0iIN6JguVhHwXZQ)
-19.  MNE tutorials + intro to python: [https://martinos.org/mne/stable/tutorials.html](https://martinos.org/mne/stable/tutorials.html)
-20.  ICA in MNE: [http://martinos.org/mne/dev/manual/preprocessing/ica.html](http://martinos.org/mne/dev/manual/preprocessing/ica.html)
-21.  Automated dipole fitting after ICA with practice datasets: [http://cognitrn.psych.indiana.edu/busey/temp/eeglabtutorial4.301/dipfittut/dipfit.html](http://cognitrn.psych.indiana.edu/busey/temp/eeglabtutorial4.301/dipfittut/dipfit.html)
+19.  MNE tutorials + intro to python: [https://martinos.org/mne/stable/tutorials.html](https://mne.tools/stable/auto_tutorials/index.html)
+20.  ICA in MNE: [http://martinos.org/mne/dev/manual/preprocessing/ica.html](https://mne.tools/stable/auto_tutorials/preprocessing/40_artifact_correction_ica.html)
+21.  Automated dipole fitting after ICA with practice datasets: [http://cognitrn.psych.indiana.edu/busey/temp/eeglabtutorial4.301/dipfittut/dipfit.html](https://eeglab.org/tutorials/09_source/DIPFIT.html)
 22.  Makoto’s personal guide on using EEGLAB for ICA and Dipole fitting: [https://sccn.ucsd.edu/wiki/Makoto%27s\_preprocessing\_pipeline](https://sccn.ucsd.edu/wiki/Makoto%27s_preprocessing_pipeline)
-23.  Background theory of ICA: [https://sccn.ucsd.edu/wiki/Chapter\_09:\_Decomposing\_Data\_Using\_ICA](https://sccn.ucsd.edu/wiki/Chapter_09:_Decomposing_Data_Using_ICA)
+23.  Background theory of ICA: [https://sccn.ucsd.edu/wiki/Chapter\_09:\_Decomposing\_Data\_Using\_ICA](https://eeglab.org/tutorials/06_RejectArtifacts/RunICA.html)
 24.  Comparing ICA and SSP: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4972935/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4972935/)
-25.  SSP in MNE: [http://martinos.org/mne/dev/manual/preprocessing/ssp.html](http://martinos.org/mne/dev/manual/preprocessing/ssp.html)
-26.  Maxwell fintering in MNE: [http://martinos.org/mne/dev/manual/preprocessing/maxwell.html#id4](http://martinos.org/mne/dev/manual/preprocessing/maxwell.html#id4)
+25.  SSP in MNE: [http://martinos.org/mne/dev/manual/preprocessing/ssp.html](https://mne.tools/stable/auto_tutorials/preprocessing/50_artifact_correction_ssp.html)
+26.  Maxwell fintering in MNE: [http://martinos.org/mne/dev/manual/preprocessing/maxwell.html#id4](https://mne.tools/stable/auto_tutorials/preprocessing/60_maxwell_filtering_sss.html)
 27.  Dipole source localization: [https://sccn.ucsd.edu/wiki/A08:\_DIPFIT](https://sccn.ucsd.edu/wiki/A08:_DIPFIT)
-28.  ICA used for artifact correction: [http://martinos.org/mne/stable/auto\_tutorials/plot\_artifacts\_correction\_ica.html](http://martinos.org/mne/stable/auto_tutorials/plot_artifacts_correction_ica.html)
+28.  ICA used for artifact correction: [http://martinos.org/mne/stable/auto\_tutorials/plot\_artifacts\_correction\_ica.html](https://mne.tools/stable/auto_tutorials/preprocessing/40_artifact_correction_ica.html)

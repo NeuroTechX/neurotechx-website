@@ -4,6 +4,8 @@ description: "Learn how to create your very own simple neural network that can c
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/machinelearning/"
 ---
+*Updated November 2026: code examples updated for MNE-Python 1.13, scikit-learn 1.9 and PyTorch 2.15.*
+
 ## Machine Learning for Brain Computer Interfaces
 
 ## Introduction
@@ -170,18 +172,16 @@ The prerequisite packages to this tutorial are:
 Below is a pip script that installs these libraries on Google Collab. If any do not work, please see their respective installation pages.
 
 ```
-# Run these from the console if following along locally
+# Run these from the console if following along locally (without the "!")
 !pip install mne
-!pip install sklearn
+!pip install scikit-learn
 !pip install matplotlib
-!pip install torch 
-!pip install torchvision
-!pip install tensorboardX
+!pip install torch
 ```
 
 For the purposes of this tutorial, we will be turning off warnings.
 
-```
+```python
 # You'll want to comment this out if you plan on modifying this code, to get valuable feedback
 import warnings
 warnings.filterwarnings('ignore')
@@ -189,12 +189,11 @@ warnings.filterwarnings('ignore')
 
 Import all of our required modules. This includes various submodules that we'll need including the RobustScaler object from scikit.
 
-```
+```python
 from collections import OrderedDict
-from pylab import rcParams
+from matplotlib import rcParams
 import torch
 import torch.nn as nn
-import torchvision.transforms
 import matplotlib.pyplot as plt
 import numpy as np
 import mne
@@ -203,7 +202,7 @@ from sklearn.preprocessing import RobustScaler
 
 Set the randomizer seed for *some* consistency
 
-```
+```python
 torch.manual_seed(100)
 ```
 
@@ -220,7 +219,7 @@ Initialize our project with a few constant parameters.
 -   **hidden3**: Number of neurons in the third hidden layer
 -   **output**: Number of neurons in the output layer
 
-```
+```python
 # Initialize parameters
 eeg_sample_count = 240 # How many samples are we training
 learning_rate = 1e-3 # How hard the network will correct its mistakes while learning
@@ -240,7 +239,7 @@ Our input data will be traveling along this graph, accumulating biases, scaled b
 
 This final number is the p300 predictor.
 
-```
+```python
 ## Define the network
 tutorial_model = nn.Sequential()
 
@@ -269,7 +268,7 @@ Next, we need training and loss functions. Loss functions are vital in giving us
 
 In the code below, we define a common loss function available in PyTorch to use and a simple training procedure that updates the network's weights and calculates the loss for every iteration.
 
-```
+```python
 # Define a loss function
 loss_function = torch.nn.MSELoss()
 
@@ -287,7 +286,7 @@ def train_network(train_data, actual_class, iterations):
 
     # Find out how wrong the network was
     loss = loss_function(classification, actual_class)
-    loss_data.append(loss)
+    loss_data.append(loss.item())
 
     # Zero out the optimizer gradients every iteration
     optimizer.zero_grad()
@@ -302,8 +301,8 @@ def train_network(train_data, actual_class, iterations):
   plt.plot(list(range(0, len(loss_data))), loss_data)
   plt.show()
 
-# Save the network's default state so we can retrain from the default weights
-torch.save(tutorial_model, "/home/tutorial_model_default_state")
+# Save the network's default weights so we can retrain from them later
+torch.save(tutorial_model.state_dict(), "tutorial_model_default_state.pt")
 ```
 
 ## Supervised Learning
@@ -326,7 +325,7 @@ Now that we understand a bit more about supervised learning, we can apply this k
 
 Before we jump into creating a network and training it with the MNE dataset, it is good practice to first test that the network is working correctly with simple, easily classifiable data. The code in this block creates a sample dataset with the same dimensions as the actual data set.
 
-```
+```python
 ## Create sample data using the parameters
 sample_positives = [None, None] # Element [0] is the sample, Element [1] is the class
 sample_positives[0] = torch.rand(int(eeg_sample_count / 2), eeg_sample_length) * 0.50 + 0.25
@@ -360,11 +359,10 @@ Below is a graph displaying a representation of this dataset. The average of the
 
 We will now design our network around this sample data. If the network classifies this data correctly, it will be more likely to classify the actual, and more complicated, dataset correctly.
 
-```
+```python
 rcParams['figure.figsize'] = 15, 5
 
 plt.title("Sample Data Set")
-plt.legend()
 plt.plot(list(range(0, eeg_sample_length)), sample_positives[0][0], color = "#bbbbbb", label = "One Sample")
 plt.plot(list(range(0, eeg_sample_length)), sample_positives[0].mean(dim = 0), color = "g", label = "Mean Positive")
 plt.plot(list(range(0, eeg_sample_length)), sample_negatives_high[0], color = "#bbbbbb")
@@ -373,6 +371,7 @@ plt.plot(list(range(0, eeg_sample_length)), sample_negatives_low[0], color = "#b
 plt.plot(list(range(0, eeg_sample_length)), sample_negatives_low.mean(dim = 0), color = "r")
 plt.plot(list(range(0, eeg_sample_length)), [0.75] * eeg_sample_length, color = "k")
 plt.plot(list(range(0, eeg_sample_length)), [0.25] * eeg_sample_length, color = "k")
+plt.legend()
 plt.show()
 ```
 
@@ -380,11 +379,22 @@ plt.show()
 
 ### (Step 6) Verify the Network Works
 
+Before this step, the network needs to be trained on the sample data. The Colab notebook does this with the training procedure from Step 5:
+
+```python
+# Define a learning function, needs to be reinitialized every load
+optimizer = torch.optim.Adam(tutorial_model.parameters(), lr = learning_rate)
+
+# Use our training procedure with the sample data
+print("Below is the loss graph for sample dataset training session")
+train_network(samples[0], samples[1], iterations = 100)
+```
+
 Okay, so we've trained our network on the sample data and now what's next? Let's classify the remaining sample test data to see if the training actually worked.
 
 Below we classify data that the network did not train on to see if it can extrapolate from the training set it **did** learn from.
 
-```
+```python
 # Classify our positive test dataset
 predicted_positives = tutorial_model(test_positives).data.tolist()
 
@@ -435,8 +445,8 @@ It is left to the reader to perform more experimentation with the sample data by
 
 The MNE library is a resource that specializes in brain signal processing, and provides access to sample databases. We will use one of these P300 databases to train our network.
 
-```
-data_path = mne.datasets.sample.data_path()
+```python
+data_path = mne.datasets.sample.data_path()  # Caution: about 1.6 GB download!
 data_path
 ```
 
@@ -444,12 +454,13 @@ In order to obtain this database using Python, we need to set the path to the sp
 
 The data we obtain is **raw**. This means that it is simply a collection of streamed brain signal samples from many EEG channels, as opposed to signals sliced or focused to an event of interest.
 
-```
-raw_fname = data_path + '/MEG/sample/sample_audvis_filt-0-40_raw.fif'
-event_fname = data_path + '/MEG/sample/sample_audvis_filt-0-40_raw-eve.fif'
+```python
+# data_path is a pathlib.Path, so we build file paths with the / operator
+raw_fname = data_path / 'MEG' / 'sample' / 'sample_audvis_filt-0-40_raw.fif'
+event_fname = data_path / 'MEG' / 'sample' / 'sample_audvis_filt-0-40_raw-eve.fif'
 
 # Obtain a reference to the database and preload into RAM
-raw_data = mne.io.read_raw_fif(raw_fname, preload=True) 
+raw_data = mne.io.read_raw_fif(raw_fname, preload=True)
 
 # EEGs work by detecting the voltage between two points. The second reference
 # point is set to be the average of all voltages using the following function.
@@ -461,7 +472,7 @@ Here we load the database and save it in a variable called raw\_data. The pick f
 
 This dataset also includes the data from MEG (magnetoencephalography). However, MEG is still very far from being an accessible technology, due to the device being the size of a room. It also requires superconductors to function, similar to fMRI.
 
-```
+```python
 # Define what data we want from the dataset
 raw_data = raw_data.pick(picks=["eeg","eog"])
 picks_eeg_only = mne.pick_types(raw_data.info, 
@@ -473,10 +484,10 @@ picks_eeg_only = mne.pick_types(raw_data.info,
 
 The raw EEG file comes with events that allow us to know when something happened during the EEG recording. For example, events with id 5 correspond to when participants were presented with smiley faces, while events 1 through 4 corresponds to trials were participants were presented with a checkerboard either on the left side or the right side of the screen and with a tone presented to either the left ear or the right ear. We know that the trials were participants were presented with a smiley (events with id 5) will elicit a P300. So we will start by slicing (or epoching) the data 0.5 seconds before the image was presented (to have a baseline) and 1 second after the image was presented. We can change this to values closer to 0.3 seconds, which would crop exactly to where the P300 is.
 
-```
+```python
 events = mne.read_events(event_fname)
 event_id = 5
-tmin = -0.5 
+tmin = -0.5
 tmax = 1
 epochs = mne.Epochs(raw_data, events, event_id, tmin, tmax, proj=True,
                     picks=picks_eeg_only, baseline=(None, 0), preload=True,
@@ -488,7 +499,7 @@ Unfortunately, this dataset only has 12 P300 event examples. Normally, a practic
 
 Specifically, we want a single EEG channel that has the highest indication of a P300 component to train our network with. It is possible to use more than one channel, but for simplicity we will use just one in this tutorial. The sensor plot below shows the name of the EEG channel we're using.
 
-```
+```python
 # This is the channel used to monitor the P300 response
 channel = "EEG 058"
 
@@ -500,7 +511,7 @@ sensor_position_figure = epochs.plot_sensors(show_names=[channel])
 
 Below is a heat graph representing the 12 P300 events found within the dataset. If you look closely around the 0.3sec -> 0.4sec mark, you can see there is a noticeable deflection in the signal. **That is the P300 component**, and the difficulty of detecting it is immediately clear, even with the line graph below the heat graph being the average of the 12 samples.
 
-```
+```python
 epochs.plot_image(picks=channel)
 ```
 
@@ -508,7 +519,7 @@ epochs.plot_image(picks=channel)
 
 Now that we have our P300 component data, we need counter examples to contrast that data with. We'll gather all of the other miscellaneous events contained within that dataset as well.
 
-```
+```python
 event_id=[1,2,3,4]
 epochsNoP300 = mne.Epochs(raw_data, events, event_id, tmin, tmax, proj=True,
                     picks=picks_eeg_only, baseline=(None, 0), preload=True,
@@ -518,13 +529,15 @@ print(epochsNoP300)
 
 There are significantly more Non-P300 events in this dataset, so we will only be using a subset to keep a necessary balance between class data. The most important thing to notice about the plot below is that there is no significant deflection around the 0.3sec -> 0.4sec time interval for the average of the data.
 
-There are significantly more Non-P300 events in this dataset, so we will only be using a subset to keep a necessary balance between class data. The most important thing to notice about the plot below is that there is no significant deflection around the 0.3sec -> 0.4sec time interval for the average of the data.
+```python
+epochsNoP300.plot_image(picks=channel)
+```
 
 ![Alt text](/learn/images/machinelearning/image23.png)
 
 Here is one more useful all-in-one graph to visualize what these samples look like. Note that the image described in the sample problem earlier in the tutorial is shown at time = 0sec. The blue line corresponds to when the subject was shown a smiley face, and the orange line corresponds to when the subject was shown a checkerboard.
 
-```
+```python
 mne.viz.plot_compare_evokeds({'P300': epochs.average(picks=channel), 'Other': epochsNoP300[0:12].average(picks=channel)})
 ```
 
@@ -539,7 +552,7 @@ We've got a few more steps to take to fully transform our dataset data into some
 
 The code block below does all of this.
 
-```
+```python
 eeg_data_scaler = RobustScaler()
 
 # We have 12 p300 samples
@@ -571,17 +584,17 @@ others_test = torch.tensor(others_test).float()
 
 # Combine everything into their final structures
 training_data = torch.tensor(np.concatenate((p300s_train, others_train), axis = 0)).float()
-positive_testing_data = torch.tensor(p300s_test).float()
-negative_testing_data = torch.tensor(others_test).float()
+positive_testing_data = p300s_test.clone()
+negative_testing_data = others_test.clone()
 
 # Print the size of each of our data structures
 print("training data count: " + str(training_data.shape[0]))
 print("positive testing data count: " + str(positive_testing_data.shape[0]))
 print("negative testing data count: " + str(negative_testing_data.shape[0]))
 
-# Generate training labels
+# Generate training labels (the first 9 samples are the P300s)
 labels = torch.tensor(np.zeros((training_data.shape[0],1))).float()
-labels[0:10] = 1.0
+labels[0:9] = 1.0
 print("training labels count: " + str(labels.shape[0]))
 ```
 
@@ -589,9 +602,9 @@ print("training labels count: " + str(labels.shape[0]))
 
 Using the network definition created in Step 5, we'll train on our real EEG data this time, beginning from defaulted weights, prior to any training with the sample data we created.
 
-```
+```python
 # Make sure we're starting from untrained every time
-tutorial_model = torch.load("/home/tutorial_model_default_state")
+tutorial_model.load_state_dict(torch.load("tutorial_model_default_state.pt"))
 
 ## Define a learning function, needs to be reinitialized every load
 optimizer = torch.optim.Adam(tutorial_model.parameters(), lr = learning_rate)
@@ -605,7 +618,7 @@ train_network(training_data, labels, iterations = 50)
 
 Alright, the moment of truth! Let's classify our test data sets.
 
-```
+```python
 # Classify our positive test dataset and print the results
 classification_1 = tutorial_model(positive_testing_data)
 for index, value in enumerate(classification_1.data.tolist()):
@@ -617,6 +630,11 @@ print()
 classification_2 = tutorial_model(negative_testing_data)
 for index, value in enumerate(classification_2.data.tolist()):
   print("P300 Negative Classification {1}: {0:.2f}%".format(value[0] * 100, index + 1))
+```
+
+The output looks like this:
+
+```text
 P300 Positive Classification 1: 100.00%
 P300 Positive Classification 2: 99.94%
 P300 Positive Classification 3: 100.00%
@@ -628,7 +646,7 @@ P300 Negative Classification 3: 0.00%
 
 Oh no, while the P300 Positive test samples did very well, one of the P300 Negative samples were misclassified! This is in part a consequence of not having enough data to train on. The network was unable to discern the difference between one of the Negative samples and the rest of the Positive samples. Let's take a look at what these samples look like next to each other.
 
-```
+```python
 rcParams['figure.figsize'] = 15, 5
 
 plt.plot(list(range(0, eeg_sample_length)), positive_testing_data[0], color = "g")
@@ -655,7 +673,7 @@ Our network was able to gain some knowledge from the test data provided through 
 
 Unfortunately, the small amount of data (9 brain waves for each class) to was available to us means that the solution it landed on was not very robust to new unique features. Here is a summary of all the other “Non-P300” data that we didn’t use from the database and the network’s classification of it:
 
-```
+```text
 Average Negative Score: 37.79%
 Proportion of Non-P300s Classified Correctly: 61.73%
 ```
@@ -703,9 +721,7 @@ The EEG signal has an extremely low SNR, is a non stationary signal and changes 
 
 In Independent Component Analysis, the directions have to be statistically independent. Let’s take into consideration the following latent model:
 
-```
 **x** = A**s**
-```
 
 where **x** is the initial n-dimensional dataset, where n in the number of EEG channels recording the signal. **s** is composed by l (with l < n ) mutually statistically independent latent variables, which are projected on l independent directions. In this case the signals from all the channels together form the dataset.
 
@@ -721,7 +737,7 @@ We aim to find the vector of lower dimension variables and the values of these v
 
 ICA example by the MNE library:
 
-[https://mne.tools/stable/auto\_tutorials/discussions/plot\_background\_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py](https://mne.tools/stable/auto_tutorials/discussions/plot_background_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py)
+[https://mne.tools/stable/auto\_tutorials/discussions/plot\_background\_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py](https://mne.tools/stable/auto_tutorials/preprocessing/40_artifact_correction_ica.html)
 
 Details on ICA Methods
 
@@ -739,11 +755,11 @@ In the following example, 3 signals will be artificially created and mixed. Then
 
 There are many useful libraries in this case, depending on the level of coding you want to apply and implement. We are going to review MNE, which is specific for EEG.
 
-mne.processing.ICA class implements ICA with four different methods: fastica, picard, infomax, and the extended-infomax algorithm. Bad data segments can be rejected by reject parameter mne.preprocessing.ICA.fit.
+mne.preprocessing.ICA class implements ICA with four different methods: fastica, picard, infomax, and the extended-infomax algorithm. Bad data segments can be rejected by reject parameter mne.preprocessing.ICA.fit.
 
-Source: [https://mne.tools/stable/auto\_tutorials/discussions/plot\_background\_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py](https://mne.tools/stable/auto_tutorials/discussions/plot_background_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py)
+Source: [https://mne.tools/stable/auto\_tutorials/discussions/plot\_background\_ica.html#sphx-glr-auto-tutorials-discussions-plot-background-ica-py](https://mne.tools/stable/auto_tutorials/preprocessing/40_artifact_correction_ica.html)
 
-```
+```python
 #Import required libraries for generating the sample signals
 import numpy as np
 import matplotlib.pyplot as plt
@@ -821,15 +837,15 @@ plt.show()
 
 As it is possible to observe from the image above, when having the mixed signal, it is very difficult to distinguish between each of the 3 components. When the PCA process is applied, it is possible to clearly discern the individual components. Nevertheless, they do not follow the same pattern as the real data. Finally, we can see why ICA is most commonly used on this type of problems, as each one of the components obtained has the same kind of signal profile as the initial data.
 
-```
-# init ICA. Feed dataset, method and random_state
+```python
+from mne.preprocessing import ICA
 
-ica =<span style="text-decoration:underline;"> </span>ICA(n_components=n_components, method=method, random_state=random_state)
+# init ICA. Feed dataset, method and random_state
+ica = ICA(n_components=n_components, method=method, random_state=random_state)
 
 # define what kind of components you want to reject
-
-reject = dict(mag=5e-12, grad=4000e-13) \
-ica.fit(raw, picks=picks_meg, decim=decim, reject=reject) \
+reject = dict(mag=5e-12, grad=4000e-13)
+ica.fit(raw, picks=picks_meg, decim=decim, reject=reject)
 ica.plot_components()
 
 # i.e., to plot component 0:
@@ -840,15 +856,15 @@ ica.plot_properties(raw, picks=0)
 
 eegkit package implements ICA methods in R. Methods available are “imax”, “fast”, and “jade”
 
-```
-ica =<span style="text-decoration:underline;"> </span>eegica(n_components = n_components(rows = channels, cols = time points), nc, center = TRUE, maxit = 100, tol = 1e-6, Rmat = diag(nc), type = c(“time”, “space”), method = c(“imax”, “fast”, “jade”)
+```r
+ica = eegica(n_components = n_components(rows = channels, cols = time points), nc, center = TRUE, maxit = 100, tol = 1e-6, Rmat = diag(nc), type = c(“time”, “space”), method = c(“imax”, “fast”, “jade”)
 ```
 
 `nc` is the number of components to extract. If `center` is TRUE then the functions mean-centers the columns before decomposition. maxit is the maximal number of algorithm iteration allowed. tol is the convergence tolerance. Rmat Initial estimate of the nc-by-nc orthogonal rotation matrix.
 
 ##### MATLAB
 
-The all inclusive EEG toolkit in MATLAB is EEGLAB. The user-friendly method to apply ICA is to call the function pop\_runica and select variables and dataset directly from the pop up window. At this point the only options in EEGLAB are [runica](https://sccn.ucsd.edu/wiki/Chapter_09:_Decomposing_Data_Using_ICA) - which uses infomax - and jade. To use the function fastica, you need to install the fastica toolbox. Let’s also mention the faster version of runica, called binica. Both give stable decomposition while processing hundreds of channels.
+The all inclusive EEG toolkit in MATLAB is EEGLAB. The user-friendly method to apply ICA is to call the function pop\_runica and select variables and dataset directly from the pop up window. At this point the only options in EEGLAB are [runica](https://eeglab.org/tutorials/06_RejectArtifacts/RunICA.html) - which uses infomax - and jade. To use the function fastica, you need to install the fastica toolbox. Let’s also mention the faster version of runica, called binica. Both give stable decomposition while processing hundreds of channels.
 
 ##### Details on ICA Methods
 
@@ -951,11 +967,9 @@ Amazing BCI applications
 
 [FMRI mind reading](http://www.dailymail.co.uk/sciencetech/article-5231179/AI-create-images-based-pictures-looking-at.html)
 
-```
-    [https://www.biorxiv.org/content/biorxiv/early/2017/12/30/240317.full.pdf](https://www.biorxiv.org/content/biorxiv/early/2017/12/30/240317.full.pdf)	
+[https://www.biorxiv.org/content/biorxiv/early/2017/12/30/240317.full.pdf](https://www.biorxiv.org/content/biorxiv/early/2017/12/30/240317.full.pdf)
 
-    [https://www.nature.com/articles/nn1444](https://www.nature.com/articles/nn1444)
-```
+[https://www.nature.com/articles/nn1444](https://www.nature.com/articles/nn1444)
 
 1 Hour Master Class on the challenges for Brain Computer Interfaces
 
@@ -1011,8 +1025,8 @@ Resources for combining classifiers.
 
 [Cornell Lecture on Boosting/Bagging](http://www.cs.cornell.edu/courses/cs578/2005fa/CS578.bagging.boosting.lecture.pdf)
 
-[Kaggle Ensemble Guide](https://mlwave.com/kaggle-ensembling-guide/)
+[Kaggle Ensemble Guide](https://web.archive.org/web/20191211112855/https://mlwave.com/kaggle-ensembling-guide/)
 
 [SKLearn Ensemble Guide](http://scikit-learn.org/stable/modules/ensemble.html)
 
-[Various](https://blog.statsbot.co/ensemble-learning-d1dcd548e936) [Great Blog](https://www.kaggle.com/c/otto-group-product-classification-challenge/discussion/14335) [Posts](https://stats.stackexchange.com/questions/18891/bagging-boosting-and-stacking-in-machine-learning?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+Various [Great Blog](https://www.kaggle.com/c/otto-group-product-classification-challenge/discussion/14335) [Posts](https://stats.stackexchange.com/questions/18891/bagging-boosting-and-stacking-in-machine-learning?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
