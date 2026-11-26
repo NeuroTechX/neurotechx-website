@@ -26,6 +26,11 @@ export default async function EducationPage({ params }: PageProps<'/[lang]/educa
         <div className="container py-12">
             <PageHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} />
 
+            <p className="mb-10 text-lg">
+                {t.newHere}{' '}
+                <Link href="/learn" className="font-bold text-neuro-accent hover:underline">{t.startHere} →</Link>
+            </p>
+
             <section className="mb-10 p-8 rounded-xl border border-neuro-accent bg-neuro-accent/5">
                 <span className="text-sm font-bold uppercase tracking-wider text-neuro-accent mb-2 block">{t.micro.label}</span>
                 <h2 className="text-3xl font-serif font-bold mb-4">{t.micro.title}</h2>

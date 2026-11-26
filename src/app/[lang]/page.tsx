@@ -38,7 +38,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
     }));
 
   const doors = [
-    { icon: BookOpen, ...t.doors.learn, href: '/education' },
+    { icon: BookOpen, ...t.doors.learn, href: '/learn' },
     { icon: Users, ...t.doors.participate, href: '/community' },
     { icon: Briefcase, ...t.doors.work, href: '/jobs' },
   ];

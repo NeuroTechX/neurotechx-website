@@ -115,11 +115,11 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                             )}
                             <div className="flex flex-wrap gap-4 text-sm font-semibold">
                                 <a href={c.leaderboard} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
-                                    {t.liveLeaderboard} <ExternalLink size={14} />
+                                    {c.leaderboardLabel ?? t.liveLeaderboard} <ExternalLink size={14} />
                                 </a>
                                 {c.enter && (
                                     <a href={c.enter} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-neuro-accent hover:underline">
-                                        {t.howToEnter} <ExternalLink size={14} />
+                                        {c.enterLabel ?? t.howToEnter} <ExternalLink size={14} />
                                     </a>
                                 )}
                             </div>

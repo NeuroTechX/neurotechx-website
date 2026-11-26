@@ -109,5 +109,35 @@
     ],
     "apply": "Apply on AtriCure's careers site.",
     "source": "https://job-boards.greenhouse.io/atricure/jobs/4339615009"
+  },
+  {
+    "id": "max-connectivity-implant-electronics-engineer",
+    "approved": true,
+    "company": "Max Connectivity Neurotech",
+    "site": "https://www.maxconnectivity.com",
+    "title": "Implant Electronics & Systems Engineer",
+    "employment": "Full-time, junior to senior",
+    "location": "Houston, TX",
+    "remote": false,
+    "regions": [
+      "north-america"
+    ],
+    "topics": [
+      "bci"
+    ],
+    "role": "hardware",
+    "postedAt": "2026-11-25",
+    "expires": "2027-01-24",
+    "summary": "Max Connectivity Neurotech (MCN), an early-stage, venture-backed Houston start-up, is building high-channel-count, long-term implantable neural interfaces around ultraflexible electrodes. This role designs and tests the recording and stimulation electronics, embedded firmware, data acquisition and power systems at the core of the platform, and supports preclinical experiments.",
+    "requirements": [
+      "BS, MS or PhD in electrical, computer or biomedical engineering, physics or a related field",
+      "Analog, digital, mixed-signal or embedded electronics",
+      "Schematic capture and PCB design",
+      "C/C++, Python or MATLAB",
+      "Hands-on work with lab test equipment",
+      "A plus: neural recording or stimulation, BCI or other implant experience, ISO 13485 / IEC 60601"
+    ],
+    "apply": "Email your resume and a short note about a challenging electronic, embedded or multidisciplinary system you built to job@maxconnectivity.com, with the role title in the subject line.",
+    "source": "https://www.maxconnectivity.com/careers/implant-electronics-systems-engineer.html"
   }
 ]

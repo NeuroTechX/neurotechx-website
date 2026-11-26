@@ -43,7 +43,7 @@ const fr = {
       education: 'Formation',
       primer: 'Le NeuroTech Primer',
       webinars: 'Webinaires',
-      gettingStarted: 'Premiers pas',
+      startHere: 'Par où commencer',
     },
     projects: {
       title: 'Projets',
@@ -120,7 +120,7 @@ const fr = {
     doors: {
       learn: {
         title: 'Apprendre',
-        desc: 'Le NeuroTech Primer, des guides pour débuter et plus de 100 heures de webinaires.',
+        desc: 'Par où commencer, le NeuroTech Primer et plus de 100 heures de webinaires.',
         cta: 'Commencer à apprendre',
       },
       participate: {
