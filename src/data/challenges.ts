@@ -14,6 +14,9 @@ export interface Challenge {
     standings?: { asOf: string; lines: string[] };
     leaderboard: string;
     enter?: string;
+    // Link labels for a challenge that has ended (default: live leaderboard / how to enter).
+    leaderboardLabel?: string;
+    enterLabel?: string;
 }
 
 const fr: Challenge[] = [
@@ -32,6 +35,24 @@ const fr: Challenge[] = [
             ],
         },
         leaderboard: 'https://neural-interfaces26.github.io/leaderboard.html',
+    },
+    {
+        name: 'Cortical Peaks Challenge 2026',
+        organiser: "Conférence BCI de Graz (TU Graz); jeux conçus par neuroTUM",
+        about:
+            "Jouer à des jeux d'arcade en temps réel avec les seuls signaux cérébraux, sans mouvements des yeux, clignements ni activité musculaire : cinq épreuves de commande discrète et continue (BrainSki, Pong). L'environnement de jeu est libre (Apache-2.0); chaque équipe branche son propre client ICM, et Mentalab l'a déjà adapté à la commande par EOG.",
+        timing: "Tenu à la 10e conférence BCI de Graz, en septembre 2026; l'environnement reste ouvert à tous",
+        standings: {
+            asOf: 'septembre 2026',
+            lines: [
+                "1re place : IAS-Lab de l'Université de Padoue.",
+                'Aussi en lice : neuroTUM, NeuroCONCISE et MIRAGE91.',
+            ],
+        },
+        leaderboard: 'https://www.tugraz.at/institute/ine/graz-bci-conferences/10th-graz-bci-conference-2026/cortical-peaks-challenge-2026',
+        enter: 'https://github.com/neuroTUM/Cortical-Peaks-Challenge-2026',
+        leaderboardLabel: 'Page du défi',
+        enterLabel: 'Code des jeux',
     },
     {
         name: 'TDBRAIN Challenge',
@@ -70,6 +91,24 @@ const en: Challenge[] = [
             ],
         },
         leaderboard: 'https://neural-interfaces26.github.io/leaderboard.html',
+    },
+    {
+        name: 'Cortical Peaks Challenge 2026',
+        organiser: 'Graz BCI Conference (TU Graz); games built by neuroTUM',
+        about:
+            'Play arcade games in real time with brain signals alone, no eye movements, blinks or muscle activity: five tasks of discrete and continuous control (BrainSki, Pong). The game environment is open source (Apache-2.0); each team plugs in its own BCI client, and Mentalab has already adapted it to EOG control.',
+        timing: 'Held at the 10th Graz BCI Conference, September 2026; the environment stays open to everyone',
+        standings: {
+            asOf: 'September 2026',
+            lines: [
+                'First place: IAS-Lab, University of Padua.',
+                'Also competing: neuroTUM, NeuroCONCISE and MIRAGE91.',
+            ],
+        },
+        leaderboard: 'https://www.tugraz.at/institute/ine/graz-bci-conferences/10th-graz-bci-conference-2026/cortical-peaks-challenge-2026',
+        enter: 'https://github.com/neuroTUM/Cortical-Peaks-Challenge-2026',
+        leaderboardLabel: 'Challenge page',
+        enterLabel: 'Game code',
     },
     {
         name: 'TDBRAIN Challenge',
