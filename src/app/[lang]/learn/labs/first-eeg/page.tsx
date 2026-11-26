@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import Link from '@/components/LocaleLink';
 import FirstEegLab from '@/components/learn/FirstEegLab';
+import { erpText } from '@/content/learn/erp-averaging';
 import { firstEegText } from '@/content/learn/first-eeg';
-import { FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
+import { ERP_LAB_PATH, FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 import { alternatesFor, pageLocale } from '@/i18n';
 
 type Props = PageProps<'/[lang]/learn/labs/first-eeg'>;
@@ -31,6 +32,7 @@ export default async function FirstEegPage({ params }: Props) {
                 <h2 className="mb-2 text-xl font-bold">{t.takeaway}</h2>
                 <p className="mb-4 max-w-prose text-muted-foreground">{t.summary}</p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                    <Link href={ERP_LAB_PATH} className="font-semibold text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
                     <Link href={primerCheckPath('eeg')} className="text-neuro-accent hover:underline">{t.selfCheck} →</Link>
                     <Link href="/learn/preprocessing" className="text-neuro-accent hover:underline">{t.preprocessing} →</Link>
                 </div>

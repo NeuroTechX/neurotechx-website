@@ -12,6 +12,7 @@ export function primerChapterPdf(chapter: number) {
 }
 
 export const FIRST_EEG_PATH = '/learn/labs/first-eeg';
+export const ERP_LAB_PATH = '/learn/labs/erp-averaging';
 export const BERKELEY_COURSE = 'https://github.com/neurotech-berkeley/neurotech-course';
 export const BERKELEY_TEXTBOOK = 'https://parthrudesai.com/ntab_edu_textbook1/';
 export const BERKELEY_FMRI_LAB = 'https://github.com/postybaloney/ntab_edu_textbook1/blob/main/Ch4/44_fMRILab.md';

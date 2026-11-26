@@ -8,8 +8,9 @@ import text from '@/i18n/pages/learn';
 import primerText from '@/i18n/pages/primer';
 import { learnPaths, modalityGroups } from '@/content/learn/paths';
 import { firstEegText } from '@/content/learn/first-eeg';
+import { erpText } from '@/content/learn/erp-averaging';
 import {
-    BERKELEY_COURSE, BERKELEY_TEXTBOOK, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath,
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
@@ -83,6 +84,9 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         </Link>
                         <a href="#modalities" className="text-sm font-semibold text-neuro-accent underline underline-offset-4">{paths.browse}</a>
                     </div>
+                    <Link href={ERP_LAB_PATH} className="mt-4 inline-block text-sm text-neuro-accent hover:underline">
+                        {erpText[lang].title} →
+                    </Link>
                 </section>
                 <section className="card p-6 sm:p-8">
                     <BookOpenCheck aria-hidden className="mb-5 text-neuro-accent" size={28} />

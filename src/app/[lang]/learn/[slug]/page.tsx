@@ -8,8 +8,9 @@ import { MdxLink } from '@/components/DockitRenderer';
 import { pageLocale } from '@/i18n';
 import text from '@/i18n/pages/learn';
 import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
+import { erpText } from '@/content/learn/erp-averaging';
 import { firstEegText } from '@/content/learn/first-eeg';
-import { FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
+import { ERP_LAB_PATH, FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
@@ -55,6 +56,11 @@ export default async function LessonPage({ params }: Props) {
             <p className="mb-2 text-sm font-semibold text-muted-foreground">
                 {t.lessons.modules[lesson.module]} · {t.lesson.lessonOf.replace('{n}', String(at + 1)).replace('{total}', String(order.length))}
             </p>
+            {slug === 'event-related-potentials' && (
+                <div className="my-4 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm font-semibold">
+                    <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
+                </div>
+            )}
             <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">
                 <h1>{lesson.title}</h1>
                 {lesson.description && <p className="lead">{lesson.description}</p>}

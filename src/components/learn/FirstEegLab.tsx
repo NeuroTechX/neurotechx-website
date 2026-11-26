@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import TracePlot from './TracePlot';
 import recording from '@/content/learn/eeg-baseline.json';
 import { firstEegText } from '@/content/learn/first-eeg';
 import type { Locale } from '@/i18n/routes';
@@ -49,51 +50,8 @@ function alphaShare(samples: number[]) {
 function Trace({ samples, limit, channel, color, lang }: {
     samples: number[]; limit: number; channel: string; color: string; lang: Locale;
 }) {
-    const canvas = useRef<HTMLCanvasElement>(null);
     const t = firstEegText[lang];
     const peak = Math.max(...samples.map(Math.abs));
-
-    useEffect(() => {
-        const element = canvas.current;
-        if (!element) return;
-        const draw = () => {
-            const ctx = element.getContext('2d');
-            if (!ctx) return;
-            const { width, height } = element.getBoundingClientRect();
-            if (width === 0 || height === 0) return;
-            const scale = window.devicePixelRatio || 1;
-            element.width = Math.round(width * scale);
-            element.height = Math.round(height * scale);
-            ctx.scale(element.width / width, element.height / height);
-            ctx.strokeStyle = '#313747';
-            ctx.lineWidth = 1;
-            for (let second = 0; second <= duration; second++) {
-                const x = 0.5 + (width - 1) * second / duration;
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, height);
-                ctx.stroke();
-            }
-            ctx.beginPath();
-            ctx.moveTo(0, height / 2);
-            ctx.lineTo(width, height / 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 1.5;
-            samples.forEach((sample, i) => {
-                const x = width * i / samples.length;
-                const y = height / 2 * (1 - sample / limit);
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-        };
-        draw();
-        const observer = new ResizeObserver(draw);
-        observer.observe(element);
-        return () => observer.disconnect();
-    }, [samples, limit, color]);
 
     return (
         <figure>
@@ -101,19 +59,13 @@ function Trace({ samples, limit, channel, color, lang }: {
                 <span className="font-semibold">{channel}</span>
                 <span className="text-xs text-muted-foreground" aria-live="polite">{t.peak} {Math.round(peak)} µV</span>
             </figcaption>
-            <div aria-hidden="true">
-                <div className="grid grid-cols-[2.5rem_minmax(0,1fr)] items-stretch gap-x-2">
-                    <div className="flex flex-col justify-between text-right text-xs tabular-nums text-muted-foreground">
-                        <span>+{limit}</span><span>0</span><span>−{limit}</span>
-                    </div>
-                    <canvas ref={canvas} className="block h-28 w-full rounded-sm bg-[var(--background)] sm:h-32" />
-                    <span />
-                    <div className="mt-1 flex justify-between text-xs tabular-nums text-muted-foreground">
-                        {Array.from({ length: duration + 1 }, (_, second) => <span key={second}>{second}</span>)}
-                    </div>
-                </div>
-                <p className="ml-12 mt-1 flex justify-between gap-2 text-xs text-muted-foreground"><span>{t.voltage}</span><span>{t.time}</span></p>
-            </div>
+            <TracePlot
+                traces={[{ samples, color }]}
+                limit={limit}
+                ticks={[0, 1, 2, 3, 4]}
+                timeLabel={t.time}
+                voltageLabel={t.voltage}
+            />
         </figure>
     );
 }

@@ -5,7 +5,8 @@ import Link from '@/components/LocaleLink';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import { alternatesFor, pageLocale } from '@/i18n';
 import primerText from '@/i18n/pages/primer';
-import { BERKELEY_FMRI_LAB, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
+import { erpText } from '@/content/learn/erp-averaging';
+import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
 import { primerChecks } from '@/content/learn/primer-checks';
 
 type Props = PageProps<'/[lang]/learn/primer/[chapter]'>;
@@ -68,7 +69,12 @@ export default async function PrimerCheckPage({ params }: Props) {
                 {check.questions.map((question) => <ChapterQuestion key={question.prompt} question={question} lang={lang} />)}
             </div>
             <nav className="mt-8 flex flex-wrap justify-between gap-4 border-t border-[var(--border-strong)] pt-5 text-sm">
-                {current.slug === 'eeg' && <Link href={FIRST_EEG_PATH} className="text-neuro-accent hover:underline">{t.lab} →</Link>}
+                {current.slug === 'eeg' && (
+                    <>
+                        <Link href={FIRST_EEG_PATH} className="text-neuro-accent hover:underline">{t.lab} →</Link>
+                        <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
+                    </>
+                )}
                 {current.slug === 'fmri' && <a href={BERKELEY_FMRI_LAB} className="text-neuro-accent hover:underline">{t.fmri} ↗</a>}
                 {next && (
                     <Link href={primerCheckPath(next.slug)} className="text-neuro-accent hover:underline">
