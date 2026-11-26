@@ -47,12 +47,6 @@ export default bilingual(
             body: "Travaillez avec de vrais enregistrements EEG publics, sans matériel.",
             items: [
               {
-                name: 'NeuroTech Course (Berkeley)',
-                body: 'Un programme libre et complet : biosignaux, matériel et laboratoires.',
-                href: 'https://github.com/neurotech-berkeley/neurotech-course',
-                english: true,
-              },
-              {
                 name: 'Tutoriels MNE-Python',
                 body: "L'outil de référence en Python pour lire, filtrer et analyser l'EEG et la MEG.",
                 href: 'https://mne.tools/stable/auto_tutorials/index.html',
@@ -80,6 +74,12 @@ export default bilingual(
                 name: 'Neuromatch Academy',
                 body: 'Des cours en ligne intensifs et gratuits en neurosciences computationnelles.',
                 href: 'https://neuromatch.io/courses/',
+                english: true,
+              },
+              {
+                name: 'NeuroTech Course',
+                body: "Un cours en ligne gratuit, financé par les NIH, sur le transfert et la commercialisation des neurotechnologies, avec certificat.",
+                href: 'https://www.neurotechcourse.org/',
                 english: true,
               },
               {
@@ -269,12 +269,6 @@ export default bilingual(
             body: 'Work with real public EEG recordings, no hardware needed.',
             items: [
               {
-                name: 'NeuroTech Course (Berkeley)',
-                body: 'A full open curriculum: biosignals, hardware and labs.',
-                href: 'https://github.com/neurotech-berkeley/neurotech-course',
-                english: true,
-              },
-              {
                 name: 'MNE-Python tutorials',
                 body: 'The standard Python tool for reading, filtering and analysing EEG and MEG.',
                 href: 'https://mne.tools/stable/auto_tutorials/index.html',
@@ -302,6 +296,12 @@ export default bilingual(
                 name: 'Neuromatch Academy',
                 body: 'Free, intensive online courses in computational neuroscience.',
                 href: 'https://neuromatch.io/courses/',
+                english: true,
+              },
+              {
+                name: 'NeuroTech Course',
+                body: 'A free, NIH-funded online course on translating and commercialising neurotechnology, with a certificate.',
+                href: 'https://www.neurotechcourse.org/',
                 english: true,
               },
               {
