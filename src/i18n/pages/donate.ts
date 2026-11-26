@@ -19,6 +19,26 @@ export default bilingual(
     cardLead: 'La façon la plus simple de contribuer.',
     paypal: 'Donner avec PayPal',
     secure: 'Paiement sécurisé. Vous pouvez aussi faire un don mensuel récurrent.',
+    fundsTitle: 'Ce que votre soutien finance',
+    fundsItems: [
+      {
+        title: 'Ressources libres et éducation',
+        body: "Hébergement du site, des cours gratuits, du NeuroTech Primer et de la veille communautaire accessible partout dans le monde.",
+      },
+      {
+        title: 'Outils et données ouvertes',
+        body: "Infrastructure communautaire pour les bancs d'essai ICM libres (comme MOABB), les défis ouverts et les outils étudiants.",
+      },
+      {
+        title: 'Sections locales et clubs étudiants',
+        body: "Soutien opérationnel aux rencontres, hackathons et compétitions étudiantes organisés par nos bénévoles dans plus de 30 villes.",
+      },
+    ],
+    sponsorTitle: 'Commanditer ou devenir partenaire',
+    sponsorBody:
+      "Votre entreprise ou laboratoire souhaite commanditer un hackathon, une compétition étudiante ou une section locale? Écrivez-nous pour discuter d'un partenariat.",
+    sponsorEmailCta: 'Écrire à info@neurotechx.org',
+    sponsorGuideCta: 'Lire le guide de commandite',
   },
   {
     title: 'Donate',
@@ -38,5 +58,25 @@ export default bilingual(
     cardLead: 'The simplest way to contribute.',
     paypal: 'Donate via PayPal',
     secure: 'Secure payment processing. You can set up a monthly recurring donation.',
+    fundsTitle: 'What your support funds',
+    fundsItems: [
+      {
+        title: 'Free education & open access',
+        body: 'Keeping neurotechx.org, our 15 free BCI/neuroscience lessons, the NeuroTech Primer, and community tools free for everyone.',
+      },
+      {
+        title: 'Open-source & benchmark infrastructure',
+        body: 'Supporting reproducible BCI research, open datasets, and community challenges maintained by NeuroTechX volunteers.',
+      },
+      {
+        title: 'Local chapters & student clubs',
+        body: 'Helping volunteer organizers run meetups, hacknights, workshops, and student competitions across 30+ cities.',
+      },
+    ],
+    sponsorTitle: 'Sponsor or partner with NeuroTechX',
+    sponsorBody:
+      'Represent a company, lab, or foundation interested in sponsoring hackathons, student competitions, or local chapters? Get in touch to discuss a partnership.',
+    sponsorEmailCta: 'Email info@neurotechx.org',
+    sponsorGuideCta: 'Read our sponsorship guide',
   }
 );

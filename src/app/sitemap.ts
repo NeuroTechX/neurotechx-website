@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { CATEGORIES } from '@/lib/job-boards';
 import { getHandbookSections, getSections } from '@/lib/dockit';
+import { getLessonSlugs } from '@/lib/lessons';
 import { isTranslated, localizePath } from '@/i18n/routes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,9 +10,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '', '/about', '/community', '/community/growth', '/community/chapter-guidelines',
     '/community/start-a-chapter',
     '/learn', '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
+    '/glossary', '/safety-and-ethics',
     '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs', '/funding', '/join-the-team',
     '/transparency', '/donate', '/students', '/students/start-a-club', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',
+    ...getLessonSlugs().map((slug) => `/learn/${slug}`),
     ...CATEGORIES.map((c) => `/jobs/${c.slug}`),
     '/handbook',
     '/guide',

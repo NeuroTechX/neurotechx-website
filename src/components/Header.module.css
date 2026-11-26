@@ -177,7 +177,7 @@ nav>.joinButton {
     cursor: pointer;
 }
 
-#mobileNavLinks {
+.mobileNavLinks {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -187,8 +187,12 @@ nav>.joinButton {
     border-bottom: 1px solid var(--border);
 }
 
+.mobileNavLinks[hidden] {
+    display: none;
+}
+
 @media (min-width: 1060px) {
-    #mobileNavLinks {
+    .mobileNavLinks {
         display: none;
     }
 }

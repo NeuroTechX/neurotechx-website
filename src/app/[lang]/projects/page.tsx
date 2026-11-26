@@ -232,6 +232,31 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                     <BookOpen /> {t.researchTitle}
                 </h2>
                 <div className={styles.grid}>
+                    {/* ComputationalReviewDLEEG */}
+                    <div className={styles.card}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-cyan-100 text-cyan-800 flex items-center justify-center`}>NX</div>
+                                <span>NeuroTechX</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href="https://github.com/NeuroTechX/ComputationalReviewDLEEG" target="_blank" rel="noopener noreferrer">{t.dleeg.name}</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.dleeg.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.dleeg.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={styles.language}>{t.dleeg.kind}</span>
+                            <a href="https://github.com/NeuroTechX/ComputationalReviewDLEEG" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.viewCode} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
                     <div className={styles.card}>
                         <div className={styles.cardHeader}>
                             <div className={styles.repoOwner}>

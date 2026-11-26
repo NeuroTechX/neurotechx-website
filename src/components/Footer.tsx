@@ -47,6 +47,8 @@ function footerSections(t: Dictionary['footer']) {
             links: [
                 { name: l.education, href: '/education' },
                 { name: l.primer, href: '/primer' },
+                { name: l.glossary, href: '/glossary' },
+                { name: l.safetyEthics, href: '/safety-and-ethics' },
                 { name: l.contentLab, href: '/content-lab' },
                 { name: l.reports, href: '/reports' },
             ],
@@ -57,6 +59,7 @@ function footerSections(t: Dictionary['footer']) {
                 { name: l.funding, href: '/funding' },
                 { name: l.jobs, href: '/jobs' },
                 { name: l.ecosystem, href: '/ecosystem' },
+                { name: l.guide, href: '/guide' },
                 { name: l.handbook, href: '/handbook' },
             ],
         },
@@ -119,7 +122,7 @@ export default function Footer({ lang, t: dict }: { lang: Locale; t: Dictionary 
                             key={link.name}
                             href={link.url}
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                             aria-label={link.name}
                             className={styles.socialLink}
                         >

@@ -106,7 +106,34 @@ export default async function JobsPage({ params }: PageProps<'/[lang]/jobs'>) {
         </section>
       )}
 
-      <p className="mt-16 text-muted-foreground">
+      <section className="mt-16">
+        <h2 className="mb-2 text-2xl font-serif font-bold">{t.pathsHeading}</h2>
+        <p className="mb-6 max-w-3xl text-muted-foreground">{t.pathsLead}</p>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {t.paths.map((path) => (
+            <article key={path.href} className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+              <h3 className="mb-2 text-lg font-bold">{path.title}</h3>
+              <p className="mb-4 flex-1 text-sm text-muted-foreground">{path.body}</p>
+              <Link href={path.href} className="inline-flex items-center gap-1 text-sm font-semibold text-neuro-accent hover:underline">
+                {path.cta} <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-muted-foreground">
+          {t.pathsLearnBefore}
+          <Link href="/learn" className="font-semibold text-neuro-accent hover:underline">
+            {t.pathsLearnLink}
+          </Link>
+          {t.pathsLearnMiddle}
+          <Link href="/glossary" className="font-semibold text-neuro-accent hover:underline">
+            {t.pathsGlossaryLink}
+          </Link>
+          .
+        </p>
+      </section>
+
+      <p className="mt-12 text-muted-foreground">
         {t.fundingBefore}
         <Link href="/funding" className="font-semibold text-neuro-accent hover:underline">
           {t.fundingLink}
