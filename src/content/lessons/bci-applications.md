@@ -99,7 +99,7 @@ A 2016 meta-analysis of randomized controlled trials found effects on ADHD sympt
 **References**
 
 -   [Cortese et al. (2016), Neurofeedback for ADHD: meta-analysis of randomized controlled trials](https://doi.org/10.1016/j.jaac.2016.03.007)
--   [Akili Interactive](https://www.akiliinteractive.com/). Note that Akili's product, EndeavorRx, is a prescription video game for children with ADHD. It does not use EEG.
+-   [Akili Interactive](https://www.akiliinteractive.com/). Akili grew out of Adam Gazzaley's lab at UCSF. Its game engine builds on NeuroRacer, a game the lab tested with EEG: in [Anguera et al. (2013)](https://doi.org/10.1038/nature12486), older adults who trained on it improved at multitasking, and EEG showed stronger midline frontal theta, a marker of cognitive control. Akili's product, EndeavorRx, is a prescription video game for children with ADHD. EEG was used in the research behind it, but the game itself does not record EEG.
 -   [Attentiv](https://web.archive.org/web/20191229104157/http://attentiv.com:80/) (archived page)
 
 #### PTSD
