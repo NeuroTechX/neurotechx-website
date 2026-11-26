@@ -1,6 +1,5 @@
 import Link from '@/components/LocaleLink';
 import { ArrowUpRight } from 'lucide-react';
-import WorldMap from './WorldMap';
 import { FEATURED_CHAPTERS, OTHER_CHAPTERS, STUDENT_CLUBS, STATUS_COLOR, cityIn, type ChapterStatus } from '@/lib/chapters';
 import type { Locale } from '@/i18n';
 import type community from '@/i18n/pages/community';
@@ -48,11 +47,8 @@ export default function Chapters({ lang, t }: { lang: Locale; t: Text }) {
         </div>
       </div>
 
-      {/* World map with chapter pins */}
-      <WorldMap label={t.mapLabel} lang={lang} />
-
       {/* Featured / largest chapters */}
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {FEATURED_CHAPTERS.map((c) => (
           <a
             key={c.name}
@@ -138,6 +134,9 @@ export default function Chapters({ lang, t }: { lang: Locale; t: Text }) {
             );
           })}
         </div>
+        <Link href="/students" className="mt-4 inline-block text-sm font-semibold text-neuro-accent hover:underline">
+          {t.allClubs}
+        </Link>
       </div>
 
       <p className="mt-8 text-sm text-muted-foreground">

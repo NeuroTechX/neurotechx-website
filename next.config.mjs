@@ -10,6 +10,7 @@ const OLD_SITE = {
     '/get-involved',
     '/slack',
     '/lead-the-neurotechx-movement-canada',
+    '/chapters', // not an old address: a short one for sharing
   ],
   '/education': ['/resources', '/learning'],
   '/primer': ['/download-the-neurotech-primer'],

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import Chapters from '@/components/Chapters';
 import Link from '@/components/LocaleLink';
@@ -12,7 +12,6 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/community'
     return { title: t.title, description: t.description, alternates: alternatesFor('/community', lang) };
 }
 
-const JOIN_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSfZyzhVdOLU8_oQ4NylHL8EFoKLIVmryGXA4u7HDsZpkTryvg/viewform';
 const STORY_VIDEOS = ['QEmz_ovwUd4', 'p4XmnU1Y1MM', 'sUAyel1Yfqg', 'iiIOG3Db-xE'];
 const SOCIAL = [
     { name: 'Bluesky', href: 'https://bsky.app/profile/neurotechx.bsky.social' },
@@ -31,23 +30,41 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
         <div className="container py-12">
             <PageHeader eyebrow={t.eyebrow} title={t.title} subtitle={t.subtitle} />
 
-            <div className="mb-12">
-                <a href={JOIN_FORM} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 py-2">
-                    {t.becomeMember}
-                </a>
-                <Link href="/code-of-conduct" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
-                    {t.readConduct}
-                </Link>
-                <Link href="/community/start-a-chapter" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
-                    {t.startChapter}
-                </Link>
-                <Link href="/guide" className="ml-4 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-neuro-accent hover:underline h-11 px-4 py-2">
-                    {t.guide}
-                </Link>
+            {/* Ways to get involved */}
+            <div className="mb-16">
+                <h2 className="text-2xl font-bold mb-6">{t.waysTitle}</h2>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    {t.ways.map((way) => {
+                        const external = way.href.startsWith('http');
+                        const anchor = way.href.startsWith('#');
+                        const className = 'group card p-6 flex flex-col hover:border-neuro-accent transition-colors';
+                        const inner = (
+                            <>
+                                <h3 className="font-bold text-lg mb-2 group-hover:text-neuro-accent">{way.title}</h3>
+                                <p className="text-sm text-muted-foreground mb-4 flex-1">{way.body}</p>
+                                <span className="inline-flex items-center gap-1 text-sm font-bold text-neuro-accent">
+                                    {way.cta} {external ? <ExternalLink className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
+                                </span>
+                            </>
+                        );
+                        return external ? (
+                            <a key={way.href} href={way.href} target="_blank" rel="noopener noreferrer" className={className}>{inner}</a>
+                        ) : anchor ? (
+                            <a key={way.href} href={way.href} className={className}>{inner}</a>
+                        ) : (
+                            <Link key={way.href} href={way.href} className={className}>{inner}</Link>
+                        );
+                    })}
+                </div>
+                <p className="mt-6 text-sm text-muted-foreground">
+                    <Link href="/code-of-conduct" className="font-semibold text-neuro-accent hover:underline">{t.readConduct}</Link>
+                    {' · '}
+                    <Link href="/guide" className="font-semibold text-neuro-accent hover:underline">{t.guide}</Link>
+                </p>
             </div>
 
-            {/* Chapters: world map + featured + full list */}
-            <div className="mb-16">
+            {/* Chapters: featured + full list + student clubs */}
+            <div id="chapters" className="mb-16 scroll-mt-24">
                 <Chapters lang={lang} t={t.chapters} />
             </div>
 
@@ -77,14 +94,6 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
                 </div>
 
                 <div className="p-6 bg-muted rounded-lg">
-                    <h2 className="text-2xl font-bold mb-4">{t.turingTitle}</h2>
-                    <p className="mb-4">{t.turingBody}</p>
-                    <a href="https://book.the-turing-way.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.turingCta}</a>
-                </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="p-6 bg-muted rounded-lg">
                     <h2 className="text-2xl font-bold mb-4">{t.connectTitle}</h2>
                     <p className="mb-4 text-muted-foreground">{t.connectLead}</p>
                     <div className="grid grid-cols-2 gap-4">
@@ -94,35 +103,15 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
                         ))}
                     </div>
                 </div>
-
-                <div className="p-6 bg-muted rounded-lg">
-                    <h2 className="text-2xl font-bold mb-4">{t.archiveTitle}</h2>
-                    <p className="mb-4 text-muted-foreground">{t.archiveBody}</p>
-                    <Link href="/newsletter" className="inline-flex items-center gap-2 text-neuro-accent hover:underline font-bold">
-                        {t.archiveCta} <ExternalLink className="w-4 h-4" />
-                    </Link>
-                </div>
             </div>
 
-            {/* Benchmarks & Challenges */}
-            <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">{t.challengesTitle}</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                    {t.challenges.map((challenge) => (
-                        <div key={challenge.href} className="card p-6">
-                            <h3 className="font-bold text-lg mb-2">{challenge.title}</h3>
-                            <p className="text-sm text-muted-foreground mb-4">{challenge.body}</p>
-                            <a href={challenge.href} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-neuro-accent hover:underline">
-                                {challenge.cta}
-                            </a>
-                        </div>
-                    ))}
-                </div>
+            {/* Beyond NeuroTechX: other open communities */}
+            <div className="mb-8">
+                <h2 className="text-2xl font-bold mb-2">{t.beyondTitle}</h2>
+                <p className="text-muted-foreground mb-6 max-w-2xl">{t.beyondLead}</p>
             </div>
 
-            {/* Community Resources */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">{t.resourcesTitle}</h2>
                 <div className="card p-6 border-l-4 border-neuro-accent bg-muted/30">
                     <h3 className="font-bold text-lg mb-2">{t.calendarTitle}</h3>
                     <p className="text-sm text-foreground/80 mb-4">{t.calendarBody}</p>
@@ -140,7 +129,7 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
 
             {/* Open Science Networks */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">{t.networksTitle}</h2>
+                <h3 className="text-xl font-bold mb-2">{t.networksTitle}</h3>
                 <p className="text-muted-foreground mb-6 max-w-2xl">{t.networksLead}</p>
                 <div className="grid md:grid-cols-2 gap-8">
                     {t.networks.map((network) => (
@@ -154,7 +143,7 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
 
             {/* Forums & Support */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">{t.forumsTitle}</h2>
+                <h3 className="text-xl font-bold mb-6">{t.forumsTitle}</h3>
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="card p-6 border-l-4 border-neuro-accent">
                         <h3 className="font-bold text-xl mb-2">NeuroStars</h3>
@@ -176,6 +165,12 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div className="mb-12 card p-6">
+                <h3 className="font-bold text-xl mb-2">{t.turingTitle}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{t.turingBody}</p>
+                <a href="https://book.the-turing-way.org/" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline font-bold">{t.turingCta}</a>
             </div>
         </div>
     );
