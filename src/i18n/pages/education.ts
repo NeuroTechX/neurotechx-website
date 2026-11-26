@@ -145,6 +145,12 @@ export default bilingual(
           tags: ['Neurosciences computationnelles', 'Apprentissage profond'],
         },
         {
+          name: 'ENIGMA-U',
+          body: "Une école en ligne gratuite du consortium ENIGMA et de l'Université de l'Utah : neurosciences, neuroimagerie, neuropsychologie, programmation et statistiques, à son rythme. Pensée pour les élèves de fin de secondaire et les premières années d'université; deux volets, neuroimagerie et neuropsychologie.",
+          href: 'https://medicine.utah.edu/neurology/research/utah-tbi/education/enigma-u',
+          tags: ['Neuroimagerie', 'Neuropsychologie'],
+        },
+        {
           name: 'NeuroTech Course',
           body: "Un cours en ligne gratuit sur le transfert et la commercialisation des neurotechnologies, donné par des experts du domaine. Financé par les NIH et le Earl E. Bakken Medical Devices Center (Université du Minnesota), avec certificat et atelier pratique.",
           href: 'https://www.neurotechcourse.org/',
@@ -529,6 +535,12 @@ export default bilingual(
           body: 'The gold standard for online computational neuroscience and deep learning education. Intensive, community-driven, and open.',
           href: 'https://neuromatch.io/courses/',
           tags: ['Computational Neuroscience', 'Deep Learning'],
+        },
+        {
+          name: 'ENIGMA-U',
+          body: 'A free online school from the ENIGMA consortium and the University of Utah: neuroscience, neuroimaging, neuropsychology, programming and statistics, at your own pace. Aimed at advanced high school and early university students, with a neuroimaging track and a neuropsychology track.',
+          href: 'https://medicine.utah.edu/neurology/research/utah-tbi/education/enigma-u',
+          tags: ['Neuroimaging', 'Neuropsychology'],
         },
         {
           name: 'NeuroTech Course',
