@@ -3,12 +3,15 @@ import { notFound } from 'next/navigation';
 import PageHeader from '@/components/PageHeader';
 import Link from '@/components/LocaleLink';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
+import { ChapterProgress } from '@/components/learn/PrimerProgress';
 import { alternatesFor, pageLocale } from '@/i18n';
 import primerText from '@/i18n/pages/primer';
 import { erpText } from '@/content/learn/erp-averaging';
+import { fnirsText } from '@/content/learn/fnirs-short-channels';
 import { mriText } from '@/content/learn/mri-and-bold';
-import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
+import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, MRI_LAB_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
 import { primerChecks } from '@/content/learn/primer-checks';
+import { questionProgressKey } from '@/content/learn/primer-progress';
 
 type Props = PageProps<'/[lang]/learn/primer/[chapter]'>;
 
@@ -65,9 +68,12 @@ export default async function PrimerCheckPage({ params }: Props) {
                 <p className="text-sm">{check.reading}</p>
                 <a href={primerChapterPdf(current.chapter)} className="mt-1 inline-block text-sm text-neuro-accent underline underline-offset-4">{t.read}</a>
             </div>
-            <h2 className="mb-4 text-2xl font-bold">{t.title}</h2>
+            <h2 className="mb-2 text-2xl font-bold">{t.title}</h2>
+            <ChapterProgress questionKeys={check.questions.map(({ id }) => questionProgressKey(current.slug, id))} lang={lang} />
             <div className="grid gap-4">
-                {check.questions.map((question) => <ChapterQuestion key={question.prompt} question={question} lang={lang} />)}
+                {check.questions.map((question) => (
+                    <ChapterQuestion key={question.id} question={question} lang={lang} progressKey={questionProgressKey(current.slug, question.id)} />
+                ))}
             </div>
             <nav className="mt-8 flex flex-wrap justify-between gap-4 border-t border-[var(--border-strong)] pt-5 text-sm">
                 {current.slug === 'eeg' && (
@@ -76,7 +82,8 @@ export default async function PrimerCheckPage({ params }: Props) {
                         <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
                     </>
                 )}
-                {(current.slug === 'fmri' || current.slug === 'fnirs') && <Link href={MRI_LAB_PATH} className="text-neuro-accent hover:underline">{mriText[lang].title} →</Link>}
+                {current.slug === 'fmri' && <Link href={MRI_LAB_PATH} className="text-neuro-accent hover:underline">{mriText[lang].title} →</Link>}
+                {current.slug === 'fnirs' && <Link href={FNIRS_LAB_PATH} className="text-neuro-accent hover:underline">{fnirsText[lang].title} →</Link>}
                 {current.slug === 'fmri' && <a href={BERKELEY_FMRI_LAB} className="text-neuro-accent hover:underline">{t.fmri} ↗</a>}
                 {next && (
                     <Link href={primerCheckPath(next.slug)} className="text-neuro-accent hover:underline">

@@ -6,8 +6,8 @@ function check(section: string, page: number, correct: number, fr: CheckCopy, en
     const { goal: frGoal, ...frQuestion } = fr;
     const { goal: enGoal, ...enQuestion } = en;
     return {
-        fr: { goal: frGoal, reading: `Lisez la section ${section}.`, questions: [{ ...frQuestion, section, page, correct }] },
-        en: { goal: enGoal, reading: `Read section ${section}.`, questions: [{ ...enQuestion, section, page, correct }] },
+        fr: { goal: frGoal, reading: `Lisez la section ${section}.`, questions: [{ ...frQuestion, id: 'application', section, page, correct }] },
+        en: { goal: enGoal, reading: `Read section ${section}.`, questions: [{ ...enQuestion, id: 'application', section, page, correct }] },
     } satisfies Record<'fr' | 'en', ChapterCheck>;
 }
 

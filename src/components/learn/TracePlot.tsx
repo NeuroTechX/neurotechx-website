@@ -2,15 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 
-type Trace = { samples: readonly number[]; color: string; dashed?: boolean };
+type Trace = { samples: readonly number[]; color: string; dash?: number[] };
 
-export default function TracePlot({ traces, limit, ticks, timeLabel, voltageLabel, marker }: {
+export default function TracePlot({ traces, limit, ticks, timeLabel, voltageLabel, markers }: {
     traces: readonly Trace[];
     limit: number;
     ticks: readonly number[];
     timeLabel: string;
     voltageLabel: string;
-    marker?: number;
+    markers?: readonly number[];
 }) {
     const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -28,26 +28,38 @@ export default function TracePlot({ traces, limit, ticks, timeLabel, voltageLabe
             ctx.scale(element.width / width, element.height / height);
 
             ctx.lineWidth = 1;
-            ticks.forEach((tick, index) => {
+            ctx.strokeStyle = '#313747';
+            ticks.forEach((_, index) => {
                 const x = 0.5 + (width - 1) * index / (ticks.length - 1);
-                ctx.strokeStyle = tick === marker ? '#94a3b8' : '#313747';
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, height);
                 ctx.stroke();
             });
 
-            ctx.strokeStyle = '#313747';
             ctx.beginPath();
             ctx.moveTo(0, height / 2);
             ctx.lineTo(width, height / 2);
             ctx.stroke();
 
+            if (markers?.length) {
+                ctx.strokeStyle = '#94a3b8';
+                const start = ticks[0];
+                const span = ticks[ticks.length - 1] - start;
+                markers.forEach((marker) => {
+                    const x = 0.5 + (width - 1) * (marker - start) / span;
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                });
+            }
+
             ctx.lineWidth = 1.5;
-            traces.forEach(({ samples, color, dashed }) => {
+            traces.forEach(({ samples, color, dash }) => {
                 ctx.beginPath();
                 ctx.strokeStyle = color;
-                if (dashed) ctx.setLineDash([5, 4]);
+                if (dash) ctx.setLineDash(dash);
                 samples.forEach((sample, i) => {
                     const x = width * i / samples.length;
                     const y = height / 2 * (1 - sample / limit);
@@ -55,14 +67,14 @@ export default function TracePlot({ traces, limit, ticks, timeLabel, voltageLabe
                     else ctx.lineTo(x, y);
                 });
                 ctx.stroke();
-                if (dashed) ctx.setLineDash([]);
+                if (dash) ctx.setLineDash([]);
             });
         };
         draw();
         const observer = new ResizeObserver(draw);
         observer.observe(element);
         return () => observer.disconnect();
-    }, [traces, limit, ticks, marker]);
+    }, [traces, limit, ticks, markers]);
 
     return (
         <div aria-hidden="true">
@@ -74,7 +86,7 @@ export default function TracePlot({ traces, limit, ticks, timeLabel, voltageLabe
                 <span />
                 <div className="mt-1 flex justify-between text-xs tabular-nums text-muted-foreground">
                     {ticks.map((tick) => (
-                        <span key={tick} className={tick === marker ? 'font-bold text-foreground' : undefined}>{tick}</span>
+                        <span key={tick} className={markers?.includes(tick) ? 'font-bold text-foreground' : undefined}>{tick}</span>
                     ))}
                 </div>
             </div>

@@ -17,6 +17,7 @@ Use AI to draft question variants, translate draft copy, or prototype controls. 
 ## Where content lives
 
 - `src/content/learn/primer-chapters.ts` holds chapter links and public lab paths. Chapter self-checks live in `primer-checks.ts` and `additional-primer-checks.ts`. The PDF references use printed page numbers.
+- Keep each question ID stable and identical across languages so a learner's completion carries over. Give a new question its own ID when it assesses a different objective.
 - Browser labs live in `src/app/[lang]/learn/labs`, with localized copy in `src/content/learn` and interactive components in `src/components/learn`.
 - Downloadable notebooks live in `public/learn/notebooks`. Cite the data, state how to reproduce the browser result, and keep downloaded participant files out of Git.
 - Use the Primer for reading and interpretation. Link Neurotech@Berkeley for deeper exercises, and confirm the license of the particular notebook, slides, or figures before adapting them.

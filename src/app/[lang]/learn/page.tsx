@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Activity, ArrowRight, BookOpenCheck, ExternalLink } from 'lucide-react';
 import Link from '@/components/LocaleLink';
 import PageHeader from '@/components/PageHeader';
+import PrimerProgress from '@/components/learn/PrimerProgress';
 import { alternatesFor, pageLocale } from '@/i18n';
 import type { Locale } from '@/i18n/routes';
 import text from '@/i18n/pages/learn';
@@ -11,9 +12,11 @@ import { firstEegText } from '@/content/learn/first-eeg';
 import { erpText } from '@/content/learn/erp-averaging';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
+import { fnirsText } from '@/content/learn/fnirs-short-channels';
 import { mriText } from '@/content/learn/mri-and-bold';
+import { primerProgressChapters } from '@/content/learn/primer-progress';
 import {
-    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, MRI_LAB_PATH,
     primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
@@ -75,6 +78,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
         { href: ERP_LAB_PATH, content: erpText[lang] },
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
         { href: MRI_LAB_PATH, content: mriText[lang] },
+        { href: FNIRS_LAB_PATH, content: fnirsText[lang] },
     ];
     const modules = getModules();
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
@@ -109,6 +113,9 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                             </li>
                         ))}
                     </ul>
+                    <div className="mb-4">
+                        <PrimerProgress chapters={primerProgressChapters(lang)} lang={lang} />
+                    </div>
                     <Link href="/primer#chapters" className="text-sm text-neuro-accent underline underline-offset-4">{paths.allChapters}</Link>
                 </section>
             </div>

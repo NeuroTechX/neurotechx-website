@@ -3,10 +3,12 @@ import { BookOpen, Download, ExternalLink, Mail } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import Link from '@/components/LocaleLink';
+import PrimerProgress from '@/components/learn/PrimerProgress';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/primer';
 import { learnPaths } from '@/content/learn/paths';
 import { PRIMER_PDF, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
+import { primerProgressChapters } from '@/content/learn/primer-progress';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/primer'>): Promise<Metadata> {
     const lang = await pageLocale(params);
@@ -75,6 +77,9 @@ export default async function PrimerPage({ params }: PageProps<'/[lang]/primer'>
                     <p className="mb-6 text-muted-foreground">
                         {t.insideBody}
                     </p>
+                    <div className="mb-6">
+                        <PrimerProgress chapters={primerProgressChapters(lang)} lang={lang} />
+                    </div>
                     <ol className="list-decimal space-y-3 pl-6 marker:text-muted-foreground">
                         {t.chapters.map((chapter, index) => {
                             const check = PRIMER_CHECKS.find((entry) => entry.chapter === index + 1);

@@ -4,20 +4,25 @@ import { useId, useState } from 'react';
 import type { Question } from '@/content/learn/primer-checks';
 import { primerPdfPage } from '@/content/learn/primer-chapters';
 import type { Locale } from '@/i18n/routes';
+import { markQuestionPassed } from './primer-progress-storage';
 
 const messages = {
     en: { check: 'Check answer', correct: 'Correct.', retry: 'Try another answer.', review: 'Review section' },
     fr: { check: 'Vérifier la réponse', correct: 'Bonne réponse.', retry: 'Essayez une autre réponse.', review: 'Revoir la section' },
 };
 
-export default function ChapterQuestion({ question, lang }: { question: Question; lang: Locale }) {
+export default function ChapterQuestion({ question, lang, progressKey }: { question: Question; lang: Locale; progressKey?: string }) {
     const id = useId();
     const [choice, setChoice] = useState<number | null>(null);
     const [checked, setChecked] = useState(false);
     const t = messages[lang];
 
     return (
-        <form className="card" onSubmit={(event) => { event.preventDefault(); setChecked(true); }}>
+        <form className="card" onSubmit={(event) => {
+            event.preventDefault();
+            setChecked(true);
+            if (progressKey && choice === question.correct) markQuestionPassed(progressKey);
+        }}>
             <fieldset>
                 <legend className="mb-4 text-lg font-semibold">{question.prompt}</legend>
                 <div className="grid gap-2">

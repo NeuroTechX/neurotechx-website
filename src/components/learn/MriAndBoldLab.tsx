@@ -4,17 +4,13 @@ import { useState } from 'react';
 import { mriText } from '@/content/learn/mri-and-bold';
 import type { Locale } from '@/i18n/routes';
 import TracePlot from './TracePlot';
+import { hemodynamicResponse } from './simulated-hemodynamics';
 
 const planes = ['sagittal', 'coronal', 'axial'] as const;
 const sliceCount = 17;
 const ticks = [0, 4, 8, 12, 16, 20];
 const times = Array.from({ length: 400 }, (_, index) => index / 20);
 const eventGaps = [0.5, 2, 6];
-
-function boldResponse(elapsed: number) {
-    // A normalized gamma-shaped response with a five-second peak and no undershoot.
-    return elapsed > 0 ? Math.pow(elapsed / 5, 5) * Math.exp(5 - elapsed) : 0;
-}
 
 export default function MriAndBoldLab({ lang }: { lang: Locale }) {
     const [plane, setPlane] = useState<(typeof planes)[number]>('axial');
@@ -23,7 +19,7 @@ export default function MriAndBoldLab({ lang }: { lang: Locale }) {
     const t = mriText[lang];
     const eventTimes = [2, 2 + gap];
     const events = times.map((time) => eventTimes.some((event) => time >= event && time < event + 0.15) ? 1 : 0);
-    const responses = times.map((time) => eventTimes.reduce((sum, event) => sum + boldResponse(time - event), 0));
+    const responses = times.map((time) => eventTimes.reduce((sum, event) => sum + hemodynamicResponse(time - event), 0));
     const peaks = responses.flatMap((value, i) => value > responses[i - 1] && value >= responses[i + 1] ? [times[i]] : []);
     const format = new Intl.NumberFormat(lang, { maximumFractionDigits: 1 });
 
@@ -89,7 +85,7 @@ export default function MriAndBoldLab({ lang }: { lang: Locale }) {
                     <TracePlot
                         traces={[
                             { samples: events, color: '#67e8f9' },
-                            { samples: responses, color: '#a5b4fc', dashed: true },
+                            { samples: responses, color: '#a5b4fc', dash: [5, 4] },
                         ]}
                         limit={2}
                         ticks={ticks}

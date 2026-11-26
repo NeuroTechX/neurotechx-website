@@ -10,7 +10,7 @@ export type Question = {
     page: number;
 };
 
-export type ChapterCheck = { goal: string; reading: string; questions: Question[] };
+export type ChapterCheck = { goal: string; reading: string; questions: (Question & { id: string })[] };
 
 export const primerChecks = {
     ...additionalPrimerChecks,
@@ -20,6 +20,7 @@ export const primerChecks = {
             reading: 'Lisez les sections 2.1, 2.3 et 2.6.2.',
             questions: [
                 {
+                    id: 'reference',
                     prompt: 'Un canal EEG affiché vaut +20 µV. À quoi cette valeur correspond-elle ?',
                     choices: [
                         'Au potentiel absolu sous une seule électrode.',
@@ -31,6 +32,7 @@ export const primerChecks = {
                     section: '2.3.1', page: 11,
                 },
                 {
+                    id: 'blink',
                     prompt: 'Une grande déflexion apparaît surtout sur les canaux frontaux au moment où la personne cligne des yeux. Que vérifier en premier ?',
                     choices: [
                         'Si le clignement a produit un artéfact oculaire.',
@@ -42,6 +44,7 @@ export const primerChecks = {
                     section: '2.6.2', page: 18,
                 },
                 {
+                    id: 'erp',
                     prompt: 'Vous voulez comparer la réponse à un son rare et à un son fréquent. Quelle étape aide à faire ressortir une réponse liée au son ?',
                     choices: [
                         'Comparer les plus grandes déflexions de tout l’enregistrement.',
@@ -59,6 +62,7 @@ export const primerChecks = {
             reading: 'Read sections 2.1, 2.3 and 2.6.2.',
             questions: [
                 {
+                    id: 'reference',
                     prompt: 'An EEG channel reads +20 µV. What does that value represent?',
                     choices: [
                         'The absolute electrical potential under one electrode.',
@@ -70,6 +74,7 @@ export const primerChecks = {
                     section: '2.3.1', page: 11,
                 },
                 {
+                    id: 'blink',
                     prompt: 'A large deflection appears mainly on frontal channels just as the participant blinks. What should you check first?',
                     choices: [
                         'Whether the blink produced an eye-movement artifact.',
@@ -81,6 +86,7 @@ export const primerChecks = {
                     section: '2.6.2', page: 18,
                 },
                 {
+                    id: 'erp',
                     prompt: 'You want to compare the response to a rare sound with the response to a frequent sound. What helps reveal a sound-locked response?',
                     choices: [
                         'Compare the largest deflections in the entire recording.',
@@ -100,6 +106,7 @@ export const primerChecks = {
             reading: 'Lisez les sections 4.1, 4.3, 4.4.3 et 4.5.1.',
             questions: [
                 {
+                    id: 'bold',
                     prompt: 'Une région présente un signal BOLD plus élevé pendant une tâche. Quel changement contribue à ce contraste ?',
                     choices: [
                         'Une variation de la désoxyhémoglobine associée à la réponse hémodynamique.',
@@ -111,6 +118,7 @@ export const primerChecks = {
                     section: '4.4.3–4.5.1', page: 47,
                 },
                 {
+                    id: 'timing',
                     prompt: 'Vous voulez distinguer deux réponses à des sons séparés de quelques dizaines de millisecondes. Quelle méthode privilégier pour cette question de temps ?',
                     choices: [
                         'L’IRM structurelle.',
@@ -128,6 +136,7 @@ export const primerChecks = {
             reading: 'Read sections 4.1, 4.3, 4.4.3 and 4.5.1.',
             questions: [
                 {
+                    id: 'bold',
                     prompt: 'A region shows a higher BOLD signal during a task. Which change contributes to that contrast?',
                     choices: [
                         'A change in deoxyhemoglobin associated with the hemodynamic response.',
@@ -139,6 +148,7 @@ export const primerChecks = {
                     section: '4.4.3–4.5.1', page: 47,
                 },
                 {
+                    id: 'timing',
                     prompt: 'You want to distinguish responses to two sounds separated by tens of milliseconds. Which method fits that timing question?',
                     choices: ['Structural MRI.', 'BOLD fMRI.', 'Scalp EEG.'],
                     correct: 2,
@@ -154,6 +164,7 @@ export const primerChecks = {
             reading: 'Lisez les sections 16.3 et 16.4.',
             questions: [
                 {
+                    id: 'consent',
                     prompt: 'Des personnes ont accepté un enregistrement EEG pour un atelier. L’équipe souhaite ensuite transmettre les tracés à un partenaire pour entraîner un produit. Quelle est la première étape ?',
                     choices: [
                         'Transmettre les tracés après avoir retiré les noms.',
@@ -165,6 +176,7 @@ export const primerChecks = {
                     section: '16.3', page: 221,
                 },
                 {
+                    id: 'claims',
                     prompt: 'Une publicité affirme qu’un casque EEG « mesure précisément la concentration ». Quelle preuve serait la plus pertinente ?',
                     choices: [
                         'Une visualisation cérébrale colorée issue du casque.',
@@ -182,6 +194,7 @@ export const primerChecks = {
             reading: 'Read sections 16.3 and 16.4.',
             questions: [
                 {
+                    id: 'consent',
                     prompt: 'Participants agreed to an EEG recording for a workshop. The team later wants to share the traces with a partner to train a product. What should the team do first?',
                     choices: [
                         'Share the traces after removing names.',
@@ -193,6 +206,7 @@ export const primerChecks = {
                     section: '16.3', page: 221,
                 },
                 {
+                    id: 'claims',
                     prompt: 'An ad says an EEG headset “accurately measures focus.” Which evidence would be most relevant?',
                     choices: [
                         'A colorful brain visualization generated by the headset.',
