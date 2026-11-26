@@ -4,18 +4,22 @@ description: "This module focuses on BCI Applications that are using EEG since i
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/applications/"
 ---
+*Updated November 2026: checked every company and product link, marked products and companies that are gone, corrected the BrainScope, Akili, and epilepsy statements, and added a 2016 meta-analysis on neurofeedback for ADHD.*
+
+Most of this lesson was written in 2017. Consumer neurotechnology changes quickly, so some products below are no longer sold. The research references are still useful starting points. Neurofeedback evidence varies a lot between conditions. A study cited here does not mean a treatment is proven or approved.
+
 ## NeuroEntertainment
 
 * * *
 
 \#### Neurogaming
 
-Emotiv and NeuroSky are two companies which has developed games to go along with their eeg headset, however it seems as though Emotiv has stopped selling them. If you are interested in playing brain controlled games, you can start with Neurosky. Otherwise you might try your luck in finding some open source games.
+Emotiv and NeuroSky are two companies which has developed games to go along with their eeg headset, however it seems as though Emotiv has stopped selling them. If you are interested in playing brain controlled games, you can start with Neurosky, whose app store still lists games for its headsets. Otherwise you might try your luck in finding some open source games.
 
 **References**
 
--   [NeuroSky store](http://store.neurosky.com/collections/apps/games)
--   [Brain Fighta, an open source eeg game](https://github.com/NeuroTechX/BrainFighta)
+-   [NeuroSky store](https://neurosky.com/store/)
+-   [Brain Fighta, an open source eeg game](https://github.com/NeuroTechX/BrainFighta) (archived since 2017)
 
 #### NeuroToys
 
@@ -23,8 +27,8 @@ There have been multiple manufacturers of BCI toys going back to the mid 2000's.
 
 **References**
 
--   [Puzzlebox has various devices BCI devices](https://puzzlebox.io/)
--   [There are also Star Wars-themed toys!](http://starwarsscience.com/product/the-force-trainer-ii-hologram-experience/)
+-   [Puzzlebox has various BCI devices](https://web.archive.org/web/20240918151654/https://puzzlebox.io/) (archived page; the live site no longer shows content)
+-   [There are also Star Wars-themed toys!](https://web.archive.org/web/20191121140952/http://www.starwarsscience.com:80/product/the-force-trainer-ii-hologram-experience/)
 
 #### Art
 
@@ -32,8 +36,8 @@ Multiple people have use EEG's for art and music generation. Below are a few exa
 
 **References**
 
--   [Axon Art Collective. A Series of projects doing brain controlled art and music](http://axonartcollective.com/)
--   [Manipulating water with eeg](https://creators.vice.com/en_us/article/vvygzm/eunoia-seeking-enlightenment-by-tracking-brainwaves)
+-   [Axon Art Collective. A Series of projects doing brain controlled art and music](https://web.archive.org/web/20180814125538/http://axonartcollective.com:80/)
+-   Manipulating water with eeg
 -   [EEG Visulization tool](http://naotohieda.com/muse/)
 
 #### Virtual Reality
@@ -46,10 +50,10 @@ There are a few companies who have been interested in bring EEG data with VR hea
 
 **References**
 
--   [Neurosky's article on the subject](http://neurosky.com/2016/04/a-new-virtual-reality-the-rise-of-vr-headsets-eeg/)
--   [Article on Mind Mazet](http://www.theverge.com/2015/3/3/8136405/mind-maze-mind-leap-thought-reading-virtual-reality-headset)
--   [DG Lab's VR Zen Headset](https://www.cnet.com/news/this-vr-headset-is-designed-to-let-you-find-your-zen/)
--   [Neurable](http://neurable.com/)
+-   [Neurosky's article on the subject](https://web.archive.org/web/20191225033244/http://neurosky.com/2016/04/a-new-virtual-reality-the-rise-of-vr-headsets-eeg/)
+-   [Article on MindMaze](https://www.theverge.com/2015/3/3/8136405/mind-maze-mind-leap-thought-reading-virtual-reality-headset). The company now operates as [MindMaze Therapeutics](https://mindmazetherapeutics.com/) and focuses on rehabilitation.
+-   [DG Lab's VR Zen Headset](https://www.cnet.com/tech/computing/this-vr-headset-is-designed-to-let-you-find-your-zen/)
+-   [Neurable](https://www.neurable.com/). Neurable started with BCI for VR. It now sells headphones with built-in EEG sensors.
 
 ## Security
 
@@ -73,7 +77,7 @@ Neurofeedback can be an effective method of handling anxiety. Similar to the met
 
 **References**
 
--   [Neurofeedback for mood and anxiety disorder](https://www.ncbi.nlm.nih.gov/pubmedhealth/PMH0070200/)
+-   Neurofeedback for mood and anxiety disorder
 -   [Treatment of Anxiety disorder with neurofeedback](http://www.sciencedirect.com/science/article/pii/S1877042811018465)
 
 #### Sleep Improvement
@@ -82,22 +86,25 @@ Sleep research has been using EEG's for a long time. Recently, startups have bee
 
 **References**
 
--   [https://iwinks.org/](https://iwinks.org/)
--   [ttps://neuroon.com/sleep-tracking/](https://neuroon.com/sleep-tracking/)
--   [http://sleepshepherd.com/](http://sleepshepherd.com/)
+-   [iWinks](https://web.archive.org/web/20210128010340/https://iwinks.org/) (archived page; the site is offline)
+-   [Neuroon](https://web.archive.org/web/20170922145527/https://neuroon.com/sleep-tracking/) (archived page; the site is offline)
+-   [Sleep Shepherd](https://sleepshepherd.com/)
 
 #### ADHD
 
 Although a controversial [use case](http://journals.sagepub.com/doi/abs/10.1177/155005940904000311), there are many neurofeedback clinics and few companies who have created solutions to help manage ADHD.
 
+A 2016 meta-analysis of randomized controlled trials found effects on ADHD symptoms when ratings came from people who knew which treatment was given. Effects were not significant with probably blinded ratings or in trials with sham or active controls. The authors concluded that well-controlled evidence did not yet support neurofeedback as an effective ADHD treatment.
+
 **References**
 
--   [http://www.akiliinteractive.com/](http://www.akiliinteractive.com/)
--   [Attentiv](http://attentiv.com/)
+-   [Cortese et al. (2016), Neurofeedback for ADHD: meta-analysis of randomized controlled trials](https://doi.org/10.1016/j.jaac.2016.03.007)
+-   [Akili Interactive](https://www.akiliinteractive.com/). Note that Akili's product, EndeavorRx, is a prescription video game for children with ADHD. It does not use EEG.
+-   [Attentiv](https://web.archive.org/web/20191229104157/http://attentiv.com:80/) (archived page)
 
 #### PTSD
 
-PTSD neurofeedback has been studied for over [25 years](http://charleston.braincoretherapy.com/wp-content/uploads/2014/01/PENISTON-PTSD.pdf). A lot of the studies focus on getting the participants to generate alpha wave activity which is associated with being in a relaxed state. Most articles which were reviewed suggest that neurofeedback should be use in combination with other treatments.
+PTSD neurofeedback has been studied for over [25 years](https://web.archive.org/web/20210506140322/http://charleston.braincoretherapy.com/wp-content/uploads/2014/01/PENISTON-PTSD.pdf). A lot of the studies focus on getting the participants to generate alpha wave activity which is associated with being in a relaxed state. Most articles which were reviewed suggest that neurofeedback should be use in combination with other treatments.
 
 **References**
 
@@ -116,15 +123,15 @@ This series of articles discuss how you can you use Neurofeedback as a mechanism
 
 -   [EEG Neurofeedback for optimizing performance 1](http://www.sciencedirect.com/science/article/pii/S0149763413002248#bib0700)
 -   [EEG Neurofeedback for optimizing performance 2](http://www.sciencedirect.com/science/article/pii/S0149763413002716)
--   \[EEG Neurofeedback for optimizing performance 3\]([http://www.sciencedirect.com/science/article/pii](http://www.sciencedirect.com/science/article/pii)\* /S0149763414000700)
+-   [EEG Neurofeedback for optimizing performance 3](https://doi.org/10.1016/j.neubiorev.2014.03.015)
 
 #### Brain Ageing
 
-One of the more common services which neurofeedback clinics provide is to combat brain ageing. Researchers have found that you can identify certain biomarkers in QEEG to predict future cognitive decline as well as the onset of Alzheimer's.
+One of the more common services which neurofeedback clinics provide is to combat brain ageing. Researchers are studying whether QEEG markers can help predict future cognitive decline and the onset of Alzheimer's. These markers are still a research topic, not an established clinical test.
 
 **References**
 
--   [Video games for cognitive enhancement - Adam Gazzaley Lab](http://gazzaleylab.ucsf.edu/wp-content/uploads/2014/09/Anguera_Nature_2013-Video-game-training-enhances-cognitive-control-in-older-adults.pdf)
+-   [Video games for cognitive enhancement - Adam Gazzaley Lab](https://web.archive.org/web/20180829003452/http://gazzaleylab.ucsf.edu/wp-content/uploads/2014/09/Anguera_Nature_2013-Video-game-training-enhances-cognitive-control-in-older-adults.pdf)
 -   [QEEG neurofeedback for Dementia](http://journals.sagepub.com/doi/abs/10.1177/1550059415590750)
 -   [Beta and gamma neurofeedback on memory and intelligence in the elderly](http://www.sciencedirect.com/science/article/pii/S030105111300152X)
 -   [Attential Training via neurofeedback in ageing bring](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5346575/)
@@ -150,18 +157,18 @@ At a consumer level, mindfulness is one of the most common use case for EEG neur
 
 **References**
 
--   [Muse Research](http://www.choosemuse.com/research)
--   [NeuroSky's mindfulness app](https://store.neurosky.com/products/mindfulness)
+-   [Muse Research](https://choosemuse.com/pages/muse-research)
+-   [NeuroSky's app store](https://neurosky.com/store/), which lists meditation apps. The original mindfulness app page is no longer online.
 -   [Neurophysiology review on Neural Oscillations and Mindfulness](http://www.sciencedirect.com/science/article/pii/S0149763415002511)
--   [Alterations in brain activity produced by mindfulness meditation](http://journals.lww.com/psychosomaticmedicine/Abstract/2003/07000/AlterationinBrain%20andImmuneFunctionProduced.14.aspx)
+-   [Alterations in brain activity produced by mindfulness meditation](https://doi.org/10.1097/01.PSY.0000077505.67574.E3)
 
 #### Accelerated Learning
 
-The use of neurotechnology to accelerate learning is one of the subjects that remains of high interest, especially to [DARPA](https://www.darpa.mil/program/targeted-neuroplasticity-training). Here are some potential use cases of how you can use eeg to speed up your learning.
+The use of neurotechnology to accelerate learning is one of the subjects that remains of high interest, especially to [DARPA](https://www.darpa.mil/research/programs/targeted-neuroplasticity-training). Here are some potential use cases of how you can use eeg to speed up your learning.
 
 **References**
 
--   [Use of B-Alert's EEG to create "Accelerated Learning"](http://www.advancedbrainmonitoring.com/neurotechnology/applications/accelerated-learning/)
+-   [Use of B-Alert's EEG to create "Accelerated Learning"](https://web.archive.org/web/20180825154845/http://www.advancedbrainmonitoring.com:80/neurotechnology/applications/accelerated-learning/)
 -   [Memory consolidation theta neurofeedback](http://www.sciencedirect.com/science/article/pii/S0301051113002214)
 -   [Non-invasive Brain biomarkers for cognitive-motor performance assement](https://link.springer.com/content/pdf/10.1007/978-3-642-21852-1.pdf#page=178)
 
@@ -171,7 +178,7 @@ One potential use case of neurofeedback training could be used to improve creati
 
 **References**
 
--   [modulating slow waves EEG to enhance musical performance](http://journals.lww.com/neuroreport/Abstract/2003/07010/Ecological_validity_of_neurofeedback___modulation.6.aspx)
+-   [modulating slow waves EEG to enhance musical performance](https://doi.org/10.1097/00001756-200307010-00006)
 -   [A theory of alpha/theta neurofeedback to improve creative performance](https://link.springer.com/article/10.1007/s10339-008-0248-5)
 
 ## Rehabilitation
@@ -212,12 +219,12 @@ Neurofeedback may provide a potential therapy to help those with Rett syndrome. 
 
 #### Concussion
 
-Research has shown that there are noticeable changes in EEG oscillations after brain injury. This leads to the potential of creating eeg diagnostics. Current solutions like Brainscope, don't actually predict if a concussion is present. However it does provide some preliminary insight to clinicians so that they can determine if a person should get a PET/MRI scan.
+Research has shown that there are noticeable changes in EEG oscillations after brain injury. This leads to the potential of creating eeg diagnostics. Current solutions like BrainScope do not diagnose a concussion on their own. BrainScope says its device helps clinicians assess the likelihood of a brain bleed that would show on a CT scan, and is not a substitute for a head CT.
 
 **References**
 
 -   [Change in neural oscillations bands of mild traumatic brain injury patients](http://ieeexplore.ieee.org/document/7319994/?arnumber=7319994)
--   [Head injury assessment tool by Brainscope](http://brainscope.com/products/)
+-   [Head injury assessment tool by Brainscope](https://www.brainscope.com/emergency-departments)
 -   [EEG changes in mild traumatic brain injury in athletes](http://www.sciencedirect.com/science/article/pii/S0304394004015034)
 
 #### Alzheimer’s
@@ -226,16 +233,16 @@ A growing body of evidence suggests that EEG analyses can be used in the early d
 
 **References**
 
--   [Development of EEG Biomarkers for Alzheimer's Disease](http://www.advancedbrainmonitoring.com/EEGbiomarkersforAlzheimersDisease)
+-   [Development of EEG Biomarkers for Alzheimer's Disease](https://web.archive.org/web/20191207192528/https://www.advancedbrainmonitoring.com/EEGbiomarkersforAlzheimersDisease)
 -   [EEG in patients with Alzheimer's](http://www.sciencedirect.com/science/article/pii/S138824570400015X)
 
 #### Epilepsy
 
-Epilepsy is a disorder that affects over 50 million people worldwide, with 80% of cases coming from developing countries. There are some great opportunities in developing a low cost Epilepsy diagnostic with EEG's and which would help those that may not have the resources to properly test for the disorder.
+Epilepsy affects around 50 million people worldwide, and nearly 80% of them live in low- and middle-income countries, according to the [World Health Organization](https://www.who.int/news-room/fact-sheets/detail/epilepsy). There are some great opportunities in developing a low cost Epilepsy diagnostic with EEG's and which would help those that may not have the resources to properly test for the disorder.
 
-**Ressources**
+**References**
 
 -   [Epilepsy seizure detection using eeg time-frequency analysis](http://ieeexplore.ieee.org/document/4801967/?arnumber=4801967)
 -   [Epilepsy care in developing countries](http://onlinelibrary.wiley.com/doi/10.1111/j.1535-7511.2010.01362.x/full)
--   [TeleEEG. a company which provides eeg analysis for epilepsy in poor countries](http://www.teleeeg.org/)
+-   [TeleEEG, an organization that provides EEG-based epilepsy diagnosis by telemedicine in low-income countries](https://www.teleeeg.org/)
 -   [Automated diagnosis of epileptic EEG using entropies](http://www.sciencedirect.com/science/article/pii/S1746809411000838)
