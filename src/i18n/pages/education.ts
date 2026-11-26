@@ -7,6 +7,8 @@ export default bilingual(
       "Le NeuroTech Primer, des jeux de données neuronales ouverts, des boîtes à outils libres d'analyse EEG, les normes FAIR et des parcours d'apprentissage choisis avec soin.",
     eyebrow: 'Apprendre',
     subtitle: 'Des ressources de formation choisies avec soin et des normes ouvertes pour la communauté.',
+    newHere: 'Vous débutez en neurotech?',
+    startHere: 'Commencez par notre parcours en quatre étapes',
     micro: {
       label: 'Programme en vedette · Partenaire de NeuroTechX',
       title: 'Programme de microcertification NeuroTech',
@@ -392,6 +394,8 @@ export default bilingual(
       'The NeuroTech Primer, open neural datasets, open-source EEG analysis toolkits, FAIR standards, and curated learning paths.',
     eyebrow: 'Learn',
     subtitle: 'Curated learning resources and open standards for the community.',
+    newHere: 'New to neurotech?',
+    startHere: 'Start with our four-step path',
     micro: {
       label: 'Featured Programme · NeuroTechX Partner',
       title: 'NeuroTech Microcredential Program',
