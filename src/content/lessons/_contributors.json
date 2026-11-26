@@ -1,0 +1,16 @@
+[
+  { "name": "Francesca Placido", "roles": ["Content builder"], "lessons": ["intro-to-bci"] },
+  { "name": "Sheida Rabipour", "roles": ["Editor", "Mentor"], "lessons": ["intro-to-bci", "preprocessing"] },
+  { "name": "Hector Orozco", "roles": ["Editor", "Mentor"], "lessons": ["preprocessing", "nervous-system", "cellular-components", "neuroanatomy", "brain-disorders"] },
+  { "name": "Patrick Coleman", "roles": ["Content builder"], "lessons": ["preprocessing"] },
+  { "name": "Davide Valeriani", "roles": ["Mentor"], "lessons": ["event-related-potentials"] },
+  { "name": "Ryan Lintott", "roles": ["Editor", "Content builder"], "lessons": ["event-related-potentials", "nervous-system", "cellular-components", "neuroanatomy", "brain-disorders"] },
+  { "name": "Yu Min Chuang", "roles": ["Content builder"], "lessons": ["event-related-potentials"] },
+  { "name": "Maria Virginia Ruiz-Blondet", "roles": ["Writer", "Editor", "Programmer", "Artist"], "lessons": ["machine-learning-for-bci"] },
+  { "name": "Brandon Siebert", "roles": ["Writer", "Editor", "Programmer", "Artist"], "lessons": ["machine-learning-for-bci"] },
+  { "name": "Christina Zappullo", "roles": ["Writer"], "lessons": ["machine-learning-for-bci"] },
+  { "name": "Daniel Vizcaya", "roles": ["Writer"], "lessons": ["machine-learning-for-bci"] },
+  { "name": "Morgan Hough", "roles": ["Mentor"], "lessons": ["machine-learning-for-bci"] },
+  { "name": "Keaton Armentrout", "roles": ["Editor", "Writer"], "lessons": ["emerging-technologies"] },
+  { "name": "Gena Meldazy", "roles": ["Writer"], "lessons": ["emerging-technologies"] }
+]

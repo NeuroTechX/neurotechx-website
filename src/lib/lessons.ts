@@ -36,3 +36,14 @@ export function getLesson(slug: string): Lesson | null {
     const { data, content } = matter(fs.readFileSync(file, 'utf-8'));
     return { slug, title: data.title, description: data.description, module: data.module, sourceUrl: data.sourceUrl, content };
 }
+
+// Named authors and editors, from the old site's contributors page
+export interface Contributor {
+    name: string;
+    roles: string[];
+    lessons: string[];
+}
+
+export function getContributors(): Contributor[] {
+    return JSON.parse(fs.readFileSync(path.join(DIR, '_contributors.json'), 'utf-8'));
+}

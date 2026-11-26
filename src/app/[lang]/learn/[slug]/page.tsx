@@ -7,7 +7,7 @@ import Link from '@/components/LocaleLink';
 import { MdxLink } from '@/components/DockitRenderer';
 import { pageLocale } from '@/i18n';
 import text from '@/i18n/pages/learn';
-import { getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
+import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
@@ -36,6 +36,7 @@ export default async function LessonPage({ params }: Props) {
         notFound();
     }
     const t = text[lang];
+    const authors = getContributors().filter((person) => person.lessons.includes(slug));
 
     // Previous and next lesson within the same module
     const order = getModules()[lesson.module];
@@ -54,6 +55,11 @@ export default async function LessonPage({ params }: Props) {
             <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg">
                 <h1>{lesson.title}</h1>
                 {lesson.description && <p className="lead">{lesson.description}</p>}
+                {authors.length > 0 && (
+                    <p className="text-sm text-muted-foreground">
+                        {t.lesson.by} {authors.map((person) => person.name).join(', ')}
+                    </p>
+                )}
                 <MDXRemote
                     source={lesson.content}
                     components={{ a: MdxLink }}

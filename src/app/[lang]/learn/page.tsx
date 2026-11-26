@@ -5,7 +5,7 @@ import PageHeader from '@/components/PageHeader';
 import { alternatesFor, pageLocale } from '@/i18n';
 import type { Locale } from '@/i18n/routes';
 import text from '@/i18n/pages/learn';
-import { getModules, type Module } from '@/lib/lessons';
+import { getContributors, getModules, type Module } from '@/lib/lessons';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/learn'>): Promise<Metadata> {
     const lang = await pageLocale(params);
@@ -98,6 +98,12 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         </div>
                     ))}
                 </div>
+                <p className="mt-6 max-w-3xl text-sm text-muted-foreground">
+                    {t.lessons.credits} {getContributors().map((person) => person.name).join(', ')}{' '}
+                    <a href="https://github.com/NeuroTechX/learn.neurotechedu.com/graphs/contributors" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">
+                        {t.lessons.creditsMore}
+                    </a>.
+                </p>
             </section>
 
             <Step n={2} label={t.step} title={track.title} lead={track.lead}>
