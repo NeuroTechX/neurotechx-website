@@ -1,30 +1,11 @@
 import type { Metadata } from 'next';
-import { DockitRenderer } from '@/components/DockitRenderer';
-import { getDockitContent } from '@/lib/dockit';
-import { notFound } from 'next/navigation';
+import DockitPage, { dockitMetadata } from '@/components/DockitPage';
+import { pageLocale } from '@/i18n';
 
-export const metadata: Metadata = {
-  title: 'Starting a Student Club',
-  description: 'How to start a university neurotechnology club, or bring an existing club into the NeuroTechX network.',
-  alternates: { canonical: '/students/start-a-club' },
-};
-
-async function getPageData() {
-  const content = getDockitContent('student-club-onboarding');
-  if (!content) {
-    return null;
-  }
-  return content;
+export async function generateMetadata({ params }: PageProps<'/[lang]/students/start-a-club'>): Promise<Metadata> {
+    return dockitMetadata('student-club-onboarding', '/students/start-a-club', await pageLocale(params));
 }
 
-export default async function Page() {
-  const content = await getPageData();
-  if (!content) {
-    notFound();
-  }
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <DockitRenderer content={content} />
-    </div>
-  );
+export default async function StartAClubPage({ params }: PageProps<'/[lang]/students/start-a-club'>) {
+    return <DockitPage slug="student-club-onboarding" lang={await pageLocale(params)} />;
 }

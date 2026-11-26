@@ -2,28 +2,35 @@ import type { Metadata } from 'next';
 import Link from '@/components/LocaleLink';
 import PageHeader from '@/components/PageHeader';
 import { getHandbookSections } from '@/lib/dockit';
+import { alternatesFor, pageLocale } from '@/i18n';
+import text from '@/i18n/pages/guide';
 
-export const metadata: Metadata = {
-    title: 'Volunteer Handbook',
-    description:
-        'The NeuroTechX volunteer handbook: how to join, the contributor agreement, tools and access, privacy, money and leaving.',
-    alternates: { canonical: '/handbook' },
-};
+export async function generateMetadata({ params }: PageProps<'/[lang]/handbook'>): Promise<Metadata> {
+    const lang = await pageLocale(params);
+    const t = text[lang].handbook;
+    return { title: t.title, description: t.description, alternates: alternatesFor('/handbook', lang) };
+}
 
-export default function HandbookPage() {
-    const sections = getHandbookSections();
+export default async function HandbookPage({ params }: PageProps<'/[lang]/handbook'>) {
+    const lang = await pageLocale(params);
+    const t = text[lang].handbook;
+    const sections = getHandbookSections(lang);
 
     return (
         <div className="container py-12">
             <PageHeader
-                eyebrow="Volunteer handbook"
-                title="Working with NeuroTechX"
-                subtitle="How you join, what you agree to, the tools you get, how we work together, and how you leave."
+                eyebrow={t.eyebrow}
+                title={t.heading}
+                subtitle={t.subtitle}
             />
             <p className="mb-10 max-w-3xl text-muted-foreground">
-                Chapters and student clubs have their own guides: <Link className="text-neuro-accent underline" href="/community/start-a-chapter">starting a chapter</Link> and{' '}
-                <Link className="text-neuro-accent underline" href="/students/start-a-club">starting a club</Link>. Passages marked{' '}
-                <strong>Draft</strong> describe something not yet decided.
+                {t.clubsBefore}
+                <Link className="text-neuro-accent underline" href="/community/start-a-chapter">{t.startChapter}</Link>
+                {t.and}
+                <Link className="text-neuro-accent underline" href="/students/start-a-club">{t.startClub}</Link>
+                {t.draftBefore}
+                <strong>{t.draft}</strong>
+                {t.draftAfter}
             </p>
             <div className="grid gap-8 md:grid-cols-3">
                 {sections.map((section) => (

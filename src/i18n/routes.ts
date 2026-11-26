@@ -2,6 +2,8 @@
 // French page names (/fr/evenements), the way desjardins.com pairs /fr and /en pages.
 // The proxy (src/proxy.ts) maps French addresses onto the shared route files in app/[lang].
 
+import synced from '../content/translated-routes.json';
+
 export const LOCALES = ['en', 'fr'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
@@ -79,11 +81,16 @@ export const TRANSLATED_ROUTES = new Set<string>([
   '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
 ]);
 
+// Guide and handbook pages with a French version in their source repository (listed by
+// scripts/sync-dockit.mjs).
+const SYNCED_TRANSLATIONS = new Set<string>(synced);
+
 // Sections translated as a whole, including the pages made from data under them (/jobs/eeg).
 const TRANSLATED_SECTIONS = ['/jobs'];
 
 export const isTranslated = (routePath: string) =>
   TRANSLATED_ROUTES.has(routePath) ||
+  SYNCED_TRANSLATIONS.has(routePath) ||
   TRANSLATED_SECTIONS.some((section) => routePath === section || routePath.startsWith(`${section}/`));
 
 /** True for an existing page whose body is still English only (unknown addresses are 404s, which are translated). */
