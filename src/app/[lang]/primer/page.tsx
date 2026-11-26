@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import { BookOpen, Download, ExternalLink, Mail } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import Link from '@/components/LocaleLink';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/primer';
+import { learnPaths } from '@/content/learn/paths';
+import { PRIMER_PDF, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/primer'>): Promise<Metadata> {
     const lang = await pageLocale(params);
@@ -11,12 +14,12 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/primer'>):
     return { title: t.title, description: t.description, alternates: alternatesFor('/primer', lang) };
 }
 
-const PDF = '/downloads/the-neurotech-primer.pdf';
 const AMAZON = 'https://www.amazon.com/Neurotech-Primer-Beginners-Everything-Neurotechnology/dp/B09CKP1D66/';
 
 export default async function PrimerPage({ params }: PageProps<'/[lang]/primer'>) {
     const lang = await pageLocale(params);
     const t = text[lang];
+    const paths = learnPaths[lang];
     return (
         <div className="container py-12">
             <PageHeader
@@ -43,7 +46,7 @@ export default async function PrimerPage({ params }: PageProps<'/[lang]/primer'>
                     </p>
                     <div className="flex flex-wrap gap-4">
                         <a
-                            href={PDF}
+                            href={PRIMER_PDF}
                             download
                             className="inline-flex items-center gap-2 rounded-full bg-neuro-accent px-7 py-3 font-bold text-[var(--background)] transition hover:brightness-110"
                         >
@@ -65,17 +68,31 @@ export default async function PrimerPage({ params }: PageProps<'/[lang]/primer'>
             </div>
 
             <div className="grid gap-12 md:grid-cols-3">
-                <section className="md:col-span-2">
+                <section id="chapters" className="scroll-mt-24 md:col-span-2">
                     <h2 className="mb-6 flex items-center gap-2 text-2xl font-serif font-bold">
                         <BookOpen className="h-6 w-6 text-neuro-accent" /> {t.insideTitle}
                     </h2>
                     <p className="mb-6 text-muted-foreground">
                         {t.insideBody}
                     </p>
-                    <ol className="grid list-inside list-decimal gap-x-8 gap-y-2 text-foreground/90 sm:grid-cols-2">
-                        {t.chapters.map((chapter) => (
-                            <li key={chapter}>{chapter}</li>
-                        ))}
+                    <ol className="list-decimal space-y-3 pl-6 marker:text-muted-foreground">
+                        {t.chapters.map((chapter, index) => {
+                            const check = PRIMER_CHECKS.find((entry) => entry.chapter === index + 1);
+                            return (
+                                <li key={chapter} className="pl-1">
+                                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-[var(--border)] pb-2">
+                                        <a href={primerChapterPdf(index + 1)} className="hover:underline">
+                                            {chapter} <span className="ml-1 text-xs text-muted-foreground">({paths.readPdf})</span>
+                                        </a>
+                                        {check && (
+                                            <Link href={primerCheckPath(check.slug)} aria-label={`${paths.check} · ${chapter}`} className="text-sm font-semibold text-neuro-accent hover:underline">
+                                                {paths.check} →
+                                            </Link>
+                                        )}
+                                    </div>
+                                </li>
+                            );
+                        })}
                     </ol>
                 </section>
 

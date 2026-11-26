@@ -8,10 +8,13 @@ import { MdxLink } from '@/components/DockitRenderer';
 import { pageLocale } from '@/i18n';
 import text from '@/i18n/pages/learn';
 import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
+import { firstEegText } from '@/content/learn/first-eeg';
+import { FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
 const REPO = 'https://github.com/NeuroTechX/neurotechx-website/edit/main/src/content/lessons';
+const EEG_LESSONS = new Set(['intro-to-bci', 'preprocessing', 'neural-oscillations']);
 
 export function generateStaticParams(): { slug: string }[] {
     return getLessonSlugs().map((slug) => ({ slug }));
@@ -66,6 +69,12 @@ export default async function LessonPage({ params }: Props) {
                     options={{ mdxOptions: { format: 'md', remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
                 />
             </article>
+            {EEG_LESSONS.has(slug) && (
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm font-semibold">
+                    <Link href={FIRST_EEG_PATH} className="text-neuro-accent hover:underline">{firstEegText[lang].title} →</Link>
+                    <Link href={primerCheckPath('eeg')} className="text-neuro-accent hover:underline">{firstEegText[lang].selfCheck} →</Link>
+                </div>
+            )}
             <p className="mt-10 text-sm text-muted-foreground">
                 {t.lesson.origin}{' '}
                 <a href={`https://web.archive.org/web/2025/${lesson.sourceUrl}`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.original}</a>
