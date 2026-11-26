@@ -49,5 +49,13 @@ export const studentClubs: StudentClub[] = [
         location: "Montréal, QC",
         logo: "/images/clubs/synapse.png",
         description: "McGill's undergraduate neurotechnology group."
+    },
+    {
+        name: "UoM NeuroTech Society",
+        university: "University of Manchester",
+        location: "Manchester, UK",
+        logo: "/images/clubs/manchester.png",
+        website: "https://linktr.ee/neurotechnologysociety",
+        description: "Student society running talks on EEG, neuroimaging and neuromorphic computing, plus a Python for Everyone series. Recorded sessions are on its YouTube channel."
     }
 ];
