@@ -462,7 +462,7 @@ For Kernel as well the final goal is to allow humans to coexist and co-evolve wi
     
 19.  Wikipedia. Lobes of the brain. Available from: [https://en.wikipedia.org/wiki/Lobes\_of\_the\_brain](https://en.wikipedia.org/wiki/Lobes_of_the_brain)
     
-20.  Neurons & glial cells. Available from: [https://training.seer.cancer.gov/brain/tumors/anatomy/neurons.html](https://training.seer.cancer.gov/brain/tumors/anatomy/neurons.html)
+20.  Neurons & glial cells. Available from: [https://training.seer.cancer.gov/brain/tumors/anatomy/neurons.html](https://web.archive.org/web/20190919195612/https://training.seer.cancer.gov/brain/tumors/anatomy/neurons.html)
     
 21.  Sanei, S. (2013). Adaptive Processing of Brain Signals. Somerset: John Wiley & Sons, Incorporated. Retrieved from 30 [http://ebookcentral.proquest.com/lib/dcu/detail.action?docID=1207774](http://ebookcentral.proquest.com/lib/dcu/detail.action?docID=1207774)
     
@@ -483,7 +483,7 @@ For Kernel as well the final goal is to allow humans to coexist and co-evolve wi
     
 30.  Ochoa, J., 2002. EEG Signal Classification for Brain Computer Interface Applications.
     
-31.  Riera, A. EEG Signal Processing for Dummies. Available from: [http://neuroelectrics.hs-sites.com/blog/bid/245833/EEG-Signal-Processing-for-Dummies?utm\_content=10498748&utm\_medium=social&utm\_source=googleplus](http://neuroelectrics.hs-sites.com/blog/bid/245833/EEG-Signal-Processing-for-Dummies?utm_content=10498748&utm_medium=social&utm_source=googleplus)
+31.  Riera, A. EEG Signal Processing for Dummies. Available from: http://neuroelectrics.hs-sites.com/blog/bid/245833/EEG-Signal-Processing-for-Dummies?utm\_content=10498748&utm\_medium=social&utm\_source=googleplus
     
 32.  Tarik Al-ani and Dalila Trad (2010). Signal Processing and Classification Approaches for Brain-Computer Interface, Intelligent and Biosensors, Vernon S. Somerset (Ed.), InTech, DOI: 10.5772/7032. Available from: [https://www.intechopen.com/books/intelligent-and-biosensors/signal-processing-and-classification-approaches-for-brain-computer-interface](https://www.intechopen.com/books/intelligent-and-biosensors/signal-processing-and-classification-approaches-for-brain-computer-interface)
     
@@ -495,6 +495,6 @@ For Kernel as well the final goal is to allow humans to coexist and co-evolve wi
     
 36.  Emerging Theory and Practice in Neuroprosthetics by Yina Guo, Ganesh Naik. Chapter 10 Brain-Computer Interfaces for Assessment and Communication in Disorders of Consciousness
     
-37.  Neurosky. 2015. What Is BCI and How Did It Evolve?. Available from: [http://neurosky.com/2015/06/what-is-bci-and-how-did-it-evolve/](http://neurosky.com/2015/06/what-is-bci-and-how-did-it-evolve/)
+37.  Neurosky. 2015. What Is BCI and How Did It Evolve?. Available from: [http://neurosky.com/2015/06/what-is-bci-and-how-did-it-evolve/](https://web.archive.org/web/20191213123024/http://neurosky.com/2015/06/what-is-bci-and-how-did-it-evolve/)
     
 38.  Statt, N. 2017. KERNEL IS TRYING TO HACK THE HUMAN BRAIN — BUT NEUROSCIENCE HAS A LONG WAY TO GO. Available from: [https://www.theverge.com/2017/2/22/14631122/kernel-neuroscience-bryan-johnson-human-intelligence-ai-startup](https://www.theverge.com/2017/2/22/14631122/kernel-neuroscience-bryan-johnson-human-intelligence-ai-startup)

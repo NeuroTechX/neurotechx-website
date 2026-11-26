@@ -32,7 +32,7 @@ Neurons communicate through axon-dendrite, axon-soma and sometimes dendrite-dend
 
 An electrical signal from one neuron's axon will trigger a release of neurotransmitters which bind to channels on another neuron's dendrite. This causes the channels to open and receive positively-charged ions from the synapse. If this increases the charge enough, can trigger an action potential, causing that neuron to send an electrical signal (positive charge) down its own axon.
 
-[![Chemical synapse schema cropped](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chemical_synapse_schema_cropped.jpg/512px-Chemical_synapse_schema_cropped.jpg)](https://commons.wikimedia.org/wiki/File%3AChemical_synapse_schema_cropped.jpg "By user:Looie496 created file, US National Institutes of Health, National Institute on Aging created original [Public domain], via Wikimedia Commons")
+[![Chemical synapse schema cropped](https://web.archive.org/web/20220517103105/https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Chemical_synapse_schema_cropped.jpg/512px-Chemical_synapse_schema_cropped.jpg)](https://commons.wikimedia.org/wiki/File%3AChemical_synapse_schema_cropped.jpg "By user:Looie496 created file, US National Institutes of Health, National Institute on Aging created original [Public domain], via Wikimedia Commons")
 
 **Chemical Synapse**
 
@@ -44,15 +44,15 @@ A nervous system emerges from a large assemblage of connected neurons. Nerve imp
 
 Glial cells mostly act as caretaker cells, supporting the neurons and their connections. There are several different types:
 
-**Astrocytes**\[^1\]**:** These are often considered a third component of synapses as they are intimately connected with neurons. Their functions include recycling excess neurotransmitter, releasing its own transmitters to modulate the synapse and providing protection from cellular damage or injury.
+**Astrocytes**[^1]**:** These are often considered a third component of synapses as they are intimately connected with neurons. Their functions include recycling excess neurotransmitter, releasing its own transmitters to modulate the synapse and providing protection from cellular damage or injury.
 
 **Oligodendrocytes:** These are myelinating cells in the central nervous system. They surround the axons of neurons with a fatty, myelin sheath that insulates the electrical signal and allows for quicker communication.
 
-**Ependymal cells:** These are cells which line part of the brain called ventricles, which have finger-like projections called cilia. These regions in the brain are chambers that are filled with cerebrospinal fluid, produced by ependymal cells, and they bathe both the brain and the spinal cord. These calls may also be involved in the migration of new neurons being formed (at least in rodents)\[^2\]. For a more extensive review, see footnotes\[^3\].
+**Ependymal cells:** These are cells which line part of the brain called ventricles, which have finger-like projections called cilia. These regions in the brain are chambers that are filled with cerebrospinal fluid, produced by ependymal cells, and they bathe both the brain and the spinal cord. These calls may also be involved in the migration of new neurons being formed (at least in rodents)[^2]. For a more extensive review, see footnotes[^3].
 
 **Schwann cells:** These are the myelinating cells of the PNS which can also insulate the electrical signals travelling through axons. They also act to speed up the neural signalling. The effect of demyelination can be seen in related disorders such as multiple sclerosis
 
-**Microglial cells:** These are the resident immune cells of the brain (up to 10% of brain cells). They are also involved in synaptic pruning/neurodevelopment and can also release molecules for other immune cells to recognize\[^4\]. Microglia can become activated into a pro-inflammatory or an anti-inflammatory state, both of which change the shape of the cell as well as the types of molecules that it releases into the environment.
+**Microglial cells:** These are the resident immune cells of the brain (up to 10% of brain cells). They are also involved in synaptic pruning/neurodevelopment and can also release molecules for other immune cells to recognize[^4]. Microglia can become activated into a pro-inflammatory or an anti-inflammatory state, both of which change the shape of the cell as well as the types of molecules that it releases into the environment.
 
 ## Neurochemistry
 
@@ -76,12 +76,11 @@ Following is a list of the prominent neurotransmitters involved in the many func
 
 Receptors are protein structures on the surface or inside of cells that recognize and bind to specific neurotransmitters, hormones, or psychotropic drugs. Once bound, the receptor then changes shape to exert a specific effect - this may involve altering the charge of the cell by opening or closing ion channels, or more subtle effects by impacting which genes in the cell are activated. This impacts the function of the neuron; it is important to note that the effect of a neurotransmitter is entirely dependent on the receptor to which it is bound.
 
-## Footnotes
 
-\[^1\]: Eroglu, C. and Barres, B.A., 2010. Regulation of synaptic connectivity by glia. *Nature*, *468*(7321), p.223.
+[^1]: Eroglu, C. and Barres, B.A., 2010. Regulation of synaptic connectivity by glia. *Nature*, *468*(7321), p.223.
 
-\[^2\]: Sawamoto, K., Wichterle, H., Gonzalez-Perez, O., Cholfin, J.A., Yamada, M., Spassky, N., Murcia, N.S., Garcia-Verdugo, J.M., Marin, O., Rubenstein, J.L. and Tessier-Lavigne, M., 2006. New neurons follow the flow of cerebrospinal fluid in the adult brain. *Science*, *311*(5761), pp.629-632.
+[^2]: Sawamoto, K., Wichterle, H., Gonzalez-Perez, O., Cholfin, J.A., Yamada, M., Spassky, N., Murcia, N.S., Garcia-Verdugo, J.M., Marin, O., Rubenstein, J.L. and Tessier-Lavigne, M., 2006. New neurons follow the flow of cerebrospinal fluid in the adult brain. *Science*, *311*(5761), pp.629-632.
 
-\[^3\]: Del Bigio, M.R., 1995. The ependyma: a protective barrier between brain and cerebrospinal fluid. *Glia*, *14*(1), pp.1-13.
+[^3]: Del Bigio, M.R., 1995. The ependyma: a protective barrier between brain and cerebrospinal fluid. *Glia*, *14*(1), pp.1-13.
 
-\[^4\]: Bilbo, S.D. and Schwarz, J.M., 2012. The immune system and developmental programming of brain and behavior. *Frontiers in neuroendocrinology*, *33*(3), pp.267-286.
+[^4]: Bilbo, S.D. and Schwarz, J.M., 2012. The immune system and developmental programming of brain and behavior. *Frontiers in neuroendocrinology*, *33*(3), pp.267-286.

@@ -28,9 +28,9 @@ These first 4 terms are helpful for explaining relative positions. i.e. the cort
 
 The literal meaning of these four terms makes more sense for animals like lizards with a horizontal central nervous system. As humans walk upright with their heads bent forwards the coordinate system bends as well. This means the caudal direction may mean towards the spine but may also mean towards the back of the head.
 
-![Brain Locations](https://www.thescienceofpsychotherapy.com/wp-content/uploads/2017/11/brain-location-1024x861.png)
+![Brain Locations](https://web.archive.org/web/20191012054314/https://www.thescienceofpsychotherapy.com/wp-content/uploads/2017/11/brain-location-1024x861.png)
 
-**Brain Locations** *via [The Science of Psychotherapy](https://www.thescienceofpsychotherapy.com/glossary/rostral/)*
+**Brain Locations** *via [The Science of Psychotherapy](https://web.archive.org/web/20191209052831/https://www.thescienceofpsychotherapy.com/glossary/rostral/)*
 
 | **Proximal** | Closer to a set point |
 | --- | --- |
@@ -95,7 +95,7 @@ Four lobes are used to denote specific anatomical locations and functions of spe
 
 ##### Detailed Topographic Mapping
 
-Korbinian Brodmann, a German neuroscientist, first mapped the cerebrum based on its cytoarchitecture (or microstructure). He was able to subdivide the brain into 52 different Brodmann areas which, taking into account over 100 years of refining, are still used today\[^1\].
+Korbinian Brodmann, a German neuroscientist, first mapped the cerebrum based on its cytoarchitecture (or microstructure). He was able to subdivide the brain into 52 different Brodmann areas which, taking into account over 100 years of refining, are still used today[^1].
 
 ![Brodmann Areas](https://upload.wikimedia.org/wikipedia/commons/0/09/Brodmann-areas.png)
 
@@ -135,7 +135,7 @@ The midbrain or mesencephalon, considered part of the brainstem, is located caud
 
 ### Hindbrain
 
-The hindbrain is the most caudal part of the brain and it includes the cerebellum, pons, and medulla oblongata. Cerebellum (Latin for "little brain") gets this name because it looks like a small version of the cerebrum. It is responsible for balance, movement, coordination and has recently been shown to be involved in some cognitive functions\[^2\]. The pons has many different regions that are specialized for various functions, including: sleep, respiration, swallowing, bladder control, hearing, equilibrium, taste, eye movement, facial expressions, facial sensation, and posture. Finally, the medulla, which is also part of the brainstem, is the most caudal region of the hindbrain. It is also involved in the control of many autonomic functions, including: breathing, blood pressure, and coughing/sneezing reflexes. The cardiovascular centre, which regulates heart beats during exercise or trauma, is also located here.
+The hindbrain is the most caudal part of the brain and it includes the cerebellum, pons, and medulla oblongata. Cerebellum (Latin for "little brain") gets this name because it looks like a small version of the cerebrum. It is responsible for balance, movement, coordination and has recently been shown to be involved in some cognitive functions[^2]. The pons has many different regions that are specialized for various functions, including: sleep, respiration, swallowing, bladder control, hearing, equilibrium, taste, eye movement, facial expressions, facial sensation, and posture. Finally, the medulla, which is also part of the brainstem, is the most caudal region of the hindbrain. It is also involved in the control of many autonomic functions, including: breathing, blood pressure, and coughing/sneezing reflexes. The cardiovascular centre, which regulates heart beats during exercise or trauma, is also located here.
 
 ## Mapping the Brain in 3D
 
@@ -149,8 +149,7 @@ Mapping locations in the brain can help but our thoughts are more than select gr
 
 **Visualization of a [DTI measurement](https://en.wikipedia.org/wiki/Diffusion_tensor_imaging) of a human brain** *Credit: Thomas Schultz [\[CC BY-SA 3.0\]](http://creativecommons.org/licenses/by-sa/3.0/) via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:DTI-sagittal-fibers.jpg)*
 
-## Notes
 
-\[^1\]: Marios. Loukas, Christopher. Pennell, Christopher. Groat, R Shane. Tubbs, Aaron A. Cohen-Gadol; Korbinian Brodmann (1868–1918) and His Contributions to Mapping the Cerebral Cortex, *Neurosurgery*, Volume 68, Issue 1, 1 January 2011, Pages 6–11,
+[^1]: Marios. Loukas, Christopher. Pennell, Christopher. Groat, R Shane. Tubbs, Aaron A. Cohen-Gadol; Korbinian Brodmann (1868–1918) and His Contributions to Mapping the Cerebral Cortex, *Neurosurgery*, Volume 68, Issue 1, 1 January 2011, Pages 6–11,
 
-\[^2\]: Buckner, R.L., 2013. The cerebellum and cognitive function: 25 years of insight from anatomy and neuroimaging. *Neuron*, *80*(3), pp.807-815.
+[^2]: Buckner, R.L., 2013. The cerebellum and cognitive function: 25 years of insight from anatomy and neuroimaging. *Neuron*, *80*(3), pp.807-815.

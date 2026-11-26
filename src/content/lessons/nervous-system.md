@@ -22,7 +22,7 @@ Between the brain and its blood supply is the blood brain barrier. As its name s
 
 ## Peripheral Nervous System (PNS)
 
-The PNS acts as a relay, transmitting information between the CNS and the rest of the body. Unlike the CNS, the PNS is not protected by the vertebral column and skull, or by the blood–brain barrier, which leaves it more exposed to toxins and mechanical injuries. The PNS contains neurons that junction with the CNS and have long axons that extend to all parts of the body. These axons are referred to as nerves. In contrast with CNS neurons, PNS neurons are able to regenerate. Consequently, the properties of the PNS have been studied in regenerative research\[^1\].
+The PNS acts as a relay, transmitting information between the CNS and the rest of the body. Unlike the CNS, the PNS is not protected by the vertebral column and skull, or by the blood–brain barrier, which leaves it more exposed to toxins and mechanical injuries. The PNS contains neurons that junction with the CNS and have long axons that extend to all parts of the body. These axons are referred to as nerves. In contrast with CNS neurons, PNS neurons are able to regenerate. Consequently, the properties of the PNS have been studied in regenerative research[^1].
 
 ### Somatic Nervous System
 
@@ -60,6 +60,5 @@ The sensory and motor divisions each include a part of the somatic system and th
 
 If you would like to learn more about the nervous system there is an excellent [video series by Crash Course](https://www.youtube.com/watch?v=qPix_X-9t7E) on the topic.
 
-## Footnotes
 
-\[^1\]: Richardson, P.M., McGuinness, U.M. and Aguayo, A.J., 1980. Axons from CNS neurones regenerate into PNS grafts. *Nature*, *284*(5753), p.264.
+[^1]: Richardson, P.M., McGuinness, U.M. and Aguayo, A.J., 1980. Axons from CNS neurones regenerate into PNS grafts. *Nature*, *284*(5753), p.264.
