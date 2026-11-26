@@ -33,6 +33,13 @@ export default bilingual(
       topics: ['modèle de tête', 'IRM', 'segmentation'],
       kind: 'Ressource',
     },
+    pieegxr: {
+      description:
+        "Interface neuronale pour la réalité étendue, par PiEEG, membre de la communauté : 16 canaux EEG, EMG et ECG (deux ADS1299 de TI, 24 bits), électrodes faciales et électrodes sèches sur le cortex visuel, pour Meta Quest et d'autres casques. Matériel et logiciel libres. Campagne Kickstarter en tout ou rien jusqu'au 31 décembre 2026.",
+      topics: ['matériel libre', 'EEG', 'RV'],
+      kind: 'Kickstarter',
+      back: 'Soutenir sur Kickstarter',
+    },
     openvibe: {
       description:
         "Logiciel pour les interfaces cerveau-machine et les neurosciences en temps réel. Une plateforme graphique pour concevoir des scénarios d'ICM.",
@@ -92,6 +99,13 @@ export default bilingual(
         'High-resolution anatomical head models for electromagnetic source imaging and stimulation.',
       topics: ['head-model', 'mri', 'segmentation'],
       kind: 'Resource',
+    },
+    pieegxr: {
+      description:
+        'A neural interface for extended reality from community member PiEEG: 16 channels of EEG, EMG and ECG (dual TI ADS1299, 24-bit), facial electrodes and dry electrodes over the visual cortex, for Meta Quest and other headsets. Open-source hardware and software. All-or-nothing Kickstarter campaign until December 31, 2026.',
+      topics: ['open hardware', 'EEG', 'VR'],
+      kind: 'Kickstarter',
+      back: 'Back it on Kickstarter',
     },
     openvibe: {
       description:
