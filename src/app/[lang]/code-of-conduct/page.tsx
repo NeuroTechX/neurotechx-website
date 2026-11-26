@@ -48,9 +48,9 @@ export default async function CodeOfConductPage({ params }: PageProps<'/[lang]/c
                 <h2>{t.attributionHeading}</h2>
                 <p className="text-sm text-muted-foreground mt-8 border-t pt-4">
                     {t.attributionBefore}{' '}
-                    <a href="https://www.contributor-covenant.org" target="_blank" rel="noreferrer" className="underline">Contributor Covenant</a>
+                    <a href="https://www.contributor-covenant.org" target="_blank" rel="noopener noreferrer" className="underline">Contributor Covenant</a>
                     {t.attributionMiddle}{' '}
-                    <a href={COVENANT} target="_blank" rel="noreferrer" className="underline">{COVENANT}</a>
+                    <a href={COVENANT} target="_blank" rel="noopener noreferrer" className="underline">{COVENANT}</a>
                 </p>
             </div>
         </div>

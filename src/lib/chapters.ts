@@ -10,6 +10,7 @@ export type Chapter = {
   note?: string;       // one-line context
   url: string;         // primary link (X account, site, or join form)
   linkLabel?: string;  // label for the primary link
+  slack?: string;      // local channel in the NeuroTechX Slack
   featured?: boolean;
   fr?: { note?: string; linkLabel?: string }; // French text, where it differs
 };
@@ -31,37 +32,37 @@ export const CHAPTERS: Chapter[] = [
   {
     name: 'NeuroTechSF', city: 'San Francisco', status: 'active', featured: true,
     note: 'One of our largest and most active chapters, anchoring the Bay Area neurotech scene.',
-    url: 'https://x.com/neurotechsf', linkLabel: '@neurotechsf',
+    url: 'https://x.com/neurotechsf', linkLabel: '@neurotechsf', slack: '#_san-francisco',
     fr: { note: "L'une de nos sections les plus grandes et les plus actives, pilier de la neurotech dans la région de la baie de San Francisco." },
   },
   {
     name: 'NeuroNYC', city: 'New York', status: 'active', featured: true,
     note: 'The New York City community — talks, socials, and hack nights.',
-    url: 'https://x.com/NeuroTechNYC', linkLabel: '@NeuroTechNYC',
+    url: 'https://x.com/NeuroTechNYC', linkLabel: '@NeuroTechNYC', slack: '#_new-york',
     fr: { note: 'La communauté de New York — conférences, rencontres et soirées de hacking.' },
   },
   {
     name: 'NeuroTechX London', city: 'London · UK', status: 'active', featured: true,
     note: 'An active London chapter that also serves the wider UK community.',
-    url: 'https://x.com/NeuroTechLDN', linkLabel: '@NeuroTechLDN',
+    url: 'https://x.com/NeuroTechLDN', linkLabel: '@NeuroTechLDN', slack: '#_london',
     fr: { note: 'Une section londonienne active qui rayonne dans tout le Royaume-Uni.' },
   },
   {
     name: 'Coglab', city: 'Paris', status: 'active', featured: true,
     note: 'NeuroTechX Paris — the Coglab community for cognitive science & neurotech.',
-    url: 'https://coglab.fr/', linkLabel: 'coglab.fr',
+    url: 'https://coglab.fr/', linkLabel: 'coglab.fr', slack: '#_paris',
     fr: { note: 'NeuroTechX Paris — la communauté Coglab en sciences cognitives et en neurotech.' },
   },
   {
     name: 'NeuroTechX Toronto', city: 'Toronto', status: 'restarting', featured: true,
     note: 'Relaunching — get in touch to help reboot the Toronto chapter.',
-    url: 'https://x.com/neurotechto', linkLabel: '@neurotechto',
+    url: 'https://x.com/neurotechto', linkLabel: '@neurotechto', slack: '#_toronto',
     fr: { note: 'En relance — écrivez-nous pour aider à redémarrer la section de Toronto.' },
   },
   {
     name: 'NeuroTechMTL', city: 'Montreal', status: 'restarting', featured: true,
     note: 'Where NeuroTechX began — the Montreal chapter is restarting.',
-    url: 'https://x.com/NeuroTechMTL', linkLabel: '@NeuroTechMTL',
+    url: 'https://x.com/NeuroTechMTL', linkLabel: '@NeuroTechMTL', slack: '#_montreal',
     fr: { note: 'Là où NeuroTechX est née — la section de Montréal redémarre.' },
   },
   {

@@ -85,6 +85,24 @@ export default async function StudentClubsPage({ params }: PageProps<'/[lang]/st
                 </div>
             </section>
 
+            {/* Starter Project Ideas by Budget */}
+            <section className="container py-12">
+                <h2 className="mb-2 text-2xl font-bold">{t.projectsHeading}</h2>
+                <p className="mb-6 max-w-3xl text-muted-foreground">{t.projectsLead}</p>
+                <div className="grid gap-5 md:grid-cols-3">
+                    {t.projectTiers.map((tier) => (
+                        <article key={tier.title} className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+                            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neuro-accent">{tier.budget}</p>
+                            <h3 className="mb-2 text-lg font-bold">{tier.title}</h3>
+                            <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">{tier.body}</p>
+                            <Link href={tier.href} className="inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline">
+                                {tier.cta} <ArrowRight size={15} />
+                            </Link>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
             {/* "Add Your Club" Call to Action (PR Flow) */}
             <section className={styles.ctaSection}>
                 <div className={styles.container}>

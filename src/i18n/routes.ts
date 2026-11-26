@@ -44,6 +44,8 @@ const FR_SEGMENTS: Record<string, string> = {
   'ntx-services-partnership-termination': 'fin-partenariat-ntx-services',
   handbook: 'guide-benevole',
   guide: 'guide',
+  glossary: 'glossaire',
+  'safety-and-ethics': 'securite-et-ethique',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
   Object.entries(FR_SEGMENTS).map(([en, fr]) => [fr, en])
@@ -79,7 +81,7 @@ export function parsePublicPath(pathname: string): [Locale, string] {
 export const TRANSLATED_ROUTES = new Set<string>([
   '/', '/events', '/about', '/community',
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
-  '/learn', '/education', '/education/webinars', '/primer', '/students', '/newsletter',
+  '/learn', '/education', '/education/webinars', '/primer', '/glossary', '/safety-and-ethics', '/students', '/newsletter',
   '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
   ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
 ]);

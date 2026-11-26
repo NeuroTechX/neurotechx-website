@@ -98,7 +98,7 @@ function French() {
             </ul>
             <p>
                 Écrivez à <Contact />. Nous répondons par écrit dans les 30 jours. Si notre réponse ne vous satisfait pas, vous pouvez vous adresser à la{' '}
-                <a href="https://www.cai.gouv.qc.ca/" target="_blank" rel="noreferrer" className="underline">Commission d&apos;accès à l&apos;information du Québec</a>.
+                <a href="https://www.cai.gouv.qc.ca/" target="_blank" rel="noopener noreferrer" className="underline">Commission d&apos;accès à l&apos;information du Québec</a>.
             </p>
 
             <h2>En cas d&apos;incident</h2>
@@ -182,7 +182,7 @@ function English() {
             </ul>
             <p>
                 Write to <Contact />. We answer in writing within 30 days. If you are not satisfied with our answer, you can contact the{' '}
-                <a href="https://www.cai.gouv.qc.ca/" target="_blank" rel="noreferrer" className="underline">Commission d&apos;accès à l&apos;information du Québec</a>.
+                <a href="https://www.cai.gouv.qc.ca/" target="_blank" rel="noopener noreferrer" className="underline">Commission d&apos;accès à l&apos;information du Québec</a>.
             </p>
 
             <h2>If something goes wrong</h2>

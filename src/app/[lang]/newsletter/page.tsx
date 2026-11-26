@@ -66,7 +66,7 @@ const newsletterArchive = [
             { title: 'September 2021', url: 'https://mailchi.mp/neurotechx/hello-neurotech-world-bh8ttvoie9', image: '' },
             { title: 'December 2020', url: 'https://us12.campaign-archive.com/?u=5124b2527cf13d913a8beeea3&id=64bab28a04', image: '' },
             { title: 'January 2020', url: 'https://us12.campaign-archive.com/?u=5124b2527cf13d913a8beeea3&id=53d3d747fb', image: '' },
-            { title: 'May 2019', url: 'http://eepurl.com/gpW8dH', image: '' },
+            { title: 'May 2019', url: 'https://eepurl.com/gpW8dH', image: '' },
             { title: 'November 2015 (Digest #1)', url: 'https://us12.campaign-archive.com/?u=5124b2527cf13d913a8beeea3&id=e753aad7de', image: '' },
         ]
     }

@@ -70,6 +70,13 @@ export default bilingual(
       topics: ['Entrepreneuriat', 'Jeune pousse'],
       kind: 'Programme',
     },
+    dleeg: {
+      name: 'Revue critique : apprentissage profond pour l’EEG',
+      description:
+        "Revue critique assistée par l'IA sur l'apprentissage profond pour l'analyse EEG depuis l'article de référence Roy et al. (2019) de la communauté NeuroTechX.",
+      topics: ['EEG', 'Apprentissage profond', 'Revue'],
+      kind: 'Revue ouverte',
+    },
   },
   {
     title: 'Open Source Projects',
@@ -136,6 +143,13 @@ export default bilingual(
         'Neurotech Entrepreneurship to Validate Emerging Innovations. Supporting neurotech startups and entrepreneurs.',
       topics: ['Entrepreneurship', 'Startup'],
       kind: 'Program',
+    },
+    dleeg: {
+      name: 'Critical Review: Deep Learning for EEG',
+      description:
+        'An AI-assisted critical review of deep learning for EEG analysis since the landmark NeuroTechX review paper Roy et al. (2019).',
+      topics: ['EEG', 'Deep Learning', 'Review'],
+      kind: 'Open Review',
     },
   },
 );

@@ -43,7 +43,7 @@
     {
       "slug": "machine-learning-for-bci",
       "title": "Machine Learning for BCI",
-      "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Collab tutorial"
+      "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
     },
     {
       "slug": "bci-projects",
@@ -60,22 +60,22 @@
     {
       "slug": "nervous-system",
       "title": "The Nervous System",
-      "description": ""
+      "description": "An overview of the central and peripheral nervous systems, how sensory and motor pathways are organized, and how the body communicates with the brain."
     },
     {
       "slug": "cellular-components",
       "title": "Cellular Components",
-      "description": ""
+      "description": "How neurons and glial cells work, how action potentials and synapses transmit signals, and why electrical brain activity can be recorded."
     },
     {
       "slug": "neuroanatomy",
       "title": "Neuroanatomy and Brain Organization",
-      "description": ""
+      "description": "A tour of major brain structures, cortical lobes, and functional regions relevant to neuroimaging and brain-computer interfaces."
     },
     {
       "slug": "brain-disorders",
       "title": "Brain Diseases and Disorders",
-      "description": ""
+      "description": "An introduction to major neurological and psychiatric conditions and how neurotechnology is used in diagnosis, rehabilitation, and treatment."
     }
   ]
 }

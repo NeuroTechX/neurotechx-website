@@ -45,6 +45,8 @@ function buildMenus(t: Dictionary['nav']): Menu[] {
                 { label: t.learn.education, href: '/education' },
                 { label: t.learn.primer, href: '/primer' },
                 { label: t.learn.webinars, href: '/education/webinars' },
+                { label: t.learn.glossary, href: '/glossary' },
+                { label: t.learn.safetyEthics, href: '/safety-and-ethics' },
             ],
         },
         {
@@ -207,7 +209,7 @@ export default function Header({ lang, t }: { lang: Locale; t: Dictionary }) {
                 </div>
             </header>
 
-            <nav aria-label={t.nav.label} data-nav="mobile" id={mobileMenuOpen ? styles.mobileNavLinks : styles.hidden}>
+            <nav id="mobile-nav" aria-label={t.nav.label} data-nav="mobile" hidden={!mobileMenuOpen} className={styles.mobileNavLinks}>
                 <Link href={href('/community')} className={styles.joinButton} onClick={closeAll}>
                     {t.nav.join}
                 </Link>

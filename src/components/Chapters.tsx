@@ -67,9 +67,16 @@ export default function Chapters({ lang, t }: { lang: Locale; t: Text }) {
             {c.note && (
               <p className="mb-4 flex-1 text-sm text-muted-foreground">{(lang === 'fr' && c.fr?.note) || c.note}</p>
             )}
-            <span className="inline-flex items-center gap-1 text-sm font-semibold text-neuro-accent">
-              {(lang === 'fr' && c.fr?.linkLabel) || c.linkLabel || t.visit} <ArrowUpRight width={15} height={15} />
-            </span>
+            <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+              <span className="inline-flex items-center gap-1 font-semibold text-neuro-accent">
+                {(lang === 'fr' && c.fr?.linkLabel) || c.linkLabel || t.visit} <ArrowUpRight width={15} height={15} />
+              </span>
+              {c.slack && (
+                <span className="rounded bg-[var(--surface-2)] px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                  Slack: {c.slack}
+                </span>
+              )}
+            </div>
           </a>
         ))}
       </div>

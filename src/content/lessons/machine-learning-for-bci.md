@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning for BCI"
-description: "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Collab tutorial"
+description: "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
 module: bci
 sourceUrl: "https://learn.neurotechedu.com/machinelearning/"
 ---

@@ -34,6 +34,39 @@ export default bilingual(
     hiringSubject: "Offre d'emploi pour la page Emplois de NeuroTechX",
     hiringEmail: 'Écrire à {email}',
     otherHeading: 'Autres endroits où chercher',
+    pathsHeading: 'Entrer en neurotech : parcours courants',
+    pathsLead:
+      "La plupart des gens arrivent en neurotechnologie depuis un domaine voisin. Voici ce que les équipes recherchent le plus souvent :",
+    paths: [
+      {
+        title: 'Logiciel, données et AA',
+        body: 'Python, traitement du signal en temps réel, apprentissage automatique (PyTorch, MNE-Python, MOABB) et logiciels embarqués ou infonuagiques.',
+        cta: 'Voir les postes en logiciel',
+        href: '/jobs/software',
+      },
+      {
+        title: 'Matériel et micrologiciel',
+        body: 'Électronique analogique à faible bruit, PCB, microcontrôleurs (C/C++, Rust), capteurs biomédicaux, mécanique et essais de fabrication.',
+        cta: 'Voir les postes en matériel',
+        href: '/jobs/hardware',
+      },
+      {
+        title: 'Clinique, réglementaire et qualité',
+        body: 'Essais cliniques, normes ISO 13485 / IEC 60601, dossiers FDA (510(k), De Novo, IDE), Santé Canada et marquage CE (RDM).',
+        cta: 'Voir les postes cliniques',
+        href: '/jobs/clinical',
+      },
+      {
+        title: 'Recherche et neurosciences',
+        body: 'Conception expérimentale, neurophysiologie, neurosciences computationnelles, modèles de décodage et transfert vers le produit.',
+        cta: 'Voir les postes en recherche',
+        href: '/jobs/research',
+      },
+    ],
+    pathsLearnBefore: 'Nouveau dans le domaine? Commencez par ',
+    pathsLearnLink: 'nos cours gratuits',
+    pathsLearnMiddle: ' et ',
+    pathsGlossaryLink: 'le glossaire neurotech',
     boards: {
       futures: "Un site d'emplois pour l'industrie de la neurotech.",
       reccy: "Un site d'emplois en neurotech, avec des répertoires d'entreprises et d'investisseurs.",
@@ -197,6 +230,39 @@ export default bilingual(
     hiringSubject: 'Job posting for the NeuroTechX jobs page',
     hiringEmail: 'Email {email}',
     otherHeading: 'Other places to look',
+    pathsHeading: 'Breaking into neurotech: common career paths',
+    pathsLead:
+      'Most people enter neurotechnology from an adjacent discipline. Here is what hiring teams look for across the four main tracks:',
+    paths: [
+      {
+        title: 'Software, data & ML',
+        body: 'Python, real-time signal processing, ML pipelines (PyTorch, MNE-Python, MOABB), and embedded or cloud software engineering.',
+        cta: 'Browse software roles',
+        href: '/jobs/software',
+      },
+      {
+        title: 'Hardware & firmware',
+        body: 'Low-noise analog front-ends, PCB layout, embedded firmware (C/C++, Rust), biosignal sensors, packaging, and test engineering.',
+        cta: 'Browse hardware roles',
+        href: '/jobs/hardware',
+      },
+      {
+        title: 'Clinical, regulatory & quality',
+        body: 'Clinical trial operations, ISO 13485 / IEC 60601 quality systems, FDA (510(k), De Novo, IDE), Health Canada, and EU MDR submissions.',
+        cta: 'Browse clinical roles',
+        href: '/jobs/clinical',
+      },
+      {
+        title: 'Research & neuroscience',
+        body: 'Experimental design, electrophysiology, computational neuroscience, neural decoding models, and translational R&D.',
+        cta: 'Browse research roles',
+        href: '/jobs/research',
+      },
+    ],
+    pathsLearnBefore: 'New to the field? Start with ',
+    pathsLearnLink: 'our free lessons',
+    pathsLearnMiddle: ' and ',
+    pathsGlossaryLink: 'the neurotech glossary',
     boards: {
       futures: 'A job board for the neurotech industry.',
       reccy: 'A neurotech job board with company and investor directories.',
