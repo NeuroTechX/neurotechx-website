@@ -96,6 +96,24 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                 <div className="grid gap-4 md:grid-cols-2">{people.items.map(resource)}</div>
             </Step>
 
+            <section className="mb-14">
+                <p className="eyebrow mb-1">{t.launch.eyebrow}</p>
+                <h2 className="mb-2 text-3xl font-serif font-bold">{t.launch.title}</h2>
+                <p className="mb-6 max-w-3xl text-muted-foreground">{t.launch.lead}</p>
+                <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {t.launch.stages.map((stage, i) => (
+                        <li key={stage.title} className="flex flex-col rounded-xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-6">
+                            <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-neuro-accent font-bold text-neuro-accent" aria-hidden>
+                                {i + 1}
+                            </span>
+                            <h3 className="mb-1 text-lg font-bold">{stage.title}</h3>
+                            <p className="mb-4 text-sm text-muted-foreground">{stage.body}</p>
+                            <div className="mt-auto grid gap-3">{stage.items.map(resource)}</div>
+                        </li>
+                    ))}
+                </ol>
+            </section>
+
             <section className="mb-14 rounded-xl bg-muted p-8">
                 <h2 className="mb-2 text-2xl font-serif font-bold">{t.further.title}</h2>
                 <p className="mb-6 max-w-3xl text-muted-foreground">{t.further.body}</p>
