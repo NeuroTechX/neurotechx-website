@@ -6,7 +6,7 @@ sourceUrl: "https://learn.neurotechedu.com/oscillations/"
 ---
 *Updated November 2026: code examples updated for MNE-Python 1.13.*
 
-# What are Neural Oscillations?
+## What are Neural Oscillations?
 
 Neural oscillations are repetitive, rhythmic synchronized frequency patterns in the central nervous system. They occur during activation of large clusters of neurons, though they can occur with a single neuron as well. Although the raw data obtained from electroencephalograms are formatted as a function of time, neural oscillations are visualized in terms of frequency and measured in units of Hertz (Hz); one cycle per second. As such the neural clusters generate neural oscillations that can be characterized by the frequency range in which they occur:
 
@@ -19,11 +19,11 @@ Neural oscillations are repetitive, rhythmic synchronized frequency patterns in 
 
 ![Brain Wave Frequency](/learn/images/oscillations/Brain-wave-frequency-chart.png)
 
-# Why do we produce neural oscillations?
+## Why do we produce neural oscillations?
 
 We do not fully understand why our brain produces neural oscillations. Some researchers theorize that neural oscillations are nothing more than byproducts of brain activity, indicators of expected brain pattern in response to events of stimulus. For example, motion produces predictable occurrences of alpha waves (in the mu frequency) in the motor cortex, and sleep cycles are characterized by the alternating flux of different neural waves. Other researchers have theorized that certain oscillations, like those that occur in the delta range, are critical to unlocking the mystery of our consciousness.
 
-# So why do neural oscillations matter?
+## So why do neural oscillations matter?
 
 Neural oscillations are useful in variety of ways. From a diagnostic and imaging perspective, they can be used as indicators of specific neurological phenomena such as:
 
@@ -36,7 +36,7 @@ Neural oscillations are useful in variety of ways. From a diagnostic and imaging
 
 Practical applications for extracting neural oscillations using your own BCI could be looking at the presence of mu waves during motion, or to check if there is a presence of alpha and beta waves during meditation. You may even want to look at all the different waves that occur when you are performing a specific task.
 
-# How do we extract neural oscillations as a feature of our EEG data?
+## How do we extract neural oscillations as a feature of our EEG data?
 
 As previously mentioned data obtained by EEF are captured as a function of time, but neural oscillations are described in units of frequency. In order to transform data we must employ a Fourier transform.
 
@@ -54,7 +54,7 @@ Before extracting neural oscillations there are several steps that must be under
 -   Assemble a classifier (plotting a topomap)
 -   and finally, plotting the relevant figure
 
-### Importing, reading, and formatting data
+#### Importing, reading, and formatting data
 
 In the below example I have used a dataset created by experimental runs by (research reference) so when data is fetched it will have already underwent some preprocessing which will not be covered in either examples. However in both cases data will be fetched using the below commands. First, import the modules used in this lesson:
 
@@ -82,11 +82,11 @@ The above code can be broken down into two components. Line 1 - 4 set parameters
 
 Line 2 is relevant in this example, as there are 14 experimental runs to choose from that were performed in this study and each was tested under different conditions. In this experiment run 3 measured the EEG signal obtained during movement of the left and right hands, both separately and simultaneously.
 
-### Preprocessing
+#### Preprocessing
 
 Preprocessing is a critical step when analyzing EEG data. EEG data contains a lot of noise, and data that are not relevant to what you're attempting to visualize. Preprocessing is a deep topic and there are many ways you can go about cleaning up EEG data. Check out our [preprocessing lesson](/learn/preprocessing). When plotting power spectral density (psd), only epoching is necessary as we want to see the psd across the entire available frequency range. However for topomap plotting you will need to preprocess your data with a band pass filter to isolate the specific frequency range you want to visualize. The example below also strips the channel names of their default "." keys to avoid errors when reading your channel names.
 
-### Epoching data
+#### Epoching data
 
 Epoching is dividing data into segments of data based on a timeframe of interest. The interest is generall determined by an event whether an evoked event or an induced event. **(do we have a segment of information that explores epoching more in depth?)**. To epoch your data you can follow the steps below:
 
@@ -112,7 +112,7 @@ The above code defines the epochs which will be further manipulated. Try the fun
 
 The following steps will diverge depending on the methods of visualization you want to apply. Below I will highlight how to use psd to visualize dominant frequencies as well as topomaps to highlight specific frequencies in localized areas.
 
-### Using PSD to categorize oscillatory occurrence based on power spectral content
+#### Using PSD to categorize oscillatory occurrence based on power spectral content
 
 Power spectral density measure the power of a signal in microvolts. The function **epochs\[event\].compute\_psd().plot()** can be used to plot specific epoched events as a function of power spectral density over a specific frequency range. Below is an example of a script you can run to achieve this. Note that the dataset imported from eegbci is already preprocessed and transformed using the Fourier function, so the steps you should see below are:
 
@@ -136,9 +136,9 @@ epochs['left'].compute_psd(fmin=2, fmax=40, picks='C4').plot()
 
 **Figure 2:** Power spectral density plotted for the electrode C4 located in the left side of the motor cortex. It is evident that the psd content is most evident in the alpha range and theta range, evident of neural oscillations occurring during movement of the left hand.
 
-### Using a topomap to visualize local oscillations
+#### Using a topomap to visualize local oscillations
 
-#### Quick highlights of topopmap
+##### Quick highlights of topopmap
 
 \* A classifier will be applied to visualize the presence of neural oscillations using a binary discrimination to highlight whether you have the presence of waves at certain frequencies or not. While there is a bit of variability on visualizing the strength of your signal, this is really simply a "there" or "not there" method of looking at neurons firing over specific electrodes. Understanding which electrodes correspond to which regions of the brain will help you to understand where the majority of activity is occurring in the brain.
 

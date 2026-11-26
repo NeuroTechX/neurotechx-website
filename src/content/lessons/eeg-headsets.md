@@ -6,11 +6,11 @@ sourceUrl: "https://learn.neurotechedu.com/headsets/"
 ---
 *Updated November 2026: device specs and prices were checked against vendor pages, discontinued models were replaced with current ones, and new devices and software tools were added.*
 
-# What to look for in a headset.
+## What to look for in a headset
 
 When deciding which EEG headset to purchase, there are a few features you should look at when making your decision.
 
-## Number and Placement of Electrodes:
+### Number and Placement of Electrodes:
 
 Depending on the type of brain response you want to measure, your system may need a minimum number of electrodes. Measuring Relaxation levels is easy with 1 or 2 electrodes but measuring other brain activity can be difficult. In most eeg papers, they will state where on the brain the strong response came from.
 
@@ -20,7 +20,7 @@ Also, many consumer EEG's have electrodes which are rigid and can't be moved. If
 
 [IMOTIONS EEG 101 Guide](https://imotions.com/blog/learning/best-practice/eeg/)
 
-## Sampling Rate:
+### Sampling Rate:
 
 The Sampling Rate of an EEG is the number of samples a second you can get from your device. Consumer devices range from about 128 to 512 samples a second, and some research systems go much higher. To capture a frequency, your sampling rate must be more than twice that frequency (the Nyquist rule). In practice, aim for at least 2.5 times the highest frequency you want to study.
 
@@ -28,7 +28,7 @@ The Sampling Rate of an EEG is the number of samples a second you can get from y
 
 [This EEG tutorials has some more details on the sampling rate](http://www.ebme.co.uk/articles/clinical-engineering/56-introduction-to-eeg)
 
-## ADC Bits:
+### ADC Bits:
 
 Simply put, the Analog to Digital Converter (ADC) Bits is the resolution of the signal. The number of bits is important in being able to accurately estimate the voltage, but more bits doesn't necessarily mean better quality data. To give an idea of how it would work with eeg data, let's say your system has 2 ADC bits and you want to measure a signal between 0 and 10 Volts. This would mean that your computer would represent the data in the following way:
 
@@ -43,18 +43,18 @@ Simply put, the Analog to Digital Converter (ADC) Bits is the resolution of the 
 
 [What does 12 or 16 bit resolution mean?](https://labjack.com/blogs/faq/what-does-12-or-16-bit-resolution-mean) [What are the advantages of a 24 bit system?](https://www.biosemi.com/faq/24bitsystem.htm)
 
-## Data Access and Software:
+### Data Access and Software:
 
 Check how you will get the raw data out of the device before you buy it. Some vendors give free access to raw EEG. Others sell it as a separate software license. Two free, open-source tools work with many of the devices below:
 
 -   [Lab Streaming Layer (LSL)](https://labstreaminglayer.org/) streams and time-syncs data from many devices.
 -   [BrainFlow](https://brainflow.org/) is one library for reading many boards. See its [list of supported boards](https://brainflow.readthedocs.io/en/stable/SupportedBoards.html).
 
-# Devices
+## Devices
 
 Prices below are the vendor's US list price in November 2026. Prices change often, so check the vendor page before you buy.
 
-## Muse
+### Muse
 
 * * *
 
@@ -71,7 +71,7 @@ Older models (the original Muse, Muse 2016 and earlier Muse S versions) are no l
 
 ![Muse Headset](/learn/images/muse-white.png)
 
-#### Features:
+##### Features:
 
 -   4 EEG channels
 -   Static Electrode Placement (TP9, AF7, AF8, TP10)
@@ -80,7 +80,7 @@ Older models (the original Muse, Muse 2016 and earlier Muse S versions) are no l
 -   12 bits (Muse 2), 14 bits (Muse S Athena)
 -   SDK for iOS, Android, Windows and macOS, licensed for prototyping and personal projects. Commercial use needs a separate license, and researchers are asked to contact Muse for research tools. See the [Muse developer page](https://choosemuse.com/pages/developers).
 
-#### Known Recordable EEG Paradigms:
+##### Known Recordable EEG Paradigms:
 
 -   "Relaxation" Level
 -   "Concentration" levels
@@ -89,7 +89,7 @@ Older models (the original Muse, Muse 2016 and earlier Muse S versions) are no l
 
 **US Price (November 2026):** Muse 2: $249.99. Muse S Athena: $474.99.
 
-## OpenBCI
+### OpenBCI
 
 * * *
 
@@ -104,7 +104,7 @@ Current boards:
 
 ![OpenBCI headset](/learn/images/openBCI.png)
 
-#### Features:
+##### Features:
 
 -   4, 8 or 16 channels
 -   Flexible Electrode Placement
@@ -114,14 +114,14 @@ Current boards:
 -   3-axis accelerometer
 -   Open Source Software and Hardware
 
-#### Known Recordable EEG Paradigms:
+##### Known Recordable EEG Paradigms:
 
 Any paradigm which needs only 16 channels or less
 
 **US Price (November 2026, from the [OpenBCI shop](https://shop.openbci.com/)):**
 Ganglion: $624.99. Cyton: $1,249. Cyton + Daisy: $2,499. Ultracortex Mark IV headset: from $499.99. Galea: $42,980.
 
-## Emotiv EPOC X
+### Emotiv EPOC X
 
 * * *
 
@@ -131,7 +131,7 @@ The Epoc is more stylish and easier to wear. It has 14 channel EEG which has a s
 
 ![Emotiv headset](/learn/images/emotiv_epoc_600.png)
 
-#### Features
+##### Features
 
 -   14 channels
 -   Rigid Electrode Placement (AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4)
@@ -143,13 +143,13 @@ The Epoc is more stylish and easier to wear. It has 14 channel EEG which has a s
 
 Source: [EPOC X technical specifications](https://emotiv.gitbook.io/epoc-x-user-manual/introduction/technical-specifications).
 
-#### Known Recordable EEG Paradigms:
+##### Known Recordable EEG Paradigms:
 
 Many paradigms which need only 14 channels or less
 
 **US Price (November 2026):** $1,199. [Product page](https://www.emotiv.com/epoc-x)
 
-## Emotiv Insight
+### Emotiv Insight
 
 * * *
 
@@ -157,7 +157,7 @@ The Emotiv Insight was the second product which Emotiv brought the market, and w
 
 ![Emotiv Insight](/learn/images/emotiv-insight.png)
 
-#### Features
+##### Features
 
 -   5 channels
 -   Rigid Electrode Placement (AF3, AF4, T7, T8, Pz)
@@ -168,20 +168,20 @@ The Emotiv Insight was the second product which Emotiv brought the market, and w
 
 Source: [Insight technical specifications](https://emotiv.gitbook.io/insight-2-user-manual/introduction/technical-specifications).
 
-#### Known Recordable EEG Paradigms:
+##### Known Recordable EEG Paradigms:
 
 Many paradigms which need only 5 channels or less
 
 **US Price (November 2026):** $499, listed as on backorder. [Product page](https://www.emotiv.com/insight)
 
-## Other Emotiv devices
+### Other Emotiv devices
 
 * * *
 
 -   **Flex 2.0**: a 32-channel cap. You choose the electrode positions. It uses gel or saline electrodes and samples at 128 or 256 Hz. [Product page](https://www.emotiv.com/flex), [specs](https://emotiv.gitbook.io/flex-2.0-user-manual/introduction/technical-specifications).
 -   **MN8**: earbuds with 2 EEG channels at 128 Hz. [Product page](https://www.emotiv.com/mn8)
 
-## Neurosky Mindwave Mobile 2
+### Neurosky Mindwave Mobile 2
 
 * * *
 
@@ -189,7 +189,7 @@ The Neurosky is one of the original consumer EEGs on the market. The design is s
 
 ![Neurosky Mindwave](/learn/images/NeuroskyMindwave.png)
 
-#### Features
+##### Features
 
 -   1 channel
 -   Rigid Electrode Placement (FP1, on the forehead)
@@ -201,12 +201,12 @@ The Neurosky is one of the original consumer EEGs on the market. The design is s
 
 Source: [MindWave Mobile 2 page](https://neurosky.com/neurosky-products/mindwave-headset/).
 
-#### Known Recordable EEG Paradigms:
+##### Known Recordable EEG Paradigms:
 
 -   "Relaxation" Level
 -   "Concentration" levels
 
-## Neurosity Crown
+### Neurosity Crown
 
 * * *
 
@@ -214,13 +214,13 @@ The Crown is an 8-channel headset with fixed electrodes at CP3, C3, F5, PO3, PO4
 
 **US Price (November 2026):** $1,499. [Product page](https://neurosity.co/crown)
 
-## g.tec Unicorn Hybrid Black
+### g.tec Unicorn Hybrid Black
 
 * * *
 
 The Unicorn is an 8-channel headset from g.tec, an Austrian maker of research EEG systems. Its electrodes can be used dry or with gel. It records at 250 Hz with 24 bits, and the battery lasts more than 3 hours. g.tec says its electrode layout suits motor imagery, P300, SSVEP and VEP experiments. [Product page](https://www.gtec.at/product/unicorn-hybrid-black-bci-platform/)
 
-## Features Comparison
+### Features Comparison
 
 * * *
 

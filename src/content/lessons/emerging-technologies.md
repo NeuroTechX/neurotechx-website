@@ -14,9 +14,8 @@ sourceUrl: "https://learn.neurotechedu.com/emerging_tech/"
 -   Applications/Public Perception
 -   References
 
-# New Emerging Technologies
 
-## Introduction
+### Introduction
 
 ![Recording techniques](https://web.archive.org/web/20150621221047im_/http://www.the-scientist.com/Nov2014/Neuroprosthetics_Finalcmyk.jpg)
 
@@ -26,7 +25,7 @@ At its core, neurotechnology is working toward two types of interactions: “rea
 
 This module is meant to introduce some of the latest developments and improvements on these methods from a technical side, as well as addressing how they are being applied outside of the research lab. Most of it was written in 2018. The section "What Has Changed Since 2018" covers newer work.
 
-## Reading
+### Reading
 
 ![Neural recording](https://www.researchgate.net/profile/Elliot_Ludvig/publication/269517554/figure/fig4/AS:295080465321988@1447364073922/Single-unit-recording-A-Schematic-showing-the-placement-of-the-tip-of-an-electrode.png)
 
@@ -44,7 +43,7 @@ Even when invasive methods are used to get direct neural recordings, the data qu
 
 Another method to create chronic implants takes the route of highly flexible electronics, using injectable electrode arrays that unfold into a mesh on the surface of the brain. [(8, 9)](#references) This approach would allow neural implants with only very minimally invasive surgery. These arrays too would be able to move with the brain while reducing tissue damage and inflammation.
 
-## Writing
+### Writing
 
 “Writing” to the brain, i.e. stimulating neurons in purposeful ways, opens up new possibilities for interaction. It can be used to help understand brain function by looking for changes resulting from the stimulation, but it is also increasingly used therapeutically to treat chronic pain, movement disorders, and some psychiatric disorders.
 
@@ -54,7 +53,7 @@ Innovations in this arena have been focused mainly on specificity of simulation 
 
 Unlike observational neural recordings, neural stimulation has classically been limited to invasive methods only, generally by applying direct electrical stimulation to a neuron. New modalities have recently been investigated, with an incentive to reduce the number of risky brain surgeries required to implant current stimulator devices. One such option is to deliver electrical stimulation to deep brain areas noninvasively, recently demonstrated by the Boyden lab at MIT. By stimulating with two high-frequency electrical currents, they were able to produce a targeted “beat frequency” at the points where the currents interfered with each other. [(10)](#references) This method was able to successfully reach areas deep in the brain, previously only accessible by highly invasive deep brain stimulation (DBS) probes. The 2017 work was done in mice. In 2023, a team including the same researchers reported that this method, called temporal interference, changed activity in the human hippocampus and improved performance on a memory task in healthy volunteers. [(20)](#references)
 
-## Read/Write
+### Read/Write
 
 Taking any of “Reading” and “Writing” methods alone represents an “open-loop” system. This means that in each case, the information is only flowing one way, so there is no feedback available to improve the system or change its behavior.
 
@@ -72,11 +71,11 @@ Separating the targets of recording and stimulation to different areas of the ne
 
 * * *
 
-# What Has Changed Since 2018
+## What Has Changed Since 2018
 
 This section gives a short, dated summary of developments since the original module was written. Most of the devices below are investigational. That means they are being tested in clinical studies and are not approved for general use.
 
-## Implanted BCIs in human trials
+### Implanted BCIs in human trials
 
 The Utah array, made by Blackrock Neurotech, has been the main electrode used in academic human BCI studies such as BrainGate. Between 2004 and 2021, 14 adults received BrainGate implants. A 2023 review of their records found no device-related deaths, brain infections or permanent increases in disability. [(24)](#references)
 
@@ -87,25 +86,25 @@ Since 2019, several companies have started their own human studies:
 -   **Paradromics** received FDA approval in November 2025 for Connect-One, an early study of its Connexus implant for restoring speech. [(30)](#references)
 -   **Precision Neuroscience** makes a thin electrode film that sits on the surface of the brain. In 2025, the FDA cleared it for temporary use of less than 30 days, for example during brain surgery. [(31)](#references)
 
-## Decoding speech
+### Decoding speech
 
 Speech has become a major focus. In 2023, a Stanford team using Utah arrays decoded attempted speech from a person with ALS into text. [(32)](#references) In 2024, a UC Davis team reported 97.5% word accuracy over 8 months for a man with ALS, using a large vocabulary. [(33)](#references) These results come from single participants or small groups, and the systems still need trained staff to run them.
 
-## Focused ultrasound
+### Focused ultrasound
 
 Ultrasound can be focused through the skull onto a small target deep in the brain. At high intensity it heats and destroys a small spot of tissue. In 2016, the FDA approved Insightec's Exablate Neuro, which uses MRI-guided focused ultrasound to treat essential tremor without cutting the skin. [(34, 35)](#references) At low intensity, focused ultrasound is being studied as a way to change brain activity without destroying tissue. That use is still experimental. [(19)](#references)
 
-## Wearable and in-ear EEG
+### Wearable and in-ear EEG
 
 EEG sensors are moving into earbuds and headphones. In January 2026, Naox Technologies received FDA 510(k) clearance for Naox Link, an in-ear EEG device for clinical monitoring. [(36)](#references) Several consumer headbands are also still sold. See the [headsets list](/learn/eeg-headsets) for current models.
 
 * * *
 
-# Applications and Public Perception
+## Applications and Public Perception
 
 This section focuses on the changes within consumer brainwave (EEG) technologies in use cases and public perception, as well as outlooks and challenges to adoption as this technology continues to develop. It was written in 2018. Product notes were checked in November 2026.
 
-## Healthcare Applications
+### Healthcare Applications
 
 Healthcare is, according to this 2018 market [research report](https://www.grandviewresearch.com/industry-analysis/brain-computer-interfaces-market), the fastest growing opportunity for commercial EEG headbands and products. A global increase in chronic conditions and diseases along with associated demands on treatment facilities are creating a heavy cost burden for the current healthcare system. A recent [PWC report suggests](https://www.pwc.com/gx/en/industries/healthcare/emerging-trends-pwc-healthcare/chronic-diseases.html) that the prevalence of these conditions and diseases is expected to increase rapidly in the coming years. That same report also states that emerging technologies will help alleviate these demands by providing a more patient-centric approach to health care solutions. There is the strong potential for commercial EEG products to fill this need by providing continuous in-home monitoring for patients with these conditions.
 
@@ -113,7 +112,7 @@ In 2015, a Las Vegas hospital held a [6-month long study](https://web.archive.or
 
 The global increase in chronic conditions and diseases, the [dangerous impact](http://ontario.cmha.ca/documents/the-relationship-between-mental-health-mental-illness-and-chronic-physical-conditions/) those have on mental illness and overall health, and an overloaded health care system are increasing the need for affordable health management tools. The possible applications of EEG and commercial alternatives, which are already being demonstrated in healthcare research, will also be applied to areas such as [mental health](https://spectrum.ieee.org/brain-controlled-game-helps-kids-with-adhd-improve-mental-focus) and [education](https://www.edweek.org/leadership/opinion-icerp-building-a-research-practice-partnership/2018/05) program innovations. As we take a more holistic approach to health with learning, diet, physical exercise, and meditation, commercial EEG will fulfill the unmet need for connected, affordable and personalized care options.
 
-## Wellness Applications
+### Wellness Applications
 
 While the product options for EEG headbands are still limited, companies are exploring new form-factors and uses for their technology. Wellness focused applications, especially for meditation and productivity, are becoming a common product focus. Here are just a few examples from 2018:
 
@@ -159,7 +158,7 @@ For example, a headband is known as a comfortable clothing piece, worn for both 
 
 Brainsensing headphones (like [Mindset](https://web.archive.org/web/20190205231906/https://www.thinkmindset.com/), archived page) or sunglasses (such as [Smith Lowdown Focus](https://web.archive.org/web/20190809160055/https://www.smithoptics.com/ca/lowdownfocus), archived page) help integrate a technology with familiar items we already wear and attach meaning and emotion to. Both products have since been discontinued, but EEG sensors are still being built into headphones and earbuds.
 
-## Outlooks
+### Outlooks
 
 There are many opinions about what the future of commercial EEG headbands can look like, and this section provides only one. It was written in 2018.
 
@@ -177,7 +176,7 @@ The diversification of EEG into wellness applications, along with the changes in
 
 * * *
 
-# References
+## References
 
 1.  *Disclaimer:* this terminology isn’t technically correct! It is only meant here to intuitively indicate the direction of data flow. More accurate terms would be “recording” and “modulating”. “Reading” and “writing” have been used to set up an analogy of the brain to a hard drive, which is an outdated comparison. That analogy would imply a number of incorrect things about brain function, including an overestimation of how precisely we can decode neural information or elicit specific effects. For those reasons, I am not promoting that analogy.
 2.  [https://en.wikipedia.org/wiki/Neuroimaging](https://en.wikipedia.org/wiki/Neuroimaging)
