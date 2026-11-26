@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { CATEGORIES } from '@/lib/job-boards';
 import { getHandbookSections, getSections } from '@/lib/dockit';
 import { isTranslated, localizePath } from '@/i18n/routes';
-import { ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerCheckPath } from '@/content/learn/primer-chapters';
+import { LEARN_LAB_PATHS, PRIMER_CHECKS, primerCheckPath } from '@/content/learn/primer-chapters';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://neurotechx.org';
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '', '/about', '/community', '/community/growth', '/community/chapter-guidelines',
     '/community/start-a-chapter',
     '/learn', '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
-    FIRST_EEG_PATH, ERP_LAB_PATH, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
+    ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
     '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs', '/funding', '/join-the-team',
     '/transparency', '/donate', '/students', '/students/start-a-club', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',

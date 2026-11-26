@@ -6,7 +6,8 @@ import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import { alternatesFor, pageLocale } from '@/i18n';
 import primerText from '@/i18n/pages/primer';
 import { erpText } from '@/content/learn/erp-averaging';
-import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
+import { mriText } from '@/content/learn/mri-and-bold';
+import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
 import { primerChecks } from '@/content/learn/primer-checks';
 
 type Props = PageProps<'/[lang]/learn/primer/[chapter]'>;
@@ -75,6 +76,7 @@ export default async function PrimerCheckPage({ params }: Props) {
                         <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
                     </>
                 )}
+                {(current.slug === 'fmri' || current.slug === 'fnirs') && <Link href={MRI_LAB_PATH} className="text-neuro-accent hover:underline">{mriText[lang].title} →</Link>}
                 {current.slug === 'fmri' && <a href={BERKELEY_FMRI_LAB} className="text-neuro-accent hover:underline">{t.fmri} ↗</a>}
                 {next && (
                     <Link href={primerCheckPath(next.slug)} className="text-neuro-accent hover:underline">

@@ -9,8 +9,12 @@ import primerText from '@/i18n/pages/primer';
 import { learnPaths, modalityGroups } from '@/content/learn/paths';
 import { firstEegText } from '@/content/learn/first-eeg';
 import { erpText } from '@/content/learn/erp-averaging';
+import { capstoneText } from '@/content/learn/eeg-capstone';
+import { filteringText } from '@/content/learn/eeg-filtering';
+import { mriText } from '@/content/learn/mri-and-bold';
 import {
-    BERKELEY_COURSE, BERKELEY_TEXTBOOK, ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath,
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
+    primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
@@ -66,6 +70,12 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
     const paths = learnPaths[lang];
     const lab = firstEegText[lang];
     const { chapters } = primerText[lang];
+    const labs = [
+        { href: FILTERING_LAB_PATH, content: filteringText[lang] },
+        { href: ERP_LAB_PATH, content: erpText[lang] },
+        { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
+        { href: MRI_LAB_PATH, content: mriText[lang] },
+    ];
     const modules = getModules();
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
     return (
@@ -84,16 +94,13 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         </Link>
                         <a href="#modalities" className="text-sm font-semibold text-neuro-accent underline underline-offset-4">{paths.browse}</a>
                     </div>
-                    <Link href={ERP_LAB_PATH} className="mt-4 inline-block text-sm text-neuro-accent hover:underline">
-                        {erpText[lang].title} →
-                    </Link>
                 </section>
                 <section className="card p-6 sm:p-8">
                     <BookOpenCheck aria-hidden className="mb-5 text-neuro-accent" size={28} />
                     <h2 className="mb-2 text-2xl font-bold">{paths.primer}</h2>
                     <p className="mb-4 text-sm text-muted-foreground">{paths.primerBody}</p>
                     <ul className="mb-4 divide-y divide-[var(--border)]">
-                        {PRIMER_CHECKS.map(({ chapter, slug }) => (
+                        {([{ chapter: 2, slug: 'eeg' }, { chapter: 4, slug: 'fmri' }, { chapter: 16, slug: 'neuroethics' }] as const).map(({ chapter, slug }) => (
                             <li key={slug} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2 text-sm">
                                 <span>{chapters[chapter - 1]}</span>
                                 <Link href={primerCheckPath(slug)} aria-label={`${paths.check} · ${chapters[chapter - 1]}`} className="shrink-0 font-semibold text-neuro-accent hover:underline">
@@ -105,6 +112,12 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                     <Link href="/primer#chapters" className="text-sm text-neuro-accent underline underline-offset-4">{paths.allChapters}</Link>
                 </section>
             </div>
+
+            <ResourceSection title={paths.labs} lead={paths.labsIntro}>
+                <div className="grid gap-4 md:grid-cols-2">
+                    {labs.map(({ href, content }) => resource({ name: content.title, body: content.intro, href, english: false }))}
+                </div>
+            </ResourceSection>
 
             <section id="modalities" className="mb-14 scroll-mt-24">
                 <h2 className="mb-2 text-3xl font-bold">{paths.modalityTitle}</h2>

@@ -3,7 +3,7 @@
 // The proxy (src/proxy.ts) maps French addresses onto the shared route files in app/[lang].
 
 import synced from '../content/translated-routes.json';
-import { ERP_LAB_PATH, FIRST_EEG_PATH, PRIMER_CHECKS, primerCheckPath } from '../content/learn/primer-chapters';
+import { LEARN_LAB_PATHS, PRIMER_CHECKS, primerCheckPath } from '../content/learn/primer-chapters';
 
 export const LOCALES = ['en', 'fr'] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -81,7 +81,7 @@ export const TRANSLATED_ROUTES = new Set<string>([
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
   '/learn', '/education', '/education/webinars', '/primer', '/students', '/newsletter',
   '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
-  FIRST_EEG_PATH, ERP_LAB_PATH, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
+  ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
 ]);
 
 // Guide and handbook pages with a French version in their source repository (listed by

@@ -1,4 +1,5 @@
 import { bilingual } from '@/i18n/text';
+import { additionalPrimerChecks } from './additional-primer-checks';
 
 export type Question = {
     prompt: string;
@@ -9,10 +10,11 @@ export type Question = {
     page: number;
 };
 
-type Check = { goal: string; reading: string; questions: Question[] };
+export type ChapterCheck = { goal: string; reading: string; questions: Question[] };
 
 export const primerChecks = {
-    eeg: bilingual<Check>(
+    ...additionalPrimerChecks,
+    eeg: bilingual<ChapterCheck>(
         {
             goal: 'Interpréter un tracé EEG et reconnaître quand un signal peut venir des yeux.',
             reading: 'Lisez les sections 2.1, 2.3 et 2.6.2.',
@@ -92,7 +94,7 @@ export const primerChecks = {
             ],
         },
     ),
-    fmri: bilingual<Check>(
+    fmri: bilingual<ChapterCheck>(
         {
             goal: 'Expliquer ce que révèle le signal IRMf et choisir une méthode selon la question posée.',
             reading: 'Lisez les sections 4.1, 4.3, 4.4.3 et 4.5.1.',
@@ -146,7 +148,7 @@ export const primerChecks = {
             ],
         },
     ),
-    neuroethics: bilingual<Check>(
+    neuroethics: bilingual<ChapterCheck>(
         {
             goal: 'Évaluer le consentement et les preuves invoquées à l’appui d’une promesse commerciale.',
             reading: 'Lisez les sections 16.3 et 16.4.',

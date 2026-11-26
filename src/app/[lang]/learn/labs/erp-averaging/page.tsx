@@ -3,7 +3,8 @@ import PageHeader from '@/components/PageHeader';
 import Link from '@/components/LocaleLink';
 import ErpAveragingLab from '@/components/learn/ErpAveragingLab';
 import { erpText } from '@/content/learn/erp-averaging';
-import { ERP_LAB_PATH, FIRST_EEG_PATH } from '@/content/learn/primer-chapters';
+import { capstoneText } from '@/content/learn/eeg-capstone';
+import { EEG_CAPSTONE_PATH, ERP_LAB_PATH, FIRST_EEG_PATH } from '@/content/learn/primer-chapters';
 import { alternatesFor, pageLocale } from '@/i18n';
 
 type Props = PageProps<'/[lang]/learn/labs/erp-averaging'>;
@@ -31,6 +32,7 @@ export default async function ErpAveragingPage({ params }: Props) {
                 <h2 className="mb-2 text-xl font-bold">{t.takeaway}</h2>
                 <p className="mb-4 max-w-prose text-muted-foreground">{t.summary}</p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-neuro-accent">
+                    <Link href={EEG_CAPSTONE_PATH} className="font-semibold hover:underline">{capstoneText[lang].title} →</Link>
                     <Link href="/learn/event-related-potentials" className="hover:underline">{t.lesson} →</Link>
                     <a href="https://mne.tools/stable/auto_tutorials/evoked/30_eeg_erp.html" className="hover:underline">{t.notebook} ↗</a>
                     <Link href={FIRST_EEG_PATH} className="hover:underline">{t.firstLab} →</Link>
