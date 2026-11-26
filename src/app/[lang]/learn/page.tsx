@@ -5,6 +5,7 @@ import PageHeader from '@/components/PageHeader';
 import { alternatesFor, pageLocale } from '@/i18n';
 import type { Locale } from '@/i18n/routes';
 import text from '@/i18n/pages/learn';
+import { getContributors, getModules, type Module } from '@/lib/lessons';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/learn'>): Promise<Metadata> {
     const lang = await pageLocale(params);
@@ -63,6 +64,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
     const lang = await pageLocale(params);
     const t = text[lang];
     const { understand, track, build, people } = t.steps;
+    const modules = getModules();
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
     return (
         <div className="container py-12">
@@ -75,6 +77,34 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
             <Step n={1} label={t.step} title={understand.title} lead={understand.lead}>
                 <div className="grid gap-4 md:grid-cols-3">{understand.items.map(resource)}</div>
             </Step>
+
+            <section id="lessons" className="mb-14 scroll-mt-24">
+                <p className="eyebrow mb-1">{t.lessons.eyebrow}</p>
+                <h2 className="mb-2 text-3xl font-serif font-bold">{t.lessons.title}</h2>
+                <p className="mb-6 max-w-3xl text-muted-foreground">{t.lessons.lead}</p>
+                <div className="grid gap-6 lg:grid-cols-2">
+                    {(Object.keys(modules) as Module[]).map((key) => (
+                        <div key={key} className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-6">
+                            <h3 className="mb-1 text-xl font-bold">{t.lessons.modules[key]}</h3>
+                            <p className="mb-4 text-sm text-muted-foreground">{t.lessons.moduleLead[key]}</p>
+                            <ol className="grid gap-2" lang="en">
+                                {modules[key].map((lesson, i) => (
+                                    <li key={lesson.slug} className="flex gap-3">
+                                        <span className="w-6 shrink-0 text-right text-sm font-semibold text-muted-foreground">{i + 1}.</span>
+                                        <Link href={`/learn/${lesson.slug}`} className="font-medium hover:text-neuro-accent hover:underline">{lesson.title}</Link>
+                                    </li>
+                                ))}
+                            </ol>
+                        </div>
+                    ))}
+                </div>
+                <p className="mt-6 max-w-3xl text-sm text-muted-foreground">
+                    {t.lessons.credits} {getContributors().map((person) => person.name).join(', ')}{' '}
+                    <a href="https://github.com/NeuroTechX/learn.neurotechedu.com/graphs/contributors" target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">
+                        {t.lessons.creditsMore}
+                    </a>.
+                </p>
+            </section>
 
             <Step n={2} label={t.step} title={track.title} lead={track.lead}>
                 <div className="grid gap-6 lg:grid-cols-2">

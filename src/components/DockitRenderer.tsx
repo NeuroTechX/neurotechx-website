@@ -5,7 +5,7 @@ import LocaleLink from '@/components/LocaleLink';
 import { DockitContent } from '@/lib/dockit';
 
 // Links between site pages stay in the reader's language
-function MdxLink({ href = '', ...props }: ComponentProps<'a'>) {
+export function MdxLink({ href = '', ...props }: ComponentProps<'a'>) {
     return href.startsWith('/') && !href.startsWith('//') ? <LocaleLink href={href} {...props} /> : <a href={href} {...props} />;
 }
 

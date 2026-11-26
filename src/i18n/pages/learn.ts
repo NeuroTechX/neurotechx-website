@@ -201,6 +201,26 @@ export default bilingual(
         ],
       },
     },
+    lessons: {
+      eyebrow: 'Cours en ligne',
+      title: 'Les cours NeuroTechX',
+      lead: "Deux modules gratuits, écrits par des bénévoles de NeuroTechX pour NeuroTechEDU et maintenant publiés ici. Les textes sont en anglais.",
+      modules: { bci: 'ICM 101', neuro: 'Neurosciences 101' },
+      credits: 'Rédigés et révisés par',
+      creditsMore: 'et les autres contributeurs sur GitHub',
+      moduleLead: {
+        bci: "Ce qu'est une interface cerveau-machine, du casque EEG au prétraitement, à l'extraction de caractéristiques et à l'apprentissage automatique.",
+        neuro: 'Un survol du système nerveux, de ses cellules, de son anatomie et de ses maladies.',
+      },
+    },
+    lesson: {
+      back: '← Apprendre',
+      lessonOf: 'Leçon {n} de {total}',
+      origin: 'Écrit par des bénévoles de NeuroTechX pour NeuroTechEDU (2017–2020) et publié ici en 2026.',
+      original: 'Page originale',
+      improve: 'Proposer une correction sur GitHub',
+      by: 'Par',
+    },
     launch: {
       eyebrow: 'Et ensuite',
       title: 'De la formation à la jeune pousse',
@@ -477,6 +497,26 @@ export default bilingual(
           },
         ],
       },
+    },
+    lessons: {
+      eyebrow: 'Online lessons',
+      title: 'NeuroTechX lessons',
+      lead: 'Two free modules written by NeuroTechX volunteers for NeuroTechEDU, now published here.',
+      modules: { bci: 'BCI 101', neuro: 'Neuroscience 101' },
+      credits: 'Written and edited by',
+      creditsMore: 'and other contributors on GitHub',
+      moduleLead: {
+        bci: 'What a brain-computer interface is, from EEG headsets to preprocessing, feature extraction and machine learning.',
+        neuro: 'An overview of the nervous system, its cells, its anatomy and its disorders.',
+      },
+    },
+    lesson: {
+      back: '← Learn',
+      lessonOf: 'Lesson {n} of {total}',
+      origin: 'Written by NeuroTechX volunteers for NeuroTechEDU (2017–2020), moved here in 2026.',
+      original: 'Original page',
+      improve: 'Suggest a fix on GitHub',
+      by: 'By',
     },
     launch: {
       eyebrow: 'What comes next',

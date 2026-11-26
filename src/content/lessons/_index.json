@@ -1,0 +1,81 @@
+{
+  "bci": [
+    {
+      "slug": "intro-to-bci",
+      "title": "Introduction to Brain-Computer Interfaces",
+      "description": "In this module you will learn the basics of Brain Computer Interface. You will read an introduction to the different technologies available, the main components and steps required for BCI, the safety and ethical issues and an overview about the future of the field."
+    },
+    {
+      "slug": "bci-applications",
+      "title": "EEG Applications",
+      "description": "This module focuses on BCI Applications that are using EEG since it is the cheapest and most mature technology available. You'll soon see that a wide variety of applications can be built with them."
+    },
+    {
+      "slug": "eeg-headsets",
+      "title": "Consumer EEG Headsets",
+      "description": "Your choice of headset will depend on what you intend to use it for. The answer will depend on your budget, interest, project idea and the number of electrodes required. Before purchasing a headset, think about your programming experience and Project Idea."
+    },
+    {
+      "slug": "bci-software",
+      "title": "Software Tools for BCI",
+      "description": "This tutorial serves as an introduction to software tools that you can use to analyze EEG and MEG data."
+    },
+    {
+      "slug": "eeg-experimental-protocol",
+      "title": "EEG Experimental Protocol",
+      "description": "This tutorial serves as an introduction to EEG experimental protocol."
+    },
+    {
+      "slug": "preprocessing",
+      "title": "Preprocessing",
+      "description": "This tutorial serves as an introduction to EEG data preprocessing. If you want to see some actual code that you can play around with, take a look at our IPython Notebook example"
+    },
+    {
+      "slug": "neural-oscillations",
+      "title": "Neural Oscillations",
+      "description": "This tutorial serves as an introduction to extracting neural oscillations from eeg data. It assumes a basic knowledge of Python and MNE for EEG analysis"
+    },
+    {
+      "slug": "event-related-potentials",
+      "title": "Event-Related Potentials",
+      "description": "This tutorial will explain how to extract Event Related Potentials"
+    },
+    {
+      "slug": "machine-learning-for-bci",
+      "title": "Machine Learning for BCI",
+      "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Collab tutorial"
+    },
+    {
+      "slug": "bci-projects",
+      "title": "BCI Projects and Apps",
+      "description": "An easy project for one person might be difficult for someone else. Therefore we have broken down the projects as to either requiring no programming experience (plug and play) or requiring some experience. You will notice that with certain EEG headsets that there is more tutorials than others. This is likely due to the ease of development when using that device. The best way to get started will also depend on the headset that you have available."
+    },
+    {
+      "slug": "emerging-technologies",
+      "title": "Emerging Technologies",
+      "description": "This module covers some of the cutting-edge technologies being developed in neurotechnology! New methodologies for recording from the brain, recording to the brain, and closed-loop systems are covered, as well as consumer-facing devices and public perception."
+    }
+  ],
+  "neuro": [
+    {
+      "slug": "nervous-system",
+      "title": "The Nervous System",
+      "description": ""
+    },
+    {
+      "slug": "cellular-components",
+      "title": "Cellular Components",
+      "description": ""
+    },
+    {
+      "slug": "neuroanatomy",
+      "title": "Neuroanatomy and Brain Organization",
+      "description": ""
+    },
+    {
+      "slug": "brain-disorders",
+      "title": "Brain Diseases and Disorders",
+      "description": ""
+    }
+  ]
+}

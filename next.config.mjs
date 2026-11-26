@@ -57,6 +57,33 @@ const JOB_REGION = [{ type: 'query', key: 'job_listing_region' }];
 const jobRegion = (value) => [{ type: 'query', key: 'job_listing_region', value }];
 const OLD_JOB_REGIONS = ['europe', 'north-america'];
 
+// learn.neurotechedu.com (NeuroTechEDU, retired) → its lessons under /learn. These only act on
+// requests for that host, so the domain has to point at this project for them to apply.
+const NEUROTECHEDU = [{ type: 'host', value: '(?:learn\\.|www\\.)?neurotechedu\\.com' }];
+const NEUROTECHEDU_LESSONS = {
+  introtobci: 'intro-to-bci',
+  applications: 'bci-applications',
+  headsets: 'eeg-headsets',
+  introbci_software: 'bci-software',
+  eegexperimentalprotocol: 'eeg-experimental-protocol',
+  preprocessing: 'preprocessing',
+  oscillations: 'neural-oscillations',
+  erp: 'event-related-potentials',
+  machinelearning: 'machine-learning-for-bci',
+  projects: 'bci-projects',
+  emerging_tech: 'emerging-technologies',
+  the_nervous_system: 'nervous-system',
+  cellular_components: 'cellular-components',
+  neuroanatomy_and_brain_organization: 'neuroanatomy',
+  brain_diseases_and_disorders: 'brain-disorders',
+  // older pages whose text now lives in the lessons above
+  introtoneuroscience: 'nervous-system',
+  'introtoneuroscience-2017-11-11': 'nervous-system',
+  what_is_neuroscience: 'nervous-system',
+  functional_systems: 'neuroanatomy',
+};
+const ORG = 'https://neurotechx.org';
+
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
@@ -99,6 +126,17 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Host rules first: the old learn site shares paths like /projects and /events with this one
+      ...Object.entries(NEUROTECHEDU_LESSONS).flatMap(([old, slug]) =>
+        [`/${old}`, `/${old}.html`].map((source) => ({
+          source,
+          has: NEUROTECHEDU,
+          destination: `${ORG}/learn/${slug}`,
+          permanent: true,
+        }))
+      ),
+      { source: '/images/:path*', has: NEUROTECHEDU, destination: `${ORG}/learn/images/:path*`, permanent: true },
+      { source: '/:path*', has: NEUROTECHEDU, destination: `${ORG}/learn#lessons`, permanent: true },
       ...Object.entries(OLD_JOB_PAGES).map(([source, destination]) => ({ source, destination, permanent: true })),
       ...OLD_JOB_REGIONS.flatMap((region) =>
         ['/', '/page/:n'].map((source) => ({
