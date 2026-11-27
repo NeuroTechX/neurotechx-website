@@ -7,7 +7,10 @@ import json
 from pathlib import Path
 
 import h5py
+import jax
 import numpy as np
+from dot_jax.hemodynamics import identify_short_channels
+from dot_jax.realtime import EpochAccumulator
 
 
 RECORDING = "sub-001_task-fingertapping_nirs.snirf"
@@ -40,14 +43,23 @@ def read_motor_regions(snirf_path):
 
         for region, name in SOURCE_BY_REGION.items():
             source = sources.index(name)
+            detector_indices = np.arange(len(detectors))
+            source_indices = np.full_like(detector_indices, source)
+            near = identify_short_channels(
+                source_positions, detector_positions, source_indices, detector_indices,
+                max_distance=np.nextafter(15.0, -np.inf),
+            )
+            within_range = identify_short_channels(
+                source_positions, detector_positions, source_indices, detector_indices,
+                max_distance=30.0,
+            ) & ~near
             columns = {label: {} for label in CHROMOPHORES}
             for column in range(series.shape[1]):
                 measurement = data[f"measurementList{column + 1}"]
                 if measurement["sourceIndex"][()] - 1 != source:
                     continue
                 detector = measurement["detectorIndex"][()] - 1
-                separation = np.linalg.norm(source_positions[source] - detector_positions[detector])
-                if not 15 <= separation <= 30:
+                if not within_range[detector]:
                     continue
                 chromophore = measurement["dataTypeLabel"][()].decode().lower()
                 if chromophore in columns:
@@ -66,6 +78,25 @@ def read_motor_regions(snirf_path):
                 for chromophore, indices in columns.items()
             }
     return time, regions, waves
+
+
+def average_blocks(blocks):
+    """Use dot-jax to average all aligned HbO/HbR traces for one hand."""
+    columns = [(region, signal) for region in SOURCE_BY_REGION for signal in CHROMOPHORES]
+    accumulator = EpochAccumulator(len(columns), epoch_samples=len(TIME), fs=SAMPLE_RATE)
+    for block in blocks:
+        frames = np.column_stack([block[region][signal] for region, signal in columns])
+        # Each block already shares the same event-relative grid, including its pre-onset interval.
+        for index, frame in enumerate(frames):
+            accumulator.add_frame(frame, event=(index == 0))
+    if accumulator.n_epochs != len(blocks):
+        raise ValueError("Averaging omitted one or more complete tapping blocks.")
+    average, _ = accumulator.get_average()
+    duration = float(np.mean([block["duration"] for block in blocks]))
+    result = {"duration": round(duration, 7)}
+    for index, (region, signal) in enumerate(columns):
+        result.setdefault(region, {})[signal] = np.asarray(average[:, index]).round(4).tolist()
+    return result
 
 
 def sha256(path):
@@ -112,10 +143,13 @@ def build(input_dir):
         "regions": regions,
         "rawFileSha256": {path.name: sha256(path) for path in (snirf_path, events_path)},
         "blocks": blocks,
+        "averages": {hand: average_blocks(condition) for hand, condition in blocks.items()},
     }
 
 
 if __name__ == "__main__":
+    # Keep the exported averages in double precision before rounding.
+    jax.config.update("jax_enable_x64", True)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input_dir", type=Path, help="Directory containing the SNIRF and events TSV")
     parser.add_argument("output", type=Path, help="Output JSON file")

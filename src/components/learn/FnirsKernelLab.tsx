@@ -13,23 +13,19 @@ const ticks = Array.from({ length: (stop - start) / 5 + 1 }, (_, index) => start
 
 type Hand = (typeof hands)[number];
 type Signal = (typeof signals)[number];
-type Block = (typeof data.blocks.left)[number];
+type TraceSet = (typeof data.averages)['left'];
 
 function average(series: number[]) {
     return series.reduce((sum, value) => sum + value, 0) / series.length;
 }
 
-function averageTrace(blocks: Block[], region: Hand, signal: Signal) {
-    return blocks[0][region][signal].map((_, index) => average(blocks.map((block) => block[region][signal][index])));
-}
-
-function limitFor(selected: Block[][]) {
-    const traces = selected.flatMap((blocks) => hands.flatMap((region) => signals.map((signal) => averageTrace(blocks, region, signal))));
+function limitFor(selected: TraceSet[]) {
+    const traces = selected.flatMap((entry) => hands.flatMap((region) => signals.map((signal) => entry[region][signal])));
     return Math.ceil(Math.max(...traces.flat().map(Math.abs)));
 }
 
-const meanLimit = limitFor(Object.values(data.blocks));
-const blockLimit = limitFor(Object.values(data.blocks).flat().map((block) => [block]));
+const meanLimit = limitFor(Object.values(data.averages));
+const blockLimit = limitFor(Object.values(data.blocks).flat());
 
 function responseWindow(trace: number[]) {
     return average(trace.slice((5 - start) * sampleRate, (15 - start) * sampleRate));
@@ -41,10 +37,8 @@ export default function FnirsKernelLab({ lang }: { lang: Locale }) {
     const [block, setBlock] = useState(0);
     const t = fnirsText[lang];
     const condition = data.blocks[hand];
-    const selected = block === 0 ? condition : [condition[block - 1]];
-    const left = averageTrace(selected, 'left', signal);
-    const right = averageTrace(selected, 'right', signal);
-    const duration = average(selected.map(({ duration }) => duration));
+    const selectedBlock = block === 0 ? undefined : condition[block - 1];
+    const { left, right, duration } = selectedBlock ?? data.averages[hand];
     const format = new Intl.NumberFormat(lang, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     return (
@@ -74,7 +68,7 @@ export default function FnirsKernelLab({ lang }: { lang: Locale }) {
                             ))}
                         </select>
                     </label>
-                    {block !== 0 && <p className="text-xs text-muted-foreground">{t.onset} · {format.format(selected[0].onset)} s</p>}
+                    {selectedBlock && <p className="text-xs text-muted-foreground">{t.onset} · {format.format(selectedBlock.onset)} s</p>}
                 </div>
                 <figure className="min-w-0">
                     <figcaption className="mb-3 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
@@ -83,8 +77,8 @@ export default function FnirsKernelLab({ lang }: { lang: Locale }) {
                     </figcaption>
                     <TracePlot
                         traces={[
-                            { samples: left, color: '#67e8f9' },
-                            { samples: right, color: '#a5b4fc', dash: [5, 4] },
+                            { samples: left[signal], color: '#67e8f9' },
+                            { samples: right[signal], color: '#a5b4fc', dash: [5, 4] },
                         ]}
                         limit={block === 0 ? meanLimit : blockLimit}
                         ticks={ticks}
@@ -96,8 +90,8 @@ export default function FnirsKernelLab({ lang }: { lang: Locale }) {
                     <div className="mt-4 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4" aria-live="polite">
                         <p className="mb-2 text-sm font-semibold">{t.window}</p>
                         <dl className="grid gap-2 sm:grid-cols-2">
-                            <div><dt className="text-xs text-muted-foreground">{t.leftRegion}</dt><dd className="text-xl font-semibold tabular-nums">{format.format(responseWindow(left))}</dd></div>
-                            <div><dt className="text-xs text-muted-foreground">{t.rightRegion}</dt><dd className="text-xl font-semibold tabular-nums">{format.format(responseWindow(right))}</dd></div>
+                            <div><dt className="text-xs text-muted-foreground">{t.leftRegion}</dt><dd className="text-xl font-semibold tabular-nums">{format.format(responseWindow(left[signal]))}</dd></div>
+                            <div><dt className="text-xs text-muted-foreground">{t.rightRegion}</dt><dd className="text-xl font-semibold tabular-nums">{format.format(responseWindow(right[signal]))}</dd></div>
                         </dl>
                     </div>
                 </figure>
@@ -114,6 +108,7 @@ export default function FnirsKernelLab({ lang }: { lang: Locale }) {
                     <a href={data.paper} className="underline underline-offset-4">{t.paper}</a>
                     <a href={data.license} className="underline underline-offset-4">{t.license}</a>
                     <a href="https://docs.kernel.com/docs/data-export-pipelines" className="underline underline-offset-4">{t.pipeline}</a>
+                    <a href="https://github.com/m9h/dot-jax" className="underline underline-offset-4">{t.processing}</a>
                 </div>
             </details>
         </section>

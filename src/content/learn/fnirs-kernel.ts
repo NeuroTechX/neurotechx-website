@@ -39,6 +39,7 @@ export const fnirsText = bilingual(
         paper: 'Article de Chekin et ses collègues (en anglais)',
         license: 'Licence CC0',
         pipeline: 'Traitement Hb Moments de Kernel (en anglais)',
+        processing: 'Outils de traitement dot-jax (en anglais)',
         deeper: 'Exemple MNE-NIRS sur un autre enregistrement Flow2 (en anglais)',
     },
     {
@@ -79,6 +80,7 @@ export const fnirsText = bilingual(
         paper: 'Paper by Chekin and colleagues',
         license: 'CC0 license',
         pipeline: 'Kernel Hb Moments pipeline',
+        processing: 'dot-jax processing tools',
         deeper: 'MNE-NIRS walkthrough with another Flow2 recording',
     },
 );
