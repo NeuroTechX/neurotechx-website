@@ -87,9 +87,13 @@ export default async function LessonPage({ params }: Props) {
                 </div>
             )}
             <p className="mt-10 text-sm text-muted-foreground">
-                {t.lesson.origin}{' '}
-                <a href={`https://web.archive.org/web/2025/${lesson.sourceUrl}`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.original}</a>
-                {' · '}
+                {lesson.sourceUrl && (
+                    <>
+                        {t.lesson.origin}{' '}
+                        <a href={`https://web.archive.org/web/2025/${lesson.sourceUrl}`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.original}</a>
+                        {' · '}
+                    </>
+                )}
                 <a href={`${REPO}/${slug}.md`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.improve}</a>
             </p>
             <nav className="mt-6 flex justify-between gap-4 border-t border-[var(--border)] pt-6 text-sm">

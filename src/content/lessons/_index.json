@@ -46,6 +46,16 @@
       "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
     },
     {
+      "slug": "invasive-bci",
+      "title": "Invasive and Intracortical BCI",
+      "description": "What implanted electrodes record, how spikes are detected and sorted, how intracortical decoders turn neural activity into cursor movement or text, and what is known about safety and how long implants last."
+    },
+    {
+      "slug": "modern-decoding",
+      "title": "Modern EEG Decoding",
+      "description": "Riemannian methods, deep learning, transfer across people and sessions, EEG foundation models, and how to evaluate a decoder honestly. Includes a short Python example on real motor imagery data."
+    },
+    {
       "slug": "bci-projects",
       "title": "BCI Projects and Apps",
       "description": "An easy project for one person might be difficult for someone else. Therefore we have broken down the projects as to either requiring no programming experience (plug and play) or requiring some experience. You will notice that with certain EEG headsets that there is more tutorials than others. This is likely due to the ease of development when using that device. The best way to get started will also depend on the headset that you have available."
