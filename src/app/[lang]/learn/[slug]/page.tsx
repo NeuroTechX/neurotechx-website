@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import Link from '@/components/LocaleLink';
 import { MdxLink } from '@/components/DockitRenderer';
-import { pageLocale } from '@/i18n';
+import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/learn';
 import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/lessons';
 import { erpText } from '@/content/learn/erp-averaging';
@@ -25,18 +25,22 @@ export function generateStaticParams(): { slug: string }[] {
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const lang = await pageLocale(params);
     const { slug } = await params;
-    const lesson = getLesson(slug);
-    // The lessons are English only, so the French address points search engines at the English page
-    return lesson
-        ? { title: lesson.title, description: lesson.description, alternates: { canonical: `/learn/${slug}` } }
-        : {};
+    if (!getLesson(slug)) {
+        return {};
+    }
+    const lesson = getLesson(slug, lang)!;
+    // A lesson with a French file has its own French page. Without one, the French address shows
+    // the English text, so it points search engines at the English page.
+    const alternates = getLesson(slug, 'fr')?.lang === 'fr' ? alternatesFor(`/learn/${slug}`, lang) : { canonical: `/learn/${slug}` };
+    return { title: lesson.title, description: lesson.description, alternates };
 }
 
 export default async function LessonPage({ params }: Props) {
     const lang = await pageLocale(params);
     const { slug } = await params;
-    const lesson = getLesson(slug);
+    const lesson = getLesson(slug, lang);
     if (!lesson) {
         notFound();
     }
@@ -44,7 +48,7 @@ export default async function LessonPage({ params }: Props) {
     const authors = getContributors().filter((person) => person.lessons.includes(slug));
 
     // Previous and next lesson within the same module
-    const order = getModules()[lesson.module];
+    const order = getModules(lang)[lesson.module];
     const at = order.findIndex((item) => item.slug === slug);
     const prev = order[at - 1];
     const next = order[at + 1];
@@ -66,7 +70,7 @@ export default async function LessonPage({ params }: Props) {
                     )}
                 </div>
             )}
-            <article lang="en" className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">
+            <article lang={lesson.lang} className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">
                 <h1>{lesson.title}</h1>
                 {lesson.description && <p className="lead">{lesson.description}</p>}
                 {authors.length > 0 && (
@@ -90,11 +94,11 @@ export default async function LessonPage({ params }: Props) {
                 {t.lesson.origin}{' '}
                 <a href={`https://web.archive.org/web/2025/${lesson.sourceUrl}`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.original}</a>
                 {' · '}
-                <a href={`${REPO}/${slug}.md`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.improve}</a>
+                <a href={`${REPO}/${slug}${lesson.lang === 'fr' ? '.fr' : ''}.md`} target="_blank" rel="noopener noreferrer" className="text-neuro-accent hover:underline">{t.lesson.improve}</a>
             </p>
             <nav className="mt-6 flex justify-between gap-4 border-t border-[var(--border)] pt-6 text-sm">
-                {prev ? <Link href={`/learn/${prev.slug}`} className="text-neuro-accent hover:underline">← {prev.title}</Link> : <span />}
-                {next ? <Link href={`/learn/${next.slug}`} className="text-neuro-accent hover:underline">{next.title} →</Link> : <span />}
+                {prev ? <Link href={`/learn/${prev.slug}`} lang={prev.lang} className="text-neuro-accent hover:underline">← {prev.title}</Link> : <span />}
+                {next ? <Link href={`/learn/${next.slug}`} lang={next.lang} className="text-neuro-accent hover:underline">{next.title} →</Link> : <span />}
             </nav>
         </div>
     );
