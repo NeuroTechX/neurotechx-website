@@ -41,9 +41,24 @@
       "description": "This tutorial will explain how to extract Event Related Potentials"
     },
     {
+      "slug": "fnirs-basics",
+      "title": "fNIRS Basics",
+      "description": "How functional near-infrared spectroscopy measures blood oxygen in the cortex with light, how it compares with EEG, which artifacts to watch for, and how to analyse a first recording with MNE-NIRS."
+    },
+    {
       "slug": "machine-learning-for-bci",
       "title": "Machine Learning for BCI",
       "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
+    },
+    {
+      "slug": "neuro-data-skills",
+      "title": "Working with Open Neuro Data",
+      "description": "Where to find open EEG and other brain datasets, how the BIDS format organizes them, how to load them with MNE-BIDS, and how to handle licences, privacy and reproducibility."
+    },
+    {
+      "slug": "brain-stimulation-safety",
+      "title": "Brain Stimulation and Safety",
+      "description": "What TMS, tDCS, tACS and transcranial focused ultrasound do, what the published safety guidelines say, why do-it-yourself stimulation is discouraged, and the ethical questions stimulation raises."
     },
     {
       "slug": "bci-projects",
@@ -71,6 +86,11 @@
       "slug": "neuroanatomy",
       "title": "Neuroanatomy and Brain Organization",
       "description": "A tour of major brain structures, cortical lobes, and functional regions relevant to neuroimaging and brain-computer interfaces."
+    },
+    {
+      "slug": "sensory-and-motor-systems",
+      "title": "Sensory and Motor Systems",
+      "description": "How signals from the eyes, ears and skin reach the cortex, how the brain sends movement commands to the muscles, and why these pathways are the basis of the most common brain-computer interfaces."
     },
     {
       "slug": "brain-disorders",
