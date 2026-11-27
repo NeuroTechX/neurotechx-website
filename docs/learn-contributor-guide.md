@@ -27,3 +27,9 @@ Use AI to draft question variants, translate draft copy, or prototype controls. 
 The atlas is derived from the [TemplateFlow brain-only 2 mm MNI152NLin2009cAsym T1w template](https://templateflow.s3.amazonaws.com/tpl-MNI152NLin2009cAsym/tpl-MNI152NLin2009cAsym_res-02_desc-brain_T1w.nii.gz). The script reorients the volume to RAS, maps intensities to grayscale, and extracts 17 evenly spaced slices per plane. The source notice is shipped with the atlas at `public/learn/mri/LICENSE.txt`.
 
 Install `nibabel`, `numpy`, and `pillow`, then run `python scripts/build-learn-mri-slices.py <input.nii.gz> public/learn/mri/mni152-slices.png`.
+
+## Kernel Flow2 fNIRS excerpt
+
+The [Flow2-Chekin2025 dataset on OpenNeuro](https://openneuro.org/datasets/ds005927/versions/1.0.0) is CC0. The lab uses Kernel’s published Hb Moments derivative for `sub-001` and links to [Chekin et al. (2025)](https://doi.org/10.1162/imag_a_00475). The two sources follow the motor-region labels in the [MNE-NIRS Flow2 walkthrough](https://mne.tools/mne-nirs/dev/auto_examples/general/plot_11b_kf2_fingertapping.html).
+
+Download `sub-001_task-fingertapping_nirs.snirf` and `sub-001_task-fingertapping_events.tsv` into the same directory. Install NumPy and h5py, then run `python scripts/build-learn-kernel-fnirs.py <download-directory> src/content/learn/fnirs-kernel-data.json`. The script averages paired HbO and HbR channels with 15–30 mm source–detector separations, interpolates each of the 20 task blocks to 2 Hz from −5 to 30 seconds, and subtracts each block’s pre-onset mean. The excerpt records the input SHA-256 digests.

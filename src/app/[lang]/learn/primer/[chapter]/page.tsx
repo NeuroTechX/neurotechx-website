@@ -7,7 +7,7 @@ import { ChapterProgress } from '@/components/learn/PrimerProgress';
 import { alternatesFor, pageLocale } from '@/i18n';
 import primerText from '@/i18n/pages/primer';
 import { erpText } from '@/content/learn/erp-averaging';
-import { fnirsText } from '@/content/learn/fnirs-short-channels';
+import { fnirsText } from '@/content/learn/fnirs-kernel';
 import { mriText } from '@/content/learn/mri-and-bold';
 import { BERKELEY_FMRI_LAB, ERP_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, MRI_LAB_PATH, PRIMER_CHECKS, primerChapterPdf, primerCheckPath } from '@/content/learn/primer-chapters';
 import { primerChecks } from '@/content/learn/primer-checks';

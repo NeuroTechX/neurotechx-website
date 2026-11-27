@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader';
 import Link from '@/components/LocaleLink';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import MriAndBoldLab from '@/components/learn/MriAndBoldLab';
-import { fnirsText } from '@/content/learn/fnirs-short-channels';
+import { fnirsText } from '@/content/learn/fnirs-kernel';
 import { modalityChoice, mriText } from '@/content/learn/mri-and-bold';
 import { BERKELEY_FMRI_LAB, FNIRS_LAB_PATH, MRI_LAB_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 import { alternatesFor, pageLocale } from '@/i18n';
