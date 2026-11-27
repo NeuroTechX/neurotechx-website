@@ -3,6 +3,7 @@ import { bilingual } from '@/i18n/text';
 export const MOTOR_IMAGERY_NOTEBOOK = '/learn/notebooks/motor-imagery-moabb.ipynb';
 export const MOABB_REPO = 'https://github.com/NeuroTechX/moabb';
 export const MOABB_DOCS = 'https://moabb.neurotechx.com/docs/';
+export const BRAINDECODE_GPU_LAB = 'https://github.com/NeuroTechX/nsg-agent-kit/tree/master/lessons/braindecode-gpu';
 export const EEGBCI_DATASET = 'https://physionet.org/content/eegmmidb/1.0.0/';
 export const ODC_BY = 'https://opendatacommons.org/licenses/by/1-0/';
 
@@ -82,6 +83,9 @@ export const motorImageryText = bilingual(
         resultsNote: 'Vos chiffres peuvent varier un peu selon les versions des bibliothèques.',
         moabbRepo: 'MOABB sur GitHub (en anglais)',
         moabbDocs: 'Documentation de MOABB (en anglais)',
+        gpuTitle: 'Adapter un modèle de fondation EEG sur GPU',
+        gpuBody: 'Sur la Neuroscience Gateway, comparez un modèle REVE gelé à une adaptation LoRA sur quatre classes d’imagerie motrice. Mesurez le gain de précision équilibrée et son coût en temps de calcul et en mémoire GPU.',
+        gpuGuide: 'Faire le labo Braindecode sur GPU (en anglais)',
         credits: 'Enregistrements EEG de Schalk et collègues (Wadsworth Center, BCI2000), distribués par PhysioNet. Citez Schalk et al. (2004) et Goldberger et al. (2000). Extrait : participants 1 à 10, séries 4, 8 et 12 (main gauche ou droite imaginée), référence moyenne commune. Script : scripts/build-learn-motor-imagery.py.',
         dataset: 'Jeu de données et citations (en anglais)',
         license: 'Licence ODC-By 1.0',
@@ -165,6 +169,9 @@ export const motorImageryText = bilingual(
         resultsNote: 'Your numbers may differ slightly with other library versions.',
         moabbRepo: 'MOABB on GitHub',
         moabbDocs: 'MOABB documentation',
+        gpuTitle: 'Adapt an EEG foundation model on a GPU',
+        gpuBody: 'On the Neuroscience Gateway, compare a frozen REVE backbone with LoRA on four-class motor imagery. Measure how balanced accuracy changes and how much GPU memory and time adaptation takes.',
+        gpuGuide: 'Run the Braindecode GPU lab',
         credits: 'EEG recordings by Schalk and colleagues (Wadsworth Center, BCI2000), distributed by PhysioNet. Cite Schalk et al. (2004) and Goldberger et al. (2000). Excerpt: participants 1 to 10, runs 4, 8 and 12 (imagined left or right fist), common average reference. Script: scripts/build-learn-motor-imagery.py.',
         dataset: 'Dataset and citations',
         license: 'ODC-By 1.0 license',
