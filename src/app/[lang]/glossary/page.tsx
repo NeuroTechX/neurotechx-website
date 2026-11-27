@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from '@/components/LocaleLink';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/glossary';
@@ -45,6 +45,31 @@ export default async function GlossaryPage({ params }: PageProps<'/[lang]/glossa
                 >
                   <dt className="mb-2 text-lg font-bold text-foreground">{item.term}</dt>
                   <dd className="text-sm leading-relaxed text-muted-foreground">{item.summary}</dd>
+                  {item.links && item.links.length > 0 && (
+                    <dd className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
+                      {item.links.map((link) =>
+                        link.href.startsWith('/') ? (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            className="inline-flex items-center gap-1 font-medium text-neuro-accent hover:underline"
+                          >
+                            {link.label} <ArrowRight width={13} height={13} aria-hidden="true" />
+                          </Link>
+                        ) : (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 font-medium text-neuro-accent hover:underline"
+                          >
+                            {link.label} <ExternalLink width={13} height={13} aria-hidden="true" />
+                          </a>
+                        )
+                      )}
+                    </dd>
+                  )}
                 </div>
               ))}
             </dl>
