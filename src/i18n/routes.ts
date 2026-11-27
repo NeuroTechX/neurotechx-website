@@ -46,6 +46,7 @@ const FR_SEGMENTS: Record<string, string> = {
   guide: 'guide',
   glossary: 'glossaire',
   'safety-and-ethics': 'securite-et-ethique',
+  'motor-imagery': 'imagerie-motrice',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
   Object.entries(FR_SEGMENTS).map(([en, fr]) => [fr, en])
