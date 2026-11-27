@@ -11,9 +11,10 @@ import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/le
 import { erpText } from '@/content/learn/erp-averaging';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { firstEegText } from '@/content/learn/first-eeg';
+import { fnirsText } from '@/content/learn/fnirs-kernel';
 import { lessonCheckText, lessonChecks } from '@/content/learn/lesson-checks';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
-import { ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
+import { ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
@@ -49,6 +50,12 @@ export default async function LessonPage({ params }: Props) {
     const t = text[lang];
     const checks = lessonChecks[slug]?.[lang] ?? [];
     const authors = getContributors().filter((person) => person.lessons.includes(slug));
+    const relatedLabs: Partial<Record<string, { href: string; title: string }>> = {
+        preprocessing: { href: FILTERING_LAB_PATH, title: filteringText[lang].title },
+        'event-related-potentials': { href: ERP_LAB_PATH, title: erpText[lang].title },
+        'fnirs-basics': { href: FNIRS_LAB_PATH, title: fnirsText[lang].title },
+    };
+    const lab = relatedLabs[slug];
 
     // Previous and next lesson within the same module
     const order = getModules(lang)[lesson.module];
@@ -64,13 +71,9 @@ export default async function LessonPage({ params }: Props) {
             <p className="mb-2 text-sm font-semibold text-muted-foreground">
                 {t.lessons.modules[lesson.module]} · {t.lesson.lessonOf.replace('{n}', String(at + 1)).replace('{total}', String(order.length))}
             </p>
-            {(slug === 'event-related-potentials' || slug === 'preprocessing') && (
+            {lab && (
                 <div className="my-4 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm font-semibold">
-                    {slug === 'preprocessing' ? (
-                        <Link href={FILTERING_LAB_PATH} className="text-neuro-accent hover:underline">{filteringText[lang].title} →</Link>
-                    ) : (
-                        <Link href={ERP_LAB_PATH} className="text-neuro-accent hover:underline">{erpText[lang].title} →</Link>
-                    )}
+                    <Link href={lab.href} className="text-neuro-accent hover:underline">{lab.title} →</Link>
                 </div>
             )}
             <article lang={lesson.lang} className="prose prose-invert max-w-none prose-a:text-neuro-accent prose-img:rounded-lg prose-td:align-top [&_td_img]:my-0 [&_td_img]:max-w-48">

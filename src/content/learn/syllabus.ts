@@ -1,6 +1,6 @@
 import { bilingual } from '@/i18n/text';
 import {
-    EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH, primerCheckPath,
+    EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, MRI_LAB_PATH, primerCheckPath,
 } from './primer-chapters';
 
 export const SYLLABUS_PATH = '/learn/syllabus';
@@ -89,6 +89,7 @@ export const syllabusText = bilingual(
                 talk: '',
                 links: [
                     { label: 'Labo : Explorer une IRM et le signal BOLD', href: MRI_LAB_PATH },
+                    { label: 'Labo : Explorer un enregistrement fNIRS de Kernel Flow2', href: FNIRS_LAB_PATH },
                     { label: 'Comparer les techniques', href: '/learn#modalities' },
                     { label: 'Primer, chapitre 4 : autoévaluation', href: primerCheckPath('fmri') },
                     { label: 'Primer, chapitre 5 : autoévaluation', href: primerCheckPath('fnirs') },
@@ -324,6 +325,7 @@ export const syllabusText = bilingual(
                 talk: '',
                 links: [
                     { label: 'Lab: Explore MRI slices and BOLD timing', href: MRI_LAB_PATH },
+                    { label: 'Lab: Explore a Kernel Flow2 fNIRS recording', href: FNIRS_LAB_PATH },
                     { label: 'Compare modalities', href: '/learn#modalities' },
                     { label: 'Primer, chapter 4: self-check', href: primerCheckPath('fmri') },
                     { label: 'Primer, chapter 5: self-check', href: primerCheckPath('fnirs') },

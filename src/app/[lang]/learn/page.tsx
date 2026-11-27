@@ -12,7 +12,7 @@ import { firstEegText } from '@/content/learn/first-eeg';
 import { erpText } from '@/content/learn/erp-averaging';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
-import { fnirsText } from '@/content/learn/fnirs-short-channels';
+import { fnirsText } from '@/content/learn/fnirs-kernel';
 import { mriText } from '@/content/learn/mri-and-bold';
 import { primerProgressChapters } from '@/content/learn/primer-progress';
 import { motorImageryText } from '@/content/learn/motor-imagery';
