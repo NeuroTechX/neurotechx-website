@@ -22,6 +22,10 @@ export default bilingual(
     howToEnter: 'Règlement et inscription',
     featuredTitle: 'Projets en vedette',
     communityTitle: 'Projets de la communauté',
+    originsTitle: "D'où viennent EEG-ExPy et MOABB",
+    originsBody:
+      "EEG-ExPy a commencé sous le nom d'eeg-notebooks, à partir de muse-lsl d'Alexandre Barachant. MOABB a été fondé par Alexandre Barachant et Vinay Jayaram pour rendre les comparaisons d'ICM reproductibles. Les deux projets sont ouverts aux contributions sur GitHub.",
+    originsLink: "Lire l'histoire des projets",
     researchTitle: 'Recherche et références',
     viewCode: 'Voir le code',
     visitWebsite: 'Visiter le site',
@@ -96,6 +100,10 @@ export default bilingual(
     howToEnter: 'Rules and how to enter',
     featuredTitle: 'Featured Projects',
     communityTitle: 'Community Projects',
+    originsTitle: 'Where EEG-ExPy and MOABB came from',
+    originsBody:
+      "EEG-ExPy started as eeg-notebooks, built on Alexandre Barachant's muse-lsl. MOABB was founded by Alexandre Barachant and Vinay Jayaram to make BCI comparisons reproducible. Both projects are open to contributions on GitHub.",
+    originsLink: 'Read the history of the projects',
     researchTitle: 'Research & References',
     viewCode: 'View Code',
     visitWebsite: 'Visit Website',

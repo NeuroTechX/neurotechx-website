@@ -4,6 +4,7 @@ import { fetchFeeds } from '@/lib/rss';
 import { formatDistanceToNow } from 'date-fns';
 import { fr as frLocale } from 'date-fns/locale';
 import { ArrowRight } from 'lucide-react';
+import Link from '@/components/LocaleLink';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/content-lab';
 
@@ -105,6 +106,10 @@ export default async function ContentLabPage({ params }: PageProps<'/[lang]/cont
                 <h2 className="mb-4 text-2xl md:text-3xl font-bold">{t.aboutTitle}</h2>
                 <p className="text-lg text-muted-foreground">
                     {t.aboutBody}
+                </p>
+                <p className="mt-4 text-muted-foreground">
+                    {t.historyBody}{' '}
+                    <Link href="/about#content" className="font-semibold text-neuro-accent hover:underline">{t.historyLink}</Link>
                 </p>
             </section>
 

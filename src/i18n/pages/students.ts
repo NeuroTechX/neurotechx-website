@@ -22,6 +22,10 @@ export default bilingual(
     codeStep1: '# 1. Faites un fork du dépôt et modifiez ce fichier :',
     codeStep2: "# 2. Ajoutez l'objet de votre club :",
     editOnGithub: 'Modifier sur GitHub',
+    historyTitle: 'Une compétition depuis 2016',
+    historyBody:
+      "La compétition des clubs étudiants a commencé en 2016 avec un projet pilote de cinq clubs à Montréal et à Toronto. À l'époque, des universités refusaient les clubs de neurotech parce qu'ils n'avaient pas de compétition. La compétition annuelle a donné aux étudiants une raison de s'organiser et de fonder leur club.",
+    historyLink: "Lire l'histoire de la compétition",
     projectsHeading: 'Idées de projets de session selon votre budget',
     projectsLead:
       "Pas besoin d'un laboratoire coûteux pour démarrer un club. Voici trois façons concrètes de lancer un premier projet étudiant :",
@@ -70,6 +74,10 @@ export default bilingual(
     codeStep1: '# 1. Fork the repo & edit this file:',
     codeStep2: '# 2. Add your club object:',
     editOnGithub: 'Edit on GitHub',
+    historyTitle: 'A competition since 2016',
+    historyBody:
+      'The student club competition started in 2016 with a pilot of five clubs in Montréal and Toronto. At the time, some universities turned down neurotech clubs because there was no competition for them. The annual competition gave students a reason to organize and start their clubs.',
+    historyLink: 'Read the history of the competition',
     projectsHeading: 'Starter semester projects by budget',
     projectsLead:
       'You do not need an expensive lab to launch an active student club. Three practical tiers for your first semester:',

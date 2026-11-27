@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import PageHeader from '@/components/PageHeader';
 import EventsList from '@/components/EventsList';
+import Link from '@/components/LocaleLink';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/events';
@@ -48,6 +49,15 @@ export default async function EventsPage({ params }: PageProps<'/[lang]/events'>
             <h2 className="mb-2 text-2xl md:text-3xl font-bold">{t.conferencesTitle}</h2>
             <p className="mb-8 max-w-2xl text-muted-foreground">{t.conferencesBody}</p>
             <EventsList lang={lang} />
+
+            {/* Past NeuroTechX hackathons */}
+            <section className="mt-14 max-w-3xl rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+                <h2 className="mb-2 text-xl font-bold">{t.pastTitle}</h2>
+                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{t.pastBody}</p>
+                <Link href="/about#hackathons" className="inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline">
+                    {t.pastLink} <ArrowRight width={15} height={15} />
+                </Link>
+            </section>
         </div>
     );
 }

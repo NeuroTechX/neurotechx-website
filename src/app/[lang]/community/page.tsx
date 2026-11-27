@@ -66,6 +66,13 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
             {/* Chapters: featured + full list + student clubs */}
             <div id="chapters" className="mb-16 scroll-mt-24">
                 <Chapters lang={lang} t={t.chapters} />
+                <div className="card mt-8 p-6">
+                    <h3 className="mb-2 text-lg font-bold">{t.historyTitle}</h3>
+                    <p className="mb-4 text-sm text-muted-foreground">{t.historyBody}</p>
+                    <Link href="/about#chapters" className="inline-flex items-center gap-1 text-sm font-bold text-neuro-accent hover:underline">
+                        {t.historyLink} <ArrowRight className="w-3 h-3" />
+                    </Link>
+                </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
