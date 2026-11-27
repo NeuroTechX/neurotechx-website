@@ -192,6 +192,18 @@ export default bilingual(
           tags: ['Potentiels évoqués', 'Conception expérimentale'],
         },
         {
+          name: 'ERP CORE',
+          body: "Un jeu de données libre du laboratoire de Steven Luck (Kappenman et collab., 2021) : 40 participants, six tâches et sept composantes des potentiels évoqués (N170, MMN, N2pc, N400, P3, LRP et ERN), avec les scripts d'analyse. Sur la page Calcul, une leçon de NeuroTechX refait la mesure de la P3 chez les 40 participants sur la Neuroscience Gateway.",
+          href: 'https://erpinfo.org/erp-core',
+          tags: ['Données ouvertes', 'Potentiels évoqués'],
+        },
+        {
+          name: 'ERP Boot Camp',
+          body: "Les formations du laboratoire de Steven Luck. Le ERP Boot Camp de 10 jours a lieu chaque été, en personne, à UC Davis ou à SDSU; selon le site, les inscriptions ouvrent en général au début de janvier. Des mini-formations de 2 ou 3 jours s'organisent sur demande, et un cours en ligne gratuit, Introduction to ERPs, s'adresse aux débutants. La boîte à outils ERPLAB qu'on y enseigne fonctionne dans MATLAB avec EEGLAB; NSG offre les outils EEGLAB on Expanse et MATLAB on Expanse.",
+          href: 'https://erpinfo.org/the-erp-boot-camp',
+          tags: ['Atelier', 'ERPLAB'],
+        },
+        {
           name: 'Analyzing Neural Time Series Data',
           body: "Le guide essentiel de l'analyse spectrale et de la dynamique temps-fréquence. Le manuel de référence de Mike X Cohen sur l'analyse des données neuronales.",
           href: 'https://direct.mit.edu/books/monograph/4013/Analyzing-Neural-Time-Series-DataTheory-and',
@@ -582,6 +594,18 @@ export default bilingual(
           body: 'The gold standard for Event-Related Potential (ERP) methodology. Best practices for experimental design and analysis from Prof. Steve Luck.',
           href: 'https://lucklab.ucdavis.edu/blog/category/EEG%2FERP',
           tags: ['ERPs', 'Experimental Design'],
+        },
+        {
+          name: 'ERP CORE',
+          body: "An open dataset from Steven Luck's lab (Kappenman et al., 2021): 40 participants, six tasks and seven ERP components (N170, MMN, N2pc, N400, P3, LRP and ERN), with the analysis scripts. On the Compute page, a NeuroTechX lesson repeats the P3 measurement for all 40 participants on the Neuroscience Gateway.",
+          href: 'https://erpinfo.org/erp-core',
+          tags: ['Open data', 'ERPs'],
+        },
+        {
+          name: 'ERP Boot Camp',
+          body: "Training from Steven Luck's lab. The 10-day ERP Boot Camp runs in person every summer at UC Davis or SDSU; the site says applications usually open in early January. Two- or three-day Mini ERP Boot Camps can be arranged on request, and a free online course, Introduction to ERPs, is meant for beginners. The ERPLAB Toolbox taught there runs in MATLAB with EEGLAB; NSG offers EEGLAB on Expanse and MATLAB on Expanse tools.",
+          href: 'https://erpinfo.org/the-erp-boot-camp',
+          tags: ['Workshop', 'ERPLAB'],
         },
         {
           name: 'Analyzing Neural Time Series Data',

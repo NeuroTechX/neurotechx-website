@@ -33,6 +33,10 @@ export const erpText = bilingual(
         nsgSummary: 'Retrouvez la réponse à une cible visuelle dans un enregistrement public de l’étude PURSUE. Examinez la courbe et le nombre d’essais retenus, puis lancez la même analyse avec MNE-Python sur la Neuroscience Gateway (NSG).',
         nsgGuide: 'Voir le résultat et lancer l’analyse (en anglais)',
         nsgDataset: 'Explorer les données dans NEMAR',
+        erpCoreTitle: 'Passer à 40 participants avec ERP CORE',
+        erpCoreSummary: 'ERP CORE est un jeu de données public du laboratoire de Steven Luck : 40 participants, six tâches et sept composantes des potentiels évoqués. La leçon suivante mesure la P3 chez les 40 participants avec MNE-BIDS-Pipeline sur NSG, puis compare la moyenne à la valeur publiée.',
+        erpCoreGuide: 'Lancer l’analyse ERP CORE sur NSG (en anglais)',
+        erpCoreData: 'À propos d’ERP CORE (en anglais)',
     },
     {
         title: 'Reveal an EEG response by averaging trials',
@@ -66,5 +70,9 @@ export const erpText = bilingual(
         nsgSummary: 'Look for the response to a visual target in a public PURSUE recording. Inspect the plot and retained trial counts, then run the same MNE-Python analysis on the Neuroscience Gateway (NSG).',
         nsgGuide: 'See the result and run the analysis',
         nsgDataset: 'Explore the dataset in NEMAR',
+        erpCoreTitle: 'Scale up to 40 participants with ERP CORE',
+        erpCoreSummary: 'ERP CORE is a public dataset from Steven Luck’s lab: 40 participants, six tasks and seven ERP components. The next lesson measures the P3 in all 40 participants with MNE-BIDS-Pipeline on NSG, then compares the average with the published value.',
+        erpCoreGuide: 'Run the ERP CORE analysis on NSG',
+        erpCoreData: 'About ERP CORE',
     },
 );

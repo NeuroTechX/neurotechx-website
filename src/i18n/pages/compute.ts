@@ -196,6 +196,13 @@ export default bilingual(
         oeb: 'OPENEEGBENCH.md : OpenEEGBench sur NSG',
       },
       repoCta: 'Voir le dépôt sur GitHub',
+      lessonsTitle: 'Deux leçons EEG pour commencer',
+      lessonsBody:
+        "Le dépôt nemar-nsg-starter, une copie du kit, ajoute deux leçons pour les personnes qui arrivent du labo de moyennage d'Apprendre. Elles se soumettent par le portail avec l'outil Python on Expanse, sans GPU. La première mesure la P300 dans un enregistrement PURSUE déjà présent dans NEMAR. La seconde lance MNE-BIDS-Pipeline sur la tâche P3 des 40 participants d'ERP CORE, le jeu de données du laboratoire de Steven Luck, et compare le résultat avec l'article de Kappenman et collab. (2021). ERP CORE n'est pas dans NEMAR : la tâche télécharge les fichiers depuis OSF et vérifie chacun.",
+      lessons: {
+        pursue: 'Leçon 1 : la P300 dans un enregistrement PURSUE',
+        erpCore: 'Leçon 2 : la P3 chez les 40 participants d’ERP CORE',
+      },
     },
 
     ideas: {
@@ -456,6 +463,13 @@ export default bilingual(
         oeb: 'OPENEEGBENCH.md: OpenEEGBench on NSG',
       },
       repoCta: 'View the repository on GitHub',
+      lessonsTitle: 'Two EEG lessons to start with',
+      lessonsBody:
+        "The nemar-nsg-starter repository, a copy of the kit, adds two lessons for people coming from the Learn averaging lab. Both are submitted through the portal with the CPU tool Python on Expanse. The first measures the P300 in one PURSUE recording that is already in NEMAR. The second runs MNE-BIDS-Pipeline on the P3 task for all 40 ERP CORE participants, the dataset from Steven Luck's lab, and compares the result with Kappenman et al. (2021). ERP CORE is not in NEMAR, so the job downloads the files from OSF and checks each one.",
+      lessons: {
+        pursue: 'Lesson 1: the P300 in one PURSUE recording',
+        erpCore: 'Lesson 2: the P3 across 40 ERP CORE participants',
+      },
     },
 
     ideas: {

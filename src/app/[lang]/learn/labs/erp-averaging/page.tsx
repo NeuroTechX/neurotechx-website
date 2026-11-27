@@ -46,6 +46,14 @@ export default async function ErpAveragingPage({ params }: Props) {
                     <a href="https://nemar.org/dataset/on007056" className="hover:underline">{t.nsgDataset} ↗</a>
                 </div>
             </section>
+            <section className="mt-8 border-t border-[var(--border-strong)] pt-6">
+                <h2 className="mb-2 text-xl font-bold">{t.erpCoreTitle}</h2>
+                <p className="mb-4 max-w-prose text-muted-foreground">{t.erpCoreSummary}</p>
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-neuro-accent">
+                    <a href="https://github.com/NeuroTechX/nemar-nsg-starter/tree/master/lessons/erp-core" className="font-semibold hover:underline">{t.erpCoreGuide} ↗</a>
+                    <a href="https://erpinfo.org/erp-core" className="hover:underline">{t.erpCoreData} ↗</a>
+                </div>
+            </section>
         </div>
     );
 }
