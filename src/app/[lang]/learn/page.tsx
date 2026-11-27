@@ -12,10 +12,11 @@ import { erpText } from '@/content/learn/erp-averaging';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { mriText } from '@/content/learn/mri-and-bold';
+import { signalsText } from '@/content/learn/signals';
 import { SYLLABUS_PATH, syllabusText } from '@/content/learn/syllabus';
 import {
     BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
-    primerChapterPdf, primerCheckPath,
+    SIGNALS_LAB_PATH, primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
@@ -72,6 +73,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
     const lab = firstEegText[lang];
     const { chapters } = primerText[lang];
     const labs = [
+        { href: SIGNALS_LAB_PATH, content: signalsText[lang] },
         { href: FILTERING_LAB_PATH, content: filteringText[lang] },
         { href: ERP_LAB_PATH, content: erpText[lang] },
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
