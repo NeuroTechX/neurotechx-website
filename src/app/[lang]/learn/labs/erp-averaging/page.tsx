@@ -38,14 +38,6 @@ export default async function ErpAveragingPage({ params }: Props) {
                     <Link href={FIRST_EEG_PATH} className="hover:underline">{t.firstLab} →</Link>
                 </div>
             </section>
-            <section className="mt-8 border-t border-[var(--border-strong)] pt-6">
-                <h2 className="mb-2 text-xl font-bold">{t.nsgTitle}</h2>
-                <p className="mb-4 max-w-prose text-muted-foreground">{t.nsgSummary}</p>
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-neuro-accent">
-                    <a href="https://github.com/NeuroTechX/nemar-nsg-starter/tree/master/lessons/pursue-p300" className="font-semibold hover:underline">{t.nsgGuide} ↗</a>
-                    <a href="https://nemar.org/dataset/on007056" className="hover:underline">{t.nsgDataset} ↗</a>
-                </div>
-            </section>
         </div>
     );
 }

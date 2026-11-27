@@ -4,7 +4,7 @@ import Link from '@/components/LocaleLink';
 import MotorImageryLab from '@/components/learn/MotorImageryLab';
 import { erpText } from '@/content/learn/erp-averaging';
 import {
-    EEGBCI_DATASET, MOABB_DOCS, MOABB_REPO, MOTOR_IMAGERY_NOTEBOOK, ODC_BY, motorImageryText,
+    BRAINDECODE_GPU_LAB, EEGBCI_DATASET, MOABB_DOCS, MOABB_REPO, MOTOR_IMAGERY_NOTEBOOK, ODC_BY, motorImageryText,
 } from '@/content/learn/motor-imagery';
 import { ERP_LAB_PATH, MOTOR_IMAGERY_PATH } from '@/content/learn/primer-chapters';
 import { alternatesFor, pageLocale } from '@/i18n';
@@ -61,6 +61,12 @@ export default async function MotorImageryPage({ params }: Props) {
                     <a href={MOABB_REPO} className="hover:underline">{t.moabbRepo} ↗</a>
                     <a href={MOABB_DOCS} className="hover:underline">{t.moabbDocs} ↗</a>
                 </div>
+            </section>
+
+            <section className="mt-8 border-t border-[var(--border-strong)] pt-6">
+                <h2 className="mb-2 text-xl font-bold">{t.gpuTitle}</h2>
+                <p className="mb-4 max-w-prose text-muted-foreground">{t.gpuBody}</p>
+                <a href={BRAINDECODE_GPU_LAB} className="text-sm font-semibold text-neuro-accent hover:underline">{t.gpuGuide} ↗</a>
             </section>
 
             <section className="mt-8 border-t border-[var(--border-strong)] pt-6">

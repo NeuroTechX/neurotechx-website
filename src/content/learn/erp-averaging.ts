@@ -29,10 +29,6 @@ export const erpText = bilingual(
         lesson: 'Lire la leçon sur les potentiels évoqués (en anglais)',
         notebook: 'Analyser de vraies données avec MNE-Python (en anglais)',
         firstLab: 'Commencer par le premier labo EEG',
-        nsgTitle: 'Passer à un enregistrement EEG réel',
-        nsgSummary: 'Retrouvez la réponse à une cible visuelle dans un enregistrement public de l’étude PURSUE. Examinez la courbe et le nombre d’essais retenus, puis lancez la même analyse avec MNE-Python sur la Neuroscience Gateway (NSG).',
-        nsgGuide: 'Voir le résultat et lancer l’analyse (en anglais)',
-        nsgDataset: 'Explorer les données dans NEMAR',
     },
     {
         title: 'Reveal an EEG response by averaging trials',
@@ -62,9 +58,5 @@ export const erpText = bilingual(
         lesson: 'Read the event-related potentials lesson',
         notebook: 'Analyze a real recording with MNE-Python',
         firstLab: 'Start with the first EEG lab',
-        nsgTitle: 'Try a real EEG recording',
-        nsgSummary: 'Look for the response to a visual target in a public PURSUE recording. Inspect the plot and retained trial counts, then run the same MNE-Python analysis on the Neuroscience Gateway (NSG).',
-        nsgGuide: 'See the result and run the analysis',
-        nsgDataset: 'Explore the dataset in NEMAR',
     },
 );
