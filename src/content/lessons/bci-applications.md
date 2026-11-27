@@ -12,7 +12,7 @@ Most of this lesson was written in 2017. Consumer neurotechnology changes quickl
 
 * * *
 
-\#### Neurogaming
+#### Neurogaming
 
 Emotiv and NeuroSky are two companies which has developed games to go along with their eeg headset, however it seems as though Emotiv has stopped selling them. If you are interested in playing brain controlled games, you can start with Neurosky, whose app store still lists games for its headsets. Otherwise you might try your luck in finding some open source games.
 
@@ -59,7 +59,7 @@ There are a few companies who have been interested in bring EEG data with VR hea
 
 * * *
 
-\#### Brain based authentication
+#### Brain based authentication
 
 EEG Biometrics is a growing field which looks at how we can use your eeg activity to be able to identify someone. Similar to one's fingerprint, your brain activity can be used as a form of authentication. The most common forms of Brain Authentication are using resting state brain activity or a visual evoked potential task. For more information on Brain Based Authentication, check out this DEF CON talk.
 

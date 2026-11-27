@@ -358,10 +358,6 @@ After the signal has been classified, the result is passed to the feature transl
 
 The feedback device receives the command from the translation step. For example it can be the computer, where the signal will be used to move a cursor, or it could be a robotic arm where the data are used to allow movement.
 
-## Applications
-
-## Examples
-
 ## Limitations
 
 The current status of BCI has still many limitations to be overcome:
@@ -389,8 +385,6 @@ Emerging technologies and brain computer interfaces raise many ethical concerns 
 **Legal Implications** Brain computer interface is often used with paralyzed people to help them in re-gain movements using prosthetic limbs. Some researchers questioned who would have the responsibility in case an accident happened using such methods. How would be possible to distinguish a voluntary action from a malfunction of the system? In addition, the ability to make communicate seriously ill patients might raise the question if their answers can be considered an informed consent given their status.
 
 **Impact on society** Considering the possibility of BCI to increase mental ability, joining with Artificial Intelligence (as for example in Elon Musk plan). We question ourselves if athletes with prosthetic limbs should compete with the others, at the same time if the BCI improves cognition, we would have a similar issue.
-
-## Safety
 
 ## Future of the field
 

@@ -16,6 +16,7 @@ export default function ChapterQuestion({ question, lang, progressKey }: { quest
     const [choice, setChoice] = useState<number | null>(null);
     const [checked, setChecked] = useState(false);
     const t = messages[lang];
+    const review = question.href ?? (question.page === undefined ? undefined : primerPdfPage(question.page));
 
     return (
         <form className="card" onSubmit={(event) => {
@@ -47,9 +48,11 @@ export default function ChapterQuestion({ question, lang, progressKey }: { quest
                 {checked && (
                     <div className="mt-4 border-t border-[var(--border-strong)] pt-3 text-sm">
                         <p><strong>{choice === question.correct ? t.correct : t.retry}</strong> {question.explanation}</p>
-                        <a href={primerPdfPage(question.page)} className="mt-2 inline-block text-neuro-accent underline underline-offset-4">
-                            {t.review} {question.section} (PDF)
-                        </a>
+                        {review && (
+                            <a href={review} className="mt-2 inline-block text-neuro-accent underline underline-offset-4">
+                                {t.review} {question.section}{question.href ? '' : ' (PDF)'}
+                            </a>
+                        )}
                     </div>
                 )}
             </div>

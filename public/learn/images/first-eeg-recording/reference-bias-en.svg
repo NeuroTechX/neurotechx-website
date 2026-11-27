@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" font-family="Helvetica, Arial, sans-serif" font-size="15">
+  <title>How an EEG channel, the reference and the bias electrode connect to the amplifier</title>
+  <rect x="0" y="0" width="720" height="340" rx="14" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f7a3a"/>
+    </marker>
+    <marker id="arrowdark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <!-- Head seen from above -->
+  <path d="M150,42 L162,22 L174,42" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <ellipse cx="54" cy="150" rx="12" ry="26" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <ellipse cx="270" cy="150" rx="12" ry="26" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <circle cx="162" cy="150" r="108" fill="#f4f4f4" stroke="#333333" stroke-width="2"/>
+  <text x="162" y="62" text-anchor="middle" fill="#555555" font-size="13">nose</text>
+
+  <!-- Amplifier box -->
+  <rect x="400" y="40" width="300" height="210" rx="10" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <text x="550" y="64" text-anchor="middle" font-weight="bold">Amplifier</text>
+
+  <!-- Wires -->
+  <polyline points="162,167 162,286 420,286 420,134 458,134" fill="none" stroke="#2f6fd0" stroke-width="3"/>
+  <polyline points="54,176 54,306 440,306 440,176 458,176" fill="none" stroke="#d9822b" stroke-width="3"/>
+  <polyline points="560,244 560,264 300,264 300,150 290,150" fill="none" stroke="#1f7a3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Differential amplifier and bias amplifier -->
+  <path d="M458,104 L458,206 L548,155 z" fill="#eef3fb" stroke="#333333" stroke-width="2"/>
+  <text x="466" y="139" font-size="18" font-weight="bold">+</text>
+  <text x="467" y="181" font-size="18" font-weight="bold">−</text>
+  <line x1="548" y1="155" x2="600" y2="155" stroke="#333333" stroke-width="2" marker-end="url(#arrowdark)"/>
+  <text x="606" y="150" font-size="13">channel =</text>
+  <text x="606" y="167" font-size="13">Cz − A1</text>
+  <rect x="520" y="214" width="80" height="30" rx="5" fill="#e8f4ec" stroke="#1f7a3a" stroke-width="2"/>
+  <text x="560" y="234" text-anchor="middle" font-size="13" fill="#1f7a3a" font-weight="bold">bias</text>
+
+  <!-- Electrodes -->
+  <circle cx="162" cy="150" r="17" fill="#2f6fd0"/>
+  <text x="162" y="155" text-anchor="middle" fill="#ffffff" font-weight="bold">Cz</text>
+  <circle cx="54" cy="150" r="17" fill="#d9822b"/>
+  <text x="54" y="155" text-anchor="middle" fill="#ffffff" font-weight="bold">A1</text>
+  <circle cx="270" cy="150" r="17" fill="#1f7a3a"/>
+  <text x="270" y="155" text-anchor="middle" fill="#ffffff" font-weight="bold">A2</text>
+
+  <!-- Labels -->
+  <text x="172" y="208" fill="#2f6fd0" font-size="13" font-weight="bold">active electrode</text>
+  <text x="20" y="328" fill="#d9822b" font-size="13" font-weight="bold">reference (REF, SRB)</text>
+  <text x="308" y="200" fill="#1f7a3a" font-size="13" font-weight="bold">bias / DRL</text>
+  <text x="308" y="216" fill="#1f7a3a" font-size="12">(often called</text>
+  <text x="308" y="230" fill="#1f7a3a" font-size="12">ground)</text>
+  <text x="410" y="328" fill="#333333" font-size="12">Every channel shares the same reference.</text>
+</svg>

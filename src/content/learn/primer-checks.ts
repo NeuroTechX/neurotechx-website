@@ -7,7 +7,10 @@ export type Question = {
     correct: number;
     explanation: string;
     section: string;
-    page: number;
+    /** Printed Primer page for the review link. */
+    page?: number;
+    /** Review link that replaces the Primer PDF page, for example a lesson heading. */
+    href?: string;
 };
 
 export type ChapterCheck = { goal: string; reading: string; questions: (Question & { id: string })[] };
