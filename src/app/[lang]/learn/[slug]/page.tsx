@@ -11,6 +11,8 @@ import { getContributors, getLesson, getLessonSlugs, getModules } from '@/lib/le
 import { erpText } from '@/content/learn/erp-averaging';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { firstEegText } from '@/content/learn/first-eeg';
+import { lessonCheckText, lessonChecks } from '@/content/learn/lesson-checks';
+import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import { ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
@@ -41,6 +43,7 @@ export default async function LessonPage({ params }: Props) {
         notFound();
     }
     const t = text[lang];
+    const checks = lessonChecks[slug]?.[lang] ?? [];
     const authors = getContributors().filter((person) => person.lessons.includes(slug));
 
     // Previous and next lesson within the same module
@@ -85,6 +88,15 @@ export default async function LessonPage({ params }: Props) {
                     <Link href={FIRST_EEG_PATH} className="text-neuro-accent hover:underline">{firstEegText[lang].title} →</Link>
                     <Link href={primerCheckPath('eeg')} className="text-neuro-accent hover:underline">{firstEegText[lang].selfCheck} →</Link>
                 </div>
+            )}
+            {checks.length > 0 && (
+                <section className="mt-10">
+                    <h2 className="mb-1 text-2xl font-bold">{lessonCheckText[lang].title}</h2>
+                    <p className="mb-4 text-sm text-muted-foreground">{lessonCheckText[lang].lead}</p>
+                    <div className="grid gap-4">
+                        {checks.map((question) => <ChapterQuestion key={question.prompt} question={question} lang={lang} />)}
+                    </div>
+                </section>
             )}
             <p className="mt-10 text-sm text-muted-foreground">
                 {t.lesson.origin}{' '}

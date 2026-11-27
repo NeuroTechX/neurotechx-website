@@ -12,6 +12,7 @@ import { erpText } from '@/content/learn/erp-averaging';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { mriText } from '@/content/learn/mri-and-bold';
+import { SYLLABUS_PATH, syllabusText } from '@/content/learn/syllabus';
 import {
     BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
     primerChapterPdf, primerCheckPath,
@@ -117,6 +118,10 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                 <div className="grid gap-4 md:grid-cols-2">
                     {labs.map(({ href, content }) => resource({ name: content.title, body: content.intro, href, english: false }))}
                 </div>
+                <p className="mt-5 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm">
+                    {syllabusText[lang].cta}{' '}
+                    <Link href={SYLLABUS_PATH} className="font-semibold text-neuro-accent hover:underline">{syllabusText[lang].ctaLink} →</Link>
+                </p>
             </ResourceSection>
 
             <section id="modalities" className="mb-14 scroll-mt-24">
