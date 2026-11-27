@@ -14,6 +14,10 @@
     /* matches --background with transparency for the blur */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    /* The blur makes this a stacking context, and the event banner below it has one too.
+       Without a z-index the banner paints over the open menu panels. */
+    position: relative;
+    z-index: 2;
 }
 
 .container {
