@@ -10,6 +10,7 @@ import primerText from '@/i18n/pages/primer';
 import { learnPaths, modalityGroups } from '@/content/learn/paths';
 import { firstEegText } from '@/content/learn/first-eeg';
 import { erpText } from '@/content/learn/erp-averaging';
+import { hdEegText } from '@/content/learn/hd-eeg';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { fnirsText } from '@/content/learn/fnirs-kernel';
@@ -24,6 +25,7 @@ import {
     BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, MOTOR_IMAGERY_PATH, OPM_MEG_LAB_PATH, MRI_LAB_PATH,
     REALTIME_LAB_PATH, SIGNALS_LAB_PATH, primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
+import { HD_EEG_LAB_PATH } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/learn'>): Promise<Metadata> {
@@ -82,6 +84,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
         { href: SIGNALS_LAB_PATH, content: signalsText[lang] },
         { href: FILTERING_LAB_PATH, content: filteringText[lang] },
         { href: ERP_LAB_PATH, content: erpText[lang] },
+        { href: HD_EEG_LAB_PATH, content: hdEegText[lang] },
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
         { href: MRI_LAB_PATH, content: mriText[lang] },
         { href: FNIRS_LAB_PATH, content: fnirsText[lang] },
