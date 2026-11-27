@@ -13,10 +13,11 @@ import { filteringText } from '@/content/learn/eeg-filtering';
 import { firstEegText } from '@/content/learn/first-eeg';
 import { fnirsText } from '@/content/learn/fnirs-kernel';
 import { hdEegText } from '@/content/learn/hd-eeg';
+import { neuromodulationText } from '@/content/learn/neuromodulation';
 import { lessonCheckText, lessonChecks } from '@/content/learn/lesson-checks';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import { ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, FNIRS_LAB_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
-import { HD_EEG_LAB_PATH } from '@/content/learn/primer-chapters';
+import { HD_EEG_LAB_PATH, NEUROMODULATION_LAB_PATH } from '@/content/learn/primer-chapters';
 
 type Props = PageProps<'/[lang]/learn/[slug]'>;
 
@@ -57,6 +58,7 @@ export default async function LessonPage({ params }: Props) {
         'event-related-potentials': { href: ERP_LAB_PATH, title: erpText[lang].title },
         'fnirs-basics': { href: FNIRS_LAB_PATH, title: fnirsText[lang].title },
         'eeg-headsets': { href: HD_EEG_LAB_PATH, title: hdEegText[lang].title },
+        'brain-stimulation-safety': { href: NEUROMODULATION_LAB_PATH, title: neuromodulationText[lang].title },
     };
     const lab = relatedLabs[slug];
 
