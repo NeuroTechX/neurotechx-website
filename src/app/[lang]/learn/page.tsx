@@ -12,8 +12,9 @@ import { erpText } from '@/content/learn/erp-averaging';
 import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { mriText } from '@/content/learn/mri-and-bold';
+import { realtimeText } from '@/content/learn/realtime';
 import {
-    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH, REALTIME_LAB_PATH,
     primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
@@ -75,6 +76,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
         { href: ERP_LAB_PATH, content: erpText[lang] },
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
         { href: MRI_LAB_PATH, content: mriText[lang] },
+        { href: REALTIME_LAB_PATH, content: realtimeText[lang] },
     ];
     const modules = getModules();
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
