@@ -12,7 +12,7 @@ La majeure partie de cette leçon a été écrite en 2017. La neurotechnologie g
 
 * * *
 
-\#### Jeux neuronaux
+#### Jeux neuronaux
 
 Emotiv et NeuroSky sont deux entreprises qui ont créé des jeux pour accompagner leurs casques EEG, mais Emotiv semble avoir cessé de les vendre. Si les jeux contrôlés par le cerveau vous intéressent, vous pouvez commencer par NeuroSky, dont la boutique d'applications offre encore des jeux pour ses casques. Sinon, vous pouvez tenter votre chance avec des jeux à code source ouvert.
 
@@ -59,7 +59,7 @@ Quelques entreprises se sont intéressées à combiner les données EEG avec les
 
 * * *
 
-\#### Authentification par le cerveau
+#### Authentification par le cerveau
 
 La biométrie EEG est un domaine en croissance qui étudie comment utiliser l'activité EEG pour identifier une personne. Comme une empreinte digitale, l'activité cérébrale peut servir à l'authentification. Les formes les plus courantes d'authentification par le cerveau utilisent l'activité cérébrale au repos ou une tâche de potentiels évoqués visuels. Pour en savoir plus sur l'authentification par le cerveau, regardez cette conférence de DEF CON.
 

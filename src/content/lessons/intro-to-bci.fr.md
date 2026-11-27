@@ -358,10 +358,6 @@ Une fois le signal classé, le résultat est transmis à l'algorithme de traduct
 
 L'appareil de rétroaction reçoit la commande de l'étape de traduction. Par exemple, il peut s'agir de l'ordinateur, où le signal servira à déplacer un curseur, ou d'un bras robotisé, où les données servent à produire un mouvement.
 
-## Applications
-
-## Exemples
-
 ## Limites
 
 Les ICM ont encore de nombreuses limites à surmonter :
@@ -389,8 +385,6 @@ Les technologies émergentes et les interfaces cerveau-machine soulèvent de nom
 **Implications juridiques** Les interfaces cerveau-machine servent souvent à aider des personnes paralysées à retrouver des mouvements grâce à des membres prothétiques. Des chercheurs se sont demandé qui serait responsable si un accident survenait avec ces méthodes. Comment distinguer une action volontaire d'une défaillance du système? De plus, la possibilité de faire communiquer des patients gravement malades soulève la question suivante : peut-on considérer leurs réponses comme un consentement éclairé, étant donné leur état?
 
 **Effets sur la société** Les ICM pourraient augmenter les capacités mentales, en s'alliant à l'intelligence artificielle (comme dans le plan d'Elon Musk, par exemple). On se demande déjà si les athlètes munis de membres prothétiques devraient concourir avec les autres. Si les ICM améliorent la cognition, on ferait face à une question semblable.
-
-## Sécurité
 
 ## Avenir du domaine
 
