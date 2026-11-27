@@ -2,7 +2,9 @@ import fs from 'fs';
 
 // Addresses from the old WordPress site (neurotechx.com) and the page that replaces each one.
 // neurotechx.com forwards here with the path kept, so these act on the old paths.
-// Old addresses not listed (news posts, account and shop pages, theme leftovers) 404 on purpose.
+// Old news, blog, author, category and feed addresses go to /news, which has no per-post pages,
+// so each old post lands on the news list. Old addresses not listed (account and shop pages,
+// theme leftovers) 404 on purpose.
 // ':path*' also matches the bare address, e.g. '/job/:path*' covers '/job' and '/job/anything'.
 const OLD_SITE = {
   '/about': ['/about-us', '/team', '/partners', '/faq', '/contact-us', '/team_members/:path*'],
@@ -41,6 +43,8 @@ const OLD_SITE = {
   '/privacy': ['/privacy-policy', '/cookie-policy'],
   '/donate': ['/donation-confirmation', '/donation-failed', '/donation-history'],
   '/projects': ['/project-details'],
+  // '/news/:path+' (not '*'): '*' would also match /news itself and loop.
+  '/news': ['/news/:path+', '/news-category/:path*', '/blog/:path*', '/author/:path*', '/feed', '/category/:path*'],
 };
 
 // Old job-board addresses that have a matching page under /jobs. These come first:
