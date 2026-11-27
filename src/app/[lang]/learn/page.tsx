@@ -77,7 +77,7 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
         { href: MRI_LAB_PATH, content: mriText[lang] },
     ];
-    const modules = getModules();
+    const modules = getModules(lang);
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
     return (
         <div className="container py-12">
@@ -167,11 +167,16 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         <div key={key} className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-6">
                             <h3 className="mb-1 text-xl font-bold">{t.lessons.modules[key]}</h3>
                             <p className="mb-4 text-sm text-muted-foreground">{t.lessons.moduleLead[key]}</p>
-                            <ol className="grid gap-2" lang="en">
+                            <ol className="grid gap-2">
                                 {modules[key].map((lesson, i) => (
                                     <li key={lesson.slug} className="flex gap-3">
                                         <span className="w-6 shrink-0 text-right text-sm font-semibold text-muted-foreground">{i + 1}.</span>
-                                        <Link href={`/learn/${lesson.slug}`} className="font-medium hover:text-neuro-accent hover:underline">{lesson.title}</Link>
+                                        <span>
+                                            <Link href={`/learn/${lesson.slug}`} lang={lesson.lang} className="font-medium hover:text-neuro-accent hover:underline">{lesson.title}</Link>
+                                            {lang === 'fr' && lesson.lang === 'en' && (
+                                                <span className="ml-2 rounded bg-muted px-2 py-0.5 text-xs">{t.english}</span>
+                                            )}
+                                        </span>
                                     </li>
                                 ))}
                             </ol>

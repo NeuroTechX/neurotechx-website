@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 // Addresses from the old WordPress site (neurotechx.com) and the page that replaces each one.
 // neurotechx.com forwards here with the path kept, so these act on the old paths.
 // Old addresses not listed (news posts, account and shop pages, theme leftovers) 404 on purpose.
@@ -108,9 +110,20 @@ const SECURITY_HEADERS = [
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
 ];
 
+// Lessons with a French translation (src/content/lessons/<slug>.fr.md), read from the files at
+// build time. src/i18n/routes.ts uses the list to skip the "English only" notice on their pages;
+// it runs in the browser and the proxy too, where the files cannot be read.
+const TRANSLATED_LESSONS = fs
+  .readdirSync('src/content/lessons')
+  .filter((file) => file.endsWith('.fr.md'))
+  .map((file) => file.slice(0, -'.fr.md'.length))
+  .sort()
+  .join(',');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  env: { TRANSLATED_LESSONS },
   async headers() {
     return [
       {
