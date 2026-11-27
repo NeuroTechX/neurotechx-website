@@ -3,22 +3,47 @@
     {
       "slug": "intro-to-bci",
       "title": "Introduction to Brain-Computer Interfaces",
-      "description": "In this module you will learn the basics of Brain Computer Interface. You will read an introduction to the different technologies available, the main components and steps required for BCI, the safety and ethical issues and an overview about the future of the field."
+      "description": "In this module you will learn the basics of Brain Computer Interface. You will read an introduction to the different technologies available, the main components and steps required for BCI, the safety and ethical issues and an overview about the future of the field.",
+      "fr": {
+        "title": "Introduction aux interfaces cerveau-machine",
+        "description": "Dans ce module, vous apprendrez les bases des interfaces cerveau-machine. Vous lirez une introduction aux différentes technologies offertes, aux principales composantes et étapes d'une ICM, aux enjeux de sécurité et d'éthique, ainsi qu'un survol de l'avenir du domaine."
+      }
     },
     {
       "slug": "bci-applications",
       "title": "EEG Applications",
-      "description": "This module focuses on BCI Applications that are using EEG since it is the cheapest and most mature technology available. You'll soon see that a wide variety of applications can be built with them."
+      "description": "This module focuses on BCI Applications that are using EEG since it is the cheapest and most mature technology available. You'll soon see that a wide variety of applications can be built with them.",
+      "fr": {
+        "title": "Applications de l'EEG",
+        "description": "Ce module porte sur les applications d'ICM qui utilisent l'EEG, puisque c'est la technologie la moins chère et la plus mature. Vous verrez vite qu'on peut créer une grande variété d'applications avec elle."
+      }
     },
     {
       "slug": "eeg-headsets",
       "title": "Consumer EEG Headsets",
-      "description": "Your choice of headset will depend on what you intend to use it for. The answer will depend on your budget, interest, project idea and the number of electrodes required. Before purchasing a headset, think about your programming experience and Project Idea."
+      "description": "Your choice of headset will depend on what you intend to use it for. The answer will depend on your budget, interest, project idea and the number of electrodes required. Before purchasing a headset, think about your programming experience and Project Idea.",
+      "fr": {
+        "title": "Casques EEG grand public",
+        "description": "Le choix d'un casque dépend de l'usage que vous voulez en faire. La réponse dépend de votre budget, de vos intérêts, de votre idée de projet et du nombre d'électrodes nécessaires. Avant d'acheter un casque, pensez à votre expérience en programmation et à votre idée de projet."
+      }
+    },
+    {
+      "slug": "first-eeg-recording",
+      "title": "Your First EEG Recording: Electrodes, Placement and Signal Quality",
+      "description": "A practical guide to the bench: where electrodes go and how they are named, wet, dry and semi-dry electrodes, reference and bias, impedance, the artifacts you will see, electrical safety, and a checklist for your first session.",
+      "fr": {
+        "title": "Votre premier enregistrement EEG : électrodes, positionnement et qualité du signal",
+        "description": "Un guide pratique pour la paillasse : où placer les électrodes et comment elles se nomment, électrodes humides, sèches et semi-sèches, référence et polarisation, impédance, les artéfacts que vous verrez, la sécurité électrique et une liste de vérification pour votre première séance."
+      }
     },
     {
       "slug": "bci-software",
       "title": "Software Tools for BCI",
-      "description": "This tutorial serves as an introduction to software tools that you can use to analyze EEG and MEG data."
+      "description": "This tutorial serves as an introduction to software tools that you can use to analyze EEG and MEG data.",
+      "fr": {
+        "title": "Outils logiciels pour les ICM",
+        "description": "Ce tutoriel présente des outils logiciels que vous pouvez utiliser pour analyser des données EEG et MEG."
+      }
     },
     {
       "slug": "eeg-experimental-protocol",
@@ -43,7 +68,11 @@
     {
       "slug": "fnirs-basics",
       "title": "fNIRS Basics",
-      "description": "How functional near-infrared spectroscopy measures blood oxygen in the cortex with light, how it compares with EEG, which artifacts to watch for, and how to analyse a first recording with MNE-NIRS."
+      "description": "How functional near-infrared spectroscopy measures blood oxygen in the cortex with light, how it compares with EEG, which artifacts to watch for, and how to analyse a first recording with MNE-NIRS.",
+      "fr": {
+        "title": "Les bases de la fNIRS",
+        "description": "Comment la spectroscopie proche infrarouge fonctionnelle mesure l'oxygène du sang dans le cortex avec de la lumière, comment elle se compare à l'EEG, quels artéfacts surveiller, et comment analyser un premier enregistrement avec MNE-NIRS."
+      }
     },
     {
       "slug": "machine-learning-for-bci",
@@ -51,14 +80,40 @@
       "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
     },
     {
+      "slug": "invasive-bci",
+      "title": "Invasive and Intracortical BCI",
+      "description": "What implanted electrodes record, how spikes are detected and sorted, how intracortical decoders turn neural activity into cursor movement or text, and what is known about safety and how long implants last.",
+      "fr": {
+        "title": "ICM invasives et intracorticales",
+        "description": "Ce qu'enregistrent les électrodes implantées, comment on détecte et trie les potentiels d'action, comment les décodeurs intracorticaux transforment l'activité neuronale en mouvement de curseur ou en texte, et ce qu'on sait de la sécurité et de la durée de vie des implants."
+      }
+    },
+    {
+      "slug": "modern-decoding",
+      "title": "Modern EEG Decoding",
+      "description": "Riemannian methods, deep learning, transfer across people and sessions, EEG foundation models, and how to evaluate a decoder honestly. Includes a short Python example on real motor imagery data.",
+      "fr": {
+        "title": "Le décodage EEG moderne",
+        "description": "Méthodes riemanniennes, apprentissage profond, transfert entre personnes et entre séances, modèles de fondation pour l'EEG, et comment évaluer un décodeur honnêtement. Avec un court exemple Python sur de vraies données d'imagerie motrice."
+      }
+    },
+    {
       "slug": "neuro-data-skills",
       "title": "Working with Open Neuro Data",
-      "description": "Where to find open EEG and other brain datasets, how the BIDS format organizes them, how to load them with MNE-BIDS, and how to handle licences, privacy and reproducibility."
+      "description": "Where to find open EEG and other brain datasets, how the BIDS format organizes them, how to load them with MNE-BIDS, and how to handle licences, privacy and reproducibility.",
+      "fr": {
+        "title": "Travailler avec des données ouvertes en neurosciences",
+        "description": "Où trouver des jeux de données ouverts en EEG et en imagerie cérébrale, comment le format BIDS les organise, comment les charger avec MNE-BIDS, et comment gérer licences, vie privée et reproductibilité."
+      }
     },
     {
       "slug": "brain-stimulation-safety",
       "title": "Brain Stimulation and Safety",
-      "description": "What TMS, tDCS, tACS and transcranial focused ultrasound do, what the published safety guidelines say, why do-it-yourself stimulation is discouraged, and the ethical questions stimulation raises."
+      "description": "What TMS, tDCS, tACS and transcranial focused ultrasound do, what the published safety guidelines say, why do-it-yourself stimulation is discouraged, and the ethical questions stimulation raises.",
+      "fr": {
+        "title": "Stimulation cérébrale et sécurité",
+        "description": "Ce que font la TMS, la tDCS, la tACS et l'ultrason focalisé transcrânien, ce que disent les lignes directrices de sécurité publiées, pourquoi la stimulation maison est déconseillée, et les questions éthiques que pose la stimulation."
+      }
     },
     {
       "slug": "bci-projects",
@@ -75,12 +130,20 @@
     {
       "slug": "nervous-system",
       "title": "The Nervous System",
-      "description": "An overview of the central and peripheral nervous systems, how sensory and motor pathways are organized, and how the body communicates with the brain."
+      "description": "An overview of the central and peripheral nervous systems, how sensory and motor pathways are organized, and how the body communicates with the brain.",
+      "fr": {
+        "title": "Le système nerveux",
+        "description": "Un survol des systèmes nerveux central et périphérique, de l'organisation des voies sensorielles et motrices, et de la façon dont le corps communique avec le cerveau."
+      }
     },
     {
       "slug": "cellular-components",
       "title": "Cellular Components",
-      "description": "How neurons and glial cells work, how action potentials and synapses transmit signals, and why electrical brain activity can be recorded."
+      "description": "How neurons and glial cells work, how action potentials and synapses transmit signals, and why electrical brain activity can be recorded.",
+      "fr": {
+        "title": "Les composantes cellulaires",
+        "description": "Le fonctionnement des neurones et des cellules gliales, la transmission des signaux par les potentiels d'action et les synapses, et pourquoi on peut enregistrer l'activité électrique du cerveau."
+      }
     },
     {
       "slug": "neuroanatomy",
@@ -90,7 +153,11 @@
     {
       "slug": "sensory-and-motor-systems",
       "title": "Sensory and Motor Systems",
-      "description": "How signals from the eyes, ears and skin reach the cortex, how the brain sends movement commands to the muscles, and why these pathways are the basis of the most common brain-computer interfaces."
+      "description": "How signals from the eyes, ears and skin reach the cortex, how the brain sends movement commands to the muscles, and why these pathways are the basis of the most common brain-computer interfaces.",
+      "fr": {
+        "title": "Systèmes sensoriels et moteurs",
+        "description": "Comment les signaux des yeux, des oreilles et de la peau atteignent le cortex, comment le cerveau envoie les commandes de mouvement aux muscles, et pourquoi ces voies sont à la base des interfaces cerveau-ordinateur les plus courantes."
+      }
     },
     {
       "slug": "brain-disorders",
