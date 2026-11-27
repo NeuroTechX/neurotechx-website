@@ -197,6 +197,16 @@ export const EVENTS: NtxEvent[] = [
     },
   },
   {
+    name: 'Synthetic Data for Rare Disease Research: OBI Centre for Analytics Webinar with EpiSign', tag: 'Webinar', dateLabel: 'Dec 10, 2026 · 12–1 PM ET', end: '2026-12-10T13:00:00-05:00',
+    location: 'Online', url: 'https://braininstitute.ca/news-events/2026/cfa-webinar-episign-2026',
+    desc: "EpiSign's Rob Denroche and Kathryn Lande on an open-source tool that generates synthetic biological data, so AI models can be trained for rare disease diagnosis without exposing patient records. Live Q&A moderated by Francis Jeanson, Head of Analytics at the Ontario Brain Institute.",
+    fr: {
+      dateLabel: '10 déc. 2026 · 12 h à 13 h (HE)',
+      location: 'En ligne',
+      desc: "Rob Denroche et Kathryn Lande, d'EpiSign, présentent un outil libre qui génère des données biologiques synthétiques pour entraîner des modèles d'IA au diagnostic des maladies rares sans exposer les dossiers des patients. Période de questions animée par Francis Jeanson, responsable de l'analytique à l'Ontario Brain Institute.",
+    },
+  },
+  {
     name: 'NeurIPS 2026', tag: 'Conference', dateLabel: 'Dec 6–12, 2026', end: '2026-12-12',
     location: 'Sydney, Australia', url: 'https://neurips.cc/Conferences/2026/',
     desc: 'Flagship machine learning & computational neuroscience conference (satellites in Paris & Atlanta).',

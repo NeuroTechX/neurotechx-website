@@ -158,6 +158,7 @@ const fr = {
       Conference: 'Conférence',
       Hackathon: 'Hackathon',
       Meetup: 'Rencontre',
+      Webinar: 'Webinaire',
       Workshop: 'Atelier',
     },
   },
