@@ -31,6 +31,12 @@ export default bilingual(
     visitWebsite: 'Visiter le site',
     readArticle: "Lire l'article",
     learnMore: 'En savoir plus',
+    nsgkit: {
+      description:
+        "Lancer des tâches de neurosciences computationnelles sur la Neuroscience Gateway (NSG) du SDSC et sur les données NEMAR, par le portail ou par l'API, pour les personnes et les agents d'IA. Par Morgan Hough. Licence MIT.",
+      topics: ['NSG', 'calcul GPU', 'NEMAR', 'agents'],
+      guide: 'Lire le guide',
+    },
     sci: {
       description:
         "Modèles anatomiques de la tête à haute résolution pour l'imagerie des sources électromagnétiques et la stimulation.",
@@ -109,6 +115,12 @@ export default bilingual(
     visitWebsite: 'Visit Website',
     readArticle: 'Read Article',
     learnMore: 'Learn More',
+    nsgkit: {
+      description:
+        "Run computational neuroscience jobs on SDSC's Neuroscience Gateway (NSG) and NEMAR data, through the portal or the API, for people and AI agents. By Morgan Hough. MIT licence.",
+      topics: ['NSG', 'GPU compute', 'NEMAR', 'agents'],
+      guide: 'Read the guide',
+    },
     sci: {
       description:
         'High-resolution anatomical head models for electromagnetic source imaging and stimulation.',

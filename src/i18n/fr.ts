@@ -91,6 +91,7 @@ const fr = {
       funding: 'Financement',
       jobs: 'Emplois',
       ecosystem: 'Écosystème',
+      compute: 'Calcul gratuit (NSG)',
       guide: 'Guide des sections et clubs',
       handbook: 'Guide des bénévoles',
       about: 'À propos',

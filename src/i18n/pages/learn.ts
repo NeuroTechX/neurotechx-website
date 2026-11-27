@@ -160,6 +160,12 @@ export default bilingual(
             english: true,
           },
           {
+            name: 'Calcul gratuit : la Neuroscience Gateway',
+            body: "Du temps gratuit sur des superordinateurs avec GPU pour les projets universitaires et sans but lucratif, avec les données NEMAR déjà sur place. Avec nsg-agent-kit, un projet de NeuroTechX.",
+            href: '/compute',
+            english: false,
+          },
+          {
             name: 'Brainhack Global',
             body: 'Des hackathons de science ouverte du cerveau partout dans le monde, ouverts aux débutants.',
             href: 'https://brainhack.org/',
@@ -452,6 +458,12 @@ export default bilingual(
             body: 'Compare BCI algorithms on public datasets. A NeuroTechX project, with weekly developer meetings.',
             href: 'https://github.com/NeuroTechX/moabb',
             english: true,
+          },
+          {
+            name: 'Free compute: the Neuroscience Gateway',
+            body: 'Free time on GPU supercomputers for academic and non-profit projects, with NEMAR data already there. With nsg-agent-kit, a NeuroTechX project.',
+            href: '/compute',
+            english: false,
           },
           {
             name: 'Brainhack Global',

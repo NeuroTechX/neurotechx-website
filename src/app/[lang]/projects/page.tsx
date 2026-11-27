@@ -8,6 +8,7 @@ import { alternatesFor, format, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/projects';
 import styles from './page.module.css';
 
+const NSG_AGENT_KIT = 'https://github.com/NeuroTechX/nsg-agent-kit';
 const PIEEG_XR = 'https://www.kickstarter.com/projects/42415505/pieeg-xr-neural-face-interface-for-spatial-computing';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/projects'>): Promise<Metadata> {
@@ -138,6 +139,33 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                     {featuredRepos.map(repo => (
                         <ProjectCard key={repo.id} repo={repo} featured={true} viewCode={t.viewCode} />
                     ))}
+                    {/* nsg-agent-kit: NeuroTechX project, explained on /compute */}
+                    <div className={`${styles.card} ${styles.featured}`}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-cyan-100 text-cyan-800 flex items-center justify-center`}>NX</div>
+                                <span>NeuroTechX</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href={NSG_AGENT_KIT} target="_blank" rel="noopener noreferrer">nsg-agent-kit</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.nsgkit.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.nsgkit.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <Link href="/compute" className={styles.link}>
+                                {t.nsgkit.guide} <ArrowRight size={14} />
+                            </Link>
+                            <a href={NSG_AGENT_KIT} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.viewCode} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
                     {/* PiEEG XR: community hardware on Kickstarter until Dec 31, 2026; drop or update the card after the campaign */}
                     <div className={`${styles.card} ${styles.featured}`}>
                         <div className={styles.cardHeader}>
