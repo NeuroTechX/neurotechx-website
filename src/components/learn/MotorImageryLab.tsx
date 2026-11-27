@@ -172,7 +172,7 @@ export default function MotorImageryLab({ lang }: { lang: Locale }) {
                                     ticks={ticks}
                                     timeLabel={t.time}
                                     voltageLabel={t.change}
-                                    marker={0}
+                                    markers={[0]}
                                 />
                                 <div className="mt-3 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-3 text-sm" aria-live="polite">
                                     <p className="text-xs text-muted-foreground">{t.windowTitle}</p>

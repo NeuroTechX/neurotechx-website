@@ -3,8 +3,9 @@ import PageHeader from '@/components/PageHeader';
 import Link from '@/components/LocaleLink';
 import ChapterQuestion from '@/components/learn/ChapterQuestion';
 import MriAndBoldLab from '@/components/learn/MriAndBoldLab';
+import { fnirsText } from '@/content/learn/fnirs-short-channels';
 import { modalityChoice, mriText } from '@/content/learn/mri-and-bold';
-import { BERKELEY_FMRI_LAB, MRI_LAB_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
+import { BERKELEY_FMRI_LAB, FNIRS_LAB_PATH, MRI_LAB_PATH, primerCheckPath } from '@/content/learn/primer-chapters';
 import { alternatesFor, pageLocale } from '@/i18n';
 
 type Props = PageProps<'/[lang]/learn/labs/mri-and-bold'>;
@@ -31,6 +32,7 @@ export default async function MriAndBoldPage({ params }: Props) {
                 <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neuro-accent">
                     <Link href={primerCheckPath('fmri')} className="hover:underline">{t.check} →</Link>
                     <Link href={primerCheckPath('fnirs')} className="hover:underline">{t.fnirsCheck} →</Link>
+                    <Link href={FNIRS_LAB_PATH} className="hover:underline">{fnirsText[lang].title} →</Link>
                     <a href={BERKELEY_FMRI_LAB} className="hover:underline">{t.berkeley} ↗</a>
                 </div>
             </section>

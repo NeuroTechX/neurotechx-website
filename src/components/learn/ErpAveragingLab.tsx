@@ -82,14 +82,14 @@ export default function ErpAveragingLab({ lang }: { lang: Locale }) {
                     </figcaption>
                     <TracePlot
                         traces={[
-                            { samples: standard, color: '#a5b4fc', dashed: true },
+                            { samples: standard, color: '#a5b4fc', dash: [5, 4] },
                             { samples: target, color: '#67e8f9' },
                         ]}
                         limit={40}
                         ticks={ticks}
                         timeLabel={aligned ? t.soundOnset : t.nominalOnset}
                         voltageLabel={t.voltage}
-                        marker={0}
+                        markers={[0]}
                     />
                     <div className="mt-4 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4" aria-live="polite">
                         <p className="text-xs text-muted-foreground">{t.meanWindow}</p>
