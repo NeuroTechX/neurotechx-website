@@ -15,6 +15,11 @@ const NSG = 'https://www.nsgportal.org';
 const PORTAL = 'https://nsgprod.sdsc.edu:8443/portal2/';
 const KIT = 'https://github.com/NeuroTechX/nsg-agent-kit';
 const kitDoc = (file: string) => `${KIT}/blob/master/docs/${file}`;
+const STARTER = 'https://github.com/NeuroTechX/nemar-nsg-starter/tree/master/lessons';
+const LESSONS = {
+    pursue: `${STARTER}/pursue-p300`,
+    erpCore: `${STARTER}/erp-core`,
+} as const;
 
 const SOURCES = {
     overview: `${NSG}/overview.html`,
@@ -217,6 +222,17 @@ export default async function ComputePage({ params }: PageProps<'/[lang]/compute
                     ))}
                 </ol>
                 <p className="mb-10 max-w-3xl text-sm text-muted-foreground">{t.kit.portalNote}</p>
+
+                <h3 className="mb-2 text-xl font-bold">{t.kit.lessonsTitle}</h3>
+                <p className="mb-4 max-w-3xl text-sm text-muted-foreground">{t.kit.lessonsBody}</p>
+                <ul className="mb-10 grid gap-2 text-sm">
+                    {(Object.keys(LESSONS) as (keyof typeof LESSONS)[]).map((key) => (
+                        <li key={key}>
+                            <Out href={LESSONS[key]}>{t.kit.lessons[key]}</Out>
+                            {englishTag}
+                        </li>
+                    ))}
+                </ul>
 
                 <h3 className="mb-3 text-xl font-bold">{t.kit.docsTitle}</h3>
                 <ul className="grid gap-2 text-sm md:grid-cols-2">
