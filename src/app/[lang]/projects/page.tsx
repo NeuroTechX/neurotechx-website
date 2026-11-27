@@ -163,6 +163,81 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                         </div>
                     </div>
 
+                    {/* bci-workshop */}
+                    <div className={`${styles.card} ${styles.featured}`}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-cyan-100 text-cyan-800 flex items-center justify-center`}>NX</div>
+                                <span>NeuroTechX</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href="https://github.com/NeuroTechX/bci-workshop" target="_blank" rel="noopener noreferrer">{t.bciWorkshop.name}</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.bciWorkshop.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.bciWorkshop.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={styles.language}>{t.bciWorkshop.kind}</span>
+                            <a href="https://github.com/NeuroTechX/bci-workshop" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.viewCode} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Timeflux */}
+                    <div className={`${styles.card} ${styles.featured}`}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-emerald-100 text-emerald-800 flex items-center justify-center`}>TF</div>
+                                <span>timeflux</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href="https://github.com/timeflux/timeflux" target="_blank" rel="noopener noreferrer">{t.timeflux.name}</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.timeflux.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.timeflux.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={styles.language}>{t.timeflux.kind}</span>
+                            <a href="https://github.com/timeflux/demos" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.viewCode} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* SPD Learn */}
+                    <div className={`${styles.card} ${styles.featured}`}>
+                        <div className={styles.cardHeader}>
+                            <div className={styles.repoOwner}>
+                                <div className={`${styles.avatar} bg-indigo-100 text-indigo-800 flex items-center justify-center`}>SP</div>
+                                <span>spdlearn</span>
+                            </div>
+                        </div>
+                        <h3 className={styles.repoName}>
+                            <a href="https://github.com/spdlearn/spd_learn" target="_blank" rel="noopener noreferrer">{t.spdlearn.name}</a>
+                        </h3>
+                        <p className={styles.description}>
+                            {t.spdlearn.description}
+                        </p>
+                        <div className={styles.topics}>
+                            {t.spdlearn.topics.map((topic) => <span key={topic} className={styles.topic}>{topic}</span>)}
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <span className={styles.language}>{t.spdlearn.kind}</span>
+                            <a href="https://spdlearn.org/" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                {t.visitWebsite} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                    </div>
+
                     {/* Fallback for SCI Head Model if API fails or placeholder needed */}
                     <div className={`${styles.card} ${styles.featured}`}>
                         <div className={styles.cardHeader}>
