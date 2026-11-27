@@ -66,6 +66,15 @@
       "description": "This tutorial will explain how to extract Event Related Potentials"
     },
     {
+      "slug": "fnirs-basics",
+      "title": "fNIRS Basics",
+      "description": "How functional near-infrared spectroscopy measures blood oxygen in the cortex with light, how it compares with EEG, which artifacts to watch for, and how to analyse a first recording with MNE-NIRS.",
+      "fr": {
+        "title": "Les bases de la fNIRS",
+        "description": "Comment la spectroscopie proche infrarouge fonctionnelle mesure l'oxygène du sang dans le cortex avec de la lumière, comment elle se compare à l'EEG, quels artéfacts surveiller, et comment analyser un premier enregistrement avec MNE-NIRS."
+      }
+    },
+    {
       "slug": "machine-learning-for-bci",
       "title": "Machine Learning for BCI",
       "description": "Learn how to create your very own simple neural network that can classify real EEG data using our step-by-step Google Colab tutorial."
@@ -86,6 +95,24 @@
       "fr": {
         "title": "Le décodage EEG moderne",
         "description": "Méthodes riemanniennes, apprentissage profond, transfert entre personnes et entre séances, modèles de fondation pour l'EEG, et comment évaluer un décodeur honnêtement. Avec un court exemple Python sur de vraies données d'imagerie motrice."
+      }
+    },
+    {
+      "slug": "neuro-data-skills",
+      "title": "Working with Open Neuro Data",
+      "description": "Where to find open EEG and other brain datasets, how the BIDS format organizes them, how to load them with MNE-BIDS, and how to handle licences, privacy and reproducibility.",
+      "fr": {
+        "title": "Travailler avec des données ouvertes en neurosciences",
+        "description": "Où trouver des jeux de données ouverts en EEG et en imagerie cérébrale, comment le format BIDS les organise, comment les charger avec MNE-BIDS, et comment gérer licences, vie privée et reproductibilité."
+      }
+    },
+    {
+      "slug": "brain-stimulation-safety",
+      "title": "Brain Stimulation and Safety",
+      "description": "What TMS, tDCS, tACS and transcranial focused ultrasound do, what the published safety guidelines say, why do-it-yourself stimulation is discouraged, and the ethical questions stimulation raises.",
+      "fr": {
+        "title": "Stimulation cérébrale et sécurité",
+        "description": "Ce que font la TMS, la tDCS, la tACS et l'ultrason focalisé transcrânien, ce que disent les lignes directrices de sécurité publiées, pourquoi la stimulation maison est déconseillée, et les questions éthiques que pose la stimulation."
       }
     },
     {
@@ -122,6 +149,15 @@
       "slug": "neuroanatomy",
       "title": "Neuroanatomy and Brain Organization",
       "description": "A tour of major brain structures, cortical lobes, and functional regions relevant to neuroimaging and brain-computer interfaces."
+    },
+    {
+      "slug": "sensory-and-motor-systems",
+      "title": "Sensory and Motor Systems",
+      "description": "How signals from the eyes, ears and skin reach the cortex, how the brain sends movement commands to the muscles, and why these pathways are the basis of the most common brain-computer interfaces.",
+      "fr": {
+        "title": "Systèmes sensoriels et moteurs",
+        "description": "Comment les signaux des yeux, des oreilles et de la peau atteignent le cortex, comment le cerveau envoie les commandes de mouvement aux muscles, et pourquoi ces voies sont à la base des interfaces cerveau-ordinateur les plus courantes."
+      }
     },
     {
       "slug": "brain-disorders",
