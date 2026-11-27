@@ -5,8 +5,12 @@ import fs from 'fs';
 // Old addresses not listed (news posts, account and shop pages, theme leftovers) 404 on purpose.
 // ':path*' also matches the bare address, e.g. '/job/:path*' covers '/job' and '/job/anything'.
 const OLD_SITE = {
+  '/': ['/index.html'],
   '/about': ['/about-us', '/team', '/partners', '/faq', '/contact-us', '/team_members/:path*'],
+  '/ntx-services-partnership-termination': ['/ntx-services'],
+  '/join-the-team': ['/opportunities/:path*'],
   '/community': [
+    '/join',
     '/chapter/:path*',
     '/city-chapter',
     '/get-involved',

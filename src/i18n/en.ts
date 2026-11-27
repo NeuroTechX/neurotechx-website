@@ -155,6 +155,7 @@ const en: Dictionary = {
       Conference: 'Conference',
       Hackathon: 'Hackathon',
       Meetup: 'Meetup',
+      Webinar: 'Webinar',
       Workshop: 'Workshop',
     },
   },
