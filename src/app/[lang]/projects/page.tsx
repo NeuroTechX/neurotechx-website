@@ -243,6 +243,15 @@ export default async function ProjectsPage({ params }: PageProps<'/[lang]/projec
                 </div>
             </section>
 
+            {/* Where the flagship projects came from */}
+            <div className="mb-16 max-w-3xl rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+                <h2 className="mb-2 text-xl font-bold">{t.originsTitle}</h2>
+                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{t.originsBody}</p>
+                <Link href="/about#open-tools" className="inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline">
+                    {t.originsLink} <ArrowRight size={15} />
+                </Link>
+            </div>
+
             <section>
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                     <Code2 /> {t.communityTitle}

@@ -60,6 +60,10 @@ export default bilingual(
     ],
     readConduct: 'Lire le code de conduite',
     guide: 'Guide des sections et des clubs',
+    historyTitle: "D'où vient le format des sections",
+    historyBody:
+      "Les premières sections sont nées de soirées de hacking : des soirées régulières où l'on travaille ensemble sur du matériel, des expériences et du code. Certains groupes existaient avant NeuroTechX, comme CogLab à Paris (2013); d'autres ont commencé avec nous, comme New York en 2015, puis Toronto, Boston et Londres. Une nouvelle section peut commencer de la même façon : quelques personnes, un lieu et un projet.",
+    historyLink: "Lire l'histoire des sections",
     chapters: {
       eyebrow: 'Réseau international',
       title: 'Trouver une section près de chez vous',
@@ -183,6 +187,10 @@ export default bilingual(
     ],
     readConduct: 'Read Code of Conduct',
     guide: 'Chapter and Club Guide',
+    historyTitle: 'How the chapter format started',
+    historyBody:
+      'The first chapters grew out of hacknights: regular evenings where people work together on hardware, experiments, and code. Some groups were meeting before NeuroTechX, such as CogLab in Paris (2013); others started with us, such as New York in 2015, then Toronto, Boston, and London. A new chapter can start the same way: a few people, a place, and a project.',
+    historyLink: 'Read the chapter history',
     chapters: {
       eyebrow: 'Global network',
       title: 'Find a chapter near you',

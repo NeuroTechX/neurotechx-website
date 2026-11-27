@@ -16,6 +16,9 @@ export default bilingual(
     aboutTitle: "Qu'est-ce que le Content Lab?",
     aboutBody:
       "Le Content Lab est l'initiative de contenu internationale de NeuroTechX. Nous réunissons des rédacteurs, des réviseurs et des designers, unis par une même passion pour la neurotech, afin de créer du contenu original qui explore l'univers de la neurotechnologie.",
+    historyBody:
+      "L'infolettre de NeuroTechX remonte à novembre 2015, avec le Digest no 1. Aujourd'hui, le Content Lab publie aussi des articles, des entrevues et des comptes rendus d'événements écrits par des bénévoles.",
+    historyLink: 'Notre histoire',
     getInvolved: 'Participer',
     roles: [
       {
@@ -65,6 +68,9 @@ export default bilingual(
     aboutTitle: 'What is the Content Lab?',
     aboutBody:
       "The Content Lab is NeuroTechX's global content initiative. We bring together writers, editors and designers, united by a common passion for neurotech, to create original content exploring the world of neurotechnology.",
+    historyBody:
+      'The NeuroTechX newsletter goes back to November 2015, with Digest #1. Today the Content Lab also publishes articles, interviews, and event write-ups by volunteers.',
+    historyLink: 'Our history',
     getInvolved: 'Get involved',
     roles: [
       {

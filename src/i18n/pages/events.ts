@@ -13,6 +13,10 @@ export default bilingual(
     lumaCta: "Voir le calendrier et s'inscrire sur Luma",
     conferencesTitle: 'Conférences et hackathons',
     conferencesBody: 'Les grandes rencontres en neurotech, en ICM et en neurosciences — à venir et récentes.',
+    pastTitle: 'Nos hackathons passés',
+    pastBody:
+      "NeuroTechX a tenu des hackathons mondiaux gratuits en octobre 2022 (en ligne, avec des points de rencontre dans des sections) et en décembre 2023 (hybride, avec huit lieux annoncés), puis a appuyé l'organisation du Global NeuroHack à San Francisco en avril 2026.",
+    pastLink: "Lire l'histoire des hackathons",
   },
   {
     title: 'Events',
@@ -26,5 +30,9 @@ export default bilingual(
     lumaCta: 'View & RSVP on Luma',
     conferencesTitle: 'Conferences & hackathons',
     conferencesBody: 'Major neurotech, BCI, and neuroscience meetings — upcoming and recent.',
+    pastTitle: 'Our past hackathons',
+    pastBody:
+      'NeuroTechX ran free global hackathons in October 2022 (online, with in-person hubs at chapters) and December 2023 (hybrid, with eight announced locations), then provided organizing support for Global NeuroHack in San Francisco in April 2026.',
+    pastLink: 'Read the history of the hackathons',
   }
 );

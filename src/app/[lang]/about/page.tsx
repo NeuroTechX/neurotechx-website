@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import styles from './page.module.css';
 import InstagramImage from '@/components/InstagramImage';
 import Link from '@/components/LocaleLink';
@@ -13,6 +13,11 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/about'>): 
 }
 
 type Person = { name: string; role: string; body: string };
+type FigureKey = keyof (typeof text)['en']['figures'];
+
+// History entries that carry a photo, and where each photo is served from.
+const FIGURES: Record<string, FigureKey | undefined> = { 'open-hardware': 'unrick' };
+const FIGURE_SRC: Record<FigureKey, string> = { unrick: '/images/history/un0rick-bench.jpg' };
 
 function People({ people }: { people: Person[] }) {
     return (
@@ -67,30 +72,65 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
                 </div>
             </section>
 
-            <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>{t.originsTitle}</h2>
-                <p className="max-w-2xl mb-12 text-lg text-muted-foreground">{t.originsLead}</p>
+            <section id="history" className={`${styles.section} ${styles.anchor}`}>
+                <h2 className={styles.sectionTitle}>{t.historyTitle}</h2>
+                <p className="max-w-2xl mb-8 text-lg text-muted-foreground">{t.historyLead}</p>
 
-                <div className={styles.originsGrid}>
-                    {t.origins.map((origin) => (
-                        <div key={origin.title} className={styles.card}>
-                            <h3 className={styles.cardTitle}>{origin.title}</h3>
-                            <span className={styles.cardLabel}>{origin.label}</span>
-                            <p className={styles.cardText}>{origin.body}</p>
-                            {origin.links.map((link) =>
-                                link.href.startsWith('/') ? (
-                                    <Link key={link.href} href={link.href} className={styles.link}>
-                                        {link.label} <ArrowUpRight className={styles.icon} />
-                                    </Link>
-                                ) : (
-                                    <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                                        {link.label} <ArrowUpRight className={styles.icon} />
-                                    </a>
-                                )
-                            )}
-                        </div>
+                <nav aria-label={t.historyNav} className={styles.historyNav}>
+                    {t.history.map((entry) => (
+                        <a key={entry.id} href={`#${entry.id}`} className={styles.historyNavLink}>
+                            {entry.title}
+                        </a>
                     ))}
-                </div>
+                </nav>
+
+                <ol className={styles.timeline}>
+                    {t.history.map((entry) => {
+                        const figureKey = FIGURES[entry.id];
+                        const figure = figureKey ? t.figures[figureKey] : undefined;
+                        return (
+                            <li key={entry.id} id={entry.id} className={`${styles.timelineItem} ${styles.anchor}`}>
+                                <span className={styles.timelinePeriod}>{entry.period}</span>
+                                <h3 className={styles.timelineTitle}>{entry.title}</h3>
+                                {entry.paragraphs.map((paragraph) => (
+                                    <p key={paragraph.slice(0, 40)} className={styles.timelineText}>{paragraph}</p>
+                                ))}
+                                {figure && figureKey && (
+                                    <figure className={styles.figure}>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img src={FIGURE_SRC[figureKey]} alt={figure.alt} loading="lazy" className={styles.figureImage} />
+                                        <figcaption className={styles.figureCaption}>
+                                            {figure.caption}{' '}
+                                            <a href={figure.sourceHref} target="_blank" rel="noopener noreferrer">{figure.credit}</a>
+                                            {', '}
+                                            <a href={figure.licenseHref} target="_blank" rel="noopener noreferrer">{figure.licenseLabel}</a>
+                                        </figcaption>
+                                    </figure>
+                                )}
+                                <div className={styles.timelineLinks}>
+                                    {entry.links.map((link) =>
+                                        link.href.startsWith('/') ? (
+                                            <Link key={link.href} href={link.href} className={styles.link}>
+                                                {link.label} <ArrowRight className={styles.icon} />
+                                            </Link>
+                                        ) : (
+                                            <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                                                {link.label} <ArrowUpRight className={styles.icon} />
+                                            </a>
+                                        )
+                                    )}
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ol>
+
+                <p className="mt-8 text-sm text-muted-foreground">
+                    {t.sourcesNote}{' '}
+                    <a href="https://github.com/m9h/neurotechx-presentations" target="_blank" rel="noopener noreferrer" className={styles.link}>
+                        {t.sourcesLink} <ArrowUpRight className={styles.icon} />
+                    </a>
+                </p>
             </section>
 
             <section className={styles.section}>

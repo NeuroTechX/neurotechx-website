@@ -86,6 +86,17 @@ export default async function StudentClubsPage({ params }: PageProps<'/[lang]/st
                 </div>
             </section>
 
+            {/* How the competition started */}
+            <section className="container pt-12">
+                <div className="max-w-3xl rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
+                    <h2 className="mb-2 text-xl font-bold">{t.historyTitle}</h2>
+                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground">{t.historyBody}</p>
+                    <Link href="/about#student-competition" className="inline-flex items-center gap-1.5 text-sm font-semibold text-neuro-accent hover:underline">
+                        {t.historyLink} <ArrowRight size={15} />
+                    </Link>
+                </div>
+            </section>
+
             {/* Starter Project Ideas by Budget */}
             <section className="container py-12">
                 <h2 className="mb-2 text-2xl font-bold">{t.projectsHeading}</h2>
