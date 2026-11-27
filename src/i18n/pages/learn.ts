@@ -201,7 +201,7 @@ export default bilingual(
     lessons: {
       eyebrow: 'Cours en ligne',
       title: 'Les cours NeuroTechX',
-      lead: "Deux modules gratuits, écrits par des bénévoles de NeuroTechX pour NeuroTechEDU et maintenant publiés ici. Les textes sont en anglais.",
+      lead: "Deux modules gratuits, écrits par des bénévoles de NeuroTechX pour NeuroTechEDU et maintenant publiés ici. Certaines leçons sont traduites en français, les autres sont en anglais.",
       modules: { bci: 'ICM 101', neuro: 'Neurosciences 101' },
       credits: 'Rédigés et révisés par',
       creditsMore: 'et les autres contributeurs sur GitHub',

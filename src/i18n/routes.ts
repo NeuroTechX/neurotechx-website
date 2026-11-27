@@ -47,6 +47,7 @@ const FR_SEGMENTS: Record<string, string> = {
   glossary: 'glossaire',
   'safety-and-ethics': 'securite-et-ethique',
   'motor-imagery': 'imagerie-motrice',
+  syllabus: 'plan-de-session',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
   Object.entries(FR_SEGMENTS).map(([en, fr]) => [fr, en])
@@ -83,7 +84,7 @@ export const TRANSLATED_ROUTES = new Set<string>([
   '/', '/events', '/about', '/community',
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
   '/learn', '/education', '/education/webinars', '/primer', '/glossary', '/safety-and-ethics', '/students', '/newsletter',
-  '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
+  '/content-lab', '/reports', '/ecosystem', '/funding', '/projects', '/learn/syllabus',
   ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
 ]);
 
@@ -91,12 +92,18 @@ export const TRANSLATED_ROUTES = new Set<string>([
 // scripts/sync-dockit.mjs).
 const SYNCED_TRANSLATIONS = new Set<string>(synced);
 
+// Lessons with a French file (<slug>.fr.md). next.config.mjs lists the files at build time.
+const TRANSLATED_LESSONS = new Set<string>(
+  (process.env.TRANSLATED_LESSONS ?? '').split(',').filter(Boolean).map((slug) => `/learn/${slug}`)
+);
+
 // Sections translated as a whole, including the pages made from data under them (/jobs/eeg).
 const TRANSLATED_SECTIONS = ['/jobs'];
 
 export const isTranslated = (routePath: string) =>
   TRANSLATED_ROUTES.has(routePath) ||
   SYNCED_TRANSLATIONS.has(routePath) ||
+  TRANSLATED_LESSONS.has(routePath) ||
   TRANSLATED_SECTIONS.some((section) => routePath === section || routePath.startsWith(`${section}/`));
 
 /** True for an existing page whose body is still English only (unknown addresses are 404s, which are translated). */
