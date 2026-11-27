@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import TranslationGate from '@/components/TranslationGate'
-import { getDictionary, isLocale, LOCALES } from '@/i18n'
+import { getDictionary, isLocale, LOCALES, RSS_ALTERNATE } from '@/i18n'
 import { Analytics } from '@vercel/analytics/react'
 
 // Inter = body + headings (readable). Aldrich = display/wordmark only (--font-display).
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
       type: 'website',
       locale: lang === 'fr' ? 'fr_CA' : 'en_CA',
     },
+    alternates: { types: RSS_ALTERNATE },
     twitter: { card: 'summary_large_image', title: 'NeuroTechX', description: t.ogDescription },
   }
 }

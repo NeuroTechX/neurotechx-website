@@ -33,6 +33,7 @@ function buildMenus(t: Dictionary['nav']): Menu[] {
                 { label: t.community.chapters, href: '/community/start-a-chapter' },
                 { label: t.community.students, href: '/students' },
                 { label: t.community.contentLab, href: '/content-lab' },
+                { label: t.community.news, href: '/news' },
                 { label: t.community.newsletter, href: '/newsletter' },
                 { label: t.community.handbook, href: '/handbook' },
             ],

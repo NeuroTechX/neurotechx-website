@@ -69,6 +69,7 @@ function footerSections(t: Dictionary['footer']) {
             links: [
                 { name: l.about, href: '/about' },
                 { name: l.events, href: '/events' },
+                { name: l.news, href: '/news' },
                 { name: l.projects, href: '/projects' },
                 { name: l.transparency, href: '/transparency' },
             ],

@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/learn', '/education', '/education/webinars', '/education/getting-started', '/education/resources', '/primer',
     '/glossary', '/safety-and-ethics', '/learn/syllabus', '/compute',
     ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
-    '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs', '/funding', '/join-the-team',
+    '/news', '/events', '/projects', '/ecosystem', '/reports', '/content-lab', '/newsletter', '/jobs', '/funding', '/join-the-team',
     '/transparency', '/donate', '/students', '/students/start-a-club', '/code-of-conduct', '/privacy',
     '/ntx-services-partnership-termination',
     ...getLessonSlugs().map((slug) => `/learn/${slug}`),
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const now = new Date();
   const changeFrequency = (r: string) =>
-    r === '' || r === '/reports' || r === '/content-lab' || r.startsWith('/jobs') ? 'daily' : 'weekly';
+    r === '' || r === '/news' || r === '/reports' || r === '/content-lab' || r.startsWith('/jobs') ? 'daily' : 'weekly';
   // French addresses are listed only for pages that have French text (see isTranslated).
   return routes.flatMap((r) => {
     const path = r || '/';
