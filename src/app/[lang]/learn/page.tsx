@@ -13,9 +13,11 @@ import { capstoneText } from '@/content/learn/eeg-capstone';
 import { filteringText } from '@/content/learn/eeg-filtering';
 import { mriText } from '@/content/learn/mri-and-bold';
 import { realtimeText } from '@/content/learn/realtime';
+import { signalsText } from '@/content/learn/signals';
+import { SYLLABUS_PATH, syllabusText } from '@/content/learn/syllabus';
 import {
-    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH, REALTIME_LAB_PATH,
-    primerChapterPdf, primerCheckPath,
+    BERKELEY_COURSE, BERKELEY_TEXTBOOK, EEG_CAPSTONE_PATH, ERP_LAB_PATH, FILTERING_LAB_PATH, FIRST_EEG_PATH, MRI_LAB_PATH,
+    REALTIME_LAB_PATH, SIGNALS_LAB_PATH, primerChapterPdf, primerCheckPath,
 } from '@/content/learn/primer-chapters';
 import { getContributors, getModules, type Module } from '@/lib/lessons';
 
@@ -72,13 +74,14 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
     const lab = firstEegText[lang];
     const { chapters } = primerText[lang];
     const labs = [
+        { href: SIGNALS_LAB_PATH, content: signalsText[lang] },
         { href: FILTERING_LAB_PATH, content: filteringText[lang] },
         { href: ERP_LAB_PATH, content: erpText[lang] },
         { href: EEG_CAPSTONE_PATH, content: capstoneText[lang] },
         { href: MRI_LAB_PATH, content: mriText[lang] },
         { href: REALTIME_LAB_PATH, content: realtimeText[lang] },
     ];
-    const modules = getModules();
+    const modules = getModules(lang);
     const resource = (item: Item) => <Resource key={item.name} item={item} lang={lang} englishLabel={t.english} />;
     return (
         <div className="container py-12">
@@ -119,6 +122,10 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                 <div className="grid gap-4 md:grid-cols-2">
                     {labs.map(({ href, content }) => resource({ name: content.title, body: content.intro, href, english: false }))}
                 </div>
+                <p className="mt-5 rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm">
+                    {syllabusText[lang].cta}{' '}
+                    <Link href={SYLLABUS_PATH} className="font-semibold text-neuro-accent hover:underline">{syllabusText[lang].ctaLink} →</Link>
+                </p>
             </ResourceSection>
 
             <section id="modalities" className="mb-14 scroll-mt-24">
@@ -164,11 +171,16 @@ export default async function LearnPage({ params }: PageProps<'/[lang]/learn'>) 
                         <div key={key} className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface-1)] p-6">
                             <h3 className="mb-1 text-xl font-bold">{t.lessons.modules[key]}</h3>
                             <p className="mb-4 text-sm text-muted-foreground">{t.lessons.moduleLead[key]}</p>
-                            <ol className="grid gap-2" lang="en">
+                            <ol className="grid gap-2">
                                 {modules[key].map((lesson, i) => (
                                     <li key={lesson.slug} className="flex gap-3">
                                         <span className="w-6 shrink-0 text-right text-sm font-semibold text-muted-foreground">{i + 1}.</span>
-                                        <Link href={`/learn/${lesson.slug}`} className="font-medium hover:text-neuro-accent hover:underline">{lesson.title}</Link>
+                                        <span>
+                                            <Link href={`/learn/${lesson.slug}`} lang={lesson.lang} className="font-medium hover:text-neuro-accent hover:underline">{lesson.title}</Link>
+                                            {lang === 'fr' && lesson.lang === 'en' && (
+                                                <span className="ml-2 rounded bg-muted px-2 py-0.5 text-xs">{t.english}</span>
+                                            )}
+                                        </span>
                                     </li>
                                 ))}
                             </ol>

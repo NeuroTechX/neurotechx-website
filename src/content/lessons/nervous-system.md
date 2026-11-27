@@ -18,7 +18,7 @@ The CNS consists of the brain and the spinal cord. Both are made of soft delicat
 
 ### The Blood Brain Barrier
 
-Between the brain and its blood supply is the blood brain barrier. As its name suggests, the blood brain brain barrier prevents the transfer of non-lipid soluble molecules, which may include toxic molecules. It does however allow the transfer of beneficial molecules such as amino acids and glucose into the CNS. A related example would be the manufacture of L-Dopa, a man-made version of the neurotransmitter dopamine which is used as treatment for Alzheimer's disease. The reason why patients are not simply given dopamine is that dopamine itself is not able to cross the blood brain barrier.
+Between the brain and its blood supply is the blood brain barrier. As its name suggests, the blood brain brain barrier prevents the transfer of non-lipid soluble molecules, which may include toxic molecules. It does however allow the transfer of beneficial molecules such as amino acids and glucose into the CNS. A related example is L-Dopa, a precursor that the brain converts into the neurotransmitter dopamine, used to treat Parkinson's disease. The reason why patients are not simply given dopamine is that dopamine itself is not able to cross the blood brain barrier.
 
 ## Peripheral Nervous System (PNS)
 
