@@ -88,6 +88,7 @@ const en: Dictionary = {
       funding: 'Funding',
       jobs: 'Jobs',
       ecosystem: 'Ecosystem',
+      compute: 'Free compute (NSG)',
       guide: 'Chapter & club guide',
       handbook: 'Volunteer handbook',
       about: 'About',
