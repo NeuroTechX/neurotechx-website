@@ -16,6 +16,11 @@
       "description": "Your choice of headset will depend on what you intend to use it for. The answer will depend on your budget, interest, project idea and the number of electrodes required. Before purchasing a headset, think about your programming experience and Project Idea."
     },
     {
+      "slug": "first-eeg-recording",
+      "title": "Your First EEG Recording: Electrodes, Placement and Signal Quality",
+      "description": "A practical guide to the bench: where electrodes go and how they are named, wet, dry and semi-dry electrodes, reference and bias, impedance, the artifacts you will see, electrical safety, and a checklist for your first session."
+    },
+    {
       "slug": "bci-software",
       "title": "Software Tools for BCI",
       "description": "This tutorial serves as an introduction to software tools that you can use to analyze EEG and MEG data."
