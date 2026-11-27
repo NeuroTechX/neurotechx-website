@@ -46,6 +46,7 @@ const FR_SEGMENTS: Record<string, string> = {
   guide: 'guide',
   glossary: 'glossaire',
   'safety-and-ethics': 'securite-et-ethique',
+  syllabus: 'plan-de-session',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
   Object.entries(FR_SEGMENTS).map(([en, fr]) => [fr, en])
@@ -82,7 +83,7 @@ export const TRANSLATED_ROUTES = new Set<string>([
   '/', '/events', '/about', '/community',
   '/join-the-team', '/donate', '/transparency', '/code-of-conduct', '/privacy',
   '/learn', '/education', '/education/webinars', '/primer', '/glossary', '/safety-and-ethics', '/students', '/newsletter',
-  '/content-lab', '/reports', '/ecosystem', '/funding', '/projects',
+  '/content-lab', '/reports', '/ecosystem', '/funding', '/projects', '/learn/syllabus',
   ...LEARN_LAB_PATHS, ...PRIMER_CHECKS.map(({ slug }) => primerCheckPath(slug)),
 ]);
 

@@ -5,6 +5,7 @@ import { studentClubs } from '@/data/clubs';
 import styles from './page.module.css';
 import { alternatesFor, pageLocale } from '@/i18n';
 import text from '@/i18n/pages/students';
+import { SYLLABUS_PATH, syllabusText } from '@/content/learn/syllabus';
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/students'>): Promise<Metadata> {
     const lang = await pageLocale(params);
@@ -89,6 +90,10 @@ export default async function StudentClubsPage({ params }: PageProps<'/[lang]/st
             <section className="container py-12">
                 <h2 className="mb-2 text-2xl font-bold">{t.projectsHeading}</h2>
                 <p className="mb-6 max-w-3xl text-muted-foreground">{t.projectsLead}</p>
+                <p className="mb-6 max-w-3xl rounded-lg border border-neuro-accent/25 bg-neuro-accent/5 p-4 text-sm">
+                    {syllabusText[lang].cta}{' '}
+                    <Link href={SYLLABUS_PATH} className="font-semibold text-neuro-accent hover:underline">{syllabusText[lang].ctaLink} →</Link>
+                </p>
                 <div className="grid gap-5 md:grid-cols-3">
                     {t.projectTiers.map((tier) => (
                         <article key={tier.title} className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-1)] p-6">
