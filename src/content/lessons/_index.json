@@ -28,6 +28,15 @@
       }
     },
     {
+      "slug": "first-eeg-recording",
+      "title": "Your First EEG Recording: Electrodes, Placement and Signal Quality",
+      "description": "A practical guide to the bench: where electrodes go and how they are named, wet, dry and semi-dry electrodes, reference and bias, impedance, the artifacts you will see, electrical safety, and a checklist for your first session.",
+      "fr": {
+        "title": "Votre premier enregistrement EEG : électrodes, positionnement et qualité du signal",
+        "description": "Un guide pratique pour la paillasse : où placer les électrodes et comment elles se nomment, électrodes humides, sèches et semi-sèches, référence et polarisation, impédance, les artéfacts que vous verrez, la sécurité électrique et une liste de vérification pour votre première séance."
+      }
+    },
+    {
       "slug": "bci-software",
       "title": "Software Tools for BCI",
       "description": "This tutorial serves as an introduction to software tools that you can use to analyze EEG and MEG data.",
