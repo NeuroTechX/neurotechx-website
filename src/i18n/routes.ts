@@ -46,6 +46,7 @@ const FR_SEGMENTS: Record<string, string> = {
   guide: 'guide',
   glossary: 'glossaire',
   'safety-and-ethics': 'securite-et-ethique',
+  'motor-imagery': 'imagerie-motrice',
   syllabus: 'plan-de-session',
 };
 const EN_SEGMENTS: Record<string, string> = Object.fromEntries(
