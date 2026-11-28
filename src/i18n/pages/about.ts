@@ -26,10 +26,10 @@ export default bilingual(
         period: '2015',
         title: 'La fondation à Montréal',
         paragraphs: [
-          "NeuroTechX est née à Montréal en 2015, à partir de Société BCI Montréal. Le matériel d'un atelier pratique sur les ICM donné par BCI Montréal au District 3 en mai 2015 se trouve encore sur notre GitHub.",
+          "NeuroTechX est née à Montréal en 2015, à partir de Société BCI Montréal. L'atelier pratique d'introduction aux ICM créé par BCI Montréal au District 3 en mai 2015 (Raymundo Cassani et Hubert Banville) est conservé sur notre GitHub — ses versions historiques de 2015 à 2018 sont archivées par étiquettes Git aux côtés de la trousse modernisée destinée aux sections et aux clubs étudiants.",
           "Dès le départ, l'idée était simple : un endroit où des gens de la recherche, du génie et du design apprennent la neurotechnologie en la construisant ensemble.",
         ],
-        links: [{ label: "Le matériel de l'atelier de 2015", href: 'https://github.com/NeuroTechX/bci-workshop' }],
+        links: [{ label: "Trousse d'atelier ICM (depuis 2015)", href: 'https://github.com/NeuroTechX/bci-workshop' }],
       },
       {
         id: 'first-wave',
@@ -265,10 +265,10 @@ export default bilingual(
         period: '2015',
         title: 'Founded in Montréal',
         paragraphs: [
-          'NeuroTechX started in Montréal in 2015, growing out of Société BCI Montréal. The material from a hands-on BCI workshop that BCI Montréal held at District 3 in May 2015 is still on our GitHub.',
+          'NeuroTechX started in Montréal in 2015, growing out of Société BCI Montréal. The hands-on Introduction to BCI workshop created by BCI Montréal at District 3 in May 2015 (Raymundo Cassani & Hubert Banville) lives on our GitHub, with its 2015–2018 iterations preserved as Git tags alongside the modernized chapter and student-club kit.',
           'From the start the idea was simple: a place where people from research, engineering, and design learn neurotechnology by building it together.',
         ],
-        links: [{ label: 'The 2015 workshop material', href: 'https://github.com/NeuroTechX/bci-workshop' }],
+        links: [{ label: 'BCI Workshop kit (2015 to today)', href: 'https://github.com/NeuroTechX/bci-workshop' }],
       },
       {
         id: 'first-wave',

@@ -87,6 +87,27 @@ export default bilingual(
       topics: ['EEG', 'Apprentissage profond', 'Revue'],
       kind: 'Revue ouverte',
     },
+    bciWorkshop: {
+      name: 'bci-workshop (v2.0)',
+      description:
+        "Trousse d'atelier pratique ICM de 2,5 h pour les sections locales et les clubs étudiants : simulation LSL sans casque, 18+ cartes EEG, neurofeedback alpha, pyRiemann et Timeflux.",
+      topics: ['Atelier', 'LSL', 'pyRiemann', 'Chapitres'],
+      kind: 'Python · Trousse éducative',
+    },
+    timeflux: {
+      name: 'Timeflux',
+      description:
+        "Cadriciel Python libre pour l'acquisition et le traitement temps réel de biosignaux (EEG, EMG, ECG), avec interfaces Web réactives et démonstrations P300 / c-VEP.",
+      topics: ['Temps réel', 'LSL', 'ICM', 'Python'],
+      kind: 'Cadriciel',
+    },
+    spdlearn: {
+      name: 'SPD Learn',
+      description:
+        "Bibliothèque PyTorch d'apprentissage profond géométrique sur les matrices symétriques définies positives (SPDNet, TSMNet, EEGSPDNet) pour le décodage neuronal.",
+      topics: ['PyTorch', 'Riemannien', 'EEG'],
+      kind: 'Bibliothèque',
+    },
   },
   {
     title: 'Open Source Projects',
@@ -170,6 +191,27 @@ export default bilingual(
         'An AI-assisted critical review of deep learning for EEG analysis since the landmark NeuroTechX review paper Roy et al. (2019).',
       topics: ['EEG', 'Deep Learning', 'Review'],
       kind: 'Open Review',
+    },
+    bciWorkshop: {
+      name: 'bci-workshop (v2.0)',
+      description:
+        'Turnkey 2.5-hour hands-on BCI workshop kit for chapters and student clubs: zero-hardware LSL simulation, 18+ EEG boards, alpha neurofeedback, pyRiemann, and Timeflux.',
+      topics: ['Workshop', 'LSL', 'pyRiemann', 'Chapters'],
+      kind: 'Python · Workshop Kit',
+    },
+    timeflux: {
+      name: 'Timeflux',
+      description:
+        'Open-source Python framework for real-time biosignal acquisition and processing (EEG, EMG, ECG), complete with reactive browser UIs and P300 / c-VEP demos.',
+      topics: ['Real-Time', 'LSL', 'BCI', 'Python'],
+      kind: 'Framework',
+    },
+    spdlearn: {
+      name: 'SPD Learn',
+      description:
+        'Pure PyTorch library for geometric deep learning on Symmetric Positive Definite covariance matrices (SPDNet, TSMNet, EEGSPDNet) for neural decoding.',
+      topics: ['PyTorch', 'Riemannian', 'EEG'],
+      kind: 'Library',
     },
   },
 );
