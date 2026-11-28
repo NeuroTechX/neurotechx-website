@@ -174,6 +174,21 @@ export default async function CommunityPage({ params }: PageProps<'/[lang]/commu
                 </div>
             </div>
 
+            {/* Reddit communities (links only; we don't mirror posts) */}
+            <div className="mb-12">
+                <h3 className="text-xl font-bold mb-2">{t.reddit.title}</h3>
+                <p className="text-muted-foreground mb-6 max-w-2xl">{t.reddit.lead}</p>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {t.reddit.items.map((sub) => (
+                        <a key={sub.name} href={`https://www.reddit.com/${sub.name}/`} target="_blank" rel="noopener noreferrer" className="card p-5 block hover:border-neuro-accent transition-colors group">
+                            <span className="font-bold group-hover:text-neuro-accent inline-flex items-center gap-1">{sub.name} <ExternalLink className="w-3 h-3" /></span>
+                            <span className="block text-sm text-muted-foreground mt-1">{sub.body}</span>
+                        </a>
+                    ))}
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground max-w-2xl">{t.reddit.note}</p>
+            </div>
+
             <div className="mb-12 card p-6">
                 <h3 className="font-bold text-xl mb-2">{t.turingTitle}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{t.turingBody}</p>
